@@ -1,0 +1,2 @@
+[18-Apr-2026 07:15:17 UTC] PHP Warning:  cURL Error: Could not resolve host: portal.myfatoorah.com in /home/blessli1/erp.blesslifeltd.com/vendor/myfatoorah/library/autoload.php on line 50
+[22-Apr-2026 07:54:22 UTC] PHP Warning:  cURL Error: getaddrinfo() thread failed to start in /home/blessli1/erp.blesslifeltd.com/vendor/myfatoorah/library/autoload.php on line 50
