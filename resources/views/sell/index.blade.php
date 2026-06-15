@@ -86,8 +86,8 @@
                             <th>@lang('sale.location')</th>
                             <th>@lang('sale.payment_status')</th>
                             <th>@lang('lang_v1.payment_method')</th>
-                            <th>Tax Amount</th>
                             <th>Net Amount</th>
+                            <th>Tax Amount</th>
                             <th>@lang('sale.total_amount')</th>
                             <th>@lang('sale.total_paid')</th>
                             <th>@lang('lang_v1.sell_due')</th>
@@ -272,13 +272,14 @@
                         "searchable": false
                     },
                     {
-                        data: 'tax_amount',
-                        name: 'tax_amount'
-                    },
-                    {
                         data: 'net_amount',
                         name: 'net_amount'
                     },
+                    {
+                        data: 'tax_amount',
+                        name: 'tax_amount'
+                    },
+
                     {
                         data: 'final_total',
                         name: 'final_total'

@@ -188,16 +188,16 @@ class PurchaseController extends Controller
                 ->editColumn('ref_no', function ($row) {
                     return ! empty($row->return_exists) ? e($row->ref_no) . ' <small class="label bg-red label-round no-print" title="' . __('lang_v1.some_qty_returned') . '"><i class="fas fa-undo"></i></small>' : e($row->ref_no);
                 })
-                ->editColumn('tax_amount', function ($row) {
-                    return '<span class="total-tax" data-orig-value="' . $row->tax_amount . '">'
-                        . $this->transactionUtil->num_f($row->tax_amount, true) .
-                        '</span>';
-                })
                 ->addColumn('net_amount', function ($row) {
                     $net = $row->final_total - $row->tax_amount;
 
                     return '<span class="net-amount" data-orig-value="' . $net . '">'
                         . $this->transactionUtil->num_f($net, true) .
+                        '</span>';
+                })
+                ->editColumn('tax_amount', function ($row) {
+                    return '<span class="total-tax" data-orig-value="' . $row->tax_amount . '">'
+                        . $this->transactionUtil->num_f($row->tax_amount, true) .
                         '</span>';
                 })
                 ->editColumn(

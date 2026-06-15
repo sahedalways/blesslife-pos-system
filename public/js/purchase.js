@@ -580,8 +580,8 @@ $(document).ready(function () {
             { data: 'name', name: 'contacts.name' },
             { data: 'status', name: 'status' },
             { data: 'payment_status', name: 'payment_status' },
-            { data: 'tax_amount', name: 'tax_amount' },
             { data: 'net_amount', name: 'net_amount' },
+            { data: 'tax_amount', name: 'tax_amount' },
             { data: 'final_total', name: 'final_total' },
             { data: 'payment_due', name: 'payment_due', orderable: false, searchable: false },
 

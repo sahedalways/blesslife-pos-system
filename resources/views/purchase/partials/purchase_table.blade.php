@@ -10,8 +10,8 @@
             <th>@lang('purchase.supplier')</th>
             <th>@lang('purchase.purchase_status')</th>
             <th>@lang('purchase.payment_status')</th>
-            <th>Tax Amount</th>
             <th>Net Amount</th>
+            <th>Tax Amount</th>
             <th>@lang('purchase.grand_total')</th>
             @php
                 $custom_labels = json_decode(session('business.custom_labels'), true);
