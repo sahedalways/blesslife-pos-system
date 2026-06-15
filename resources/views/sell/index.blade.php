@@ -5,7 +5,9 @@
 
     <!-- Content Header (Page header) -->
     <section class="content-header no-print">
-        <h1  class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black">@lang('sale.sells') <span id="sell_list_selected_range" class="tw-text-gray-600 tw-font-normal tw-text-base">{{ @format_date(\Carbon\Carbon::now()->subDays(29)) }} ~ {{ @format_date(\Carbon\Carbon::now()) }}</span>
+        <h1 class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black">@lang('sale.sells') <span id="sell_list_selected_range"
+                  class="tw-text-gray-600 tw-font-normal tw-text-base">{{ @format_date(\Carbon\Carbon::now()->subDays(29)) }}
+                ~ {{ @format_date(\Carbon\Carbon::now()) }}</span>
         </h1>
     </section>
 
@@ -45,11 +47,20 @@
                 @slot('tool')
                     <div class="box-tools">
                         <a class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full pull-right"
-                            href="{{ action([\App\Http\Controllers\SellController::class, 'create']) }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                           href="{{ action([\App\Http\Controllers\SellController::class, 'create']) }}">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                <path stroke="none"
+                                      d="M0 0h24v24H0z"
+                                      fill="none" />
                                 <path d="M12 5l0 14" />
                                 <path d="M5 12l14 0" />
                             </svg> @lang('messages.add')
@@ -63,7 +74,8 @@
                 @php
                     $custom_labels = json_decode(session('business.custom_labels'), true);
                 @endphp
-                <table class="table table-bordered table-striped ajax_view" id="sell_table">
+                <table class="table table-bordered table-striped ajax_view"
+                       id="sell_table">
                     <thead>
                         <tr>
                             <th>@lang('messages.action')</th>
@@ -115,15 +127,24 @@
         @endcomponent
     </section>
     <!-- /.content -->
-    <div class="modal fade payment_modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade payment_modal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="gridSystemModalLabel">
+
+
     </div>
 
-    <div class="modal fade edit_payment_modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade edit_payment_modal"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="gridSystemModalLabel">
     </div>
 
     <!-- This will be printed -->
-    <section class="invoice print_section" id="receipt_section">
-        </section> 
+    <section class="invoice print_section"
+             id="receipt_section">
+    </section>
 
 @stop
 
@@ -133,7 +154,7 @@
             //Date range as a button
             var startLast30 = moment().subtract(29, 'days');
             var endLast = moment();
-            
+
             // Function to update heading with date range
             function updateDateRangeHeading(start, end) {
                 if (start && end) {
@@ -147,9 +168,12 @@
                     $('#sell_list_selected_range').text(defaultStart + ' ~ ' + defaultEnd);
                 }
             }
-            
+
             $('#sell_list_filter_date_range').daterangepicker(
-                $.extend(true, {}, dateRangeSettings, { startDate: startLast30, endDate: endLast }),
+                $.extend(true, {}, dateRangeSettings, {
+                    startDate: startLast30,
+                    endDate: endLast
+                }),
                 function(start, end) {
                     updateDateRangeHeading(start, end);
                     sell_table.ajax.reload();
@@ -164,7 +188,7 @@
             sell_table = $('#sell_table').DataTable({
                 processing: true,
                 serverSide: true,
-                fixedHeader:false,
+                fixedHeader: false,
                 aaSorting: [
                     [1, 'desc']
                 ],

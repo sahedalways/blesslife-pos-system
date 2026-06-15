@@ -93,18 +93,18 @@ class LoginController extends Controller
             \Auth::logout();
 
             return redirect('/login')
-              ->with(
-                  'status',
-                  ['success' => 0, 'msg' => __('lang_v1.business_inactive')]
-              );
+                ->with(
+                    'status',
+                    ['success' => 0, 'msg' => __('lang_v1.business_inactive')]
+                );
         } elseif ($user->status != 'active') {
             \Auth::logout();
 
             return redirect('/login')
-              ->with(
-                  'status',
-                  ['success' => 0, 'msg' => __('lang_v1.user_inactive')]
-              );
+                ->with(
+                    'status',
+                    ['success' => 0, 'msg' => __('lang_v1.user_inactive')]
+                );
         } elseif (! $user->allow_login) {
             \Auth::logout();
 
@@ -140,19 +140,18 @@ class LoginController extends Controller
 
     public function validateLogin(Request $request)
     {
-        if(config('constants.enable_recaptcha')){
+
+        if (config('constants.enable_recaptcha')) {
             $this->validate($request, [
                 $this->username() => 'required|string',
                 'password' => 'required|string',
                 'g-recaptcha-response' => ['required', new ReCaptcha]
             ]);
-        }else{
+        } else {
             $this->validate($request, [
                 $this->username() => 'required|string',
                 'password' => 'required|string',
             ]);
         }
-       
     }
-
 }
