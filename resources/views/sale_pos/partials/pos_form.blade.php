@@ -88,7 +88,7 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <label>Project Name</label>
+
             <div class="input-group">
                 <span class="input-group-addon">
                     <i class="fa fa-folder"></i>
@@ -105,7 +105,7 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <label>Project Code</label>
+
             <div class="input-group">
                 <span class="input-group-addon">
                     <i class="fa fa-code"></i>
