@@ -93,14 +93,7 @@
             'right_value' => $receipt_details->customer_address['state'] ?? '-',
             'right_ar' => 'المنطقة',
         ],
-        [
-            'left_label' => 'Zip Code',
-            'left_value' => $receipt_details->seller_address['zip_code'] ?? '-',
-            'left_ar' => 'الرمز البريدي',
-            'right_label' => 'Zip Code',
-            'right_value' => $receipt_details->customer_address['zip_code'] ?? '-',
-            'right_ar' => 'الرمز البريدي',
-        ],
+
         [
             'left_label' => 'Country',
             'left_value' => $receipt_details->seller_address['country'] ?? '-',
@@ -108,6 +101,16 @@
             'right_label' => 'Country',
             'right_value' => $receipt_details->customer_address['country'] ?? '-',
             'right_ar' => 'الدولة',
+        ],
+
+        [
+            'left_label' => 'Zip/Postal Code',
+            'left_value' => $receipt_details->seller_address['zip_code'] ?? '-',
+            'left_ar' => 'الرمز البريدي',
+
+            'right_label' => 'Zip/Postal Code',
+            'right_value' => $receipt_details->customer_address['zip_code'] ?? '-',
+            'right_ar' => 'الرمز البريدي',
         ],
         [
             'left_label' => 'Website',
