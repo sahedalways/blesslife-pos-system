@@ -793,29 +793,57 @@ class SellPosController extends Controller
 
 
         if ($is_package_slip) {
+
+            \Log::info('Receipt Branch: PACKAGE_SLIP', [
+                'view' => 'sale_pos.receipts.packing_slip',
+                'transaction_id' => $transaction_id
+            ]);
+
             $output['html_content'] = view('sale_pos.receipts.packing_slip', compact('receipt_details'))->render();
 
             return $output;
         }
 
         if ($is_delivery_note) {
+
+            \Log::info('Receipt Branch: DELIVERY_NOTE', [
+                'view' => 'sale_pos.receipts.delivery_note',
+                'transaction_id' => $transaction_id
+            ]);
+
             $output['html_content'] = view('sale_pos.receipts.delivery_note', compact('receipt_details'))->render();
 
             return $output;
         }
 
         $output['print_title'] = $receipt_details->invoice_no;
-        //If print type browser - return the content, printer - return printer config data, and invoice format config
+
         if ($receipt_printer_type == 'printer') {
+
+            \Log::info('Receipt Branch: PRINTER', [
+                'printer_type' => $receipt_printer_type,
+                'transaction_id' => $transaction_id,
+                'design' => $receipt_details->design
+            ]);
+
             $output['print_type'] = 'printer';
             $output['printer_config'] = $this->businessUtil->printerConfig($business_id, $location_details->printer_id);
             $output['data'] = $receipt_details;
         } else {
-            $layout = !empty($receipt_details->design) ? 'sale_pos.receipts.' . $receipt_details->design : 'sale_pos.receipts.classic';
+
+            $layout = !empty($receipt_details->design)
+                ? 'sale_pos.receipts.' . $receipt_details->design
+                : 'sale_pos.receipts.classic';
+
+            \Log::info('Receipt Branch: BROWSER', [
+                'view' => $layout,
+                'transaction_id' => $transaction_id,
+                'printer_type' => $receipt_printer_type,
+                'design' => $receipt_details->design
+            ]);
 
             $output['html_content'] = view($layout, compact('receipt_details'))->render();
         }
-
 
         return $output;
     }
