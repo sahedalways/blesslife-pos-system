@@ -9,11 +9,7 @@
         $customer_address_parts = preg_split('/[\n,]+/', strip_tags($raw_customer_address));
         $customer_address_parts = array_map('trim', $customer_address_parts);
 
-        $address_remove_values = array_filter([
-            $customer_name,
-            $customer_display_name,
-            $customer_phone,
-        ]);
+        $address_remove_values = array_filter([$customer_name, $customer_display_name, $customer_phone]);
 
         $customer_address_parts = array_filter($customer_address_parts, function ($part) use ($address_remove_values) {
             return $part !== '' && !in_array($part, $address_remove_values, true);
@@ -26,14 +22,28 @@
     $customer_id = $receipt_details->client_id ?? ($receipt_details->contact_id ?? '');
 
     $seller_other_id = trim(($receipt_details->tax_label2 ?? 'CRN') . ' ' . ($receipt_details->tax_info2 ?? ''));
-    $buyer_other_id = !empty($receipt_details->client_id_label) || !empty($customer_id)
-        ? trim(($receipt_details->client_id_label ?? 'CRN') . ' ' . $customer_id)
-        : '';
+    $buyer_other_id =
+        !empty($receipt_details->client_id_label) || !empty($customer_id)
+            ? trim(($receipt_details->client_id_label ?? 'CRN') . ' ' . $customer_id)
+            : '';
 
     $top_rows = [
         ['label' => 'Invoice No', 'value' => $receipt_details->invoice_no ?? '', 'arabic' => 'رقم الفاتورة'],
-        ['label' => 'Invoice Date', 'value' => $receipt_details->invoice_date ?? '', 'arabic' => 'تاريخ إصدار الفاتورة'],
-        ['label' => $receipt_details->custom_field_1_label ?? 'Project Name', 'value' => $receipt_details->custom_field_1 ?? '', 'arabic' => 'اسم المشروع'],
+        [
+            'label' => 'Invoice Date',
+            'value' => $receipt_details->invoice_date ?? '',
+            'arabic' => 'تاريخ إصدار الفاتورة',
+        ],
+        [
+            'label' => $receipt_details->custom_field_1_label ?? 'Project Name',
+            'value' => !empty($receipt_details->custom_field_1) ? $receipt_details->custom_field_1 : '-',
+            'arabic' => 'اسم المشروع',
+        ],
+        [
+            'label' => 'Project Code',
+            'value' => !empty($receipt_details->project_code) ? $receipt_details->project_code : '-',
+            'arabic' => 'رمز المشروع',
+        ],
         ['label' => 'Note', 'value' => $receipt_details->sub_heading_line2 ?? '', 'arabic' => 'ملاحظة'],
         ['label' => 'Order No', 'value' => $receipt_details->sub_heading_line3 ?? '', 'arabic' => 'رقم الطلب'],
     ];
@@ -48,18 +58,70 @@
             'right_ar' => 'الاسم',
         ],
         [
-            'left_label' => 'Address',
-            'left_value' => trim(strip_tags(str_replace('<br>', ', ', $receipt_details->address ?? ''))),
-            'left_ar' => 'العنوان',
-            'right_label' => 'Address',
-            'right_value' => trim(strip_tags(str_replace('<br>', ', ', $customer_address))),
-            'right_ar' => 'العنوان',
+            'left_label' => 'Building Number',
+            'left_value' => data_get($receipt_details, 'seller_address.building_number', '-'),
+            'left_ar' => 'رقم المبنى',
+
+            'right_label' => 'Building Number',
+            'right_value' => data_get($receipt_details, 'customer_address.building_number', '-'),
+            'right_ar' => 'رقم المبنى',
+        ],
+
+        [
+            'left_label' => 'Street',
+            'left_value' => data_get($receipt_details, 'seller_address.street_name', '-'),
+            'left_ar' => 'اسم الشارع',
+
+            'right_label' => 'Street',
+            'right_value' => data_get($receipt_details, 'customer_address.street_name', '-'),
+            'right_ar' => 'اسم الشارع',
+        ],
+
+        [
+            'left_label' => 'City',
+            'left_value' => $receipt_details->seller_address['city'] ?? '-',
+            'left_ar' => 'المدينة',
+            'right_label' => 'City',
+            'right_value' => $receipt_details->customer_address['city'] ?? '-',
+            'right_ar' => 'المدينة',
         ],
         [
-            'left_label' => 'Phone',
+            'left_label' => 'State',
+            'left_value' => $receipt_details->seller_address['state'] ?? '-',
+            'left_ar' => 'المنطقة',
+            'right_label' => 'State',
+            'right_value' => $receipt_details->customer_address['state'] ?? '-',
+            'right_ar' => 'المنطقة',
+        ],
+        [
+            'left_label' => 'Zip Code',
+            'left_value' => $receipt_details->seller_address['zip_code'] ?? '-',
+            'left_ar' => 'الرمز البريدي',
+            'right_label' => 'Zip Code',
+            'right_value' => $receipt_details->customer_address['zip_code'] ?? '-',
+            'right_ar' => 'الرمز البريدي',
+        ],
+        [
+            'left_label' => 'Country',
+            'left_value' => $receipt_details->seller_address['country'] ?? '-',
+            'left_ar' => 'الدولة',
+            'right_label' => 'Country',
+            'right_value' => $receipt_details->customer_address['country'] ?? '-',
+            'right_ar' => 'الدولة',
+        ],
+        [
+            'left_label' => 'Website',
+            'left_value' => $receipt_details->seller_address['website'] ?? '-',
+            'left_ar' => 'الموقع',
+            'right_label' => 'Website',
+            'right_value' => $receipt_details->customer_address['website'] ?? '-',
+            'right_ar' => 'الموقع',
+        ],
+        [
+            'left_label' => 'Phone Number',
             'left_value' => trim(strip_tags($receipt_details->contact ?? '')),
             'left_ar' => 'الهاتف',
-            'right_label' => 'Phone',
+            'right_label' => 'Phone Number',
             'right_value' => $customer_phone,
             'right_ar' => 'الهاتف',
         ],
@@ -72,10 +134,10 @@
             'right_ar' => 'الرقم الضريبي',
         ],
         [
-            'left_label' => 'Other Reg. ID',
+            'left_label' => 'CR Number',
             'left_value' => $seller_other_id,
             'left_ar' => 'رقم إضافي',
-            'right_label' => 'Other Reg. ID',
+            'right_label' => 'CR Number',
             'right_value' => $buyer_other_id,
             'right_ar' => 'رقم إضافي',
         ],
@@ -84,25 +146,29 @@
     $total_vat = 0;
     $total_discount = 0;
     foreach ($receipt_details->lines as $line) {
-        $qty = (float) ($line['quantity_uf'] ?? $line['quantity'] ?? 0);
+        $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
         $tax_amount = (float) ($line['tax'] ?? 0) * $qty;
         $total_vat += $tax_amount;
 
-        $line_discount = (float) ($line['total_line_discount_uf'] ?? $line['total_line_discount'] ?? 0);
+        $line_discount = (float) ($line['total_line_discount_uf'] ?? ($line['total_line_discount'] ?? 0));
         $total_discount += $line_discount;
     }
 
     $subtotal_uf = $receipt_details->subtotal_unformatted ?? null;
     $discount_uf = $receipt_details->discount_amount_unformatted ?? 0;
-    $taxable_amount_uf = !is_null($subtotal_uf) ? ($subtotal_uf - $discount_uf) : null;
+    $taxable_amount_uf = !is_null($subtotal_uf) ? $subtotal_uf - $discount_uf : null;
 @endphp
 
 <div class="ksa-tax-invoice">
     <div class="text-center ksa-header">
         @if (!empty($receipt_details->logo))
-            <img src="{{ $receipt_details->logo }}" alt="Logo" class="ksa-logo">
+            <img src="{{ $receipt_details->logo }}"
+                 alt="Logo"
+                 class="ksa-logo">
         @elseif (!empty($receipt_details->letter_head))
-            <img src="{{ $receipt_details->letter_head }}" alt="Letter Head" class="ksa-logo">
+            <img src="{{ $receipt_details->letter_head }}"
+                 alt="Letter Head"
+                 class="ksa-logo">
         @endif
 
         <div class="ksa-title-main">{{ $receipt_details->invoice_heading ?: 'Tax Invoice' }}</div>
@@ -127,8 +193,8 @@
             <td class="ksa-top-qr text-center">
                 @if ($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
                     <img class="ksa-qr"
-                        src="data:image/png;base64,{{ DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 4, 4, [39, 48, 54]) }}"
-                        alt="QR Code">
+                         src="data:image/png;base64,{{ DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 4, 4, [39, 48, 54]) }}"
+                         alt="QR Code">
                 @endif
             </td>
         </tr>
@@ -137,8 +203,10 @@
     <table class="ksa-grid-table party-table">
         <thead>
             <tr>
-                <th colspan="3" class="party-head-left">Seller</th>
-                <th colspan="3" class="party-head-right">Buyer</th>
+                <th colspan="3"
+                    class="party-head-left">Seller</th>
+                <th colspan="3"
+                    class="party-head-right">Buyer</th>
             </tr>
         </thead>
         <tbody>
@@ -188,12 +256,14 @@
         <tbody>
             @foreach ($receipt_details->lines as $line)
                 @php
-                    $qty = (float) ($line['quantity_uf'] ?? $line['quantity'] ?? 0);
+                    $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
                     $line_tax_amount = (float) ($line['tax'] ?? 0) * $qty;
                     $line_total_uf = (float) ($line['line_total_uf'] ?? 0);
                     $line_taxable_amount = !empty($line['line_total_exc_tax_uf'])
                         ? (float) $line['line_total_exc_tax_uf']
-                        : ($line_total_uf > 0 ? $line_total_uf - $line_tax_amount : 0);
+                        : ($line_total_uf > 0
+                            ? $line_total_uf - $line_tax_amount
+                            : 0);
                 @endphp
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
@@ -237,8 +307,7 @@
     <div class="ksa-summary-wrap avoid-page-break">
         <div class="ksa-summary-left">
             @if (!empty($receipt_details->sale_note))
-
-                 {!! nl2br(e($receipt_details->sale_note)) !!}
+                {!! nl2br(e($receipt_details->sale_note)) !!}
             @endif
             @if (!empty($receipt_details->additional_notes))
                 <div class="ksa-notes">
@@ -310,7 +379,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="ksa-label">Due Amount  ( المبلغ المستحق )</td>
+                    <td class="ksa-label">Due Amount ( المبلغ المستحق )</td>
                     <td class="ksa-value text-right">
                         {{ $receipt_details->total_due ?? $receipt_details->total }}
                     </td>
@@ -320,10 +389,12 @@
             @if (!empty($receipt_details->total_unformatted))
                 <div class="amount-in-words-row">
                     <p class="amount-line">
-                        <strong>Invoiced Amount:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($receipt_details->total_unformatted, 'riyal', 'halala', 'en') }}
+                        <strong>Invoiced
+                            Amount:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($receipt_details->total_unformatted, 'riyal', 'halala', 'en') }}
                     </p>
                     <p class="amount-line amount-line-ar">
-                        <strong>مبلغ الفاتورة:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($receipt_details->total_unformatted, 'ريالًا و', ' هللة فقط', 'ar') }}
+                        <strong>مبلغ
+                            الفاتورة:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($receipt_details->total_unformatted, 'ريالًا و', ' هللة فقط', 'ar') }}
                     </p>
                 </div>
             @endif
@@ -525,6 +596,7 @@
     }
 
     @media print {
+
         html,
         body,
         .ksa-tax-invoice,
@@ -542,4 +614,3 @@
         }
     }
 </style>
-

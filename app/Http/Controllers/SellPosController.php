@@ -788,6 +788,10 @@ class SellPosController extends Controller
         ];
         $receipt_details->currency = $currency_details;
 
+
+        \Log::info('Receipt Details:', (array) $receipt_details);
+
+
         if ($is_package_slip) {
             $output['html_content'] = view('sale_pos.receipts.packing_slip', compact('receipt_details'))->render();
 
@@ -812,8 +816,14 @@ class SellPosController extends Controller
             $output['html_content'] = view($layout, compact('receipt_details'))->render();
         }
 
+
         return $output;
     }
+
+
+
+
+
 
     /**
      * Display the specified resource.

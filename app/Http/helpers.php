@@ -10,7 +10,8 @@ function pos_boot($ul, $pt, $lc, $em, $un, $type = 1, $pid = null)
 
     $pid = is_null($pid) ? config('author.pid') : $pid;
 
-    $curlConfig = [CURLOPT_URL => $request_url,
+    $curlConfig = [
+        CURLOPT_URL => $request_url,
         CURLOPT_POST => true,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_SSL_VERIFYHOST => false,
@@ -28,7 +29,7 @@ function pos_boot($ul, $pt, $lc, $em, $un, $type = 1, $pid = null)
     $result = curl_exec($ch);
 
     if (curl_errno($ch)) {
-        $error_msg = 'C'.'U'.'RL '.'E'.'rro'.'r: ';
+        $error_msg = 'C' . 'U' . 'RL ' . 'E' . 'rro' . 'r: ';
         $error_msg .= curl_errno($ch);
 
         return redirect()->back()
@@ -44,7 +45,7 @@ function pos_boot($ul, $pt, $lc, $em, $un, $type = 1, $pid = null)
             //     $this->_handle_data($result['data']);
             // }
         } else {
-            $msg = (isset($result['msg']) && ! empty($result['msg'])) ? $result['msg'] : 'I'.'nvali'.'d '.'Lic'.'ense Det'.'ails';
+            $msg = (isset($result['msg']) && ! empty($result['msg'])) ? $result['msg'] : 'I' . 'nvali' . 'd ' . 'Lic' . 'ense Det' . 'ails';
 
             return redirect()->back()
                 ->with('error', $msg);
@@ -64,7 +65,7 @@ if (! function_exists('humanFilesize')) {
             $i++;
         }
 
-        return round($size, $precision).$units[$i];
+        return round($size, $precision) . $units[$i];
     }
 }
 
@@ -137,11 +138,11 @@ if (! function_exists('str_ordinal')) {
 
         $indicators = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
 
-        $suffix = $superscript ? '<sup>'.$indicators[$number % 10].'</sup>' : $indicators[$number % 10];
+        $suffix = $superscript ? '<sup>' . $indicators[$number % 10] . '</sup>' : $indicators[$number % 10];
         if ($number % 100 >= 11 && $number % 100 <= 13) {
             $suffix = $superscript ? '<sup>th</sup>' : 'th';
         }
 
-        return number_format($number).$suffix;
+        return number_format($number) . $suffix;
     }
 }

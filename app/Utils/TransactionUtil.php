@@ -966,7 +966,8 @@ class TransactionUtil extends Util
     {
         $il = $invoice_layout;
 
-        $transaction = Transaction::find($transaction_id);
+        $transaction = Transaction::with('contact')->find($transaction_id);
+        $contact = $transaction->contact;
         $transaction_type = $transaction->type;
 
         $output = [
@@ -1034,6 +1035,17 @@ class TransactionUtil extends Util
         if (! empty($temp)) {
             $output['address'] .= implode(', ', $temp);
         }
+
+        $output['seller_address'] = [
+            'landmark' => $location_details->landmark ?? null,
+            'city' => $location_details->city ?? null,
+            'state' => $location_details->state ?? null,
+            'zip_code' => $location_details->zip_code ?? null,
+            'country' => $location_details->country ?? null,
+            'website' => $location_details->website ?? null,
+            'building_number' => $contact->building_number ?? null,
+            'street_name' => $contact->street_name ?? null
+        ];
 
         $output['website'] = $location_details->website;
         $output['location_custom_fields'] = '';
@@ -1190,6 +1202,19 @@ class TransactionUtil extends Util
             if (! empty($customer_address)) {
                 $output['customer_info_address'] = implode(', ', $customer_address);
             }
+
+
+            $output['customer_address'] = [
+                'business_name' => $customer->supplier_business_name ?? null,
+                'address_line_1' => $customer->address_line_1 ?? null,
+                'address_line_2' => $customer->address_line_2 ?? null,
+                'city' => $customer->city ?? null,
+                'state' => $customer->state ?? null,
+                'country' => $customer->country ?? null,
+                'zip_code' => $customer->zip_code ?? null,
+                'building_number' => $customer->building_number ?? null,
+                'street_name' => $customer->street_name ?? null,
+            ];
         }
 
         if ($il->show_reward_point == 1) {
@@ -1264,6 +1289,9 @@ class TransactionUtil extends Util
         $output['transaction_date'] = $transaction->transaction_date;
         $output['date_time_format'] = $business_details->date_format;
         $output['currency_symbol'] = $business_details->currency_symbol;
+        $output['project_name'] = $transaction['custom_field_1'] ?? null;
+        $output['project_code'] = $transaction['custom_field_2'] ?? null;
+
 
         $output['hide_price'] = ! empty($il->common_settings['hide_price']) ? true : false;
 
