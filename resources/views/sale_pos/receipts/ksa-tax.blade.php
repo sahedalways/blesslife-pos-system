@@ -148,13 +148,26 @@
 
     $total_vat = 0;
     $total_discount = 0;
+    $totalProductsAfterTaxAmount = 0;
+    $tax_rate = 0.15;
+
     foreach ($receipt_details->lines as $line) {
         $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
-        $tax_amount = (float) ($line['tax'] ?? 0) * $qty;
+        $tax_amount = (float) ($line['tax'] ?? $tax_rate) * $qty;
         $total_vat += $tax_amount;
 
         $line_discount = (float) ($line['total_line_discount_uf'] ?? ($line['total_line_discount'] ?? 0));
         $total_discount += $line_discount;
+
+        $perProductTaxableAmount = !empty($line['line_total_exc_tax_uf'])
+            ? (float) $line['line_total_exc_tax_uf']
+            : $line_total_uf;
+
+        $perProductTaxAmount = $perProductTaxableAmount * 0.15;
+
+        $perProductAfterTaxAmount = $perProductTaxableAmount + $perProductTaxAmount;
+
+        $totalProductsAfterTaxAmount += $perProductAfterTaxAmount;
     }
 
     $subtotal_uf = $receipt_details->subtotal_unformatted ?? null;
@@ -335,6 +348,7 @@
             $vat_amount = $net_amount * 0.15;
 
             $total_amount = $net_amount + $vat_amount;
+
         @endphp
 
         <div class="ksa-summary-block">
@@ -342,18 +356,18 @@
                 <tr>
                     <td class="ksa-label">Subtotal ( المجموع الفرعي )</td>
                     <td class="ksa-value text-right">
-                        @if (!is_null($subtotal_uf))
-                            @format_currency($subtotal_uf)
+                        @if ($totalProductsAfterTaxAmount)
+                            @format_currency($totalProductsAfterTaxAmount)
                         @else
-                            {{ $receipt_details->subtotal }}
+                            @format_currency(0)
                         @endif
                     </td>
                 </tr>
                 <tr>
                     <td class="ksa-label">Total Discount ( إجمالي الخصم )</td>
                     <td class="ksa-value text-right">
-                        @if ($total_discount > 0)
-                            @format_currency($total_discount)
+                        @if ($discount_uf > 0)
+                            @format_currency($discount_uf)
                         @else
                             @format_currency(0)
                         @endif

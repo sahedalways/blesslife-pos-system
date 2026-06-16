@@ -12,6 +12,9 @@
     $total_vat = 0;
     $total_discount = 0;
     $total_quantity = 0;
+    $totalProductsAfterTaxAmount = 0;
+    $tax_rate = 0.15;
+
     foreach ($receipt_details->lines as $line) {
         $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
         $tax_amount = (float) ($line['tax'] ?? 0) * $qty;
@@ -20,6 +23,16 @@
 
         $line_discount = (float) ($line['total_line_discount_uf'] ?? ($line['total_line_discount'] ?? 0));
         $total_discount += $line_discount;
+
+        $perProductTaxableAmount = !empty($line['line_total_exc_tax_uf'])
+            ? (float) $line['line_total_exc_tax_uf']
+            : $line_total_uf;
+
+        $perProductTaxAmount = $perProductTaxableAmount * 0.15;
+
+        $perProductAfterTaxAmount = $perProductTaxableAmount + $perProductTaxAmount;
+
+        $totalProductsAfterTaxAmount += $perProductAfterTaxAmount;
     }
 
     $subtotal_uf = $receipt_details->subtotal_unformatted ?? 0;
@@ -439,6 +452,18 @@
             </td>
             <td class="tcn-totals-label-ar">
                 المبلغ الإجمالي بدون ضريبة القيمة المضافة
+            </td>
+        </tr>
+
+        <tr>
+            <td class="tcn-totals-label-en">
+                Discount
+            </td>
+            <td class="tcn-totals-value">
+                @format_currency($discount_uf)
+            </td>
+            <td class="tcn-totals-label-ar">
+                الخصم
             </td>
         </tr>
 
