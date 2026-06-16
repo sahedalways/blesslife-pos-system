@@ -260,13 +260,16 @@
             @foreach ($receipt_details->lines as $line)
                 @php
                     $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
-                    $line_tax_amount = (float) ($line['tax'] ?? 0) * $qty;
+
                     $line_total_uf = (float) ($line['line_total_uf'] ?? 0);
+
                     $line_taxable_amount = !empty($line['line_total_exc_tax_uf'])
                         ? (float) $line['line_total_exc_tax_uf']
-                        : ($line_total_uf > 0
-                            ? $line_total_uf - $line_tax_amount
-                            : 0);
+                        : $line_total_uf;
+
+                    $line_tax_amount = $line_taxable_amount * 0.15;
+
+                    $line_total_with_vat = $line_taxable_amount + $line_tax_amount;
                 @endphp
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
@@ -293,14 +296,10 @@
                         @format_currency($line_taxable_amount)
                     </td>
                     <td class="text-center">
-                        {{ $line['tax_percent'] ?? '' }}%
+                        {{ $line['tax_percent'] ?? '15' }}%
                     </td>
                     <td class="text-right">
-                        @if (isset($line['line_total_uf']))
-                            @format_currency($line['line_total_uf'])
-                        @else
-                            {{ $line['line_total'] ?? '' }}
-                        @endif
+                        @format_currency($line_total_with_vat)
                     </td>
                 </tr>
             @endforeach
@@ -322,6 +321,21 @@
                 <div class="ksa-footer-text">{!! $receipt_details->footer_text !!}</div>
             @endif
         </div>
+
+        @php
+
+            if (!empty($receipt_details->total_unformatted)) {
+                $net_amount = $receipt_details->total_unformatted - $total_vat;
+            } elseif (!is_null($taxable_amount_uf)) {
+                $net_amount = $taxable_amount_uf;
+            } else {
+                $net_amount = $subtotal_uf ?? 0;
+            }
+
+            $vat_amount = $net_amount * 0.15;
+
+            $total_amount = $net_amount + $vat_amount;
+        @endphp
 
         <div class="ksa-summary-block">
             <table class="ksa-grid-table ksa-totals-table">
@@ -358,16 +372,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="ksa-label">Total Tax ( إجمالي الضريبة )</td>
+                    <td class="ksa-label">Total VAT (15%)</td>
                     <td class="ksa-value text-right">
-                        @if ($total_vat > 0)
-                            @format_currency($total_vat)
+                        @if ($vat_amount > 0)
+                            @format_currency($vat_amount)
                         @else
-                            @if (!empty($receipt_details->tax))
-                                {{ $receipt_details->tax }}
-                            @else
-                                @format_currency(0)
-                            @endif
+                            @format_currency(0)
                         @endif
                     </td>
                 </tr>
@@ -375,16 +385,16 @@
                     <td class="ksa-label">Total Amount ( المبلغ الإجمالي )</td>
                     <td class="ksa-value text-right">
                         @if (!empty($receipt_details->total_unformatted))
-                            @format_currency($receipt_details->total_unformatted)
+                            @format_currency($total_amount ?? '0.00')
                         @else
-                            {{ $receipt_details->total }}
+                            {{ $total_amount ?? '0.00' }}
                         @endif
                     </td>
                 </tr>
                 <tr>
                     <td class="ksa-label">Due Amount ( المبلغ المستحق )</td>
                     <td class="ksa-value text-right">
-                        {{ $receipt_details->total_due ?? $receipt_details->total }}
+                        {{ $receipt_details->total_due ?? $total_amount }}
                     </td>
                 </tr>
             </table>
@@ -393,11 +403,11 @@
                 <div class="amount-in-words-row">
                     <p class="amount-line">
                         <strong>Invoiced
-                            Amount:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($receipt_details->total_unformatted, 'riyal', 'halala', 'en') }}
+                            Amount:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($total_amount, 'riyal', 'halala', 'en') }}
                     </p>
                     <p class="amount-line amount-line-ar">
                         <strong>مبلغ
-                            الفاتورة:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($receipt_details->total_unformatted, 'ريالًا و', ' هللة فقط', 'ar') }}
+                            الفاتورة:</strong>{{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($total_amount, 'ريالًا و', ' هللة فقط', 'ar') }}
                     </p>
                 </div>
             @endif

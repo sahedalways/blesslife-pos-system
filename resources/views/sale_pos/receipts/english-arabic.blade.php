@@ -27,6 +27,12 @@
     $total_uf = $receipt_details->total_unformatted ?? 0;
     $taxable_amount_uf = $subtotal_uf - $discount_uf;
 
+    $net_amount = $taxable_amount_uf;
+
+    $calculated_vat = $net_amount * 0.15;
+
+    $total_amount_include_vat = $net_amount + $calculated_vat;
+
     // Calculate VAT percent (assume 15% if not specified)
     $vat_percent = 15;
     if ($taxable_amount_uf > 0 && $total_vat > 0) {
@@ -348,26 +354,42 @@
             @foreach ($receipt_details->lines as $line)
                 @php
                     $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
-                    $line_tax_amount = (float) ($line['tax'] ?? 0) * $qty;
+
                     $line_total_uf = (float) ($line['line_total_uf'] ?? 0);
+
                     $line_taxable_amount = !empty($line['line_total_exc_tax_uf'])
                         ? (float) $line['line_total_exc_tax_uf']
-                        : ($line_total_uf > 0
-                            ? $line_total_uf - $line_tax_amount
-                            : 0);
+                        : $line_total_uf;
+
+                    $line_tax_amount = $line_taxable_amount * 0.15;
+
+                    // Total Amount Including VAT
+                    $line_total_with_vat = $line_taxable_amount + $line_tax_amount;
                 @endphp
+
                 <tr>
-                    <td class="tcn-lines-td text-center">{{ $loop->iteration }}</td>
                     <td class="tcn-lines-td text-center">
-                        {{ $line['name'] }} {{ $line['product_variation'] ?? '' }} {{ $line['variation'] ?? '' }}
+                        {{ $loop->iteration }}
+                    </td>
+
+                    <td class="tcn-lines-td text-center">
+                        {{ $line['name'] }}
+                        {{ $line['product_variation'] ?? '' }}
+                        {{ $line['variation'] ?? '' }}
+
                         @if (!empty($line['sub_sku']))
                             <br><small>{{ $line['sub_sku'] }}</small>
                         @endif
+
                         @if (!empty($line['sell_line_note']))
                             <br><small>{!! strip_tags($line['sell_line_note']) !!}</small>
                         @endif
                     </td>
-                    <td class="tcn-lines-td text-center">{{ $line['quantity'] }}</td>
+
+                    <td class="tcn-lines-td text-center">
+                        {{ $line['quantity'] }}
+                    </td>
+
                     <td class="tcn-lines-td text-right">
                         @if (isset($line['unit_price_before_discount_uf']))
                             @format_currency($line['unit_price_before_discount_uf'])
@@ -375,14 +397,20 @@
                             {{ $line['unit_price_before_discount'] ?? '' }}
                         @endif
                     </td>
-                    <td class="tcn-lines-td text-right">@format_currency($line_taxable_amount)</td>
-                    <td class="tcn-lines-td text-right">@format_currency($line_tax_amount)</td>
+
+                    <!-- Amount Without VAT -->
                     <td class="tcn-lines-td text-right">
-                        @if (isset($line['line_total_uf']))
-                            @format_currency($line['line_total_uf'])
-                        @else
-                            {{ $line['line_total'] ?? '' }}
-                        @endif
+                        @format_currency($line_taxable_amount)
+                    </td>
+
+                    <!-- VAT 15% -->
+                    <td class="tcn-lines-td text-right">
+                        @format_currency($line_tax_amount)
+                    </td>
+
+                    <!-- Total Amount Include VAT -->
+                    <td class="tcn-lines-td text-right">
+                        @format_currency($line_total_with_vat)
                     </td>
                 </tr>
             @endforeach
@@ -406,18 +434,32 @@
     <table class="tcn-totals-table avoid-page-break">
         <tr>
             <td class="tcn-totals-label-en">Total Amount Without Vat</td>
-            <td class="tcn-totals-value">@format_currency($taxable_amount_uf)</td>
-            <td class="tcn-totals-label-ar">المبلغ الإجمالي بدون ضريبة القيمة المضافة</td>
+            <td class="tcn-totals-value">
+                @format_currency($net_amount)
+            </td>
+            <td class="tcn-totals-label-ar">
+                المبلغ الإجمالي بدون ضريبة القيمة المضافة
+            </td>
         </tr>
+
         <tr>
-            <td class="tcn-totals-label-en">{{ $vat_percent }}% Vat</td>
-            <td class="tcn-totals-value">@format_currency($total_vat)</td>
-            <td class="tcn-totals-label-ar">{{ $vat_percent }}% ضريبة القيمة المضافة</td>
+            <td class="tcn-totals-label-en"> Vat %</td>
+            <td class="tcn-totals-value">
+                @format_currency($calculated_vat)
+            </td>
+            <td class="tcn-totals-label-ar">
+                ضريبة القيمة المضافة
+            </td>
         </tr>
+
         <tr>
             <td class="tcn-totals-label-en">Total Amount Include Vat</td>
-            <td class="tcn-totals-value">@format_currency($total_uf)</td>
-            <td class="tcn-totals-label-ar">المبلغ الإجمالي يشمل ضريبة القيمة المضافة</td>
+            <td class="tcn-totals-value">
+                @format_currency($total_amount_include_vat)
+            </td>
+            <td class="tcn-totals-label-ar">
+                المبلغ الإجمالي يشمل ضريبة القيمة المضافة
+            </td>
         </tr>
     </table>
 
@@ -426,8 +468,8 @@
         <tr>
             <td class="tcn-words-label">Amount in Words:</td>
             <td class="tcn-words-value">
-                @if (!empty($total_uf))
-                    {{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($total_uf, 'Riyals', 'Halalas', 'en') }}.
+                @if (!empty($total_amount_include_vat))
+                    {{ app(\App\Utils\TransactionUtil::class)->numberToCurrencyWords($total_amount_include_vat, 'Riyals', 'Halalas', 'en') }}.
                 @endif
             </td>
         </tr>
