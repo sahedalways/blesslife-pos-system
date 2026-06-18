@@ -417,7 +417,7 @@
             <button type="button"
                     class="tw-dw-btn tw-dw-btn-primary tw-text-white"
                     aria-label="Print"
-                    onclick="$(this).closest('div.modal').printThis();">
+                    onclick="printPaymentVoucher(this);">
                 <i class="fa fa-print"></i> @lang('messages.print')
             </button>
             <button type="button"
@@ -427,3 +427,236 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function printPaymentVoucher(btn) {
+        var $modal = $(btn).closest('.modal-content');
+
+        // Get only the voucher content (exclude header, footer buttons)
+        var voucherHTML = $modal.find('.voucher-body').html();
+
+        // Collect ALL stylesheets from current page
+        var allStyles = '';
+        $('style').each(function() {
+            allStyles += '<style>' + $(this).html() + '</style>';
+        });
+        $('link[rel="stylesheet"]').each(function() {
+            allStyles += '<link rel="stylesheet" href="' + $(this).attr('href') + '">';
+        });
+
+        // Open print window
+        var printWin = window.open('', '_blank', 'width=1200,height=850');
+        printWin.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Payment Voucher</title>
+            <meta charset="utf-8">
+            ${allStyles}
+            <style>
+                @page {
+                    size: A4 landscape;
+                    margin: 8mm;
+                }
+                * {
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                    color-adjust: exact !important;
+                }
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    background: #eef0fb !important;
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                }
+                .no-print { display: none !important; }
+
+                /* Force preserve voucher styles in print */
+                .voucher-body {
+                    background: #eef0fb !important;
+                    padding: 0 !important;
+                    font-family: Arial, sans-serif !important;
+                    color: #4a3f9e !important;
+                    position: relative !important;
+                    overflow: hidden !important;
+                }
+                .voucher-container {
+                    padding: 25px 35px 40px 35px !important;
+                    position: relative !important;
+                }
+                .voucher-container::before {
+                    content: '' !important;
+                    position: absolute !important;
+                    top: 0 !important;
+                    right: 0 !important;
+                    width: 280px !important;
+                    height: 110px !important;
+                    background: linear-gradient(135deg, transparent 30%, #5b4fc4 30%, #5b4fc4 60%, #8a7fd9 60%, #8a7fd9 75%, transparent 75%) !important;
+                    border-bottom-left-radius: 100% 80px !important;
+                    opacity: 0.85 !important;
+                    z-index: 0 !important;
+                }
+                .voucher-header {
+                    display: flex !important;
+                    align-items: flex-start !important;
+                    justify-content: space-between !important;
+                    margin-bottom: 30px !important;
+                    position: relative !important;
+                    z-index: 2 !important;
+                }
+                .voucher-logo img { max-height: 90px !important; }
+                .voucher-title {
+                    border: 2px solid #4a3f9e !important;
+                    border-radius: 30px !important;
+                    padding: 8px 30px !important;
+                    text-align: center !important;
+                    font-weight: bold !important;
+                    color: #4a3f9e !important;
+                    background: #fff !important;
+                    margin-top: 20px !important;
+                    font-size: 16px !important;
+                    line-height: 1.3 !important;
+                }
+                .voucher-row {
+                    display: flex !important;
+                    justify-content: space-between !important;
+                    align-items: center !important;
+                    margin-bottom: 18px !important;
+                    flex-wrap: wrap !important;
+                    position: relative !important;
+                    z-index: 2 !important;
+                }
+                .voucher-field {
+                    display: flex !important;
+                    align-items: center !important;
+                    flex: 1 !important;
+                    margin: 0 5px !important;
+                    font-size: 14px !important;
+                    color: #4a3f9e !important;
+                    font-weight: 600 !important;
+                }
+                .voucher-field .label-en, .voucher-field .label-ar { white-space: nowrap !important; }
+                .voucher-field .label-ar { direction: rtl !important; }
+                .voucher-field .field-line {
+                    flex: 1 !important;
+                    border-bottom: 2px dotted #4a3f9e !important;
+                    margin: 0 8px !important;
+                    min-height: 20px !important;
+                    text-align: center !important;
+                    padding: 0 5px !important;
+                    color: #000 !important;
+                    font-weight: 500 !important;
+                }
+                .voucher-amount-box {
+                    border: 2px solid #4a3f9e !important;
+                    padding: 6px 40px !important;
+                    min-width: 180px !important;
+                    text-align: center !important;
+                    background: #fff !important;
+                    font-weight: bold !important;
+                    color: #000 !important;
+                }
+                .amount-wrapper { display: flex !important; align-items: center !important; gap: 8px !important; }
+                .checkbox-row {
+                    display: flex !important;
+                    justify-content: space-between !important;
+                    margin: 20px 0 !important;
+                    flex-wrap: wrap !important;
+                    gap: 10px !important;
+                    position: relative !important;
+                    z-index: 2 !important;
+                }
+                .check-item {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 6px !important;
+                    font-size: 13px !important;
+                    font-weight: 600 !important;
+                    color: #4a3f9e !important;
+                }
+                .check-box {
+                    width: 16px !important;
+                    height: 16px !important;
+                    border: 1.5px solid #4a3f9e !important;
+                    display: inline-block !important;
+                    background: #fff !important;
+                    text-align: center !important;
+                    line-height: 14px !important;
+                    font-weight: bold !important;
+                }
+                .check-box.checked::after {
+                    content: '✓' !important;
+                    color: #4a3f9e !important;
+                    font-size: 14px !important;
+                }
+                .signature-row {
+                    display: flex !important;
+                    justify-content: space-between !important;
+                    margin-top: 35px !important;
+                    gap: 20px !important;
+                    position: relative !important;
+                    z-index: 2 !important;
+                }
+                .signature-field {
+                    flex: 1 !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    font-size: 13px !important;
+                    font-weight: 600 !important;
+                    color: #4a3f9e !important;
+                }
+                .signature-field .field-line {
+                    flex: 1 !important;
+                    border-bottom: 2px dotted #4a3f9e !important;
+                    margin: 0 6px !important;
+                    min-height: 18px !important;
+                }
+                .voucher-footer {
+                    background: #4a3f9e !important;
+                    color: #fff !important;
+                    padding: 12px 30px !important;
+                    display: flex !important;
+                    justify-content: space-between !important;
+                    align-items: center !important;
+                    font-size: 12px !important;
+                    flex-wrap: wrap !important;
+                    gap: 10px !important;
+                }
+                .voucher-footer .footer-item {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 6px !important;
+                    color: #fff !important;
+                }
+                .voucher-footer span { color: #fff !important; }
+                .voucher-footer i {
+                    background: #fff !important;
+                    color: #4a3f9e !important;
+                    padding: 4px !important;
+                    border-radius: 50% !important;
+                    width: 22px !important;
+                    height: 22px !important;
+                    text-align: center !important;
+                    line-height: 14px !important;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="voucher-body">${voucherHTML}</div>
+        </body>
+        </html>
+    `);
+        printWin.document.close();
+
+        // Wait for images and fonts to load
+        setTimeout(function() {
+            printWin.focus();
+            printWin.print();
+            setTimeout(function() {
+                printWin.close();
+            }, 300);
+        }, 800);
+    }
+</script>
