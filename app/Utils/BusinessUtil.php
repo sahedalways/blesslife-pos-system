@@ -32,14 +32,17 @@ class BusinessUtil extends Util
         $user = User::find($user_id);
 
         //create Admin role and assign to user
-        $role = Role::create(['name' => 'Admin#'.$business_id,
+        $role = Role::create([
+            'name' => 'Admin#' . $business_id,
             'business_id' => $business_id,
-            'guard_name' => 'web', 'is_default' => 1,
+            'guard_name' => 'web',
+            'is_default' => 1,
         ]);
         $user->assignRole($role->name);
 
         //Create Cashier role for a new business
-        $cashier_role = Role::create(['name' => 'Cashier#'.$business_id,
+        $cashier_role = Role::create([
+            'name' => 'Cashier#' . $business_id,
             'business_id' => $business_id,
             'guard_name' => 'web',
         ]);
@@ -64,7 +67,8 @@ class BusinessUtil extends Util
         Contact::create($customer);
 
         //create default invoice setting for new business
-        InvoiceScheme::create(['name' => 'Default',
+        InvoiceScheme::create([
+            'name' => 'Default',
             'scheme_type' => 'blank',
             'prefix' => '',
             'start_number' => 1,
@@ -73,7 +77,8 @@ class BusinessUtil extends Util
             'business_id' => $business_id,
         ]);
         //create default invoice layour for new business
-        InvoiceLayout::create(['name' => 'Default',
+        InvoiceLayout::create([
+            'name' => 'Default',
             'header_text' => null,
             'invoice_no_prefix' => 'Invoice No.',
             'invoice_heading' => 'Invoice',
@@ -145,8 +150,8 @@ class BusinessUtil extends Util
     public function allCurrencies()
     {
         $currencies = Currency::select('id', DB::raw("concat(country, ' - ',currency, '(', code, ') ') as info"))
-                ->orderBy('country')
-                ->pluck('info', 'id');
+            ->orderBy('country')
+            ->pluck('info', 'id');
 
         return $currencies;
     }
@@ -214,6 +219,10 @@ class BusinessUtil extends Util
 
         $business = Business::create_business($business_details);
 
+        Business::where('id', $business->id)->update([
+            'accounting_settings' => json_encode($this->defaultAccountingSettings())
+        ]);
+
         return $business;
     }
 
@@ -225,18 +234,18 @@ class BusinessUtil extends Util
     public function getDetails($business_id)
     {
         $details = Business::leftjoin('tax_rates AS TR', 'business.default_sales_tax', 'TR.id')
-                        ->leftjoin('currencies AS cur', 'business.currency_id', 'cur.id')
-                        ->select(
-                            'business.*',
-                            'cur.code as currency_code',
-                            'cur.symbol as currency_symbol',
-                            'thousand_separator',
-                            'decimal_separator',
-                            'TR.amount AS tax_calculation_amount',
-                            'business.default_sales_discount'
-                        )
-                        ->where('business.id', $business_id)
-                        ->first();
+            ->leftjoin('currencies AS cur', 'business.currency_id', 'cur.id')
+            ->select(
+                'business.*',
+                'cur.code as currency_code',
+                'cur.symbol as currency_symbol',
+                'thousand_separator',
+                'decimal_separator',
+                'TR.amount AS tax_calculation_amount',
+                'business.default_sales_discount'
+            )
+            ->where('business.id', $business_id)
+            ->first();
 
         return $details;
     }
@@ -266,8 +275,8 @@ class BusinessUtil extends Util
         if (date('n') > $end_month) {
             $end_year = $start_year + 1;
         }
-        $start_date = $start_year.'-'.str_pad($start_month, 2, 0, STR_PAD_LEFT).'-01';
-        $end_date = $end_year.'-'.str_pad($end_month, 2, 0, STR_PAD_LEFT).'-01';
+        $start_date = $start_year . '-' . str_pad($start_month, 2, 0, STR_PAD_LEFT) . '-01';
+        $end_date = $end_year . '-' . str_pad($end_month, 2, 0, STR_PAD_LEFT) . '-01';
         $end_date = date('Y-m-t', strtotime($end_date));
 
         $output = [
@@ -290,15 +299,15 @@ class BusinessUtil extends Util
     {
         if (empty($invoice_scheme_id)) {
             $layout = InvoiceLayout::where('is_default', 1)
-                                    ->where('business_id', $business_id)
-                                    ->first();
+                ->where('business_id', $business_id)
+                ->first();
             $invoice_layout_id = $layout->id;
         }
 
         if (empty($invoice_scheme_id)) {
             $scheme = InvoiceScheme::where('is_default', 1)
-                                    ->where('business_id', $business_id)
-                                    ->first();
+                ->where('business_id', $business_id)
+                ->first();
             $invoice_scheme_id = $scheme->id;
         }
 
@@ -315,7 +324,13 @@ class BusinessUtil extends Util
                 'account' => null,
             ];
         }
-        $location = BusinessLocation::create(['business_id' => $business_id,
+
+
+        $default_accounting_map = $this->defaultAccountingLocationMap();
+
+
+        $location = BusinessLocation::create([
+            'business_id' => $business_id,
             'name' => $location_details['name'],
             'landmark' => $location_details['landmark'],
             'city' => $location_details['city'],
@@ -331,6 +346,23 @@ class BusinessUtil extends Util
             'email' => '',
             'location_id' => $location_id,
             'default_payment_accounts' => json_encode($location_payment_types),
+            'accounting_default_map' => json_encode($default_accounting_map),
+        ]);
+
+        $business = Business::findOrFail($business_id);
+
+        $accounting_settings = !empty($business->accounting_settings)
+            ? json_decode($business->accounting_settings, true)
+            : $this->defaultAccountingSettings();
+
+        $accounting_settings['journal_entry_prefix'] = $accounting_settings['journal_entry_prefix'] ?? null;
+        $accounting_settings['transfer_prefix'] = $accounting_settings['transfer_prefix'] ?? null;
+        $accounting_settings['accounting_default_map'] = $accounting_settings['accounting_default_map'] ?? [];
+
+        $accounting_settings['accounting_default_map'][$location->id] = $default_accounting_map;
+
+        Business::where('id', $business_id)->update([
+            'accounting_settings' => json_encode($accounting_settings)
         ]);
 
         return $location;
@@ -353,8 +385,8 @@ class BusinessUtil extends Util
         //If layout is not found (deleted) then get the default layout for the business
         if (empty($layout)) {
             $layout = InvoiceLayout::where('business_id', $business_id)
-                        ->where('is_default', 1)
-                        ->first();
+                ->where('is_default', 1)
+                ->first();
         }
         //$output = []
         return $layout;
@@ -370,7 +402,7 @@ class BusinessUtil extends Util
     public function printerConfig($business_id, $printer_id)
     {
         $printer = Printer::where('business_id', $business_id)
-                    ->find($printer_id);
+            ->find($printer_id);
 
         $output = [];
 
@@ -397,8 +429,9 @@ class BusinessUtil extends Util
     public function editTransactionDateRange($business_id, $edit_transaction_period)
     {
         if (is_numeric($edit_transaction_period)) {
-            return ['start' => \Carbon::today()
-                ->subDays($edit_transaction_period),
+            return [
+                'start' => \Carbon::today()
+                    ->subDays($edit_transaction_period),
                 'end' => \Carbon::today(),
             ];
         } elseif ($edit_transaction_period == 'fy') {
@@ -439,4 +472,39 @@ class BusinessUtil extends Util
         return ['url' => '', 'send_to_param_name' => 'to', 'msg_param_name' => 'text', 'request_method' => 'post', 'param_1' => '', 'param_val_1' => '', 'param_2' => '', 'param_val_2' => '', 'param_3' => '', 'param_val_3' => '', 'param_4' => '', 'param_val_4' => '', 'param_5' => '', 'param_val_5' => '', 'data_parameter_type' => 'form-data'];
     }
 
+
+    public function defaultAccountingLocationMap()
+    {
+        return [
+            'sale' => [
+                'payment_account' => '1173',
+                'deposit_to' => '1238',
+            ],
+            'sell_payment' => [
+                'payment_account' => '1238',
+                'deposit_to' => '1226',
+            ],
+            'purchases' => [
+                'payment_account' => null,
+                'deposit_to' => null,
+            ],
+            'purchase_payment' => [
+                'payment_account' => null,
+                'deposit_to' => null,
+            ],
+            'expense' => [
+                'payment_account' => null,
+                'deposit_to' => null,
+            ],
+        ];
+    }
+
+    public function defaultAccountingSettings()
+    {
+        return [
+            'journal_entry_prefix' => null,
+            'transfer_prefix' => null,
+            'accounting_default_map' => [],
+        ];
+    }
 }
