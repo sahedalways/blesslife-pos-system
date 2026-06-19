@@ -454,7 +454,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            dffffffffffffffffffffffffg
+                            Building No.
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-map-marker"></i>

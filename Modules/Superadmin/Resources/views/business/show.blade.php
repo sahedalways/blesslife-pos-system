@@ -9,15 +9,15 @@
             <small class="tw-text-sm md:tw-text-base tw-text-gray-700 tw-font-semibold"> {{ $business->name }} </small>
         </h1>
         <!-- <ol class="breadcrumb">
-                                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                                    <li class="active">Here</li>
-                                </ol> -->
+                                                                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                                                                    <li class="active">Here</li>
+                                                                </ol> -->
     </section>
 
     <!-- Main content -->
     <section class="content">
         <div
-            class=" tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
+             class=" tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
             <div class="tw-p-4 sm:tw-p-5">
                 <div class="tw-flex tw-gap-2.5">
                     <strong><i class="fa fa-briefcase margin-r-5"></i>
@@ -33,6 +33,13 @@
                                     <p class="text-muted">
                                         {{ $business->name }}
                                     </p>
+
+                                    <strong><i class="fa fa-briefcase margin-r-5"></i>
+                                        CR No</strong>
+                                    <p class="text-muted">
+                                        {{ $business->owner->cr_no }}
+                                    </p>
+
 
                                     <strong><i class="fa fa-money margin-r-5"></i>
                                         @lang('business.currency')</strong>
@@ -124,8 +131,8 @@
                                 <div>
                                     @if (!empty($business->logo))
                                         <img class="img-responsive"
-                                            src="{{ url('uploads/business_logos/' . $business->logo) }}"
-                                            alt="Business Logo">
+                                             src="{{ url('uploads/business_logos/' . $business->logo) }}"
+                                             alt="Business Logo">
                                     @endif
                                 </div>
                             </div>
@@ -136,7 +143,7 @@
         </div>
 
         <div
-            class="tw-mt-5 tw-transition-all  lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
+             class="tw-mt-5 tw-transition-all  lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
             <div class="tw-p-4 sm:tw-p-5">
                 <div class="tw-flex tw-gap-2.5">
                     <strong><i class="fa fa-map-marker margin-r-5"></i>
@@ -149,7 +156,7 @@
                                 <thead>
                                     <tr>
                                         <th>@lang('lang_v1.name')</th>
-                                        <th>@lang('lang_v1.location_id')</th> 
+                                        <th>@lang('lang_v1.location_id')</th>
                                         <th>@lang('business.landmark')</th>
                                         <th>@lang('business.city')</th>
                                         <th>@lang('business.zip_code')</th>
@@ -180,7 +187,7 @@
         </div>
 
         <div
-            class="tw-mt-5 tw-transition-all  lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
+             class="tw-mt-5 tw-transition-all  lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
             <div class="tw-p-4 sm:tw-p-5">
                 <div class="tw-flex tw-gap-2.5">
                     <strong><i class="fa fa-refresh margin-r-5"></i>
@@ -243,7 +250,7 @@
         </div>
 
         <div
-            class="tw-mt-5 tw-transition-all  lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
+             class="tw-mt-5 tw-transition-all  lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md  tw-ring-gray-200">
             <div class="tw-p-4 sm:tw-p-5">
                 <div class="tw-flex tw-gap-2.5">
                     <strong>{{ __('user.all_users') }}</strong>
@@ -252,7 +259,8 @@
                     <div class="tw-mx-4 tw--my-2 tw-overflow-x-auto sm:tw--mx-5">
                         <div class="tw-inline-block tw-min-w-full tw-py-2 tw-align-middle sm:tw-px-5">
                             <!-- location table-->
-                            <table class="table table-bordered table-striped" id="users_table">
+                            <table class="table table-bordered table-striped"
+                                   id="users_table">
                                 <thead>
                                     <tr>
                                         <th>@lang('business.username')</th>
@@ -279,7 +287,7 @@
             var users_table = $('#users_table').DataTable({
                 processing: true,
                 serverSide: true,
-                fixedHeader:false,
+                fixedHeader: false,
                 ajax: '/superadmin/users/' + "{{ $business->id }}",
                 columnDefs: [{
                     "targets": [4],

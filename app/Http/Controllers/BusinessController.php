@@ -98,7 +98,7 @@ class BusinessController extends Controller
 
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
-            $months[$i] = __('business.months.'.$i);
+            $months[$i] = __('business.months.' . $i);
         }
 
         $accounting_methods = $this->businessUtil->allAccountingMethods();
@@ -145,6 +145,7 @@ class BusinessController extends Controller
                     'password' => 'required|min:4|max:255',
                     'fy_start_month' => 'required',
                     'accounting_method' => 'required',
+                    'cr_no' => 'required',
                 ],
                 [
                     'name.required' => __('validation.required', ['attribute' => __('business.business_name')]),
@@ -180,18 +181,36 @@ class BusinessController extends Controller
             DB::beginTransaction();
 
             //Create owner.
-            $owner_details = $request->only(['surname', 'first_name', 'last_name', 'username', 'email', 'password', 'language']);
+            $owner_details = $request->only(['surname', 'first_name', 'last_name', 'username', 'email', 'password', 'language', 'cr_no']);
 
             $owner_details['language'] = empty($owner_details['language']) ? config('app.locale') : $owner_details['language'];
 
             $user = User::create_user($owner_details);
 
-            $business_details = $request->only(['name', 'start_date', 'currency_id', 'time_zone',
-                'fy_start_month', 'accounting_method', 'tax_label_1', 'tax_number_1',
-                'tax_label_2', 'tax_number_2', ]);
+            $business_details = $request->only([
+                'name',
+                'start_date',
+                'currency_id',
+                'time_zone',
+                'fy_start_month',
+                'accounting_method',
+                'tax_label_1',
+                'tax_number_1',
+                'tax_label_2',
+                'tax_number_2',
+            ]);
 
-            $business_location = $request->only(['name', 'country', 'state', 'city', 'zip_code', 'landmark',
-                'website', 'mobile', 'alternate_number', ]);
+            $business_location = $request->only([
+                'name',
+                'country',
+                'state',
+                'city',
+                'zip_code',
+                'landmark',
+                'website',
+                'mobile',
+                'alternate_number',
+            ]);
 
             //Create the business
             $business_details['owner_id'] = $user->id;
@@ -218,7 +237,7 @@ class BusinessController extends Controller
             $new_location = $this->businessUtil->addLocation($business->id, $business_location);
 
             //create new permission with the new location
-            Permission::create(['name' => 'location.'.$new_location->id]);
+            Permission::create(['name' => 'location.' . $new_location->id]);
 
             DB::commit();
 
@@ -238,16 +257,18 @@ class BusinessController extends Controller
                 }
             }
 
-            $output = ['success' => 1,
+            $output = [
+                'success' => 1,
                 'msg' => __('business.business_created_succesfully'),
             ];
 
             return redirect('login')->with('status', $output);
         } catch (\Exception $e) {
             DB::rollBack();
-            \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+            \Log::emergency('File:' . $e->getFile() . 'Line:' . $e->getLine() . 'Message:' . $e->getMessage());
 
-            $output = ['success' => 0,
+            $output = [
+                'success' => 0,
                 'msg' => __('messages.something_went_wrong'),
             ];
 
@@ -305,7 +326,7 @@ class BusinessController extends Controller
 
         $months = [];
         for ($i = 1; $i <= 12; $i++) {
-            $months[$i] = __('business.months.'.$i);
+            $months[$i] = __('business.months.' . $i);
         }
 
         $accounting_methods = [
@@ -368,15 +389,55 @@ class BusinessController extends Controller
                 return $notAllowed;
             }
 
-            $business_details = $request->only(['name', 'start_date', 'currency_id', 'tax_label_1', 'tax_number_1', 'tax_label_2', 'tax_number_2', 'default_profit_percent', 'default_sales_tax', 'default_sales_discount', 'sell_price_tax', 'sku_prefix', 'time_zone', 'fy_start_month', 'accounting_method', 'transaction_edit_days', 'sales_cmsn_agnt', 'item_addition_method', 'currency_symbol_placement', 'on_product_expiry',
-                'stop_selling_before', 'default_unit', 'expiry_type', 'date_format',
-                'time_format', 'ref_no_prefixes', 'theme_color', 'email_settings',
-                'sms_settings', 'rp_name', 'amount_for_unit_rp',
-                'min_order_total_for_rp', 'max_rp_per_order',
-                'redeem_amount_per_unit_rp', 'min_order_total_for_redeem',
-                'min_redeem_point', 'max_redeem_point', 'rp_expiry_period',
-                'rp_expiry_type', 'custom_labels', 'weighing_scale_setting',
-                'code_label_1', 'code_1', 'code_label_2', 'code_2', 'currency_precision', 'quantity_precision', ]);
+            $business_details = $request->only([
+                'name',
+                'start_date',
+                'currency_id',
+                'tax_label_1',
+                'tax_number_1',
+                'tax_label_2',
+                'tax_number_2',
+                'default_profit_percent',
+                'default_sales_tax',
+                'default_sales_discount',
+                'sell_price_tax',
+                'sku_prefix',
+                'time_zone',
+                'fy_start_month',
+                'accounting_method',
+                'transaction_edit_days',
+                'sales_cmsn_agnt',
+                'item_addition_method',
+                'currency_symbol_placement',
+                'on_product_expiry',
+                'stop_selling_before',
+                'default_unit',
+                'expiry_type',
+                'date_format',
+                'time_format',
+                'ref_no_prefixes',
+                'theme_color',
+                'email_settings',
+                'sms_settings',
+                'rp_name',
+                'amount_for_unit_rp',
+                'min_order_total_for_rp',
+                'max_rp_per_order',
+                'redeem_amount_per_unit_rp',
+                'min_order_total_for_redeem',
+                'min_redeem_point',
+                'max_redeem_point',
+                'rp_expiry_period',
+                'rp_expiry_type',
+                'custom_labels',
+                'weighing_scale_setting',
+                'code_label_1',
+                'code_1',
+                'code_label_2',
+                'code_2',
+                'currency_precision',
+                'quantity_precision',
+            ]);
 
             if (! empty($request->input('enable_rp')) && $request->input('enable_rp') == 1) {
                 $business_details['enable_rp'] = 1;
@@ -427,10 +488,20 @@ class BusinessController extends Controller
                 $business_details['logo'] = $logo_name;
             }
 
-            $checkboxes = ['enable_editing_product_from_purchase',
+            $checkboxes = [
+                'enable_editing_product_from_purchase',
                 'enable_inline_tax',
-                'enable_brand', 'enable_category', 'enable_sub_category', 'enable_price_tax', 'enable_purchase_status',
-                'enable_lot_number', 'enable_racks', 'enable_row', 'enable_position', 'enable_sub_units', ];
+                'enable_brand',
+                'enable_category',
+                'enable_sub_category',
+                'enable_price_tax',
+                'enable_purchase_status',
+                'enable_lot_number',
+                'enable_racks',
+                'enable_row',
+                'enable_position',
+                'enable_sub_units',
+            ];
             foreach ($checkboxes as $value) {
                 $business_details[$value] = ! empty($request->input($value)) && $request->input($value) == 1 ? 1 : 0;
             }
@@ -449,7 +520,7 @@ class BusinessController extends Controller
             $shortcuts = $request->input('shortcuts');
             $business_details['keyboard_shortcuts'] = json_encode($shortcuts);
 
-           // Get existing pos_settings
+            // Get existing pos_settings
             $pos_settings = $request->input('pos_settings', []);
 
             $pre_busines_detail = $this->businessUtil->getDetails($business_id);
@@ -460,7 +531,7 @@ class BusinessController extends Controller
                 if ($request->hasFile($inputName)) {
                     $image_name = $this->businessUtil->uploadFile($request, $inputName, 'carousel_images', 'image');
                     $pos_settings[$inputName] = $image_name; // Store image URL inside pos_settings
-                }else if (isset($pre_pos_setting[$inputName])){
+                } else if (isset($pre_pos_setting[$inputName])) {
                     $pos_settings[$inputName] = $pre_pos_setting[$inputName] ?? null;
                 }
             }
@@ -500,13 +571,15 @@ class BusinessController extends Controller
             $financial_year = $this->businessUtil->getCurrentFinancialYear($business->id);
             $request->session()->put('financial_year', $financial_year);
 
-            $output = ['success' => 1,
+            $output = [
+                'success' => 1,
                 'msg' => __('business.settings_updated_success'),
             ];
         } catch (\Exception $e) {
-            \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+            \Log::emergency('File:' . $e->getFile() . 'Line:' . $e->getLine() . 'Message:' . $e->getMessage());
 
-            $output = ['success' => 0,
+            $output = [
+                'success' => 0,
                 'msg' => __('messages.something_went_wrong'),
             ];
         }
@@ -521,7 +594,7 @@ class BusinessController extends Controller
      */
     public function postCheckEmail(Request $request)
     {
-        if(config('constants.do_not_allow_disposable_email') && $request->input('is_disposable_email')) {
+        if (config('constants.do_not_allow_disposable_email') && $request->input('is_disposable_email')) {
 
             $email_validator = Validator::make($request->only('email'), [
                 'email' => 'email|indisposable',
@@ -565,17 +638,17 @@ class BusinessController extends Controller
             $api_settings = $this->moduleUtil->getApiSettings($api_token);
 
             $settings = Business::where('id', $api_settings->business_id)
-                        ->value('ecom_settings');
+                ->value('ecom_settings');
 
             $settings_array = ! empty($settings) ? json_decode($settings, true) : [];
 
             if (! empty($settings_array['slides'])) {
                 foreach ($settings_array['slides'] as $key => $value) {
-                    $settings_array['slides'][$key]['image_url'] = ! empty($value['image']) ? url('uploads/img/'.$value['image']) : '';
+                    $settings_array['slides'][$key]['image_url'] = ! empty($value['image']) ? url('uploads/img/' . $value['image']) : '';
                 }
             }
         } catch (\Exception $e) {
-            \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+            \Log::emergency('File:' . $e->getFile() . 'Line:' . $e->getLine() . 'Message:' . $e->getMessage());
 
             return $this->respondWentWrong($e);
         }
@@ -595,14 +668,14 @@ class BusinessController extends Controller
 
             $data['email_settings'] = $email_settings;
             \Notification::route('mail', $email_settings['mail_from_address'])
-            ->notify(new TestEmailNotification($data));
+                ->notify(new TestEmailNotification($data));
 
             $output = [
                 'success' => 1,
                 'msg' => __('lang_v1.email_tested_successfully'),
             ];
         } catch (\Exception $e) {
-            \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+            \Log::emergency('File:' . $e->getFile() . 'Line:' . $e->getLine() . 'Message:' . $e->getMessage());
             $output = [
                 'success' => 0,
                 'msg' => $e->getMessage(),
@@ -631,7 +704,7 @@ class BusinessController extends Controller
                 $response = $this->businessUtil->sendSms($data);
                 $parameter_type = isset($sms_settings['data_parameter_type']) ? $sms_settings['data_parameter_type'] : 'form-data';
 
-                if($parameter_type == 'json'){
+                if ($parameter_type == 'json') {
 
                     $body = json_decode($response->getBody(), true);
                     // Optional: Check if 'status' or 'success' is true inside JSON (based on API format)
@@ -646,7 +719,7 @@ class BusinessController extends Controller
                 'msg' => $response,
             ];
         } catch (\Exception $e) {
-            \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+            \Log::emergency('File:' . $e->getFile() . 'Line:' . $e->getLine() . 'Message:' . $e->getMessage());
             $output = [
                 'success' => 0,
                 'msg' => $e->getMessage(),
