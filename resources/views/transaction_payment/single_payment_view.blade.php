@@ -264,9 +264,50 @@
 
             <div class="voucher-container">
                 <div class="voucher-header">
-                    <div class="voucher-logo">
-                        <img src="{{ asset('images/blesslife-logo.png') }}"
-                             alt="BlessLife">
+                    <div class="voucher-logo"
+                         style="
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 15px;
+     ">
+
+                        <div
+                             style="
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        line-height: 1;
+        text-transform: uppercase;
+        color: #1f2937;
+        font-family: Arial, sans-serif;
+    ">
+                            {{ Session::get('business.name') }}
+                        </div>
+
+                        <div
+                             style="
+        width: 80px;
+        height: 2px;
+        background: #1f2937;
+        margin: 6px 0;
+        border-radius: 10px;
+    ">
+                        </div>
+
+                        <div
+                             style="
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .5px;
+        color: #555;
+        font-family: Arial, sans-serif;
+    ">
+                            CR NO: {{ auth()->user()->cr_no ?? 'N/A' }}
+                        </div>
+
                     </div>
                     <div class="voucher-title">
                         <div>سند صرف</div>
@@ -391,14 +432,16 @@
             <div class="voucher-footer">
                 <div class="footer-item">
                     <i class="fa fa-envelope"></i>
-                    <span>info@blesslife.com.sa</span>
+                    <span>{{ auth()->user()->email ?? 'N/A' }}</span>
                 </div>
+
                 <div class="footer-item">
-                    <span>Alshafi Complex, 5th Floor, Office No. 501, Al Olaya, 12611 Riyadh, K.S.A</span>
+                    <span>{{ auth()->user()->current_address ?? (auth()->user()->permanent_address ?? 'N/A') }}</span>
                 </div>
+
                 <div class="footer-item">
                     <i class="fa fa-phone"></i>
-                    <span>0112242650</span>
+                    <span>{{ auth()->user()->contact_number ?? 'N/A' }}</span>
                 </div>
             </div>
 
