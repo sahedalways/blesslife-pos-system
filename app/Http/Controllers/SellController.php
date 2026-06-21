@@ -90,6 +90,7 @@ class SellController extends Controller
      */
     public function index()
     {
+
         $is_admin = $this->businessUtil->is_admin(auth()->user());
 
         if (! $is_admin && ! auth()->user()->hasAnyPermission(['sell.view', 'sell.create', 'direct_sell.access', 'direct_sell.view', 'view_own_sell_only', 'view_commission_agent_sell', 'access_shipping', 'access_own_shipping', 'access_commission_agent_shipping', 'so.view_all', 'so.view_own'])) {
@@ -425,7 +426,20 @@ class SellController extends Controller
                 })
                 ->addColumn('net_amount', function ($row) {
 
-                    $net_amount = $row->final_total - $row->tax_amount;
+                    $subtotal = $row->total_before_tax ?? 0;
+
+                    $discount = 0;
+
+                    if (!empty($row->discount_amount)) {
+
+                        if ($row->discount_type == 'percentage') {
+                            $discount = $subtotal * ($row->discount_amount / 100);
+                        } else {
+                            $discount = $row->discount_amount;
+                        }
+                    }
+
+                    $net_amount = $subtotal - $discount;
 
                     return '<span class="net-amount"
         data-orig-value="' . $net_amount . '">'
