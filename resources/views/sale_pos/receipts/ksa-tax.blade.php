@@ -149,21 +149,35 @@
     $total_vat = 0;
     $total_discount = 0;
     $totalProductsAfterTaxAmount = 0;
-    $tax_rate = 0.15;
 
     foreach ($receipt_details->lines as $line) {
         $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
-        $tax_amount = (float) ($line['tax'] ?? $tax_rate) * $qty;
-        $total_vat += $tax_amount;
 
-        $line_discount = (float) ($line['total_line_discount_uf'] ?? ($line['total_line_discount'] ?? 0));
+        $line_total_uf = (float) ($line['line_total_uf'] ?? 0);
+
+        $tax_percent = (float) ($line['tax_percent'] ?? ($line['tax'] ?? 0));
+
+        $line_discount = 0;
+
+        if (!empty($line['line_discount_amount_uf'])) {
+            $line_discount = (float) $line['line_discount_amount_uf'];
+        } elseif (!empty($line['discount_percent'])) {
+            $line_discount = $line_total_uf * ((float) $line['discount_percent'] / 100);
+        } elseif (!empty($line['discount'])) {
+            $line_discount = (float) $line['discount'];
+        }
+
         $total_discount += $line_discount;
+
+        $line_after_discount = $line_total_uf - $line_discount;
 
         $perProductTaxableAmount = !empty($line['line_total_exc_tax_uf'])
             ? (float) $line['line_total_exc_tax_uf']
             : $line_total_uf;
 
-        $perProductTaxAmount = $perProductTaxableAmount * 0.15;
+        $perProductTaxAmount = $perProductTaxableAmount * ($tax_percent / 100);
+
+        $total_vat += $perProductTaxAmount;
 
         $perProductAfterTaxAmount = $perProductTaxableAmount + $perProductTaxAmount;
 
@@ -280,7 +294,9 @@
                         ? (float) $line['line_total_exc_tax_uf']
                         : $line_total_uf;
 
-                    $line_tax_amount = $line_taxable_amount * 0.15;
+                    $tax_percent = (float) ($line['tax_percent'] ?? 0);
+
+                    $line_tax_amount = $line_taxable_amount * ($tax_percent / 100);
 
                     $line_total_with_vat = $line_taxable_amount + $line_tax_amount;
                 @endphp
@@ -309,7 +325,7 @@
                         @format_currency($line_taxable_amount)
                     </td>
                     <td class="text-center">
-                        {{ $line['tax_percent'] ?? '15' }}%
+                        {{ isset($line['tax_percent']) ? $line['tax_percent'] . '%' : 'N/A' }}
                     </td>
                     <td class="text-right">
                         @format_currency($line_total_with_vat)
@@ -337,18 +353,15 @@
 
         @php
 
-            if (!empty($receipt_details->total_unformatted)) {
-                $net_amount = $receipt_details->total_unformatted - $total_vat;
-            } elseif (!is_null($taxable_amount_uf)) {
-                $net_amount = $taxable_amount_uf;
-            } else {
-                $net_amount = $subtotal_uf ?? 0;
-            }
+            $subtotal_amount = (float) ($totalProductsAfterTaxAmount ?? 0);
+
+            $discount_amount = (float) ($total_discount ?? 0);
+
+            $net_amount = $subtotal_amount - $discount_amount;
 
             $vat_amount = $net_amount * 0.15;
 
             $total_amount = $net_amount + $vat_amount;
-
         @endphp
 
         <div class="ksa-summary-block">
@@ -356,8 +369,8 @@
                 <tr>
                     <td class="ksa-label">Subtotal ( المجموع الفرعي )</td>
                     <td class="ksa-value text-right">
-                        @if ($totalProductsAfterTaxAmount)
-                            @format_currency($totalProductsAfterTaxAmount)
+                        @if ($subtotal_amount)
+                            @format_currency($subtotal_amount)
                         @else
                             @format_currency(0)
                         @endif
@@ -366,8 +379,8 @@
                 <tr>
                     <td class="ksa-label">Total Discount ( إجمالي الخصم )</td>
                     <td class="ksa-value text-right">
-                        @if ($discount_uf > 0)
-                            @format_currency($discount_uf)
+                        @if ($discount_amount > 0)
+                            @format_currency($discount_amount)
                         @else
                             @format_currency(0)
                         @endif
@@ -376,12 +389,10 @@
                 <tr>
                     <td class="ksa-label">Net Amount ( المبلغ الصافي )</td>
                     <td class="ksa-value text-right">
-                        @if (!empty($receipt_details->total_unformatted))
-                            @format_currency($receipt_details->total_unformatted - $total_vat)
-                        @elseif (!is_null($taxable_amount_uf))
-                            @format_currency($taxable_amount_uf)
+                        @if (!empty($net_amount))
+                            @format_currency($net_amount)
                         @else
-                            {{ $receipt_details->subtotal }}
+                            {{ $net_amount ?? '0.00' }}
                         @endif
                     </td>
                 </tr>
