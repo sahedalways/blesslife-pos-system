@@ -8,55 +8,92 @@
     $seller_cr = trim($receipt_details->tax_info2 ?? '');
     $buyer_cr = trim($customer_id ?? '');
 
-    // Calculate totals
-    $total_vat = 0;
-    $total_discount = 0;
+    $arabic_digits = [
+        '0' => '٠',
+        '1' => '١',
+        '2' => '٢',
+        '3' => '٣',
+        '4' => '٤',
+        '5' => '٥',
+        '6' => '٦',
+        '7' => '٧',
+        '8' => '٨',
+        '9' => '٩',
+    ];
+
+    // ── Step 1: Loop through lines ────────────────────────────────────────────
     $total_quantity = 0;
-    $total_taxable_amount = 0; // sum of line_total_exc_tax_uf  (excl. VAT, excl. discount)
+    $total_line_discount = 0;
+    $total_per_product_vat = 0; // Σ per-line VAT (product-wise)
+    $total_taxable_excl_vat = 0; // Σ line_taxable (excl. VAT, net of discount)
+    $total_product_line_with_vat = 0; // Σ (line_taxable + line_vat)
+
+    $processed_lines = [];
 
     foreach ($receipt_details->lines as $line) {
         $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
-        $line_total_uf = (float) ($line['line_total_uf'] ?? 0);
+        $unit_price = (float) ($line['unit_price_before_discount_uf'] ?? ($line['unit_price_before_discount'] ?? 0));
         $tax_percent = (float) ($line['tax_percent'] ?? 0);
 
         $total_quantity += $qty;
 
-        // ── Taxable amount per line (excl. VAT) ──────────────────────────
-        $line_taxable_amount = !empty($line['line_total_exc_tax_uf'])
-            ? (float) $line['line_total_exc_tax_uf']
-            : $line_total_uf;
+        $gross = $unit_price * $qty;
 
-        $total_taxable_amount += $line_taxable_amount;
-
-        // ── VAT per line ─────────────────────────────────────────────────
-        $total_vat += $line_taxable_amount * ($tax_percent / 100);
-
-        // ── Discount per line ────────────────────────────────────────────
+        // ── Per-line discount ─────────────────────────────────────────────────
         $line_discount = 0;
+        $discount_label = '';
+
         if (!empty($line['line_discount_amount_uf'])) {
             $line_discount = (float) $line['line_discount_amount_uf'];
+            if (!empty($line['discount_percent'])) {
+                $discount_label = '(' . $line['discount_percent'] . '%)';
+            }
         } elseif (!empty($line['discount_percent'])) {
-            $line_discount = $line_total_uf * ((float) $line['discount_percent'] / 100);
+            $line_discount = $gross * ((float) $line['discount_percent'] / 100);
+            $discount_label = '(' . $line['discount_percent'] . '%)';
         } elseif (!empty($line['discount'])) {
             $line_discount = (float) $line['discount'];
         }
-        $total_discount += $line_discount;
+
+        $total_line_discount += $line_discount;
+
+        // ── Taxable amount per line (excl. VAT, net of discount) ─────────────
+        if (!empty($line['line_total_exc_tax_uf'])) {
+            $line_taxable = (float) $line['line_total_exc_tax_uf'];
+        } else {
+            $line_taxable = $gross - $line_discount;
+        }
+
+        // ── Per-product VAT ──────────────────────────────────────────────────
+        $line_vat = $line_taxable * ($tax_percent / 100);
+        $line_total_with_vat = $line_taxable + $line_vat;
+
+        // ── Accumulate ───────────────────────────────────────────────────────
+        $total_taxable_excl_vat += $line_taxable;
+        $total_per_product_vat += $line_vat;
+        $total_product_line_with_vat += $line_total_with_vat;
+
+        $processed_lines[] = [
+            'line' => $line,
+            'qty' => $qty,
+            'unit_price' => $unit_price,
+            'gross' => $gross,
+            'line_discount' => $line_discount,
+            'discount_label' => $discount_label,
+            'line_taxable' => $line_taxable,
+            'tax_percent' => $tax_percent,
+            'line_vat' => $line_vat,
+            'line_total_with_vat' => $line_total_with_vat,
+        ];
     }
 
-    $invoice_discount = (float) ($receipt_details->discount_amount_unformatted ?? 0);
-
-    $discount_uf = $invoice_discount > 0 ? $invoice_discount : $total_discount;
-
-    $subtotal_excl_vat = $total_taxable_amount;
-
-    $net_amount = $subtotal_excl_vat - $discount_uf;
-
-    $calculated_vat = $net_amount * 0.15;
-
-    $total_amount_include_vat = $net_amount + $calculated_vat;
-
-    $vat_percent = 15;
+    $subtotal_excl_vat = $total_taxable_excl_vat;
+    $net_amount = $total_product_line_with_vat;
+    $vat_on_total = $net_amount * 0.15;
+    $total_amount_include_vat = $net_amount + $vat_on_total;
 @endphp
+
+
 
 <div class="tax-creditnote-wrap">
 
@@ -78,23 +115,7 @@
             <td class="tcn-cnno-label-en">CREDITNOTE No</td>
             <td class="tcn-cnno-value">{{ $receipt_details->invoice_no ?? '' }}</td>
             <td class="tcn-cnno-value-ar">
-                @php
-                    // Convert invoice number to Arabic numerals for display
-                    $invoice_no_ar = $receipt_details->invoice_no ?? '';
-                    $arabic_digits = [
-                        '0' => '٠',
-                        '1' => '١',
-                        '2' => '٢',
-                        '3' => '٣',
-                        '4' => '٤',
-                        '5' => '٥',
-                        '6' => '٦',
-                        '7' => '٧',
-                        '8' => '٨',
-                        '9' => '٩',
-                    ];
-                    echo strtr($invoice_no_ar, $arabic_digits);
-                @endphp
+                @php echo strtr($receipt_details->invoice_no ?? '', $arabic_digits); @endphp
             </td>
             <td class="tcn-cnno-label-ar">رقم الفاتورة:</td>
         </tr>
@@ -111,23 +132,18 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Row 1: Name -->
             <tr>
                 <td class="tcn-cell-label-en">Name</td>
                 <td class="tcn-cell-value"
                     colspan="6">{{ $receipt_details->display_name ?? '' }}</td>
                 <td class="tcn-cell-label-ar">الاسم</td>
             </tr>
-            <!-- Row 2: Street Name -->
             <tr>
                 <td class="tcn-cell-label-en">Street Name</td>
                 <td class="tcn-cell-value"
-                    colspan="6">
-                    {{ data_get($receipt_details, 'seller_address.street_name', '') }}
-                </td>
+                    colspan="6">{{ data_get($receipt_details, 'seller_address.street_name', '') }}</td>
                 <td class="tcn-cell-label-ar">اسم الشارع</td>
             </tr>
-            <!-- Row 3: Building Name | City | Postal Code -->
             <tr>
                 <td class="tcn-cell-label-en">Building Name</td>
                 <td class="tcn-cell-value">{{ data_get($receipt_details, 'seller_address.building_number', '') }}</td>
@@ -142,7 +158,6 @@
                 </td>
                 <td class="tcn-cell-label-ar">رقم المبنى</td>
             </tr>
-            <!-- Row 4: Addl. No | District -->
             <tr>
                 <td class="tcn-cell-label-en">Addl. No.</td>
                 <td class="tcn-cell-value">{{ data_get($receipt_details, 'seller_address.additional_no', '') }}</td>
@@ -157,7 +172,6 @@
                 </td>
                 <td class="tcn-cell-label-ar">رقم إضافي</td>
             </tr>
-            <!-- Row 5: Postal Code | Country -->
             <tr>
                 <td class="tcn-cell-label-en">Postal Code:</td>
                 <td class="tcn-cell-value">{{ data_get($receipt_details, 'seller_address.zip_code', '') }}</td>
@@ -172,19 +186,14 @@
                 </td>
                 <td class="tcn-cell-label-ar">رمز بريدي</td>
             </tr>
-            <!-- Row 6: Vat Number | CRN -->
             <tr>
                 <td class="tcn-cell-label-en">Vat Number:</td>
                 <td class="tcn-cell-value">{{ $receipt_details->tax_info1 ?? '' }}</td>
                 <td class="tcn-cell-label-en">CRN:</td>
                 <td class="tcn-cell-value">{{ $sell->seller_cr_number ?? '' }}</td>
-                <td class="tcn-cell-value-ar">
-                    @php echo strtr($seller_cr, $arabic_digits); @endphp
-                </td>
+                <td class="tcn-cell-value-ar">@php echo strtr($seller_cr, $arabic_digits); @endphp</td>
                 <td class="tcn-cell-label-ar">رقم السجل المدني</td>
-                <td class="tcn-cell-value-ar">
-                    @php echo strtr($receipt_details->tax_info1 ?? '', $arabic_digits); @endphp
-                </td>
+                <td class="tcn-cell-value-ar">@php echo strtr($receipt_details->tax_info1 ?? '', $arabic_digits); @endphp</td>
                 <td class="tcn-cell-label-ar">أرقام ضريبة</td>
             </tr>
         </tbody>
@@ -201,23 +210,18 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Row 1: Name -->
             <tr>
                 <td class="tcn-cell-label-en">Name</td>
                 <td class="tcn-cell-value"
                     colspan="6">{{ $customer_name }}</td>
                 <td class="tcn-cell-label-ar">الاسم</td>
             </tr>
-            <!-- Row 2: Street Name -->
             <tr>
                 <td class="tcn-cell-label-en">Street Name</td>
                 <td class="tcn-cell-value"
-                    colspan="6">
-                    {{ data_get($receipt_details, 'customer_address.street_name', '') }}
-                </td>
+                    colspan="6">{{ data_get($receipt_details, 'customer_address.street_name', '') }}</td>
                 <td class="tcn-cell-label-ar">اسم الشارع</td>
             </tr>
-            <!-- Row 3: Building Name | City -->
             <tr>
                 <td class="tcn-cell-label-en">Building Name</td>
                 <td class="tcn-cell-value">
@@ -231,12 +235,9 @@
                     {{ data_get($receipt_details, 'customer_address.city_ar', $receipt_details->customer_address['city'] ?? '') }}
                 </td>
                 <td class="tcn-cell-label-ar">مدينة</td>
-                <td class="tcn-cell-value-ar">
-                    @php echo strtr(data_get($receipt_details, 'customer_address.building_number', ''), $arabic_digits); @endphp
-                </td>
+                <td class="tcn-cell-value-ar">@php echo strtr(data_get($receipt_details, 'customer_address.building_number', ''), $arabic_digits); @endphp</td>
                 <td class="tcn-cell-label-ar">رقم المبنى</td>
             </tr>
-            <!-- Row 4: Addl. No | District -->
             <tr>
                 <td class="tcn-cell-label-en">Addl. No.</td>
                 <td class="tcn-cell-value">{{ data_get($receipt_details, 'customer_address.additional_no', '') }}</td>
@@ -246,12 +247,9 @@
                 </td>
                 <td class="tcn-cell-value-ar">{{ data_get($receipt_details, 'customer_address.district_ar', '') }}</td>
                 <td class="tcn-cell-label-ar">الحي</td>
-                <td class="tcn-cell-value-ar">
-                    @php echo strtr(data_get($receipt_details, 'customer_address.additional_no', ''), $arabic_digits); @endphp
-                </td>
+                <td class="tcn-cell-value-ar">@php echo strtr(data_get($receipt_details, 'customer_address.additional_no', ''), $arabic_digits); @endphp</td>
                 <td class="tcn-cell-label-ar">رقم إضافي</td>
             </tr>
-            <!-- Row 5: Postal Code | Country -->
             <tr>
                 <td class="tcn-cell-label-en">Postal Code:</td>
                 <td class="tcn-cell-value">{{ data_get($receipt_details, 'customer_address.zip_code', '') }}</td>
@@ -261,24 +259,17 @@
                     {{ data_get($receipt_details, 'customer_address.country_ar', data_get($receipt_details, 'customer_address.country', '')) }}
                 </td>
                 <td class="tcn-cell-label-ar">البلد</td>
-                <td class="tcn-cell-value-ar">
-                    @php echo strtr(data_get($receipt_details, 'customer_address.zip_code', ''), $arabic_digits); @endphp
-                </td>
+                <td class="tcn-cell-value-ar">@php echo strtr(data_get($receipt_details, 'customer_address.zip_code', ''), $arabic_digits); @endphp</td>
                 <td class="tcn-cell-label-ar">رمز بريدي</td>
             </tr>
-            <!-- Row 6: Vat Number | CRN -->
             <tr>
                 <td class="tcn-cell-label-en">Vat Number:</td>
                 <td class="tcn-cell-value">{{ $customer_tax_number }}</td>
                 <td class="tcn-cell-label-en">CRN:</td>
                 <td class="tcn-cell-value">{{ $sell->customer_cr_number ?? '' }}</td>
-                <td class="tcn-cell-value-ar">
-                    @php echo strtr($buyer_cr, $arabic_digits); @endphp
-                </td>
+                <td class="tcn-cell-value-ar">@php echo strtr($buyer_cr, $arabic_digits); @endphp</td>
                 <td class="tcn-cell-label-ar">رقم السجل المدني</td>
-                <td class="tcn-cell-value-ar">
-                    @php echo strtr($customer_tax_number, $arabic_digits); @endphp
-                </td>
+                <td class="tcn-cell-value-ar">@php echo strtr($customer_tax_number, $arabic_digits); @endphp</td>
                 <td class="tcn-cell-label-ar">رقم ضريبة</td>
             </tr>
         </tbody>
@@ -354,6 +345,10 @@
                     <div class="tcn-lines-th-en">Unit Rate</div>
                     <div class="tcn-lines-th-ar">سعر الوحدة</div>
                 </th>
+                <th class="tcn-lines-th tcn-th-discount">
+                    <div class="tcn-lines-th-en">Discount</div>
+                    <div class="tcn-lines-th-ar">الخصم</div>
+                </th>
                 <th class="tcn-lines-th tcn-th-amt">
                     <div class="tcn-lines-th-en">Total Amount without Vat</div>
                     <div class="tcn-lines-th-ar">المبلغ الإجمالي بدون ضريبة القيمة المضافة</div>
@@ -372,42 +367,57 @@
             @foreach ($receipt_details->lines as $line)
                 @php
                     $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
-
-                    $line_total_uf = (float) ($line['line_total_uf'] ?? 0);
-
-                    $line_taxable_amount = !empty($line['line_total_exc_tax_uf'])
-                        ? (float) $line['line_total_exc_tax_uf']
-                        : $line_total_uf;
-
+                    $unit_price =
+                        (float) ($line['unit_price_before_discount_uf'] ?? ($line['unit_price_before_discount'] ?? 0));
                     $tax_percent = (float) ($line['tax_percent'] ?? 0);
 
-                    $line_tax_amount = $line_taxable_amount * ($tax_percent / 100);
+                    // Gross before discount
+                    $gross = $unit_price * $qty;
 
-                    $line_total_with_vat = $line_taxable_amount + $line_tax_amount;
+                    // Per-line discount ─────────────────────────────────────
+                    $line_discount = 0;
+                    $discount_label = '';
+
+                    if (!empty($line['line_discount_amount_uf'])) {
+                        $line_discount = (float) $line['line_discount_amount_uf'];
+                        // build label from percent if available
+                        if (!empty($line['discount_percent'])) {
+                            $discount_label = '(' . $line['discount_percent'] . '%)';
+                        }
+                    } elseif (!empty($line['discount_percent'])) {
+                        $line_discount = $gross * ((float) $line['discount_percent'] / 100);
+                        $discount_label = '(' . $line['discount_percent'] . '%)';
+                    } elseif (!empty($line['discount'])) {
+                        $line_discount = (float) $line['discount'];
+                    }
+
+                    // Taxable amount (excl. VAT, net of discount) ───────────
+                    if (!empty($line['line_total_exc_tax_uf'])) {
+                        $line_taxable = (float) $line['line_total_exc_tax_uf'];
+                    } else {
+                        $line_taxable = $gross - $line_discount;
+                    }
+
+                    // VAT & total ──────────────────────────────────────────
+                    $line_tax_amount = $line_taxable * ($tax_percent / 100);
+                    $line_total_with_vat = $line_taxable + $line_tax_amount;
                 @endphp
                 <tr>
-                <tr>
-                    <td class="tcn-lines-td text-center">
-                        {{ $loop->iteration }}
-                    </td>
+                    <td class="tcn-lines-td text-center">{{ $loop->iteration }}</td>
 
                     <td class="tcn-lines-td text-center">
                         {{ $line['name'] }}
                         {{ $line['product_variation'] ?? '' }}
                         {{ $line['variation'] ?? '' }}
-
                         @if (!empty($line['sub_sku']))
                             <br><small>{{ $line['sub_sku'] }}</small>
                         @endif
-
                         @if (!empty($line['sell_line_note']))
                             <br><small>{!! strip_tags($line['sell_line_note']) !!}</small>
                         @endif
                     </td>
 
-                    <td class="tcn-lines-td text-center">
-                        {{ $line['quantity'] }}
-                    </td>
+                    <td class="tcn-lines-td text-center">{{ $line['quantity'] }}</td>
 
                     <td class="tcn-lines-td text-right">
                         @if (isset($line['unit_price_before_discount_uf']))
@@ -417,26 +427,39 @@
                         @endif
                     </td>
 
-                    <!-- Amount Without VAT -->
+                    <!-- Per-product discount (shown on line; NOT deducted again in totals) -->
                     <td class="tcn-lines-td text-right">
-                        @format_currency($line_taxable_amount)
+                        @if ($line_discount > 0)
+                            @format_currency($line_discount)
+                            @if (!empty($discount_label))
+                                <br><small>{{ $discount_label }}</small>
+                            @endif
+                        @else
+                            -
+                        @endif
                     </td>
 
-                    <!-- VAT 15% -->
+                    <!-- Amount Without VAT (already net of discount) -->
                     <td class="tcn-lines-td text-right">
-                        {{ isset($line['tax_percent']) ? $line['tax_percent'] . '%' : 'N/A' }}
+                        @format_currency($line_taxable)
                     </td>
 
-                    <!-- Total Amount Include VAT -->
+                    <!-- VAT % -->
+                    <td class="tcn-lines-td text-center">
+                        {{ $tax_percent > 0 ? $tax_percent . '%' : 'N/A' }}
+                    </td>
+
+                    <!-- Total Include VAT -->
                     <td class="tcn-lines-td text-right">
                         @format_currency($line_total_with_vat)
                     </td>
                 </tr>
             @endforeach
 
-            {{-- Empty filler rows to match the look (optional) --}}
+            {{-- Filler rows to keep layout tidy --}}
             @for ($i = count($receipt_details->lines); $i < 2; $i++)
                 <tr>
+                    <td class="tcn-lines-td">&nbsp;</td>
                     <td class="tcn-lines-td">&nbsp;</td>
                     <td class="tcn-lines-td">&nbsp;</td>
                     <td class="tcn-lines-td">&nbsp;</td>
@@ -449,57 +472,42 @@
         </tbody>
     </table>
 
-
     <!-- ==================== TOTALS SECTION ==================== -->
+    {{--
+        LOGIC:
+        • "Total Amount Without Vat"  = sum of line taxable amounts  (already net of per-line discounts)
+        • "Discount"                  = 0  (discounts are already absorbed in each line total)
+        • "Net Amount"                = same as Total Without Vat
+        • "Vat (15%)"                 = Net Amount × 15 %
+        • "Total Include Vat"         = Net Amount + VAT
+    --}}
     <table class="tcn-totals-table avoid-page-break">
         <tr>
             <td class="tcn-totals-label-en">Total Amount Without Vat</td>
-            <td class="tcn-totals-value">
-                @format_currency($subtotal_excl_vat)
-            </td>
-            <td class="tcn-totals-label-ar">
-                المبلغ الإجمالي بدون ضريبة القيمة المضافة
-            </td>
+            <td class="tcn-totals-value">@format_currency($total_product_line_with_vat)</td>
+            <td class="tcn-totals-label-ar">المبلغ الإجمالي بدون ضريبة القيمة المضافة</td>
         </tr>
-
         <tr>
+            {{-- Discount row is intentionally 0 because discounts are already
+                 reflected in each line's "Total Amount without Vat" column. --}}
             <td class="tcn-totals-label-en">Discount</td>
-            <td class="tcn-totals-value">
-                @format_currency($discount_uf)
-            </td>
-            <td class="tcn-totals-label-ar">
-                الخصم
-            </td>
+            <td class="tcn-totals-value">@format_currency(0)</td>
+            <td class="tcn-totals-label-ar">الخصم</td>
         </tr>
-
         <tr>
-            <td class="tcn-totals-label-en">Net Amount (After Discount)</td>
-            <td class="tcn-totals-value">
-                @format_currency($net_amount)
-            </td>
-            <td class="tcn-totals-label-ar">
-                المبلغ الصافي
-            </td>
+            <td class="tcn-totals-label-en">Net Amount</td>
+            <td class="tcn-totals-value">@format_currency($net_amount)</td>
+            <td class="tcn-totals-label-ar">المبلغ الصافي</td>
         </tr>
-
         <tr>
             <td class="tcn-totals-label-en">Vat (15%)</td>
-            <td class="tcn-totals-value">
-                @format_currency($calculated_vat)
-            </td>
-            <td class="tcn-totals-label-ar">
-                ضريبة القيمة المضافة
-            </td>
+            <td class="tcn-totals-value">@format_currency($vat_on_total)</td>
+            <td class="tcn-totals-label-ar">ضريبة القيمة المضافة</td>
         </tr>
-
         <tr>
             <td class="tcn-totals-label-en">Total Amount Include Vat</td>
-            <td class="tcn-totals-value">
-                @format_currency($total_amount_include_vat)
-            </td>
-            <td class="tcn-totals-label-ar">
-                المبلغ الإجمالي يشمل ضريبة القيمة المضافة
-            </td>
+            <td class="tcn-totals-value">@format_currency($total_amount_include_vat)</td>
+            <td class="tcn-totals-label-ar">المبلغ الإجمالي يشمل ضريبة القيمة المضافة</td>
         </tr>
     </table>
 
@@ -554,7 +562,6 @@
 </div>
 
 <style type="text/css">
-    /* ===== GLOBAL PRINT COLOR FIX ===== */
     html,
     body,
     .tax-creditnote-wrap,
@@ -564,7 +571,6 @@
         color-adjust: exact !important;
     }
 
-    /* ===== WRAPPER ===== */
     .tax-creditnote-wrap {
         font-family: Arial, Helvetica, sans-serif;
         color: #000;
@@ -573,7 +579,6 @@
         width: 100%;
     }
 
-    /* ===== TITLE BAR ===== */
     .tcn-title-table {
         width: 100%;
         border-collapse: collapse;
@@ -603,7 +608,6 @@
         direction: rtl;
     }
 
-    /* ===== CREDITNOTE NO ROW ===== */
     .tcn-cnno-table {
         width: 100%;
         border-collapse: collapse;
@@ -647,7 +651,6 @@
         direction: rtl;
     }
 
-    /* ===== PARTY TABLES (Seller / Buyer) ===== */
     .tcn-party-table {
         width: 100%;
         border-collapse: collapse;
@@ -707,7 +710,6 @@
         width: 14%;
     }
 
-    /* ===== INFO TABLE (Credit Note Date / Supply Date / etc.) ===== */
     .tcn-info-table {
         width: 100%;
         border-collapse: collapse;
@@ -748,7 +750,6 @@
         background: #fff !important;
     }
 
-    /* ===== PRODUCT LINES TABLE ===== */
     .tcn-lines-table {
         width: 100%;
         border-collapse: collapse;
@@ -799,16 +800,20 @@
         width: 11%;
     }
 
+    .tcn-th-discount {
+        width: 8%;
+    }
+
     .tcn-th-amt {
         width: 14%;
     }
 
     .tcn-th-vat {
-        width: 12%;
+        width: 10%;
     }
 
     .tcn-th-total {
-        width: 18%;
+        width: 12%;
     }
 
     .tcn-lines-td {
@@ -829,7 +834,6 @@
         text-align: left;
     }
 
-    /* ===== TOTALS TABLE ===== */
     .tcn-totals-table {
         width: 100%;
         border-collapse: collapse;
@@ -863,7 +867,6 @@
         width: 40%;
     }
 
-    /* ===== AMOUNT IN WORDS ===== */
     .tcn-words-table {
         width: 100%;
         border-collapse: collapse;
@@ -888,7 +891,6 @@
         width: 85%;
     }
 
-    /* ===== SIGNATURES ===== */
     .tcn-sign-table {
         width: 100%;
         border-collapse: collapse;
@@ -935,12 +937,6 @@
         font-weight: bold;
     }
 
-    .tcn-sign-stamp-en,
-    .tcn-sign-stamp-ar {
-        font-style: normal;
-    }
-
-    /* ===== QR CODE ===== */
     .tcn-qr-wrap {
         text-align: center;
         margin-top: 10px;
@@ -951,13 +947,11 @@
         height: 130px;
     }
 
-    /* ===== PAGE BREAK ===== */
     .avoid-page-break {
         page-break-inside: avoid;
         break-inside: avoid;
     }
 
-    /* ===== PRINT ===== */
     @media print {
 
         html,

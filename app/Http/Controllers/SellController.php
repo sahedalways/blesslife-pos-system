@@ -384,7 +384,8 @@ class SellController extends Controller
                         $subtotal = $row->total_before_tax ?? 0;
                         $discount = $row->total_line_discount ?? 0;
 
-                        $net = $subtotal - $discount;
+                        // $net = $subtotal - $discount;
+                        $net = $subtotal;
 
                         $vat = $net * 0.15;
 
@@ -398,7 +399,8 @@ class SellController extends Controller
                 ->editColumn(
                     'tax_amount',
                     function ($row) {
-                        $net = ($row->total_before_tax ?? 0) - ($row->total_line_discount ?? 0);
+                        $net = ($row->total_before_tax ?? 0);
+                        // $net = ($row->total_before_tax ?? 0) - ($row->total_line_discount ?? 0);
                         $vat = $net * 0.15;
 
                         return '<span class="total-tax" data-orig-value="' . $vat . '">'
@@ -451,7 +453,8 @@ class SellController extends Controller
 
                     $discount = $row->total_line_discount ?? 0;
 
-                    $net_amount = $subtotal - $discount;
+                    // $net_amount = $subtotal - $discount;
+                    $net_amount = $subtotal;
 
                     return '<span class="net-amount"
         data-orig-value="' . $net_amount . '">' .

@@ -257,19 +257,23 @@
         <thead>
             <tr>
                 <th style="width: 5%;">#</th>
-                <th style="width: 35%;">
+                <th style="width: 30%;">
                     {{ $receipt_details->table_product_label ?: 'Nature of goods or services' }}<br>
                     <span>وصف السلع أو الخدمات</span>
                 </th>
-                <th style="width: 12%;">
+                <th style="width: 10%;">
                     {{ $receipt_details->table_unit_price_label ?: 'Unit Price' }}<br>
                     <span>سعر الوحدة</span>
                 </th>
-                <th style="width: 10%;">
+                <th style="width: 8%;">
                     {{ $receipt_details->table_qty_label ?: 'Quantity' }}<br>
                     <span>الكمية</span>
                 </th>
-                <th style="width: 14%;">
+                <th style="width: 10%;">
+                    Discount<br>
+                    <span>الخصم</span>
+                </th>
+                <th style="width: 12%;">
                     Taxable Amount<br>
                     <span>المبلغ الخاضع للضريبة</span>
                 </th>
@@ -277,7 +281,7 @@
                     VAT %<br>
                     <span>ضريبة %</span>
                 </th>
-                <th style="width: 16%;">
+                <th style="width: 14%;">
                     {{ $receipt_details->table_subtotal_label ?: 'Subtotal (With VAT)' }}<br>
                     <span>الإجمالي شامل الضريبة</span>
                 </th>
@@ -299,6 +303,21 @@
                     $line_tax_amount = $line_taxable_amount * ($tax_percent / 100);
 
                     $line_total_with_vat = $line_taxable_amount + $line_tax_amount;
+
+                    // Per product discount
+                    $line_discount = 0;
+                    if (!empty($line['line_discount_amount_uf'])) {
+                        $line_discount = (float) $line['line_discount_amount_uf'];
+                    } elseif (!empty($line['discount_percent'])) {
+                        $line_discount = $line_total_uf * ((float) $line['discount_percent'] / 100);
+                    } elseif (!empty($line['discount'])) {
+                        $line_discount = (float) $line['discount'];
+                    }
+
+                    $discount_label = '';
+                    if (!empty($line['discount_percent'])) {
+                        $discount_label = '(' . $line['discount_percent'] . '%)';
+                    }
                 @endphp
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
@@ -321,6 +340,19 @@
                     <td class="text-center">
                         {{ $line['quantity'] ?? $qty }} {{ $line['units'] ?? '' }}
                     </td>
+
+                    <!-- Per Product Discount -->
+                    <td class="text-right">
+                        @if ($line_discount > 0)
+                            @format_currency($line_discount)
+                            @if (!empty($discount_label))
+                                <br><small>{{ $discount_label }}</small>
+                            @endif
+                        @else
+                            -
+                        @endif
+                    </td>
+
                     <td class="text-right">
                         @format_currency($line_taxable_amount)
                     </td>
@@ -357,7 +389,7 @@
 
             $discount_amount = (float) ($total_discount ?? 0);
 
-            $net_amount = $subtotal_amount - $discount_amount;
+            $net_amount = $subtotal_amount;
 
             $vat_amount = $net_amount * 0.15;
 
@@ -380,7 +412,7 @@
                     <td class="ksa-label">Total Discount ( إجمالي الخصم )</td>
                     <td class="ksa-value text-right">
                         @if ($discount_amount > 0)
-                            @format_currency($discount_amount)
+                            @format_currency(0)
                         @else
                             @format_currency(0)
                         @endif
