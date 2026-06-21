@@ -350,9 +350,26 @@
                                 <span class="input-group-addon">
                                     <i class="fas fa-money-bill-alt"></i>
                                 </span>
-                                {!! Form::text('credit_limit', $default_credit_limit ?? null, ['class' => 'form-control input_number']) !!}
+                                {!! Form::text('credit_limit', $default_credit_limit ?? null, [
+                                    'class' => 'form-control input_number',
+                                ]) !!}
                             </div>
                             <p class="help-block">@lang('lang_v1.credit_limit_help')</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 customer_fields">
+                        <div class="form-group">
+                            {!! Form::label('cr_no', 'CR Number:') !!}
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card"></i>
+                                </span>
+                                {!! Form::text('cr_no', null, [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'CR Number',
+                                ]) !!}
+                            </div>
                         </div>
                     </div>
 

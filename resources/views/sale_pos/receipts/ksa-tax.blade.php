@@ -112,14 +112,7 @@
             'right_value' => $receipt_details->customer_address['zip_code'] ?? '-',
             'right_ar' => 'الرمز البريدي',
         ],
-        [
-            'left_label' => 'Website',
-            'left_value' => $receipt_details->seller_address['website'] ?? '-',
-            'left_ar' => 'الموقع',
-            'right_label' => 'Website',
-            'right_value' => $receipt_details->customer_address['website'] ?? '-',
-            'right_ar' => 'الموقع',
-        ],
+
         [
             'left_label' => 'Phone Number',
             'left_value' => trim(strip_tags($receipt_details->contact ?? '')),

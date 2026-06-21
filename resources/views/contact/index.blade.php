@@ -11,7 +11,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1 class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black"> @lang('lang_v1.' . $type . 's')
+        <h1 class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black"> fsdfsdf
             <small class="tw-text-sm md:tw-text-base tw-text-gray-700 tw-font-semibold">@lang('contact.manage_your_contact', ['contacts' => __('lang_v1.' . $type . 's')])</small>
         </h1>
     </section>
@@ -111,7 +111,9 @@
                 </div>
             </div>
         @endcomponent
-        <input type="hidden" value="{{ $type }}" id="contact_type">
+        <input type="hidden"
+               value="{{ $type }}"
+               id="contact_type">
         @component('components.widget', [
             'class' => 'box-primary',
             'title' => __('contact.all_your_contact', ['contacts' => __('lang_v1.' . $type . 's')]),
@@ -123,15 +125,24 @@
                 @slot('tool')
                     <div class="box-tools">
                         <a class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full btn-modal"
-                                data-href="{{ action([\App\Http\Controllers\ContactController::class, 'create'], ['type' => $type]) }}"
-                                data-container=".contact_modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                           data-href="{{ action([\App\Http\Controllers\ContactController::class, 'create'], ['type' => $type]) }}"
+                           data-container=".contact_modal">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                <path stroke="none"
+                                      d="M0 0h24v24H0z"
+                                      fill="none" />
                                 <path d="M12 5l0 14" />
                                 <path d="M5 12l14 0" />
-                                </svg> @lang('messages.add')
+                            </svg> @lang('messages.add')
                         </a>
                     </div>
                 @endslot
@@ -141,7 +152,8 @@
                     auth()->user()->can('supplier.view_own') ||
                     auth()->user()->can('customer.view_own'))
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="contact_table">
+                    <table class="table table-bordered table-striped"
+                           id="contact_table">
                         <thead>
                             <tr>
                                 <th class="tw-w-full">@lang('messages.action')</th>
@@ -251,9 +263,15 @@
             @endif
         @endcomponent
 
-        <div class="modal fade contact_modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal fade contact_modal"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="gridSystemModalLabel">
         </div>
-        <div class="modal fade pay_contact_due_modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal fade pay_contact_due_modal"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="gridSystemModalLabel">
         </div>
 
     </section>
@@ -352,7 +370,9 @@
                 });
             }
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ $api_key }}&libraries=places" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ $api_key }}&libraries=places"
+                async
+                defer></script>
         <script type="text/javascript">
             $(document).on('shown.bs.modal', '.contact_modal', function(e) {
                 initAutocomplete();
