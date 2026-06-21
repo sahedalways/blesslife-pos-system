@@ -5201,6 +5201,33 @@ class TransactionUtil extends Util
                         $join->on('tsl_agg.transaction_id', '=', 'transactions.id');
                     }
                 )
+                ->leftJoinSub(
+                    DB::table('transaction_sell_lines as tsl_discount')
+                        ->selectRaw("
+            tsl_discount.transaction_id,
+
+            SUM(
+                CASE
+                    WHEN tsl_discount.line_discount_type = 'percentage'
+                    THEN (
+                        (tsl_discount.unit_price_before_discount * tsl_discount.quantity)
+                        * tsl_discount.line_discount_amount / 100
+                    )
+
+                    WHEN tsl_discount.line_discount_type = 'fixed'
+                    THEN tsl_discount.line_discount_amount
+
+                    ELSE 0
+                END
+            ) as total_line_discount
+        ")
+                        ->whereNull('tsl_discount.parent_sell_line_id')
+                        ->groupBy('tsl_discount.transaction_id'),
+                    'tsl_discount_agg',
+                    function ($join) {
+                        $join->on('tsl_discount_agg.transaction_id', '=', 'transactions.id');
+                    }
+                )
                 ->select(
                     'transactions.id',
                     'transactions.transaction_date',
@@ -5241,6 +5268,7 @@ class TransactionUtil extends Util
                     'transactions.custom_field_2',
                     'transactions.custom_field_3',
                     'transactions.custom_field_4',
+                    DB::raw('COALESCE(tsl_discount_agg.total_line_discount, 0) as total_line_discount'),
                     DB::raw('DATE_FORMAT(transactions.transaction_date, "%Y/%m/%d") as sale_date'),
                     DB::raw("CONCAT(COALESCE(u.surname, ''),' ',COALESCE(u.first_name, ''),' ',COALESCE(u.last_name,'')) as added_by"),
                     DB::raw('(SELECT SUM(IF(TP.is_return = 1,-1*TP.amount,TP.amount)) FROM transaction_payments AS TP WHERE

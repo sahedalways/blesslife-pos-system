@@ -379,11 +379,32 @@ class SellController extends Controller
                 ->removeColumn('id')
                 ->editColumn(
                     'final_total',
-                    '<span class="final-total" data-orig-value="{{$final_total}}">@format_currency($final_total)</span>'
+                    function ($row) {
+
+                        $subtotal = $row->total_before_tax ?? 0;
+                        $discount = $row->total_line_discount ?? 0;
+
+                        $net = $subtotal - $discount;
+
+                        $vat = $net * 0.15;
+
+                        $final = $net + $vat;
+
+                        return '<span class="final-total" data-orig-value="' . $final . '">'
+                            . $this->transactionUtil->num_f($final, true) .
+                            '</span>';
+                    }
                 )
                 ->editColumn(
                     'tax_amount',
-                    '<span class="total-tax" data-orig-value="{{$tax_amount}}">@format_currency($tax_amount)</span>'
+                    function ($row) {
+                        $net = ($row->total_before_tax ?? 0) - ($row->total_line_discount ?? 0);
+                        $vat = $net * 0.15;
+
+                        return '<span class="total-tax" data-orig-value="' . $vat . '">'
+                            . $this->transactionUtil->num_f($vat, true) .
+                            '</span>';
+                    }
                 )
                 ->editColumn(
                     'total_paid',
@@ -428,22 +449,13 @@ class SellController extends Controller
 
                     $subtotal = $row->total_before_tax ?? 0;
 
-                    $discount = 0;
-
-                    if (!empty($row->discount_amount)) {
-
-                        if ($row->discount_type == 'percentage') {
-                            $discount = $subtotal * ($row->discount_amount / 100);
-                        } else {
-                            $discount = $row->discount_amount;
-                        }
-                    }
+                    $discount = $row->total_line_discount ?? 0;
 
                     $net_amount = $subtotal - $discount;
 
                     return '<span class="net-amount"
-        data-orig-value="' . $net_amount . '">'
-                        . $this->transactionUtil->num_f($net_amount, true) .
+        data-orig-value="' . $net_amount . '">' .
+                        $this->transactionUtil->num_f($net_amount, true) .
                         '</span>';
                 })
                 ->addColumn('total_remaining', function ($row) {

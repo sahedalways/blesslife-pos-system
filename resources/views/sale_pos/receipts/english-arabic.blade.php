@@ -12,45 +12,50 @@
     $total_vat = 0;
     $total_discount = 0;
     $total_quantity = 0;
-    $totalProductsAfterTaxAmount = 0;
-    $tax_rate = 0.15;
+    $total_taxable_amount = 0; // sum of line_total_exc_tax_uf  (excl. VAT, excl. discount)
 
     foreach ($receipt_details->lines as $line) {
         $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
-        $tax_amount = (float) ($line['tax'] ?? 0) * $qty;
-        $total_vat += $tax_amount;
+        $line_total_uf = (float) ($line['line_total_uf'] ?? 0);
+        $tax_percent = (float) ($line['tax_percent'] ?? 0);
+
         $total_quantity += $qty;
 
-        $line_discount = (float) ($line['total_line_discount_uf'] ?? ($line['total_line_discount'] ?? 0));
-        $total_discount += $line_discount;
-
-        $perProductTaxableAmount = !empty($line['line_total_exc_tax_uf'])
+        // ── Taxable amount per line (excl. VAT) ──────────────────────────
+        $line_taxable_amount = !empty($line['line_total_exc_tax_uf'])
             ? (float) $line['line_total_exc_tax_uf']
             : $line_total_uf;
 
-        $perProductTaxAmount = $perProductTaxableAmount * 0.15;
+        $total_taxable_amount += $line_taxable_amount;
 
-        $perProductAfterTaxAmount = $perProductTaxableAmount + $perProductTaxAmount;
+        // ── VAT per line ─────────────────────────────────────────────────
+        $total_vat += $line_taxable_amount * ($tax_percent / 100);
 
-        $totalProductsAfterTaxAmount += $perProductAfterTaxAmount;
+        // ── Discount per line ────────────────────────────────────────────
+        $line_discount = 0;
+        if (!empty($line['line_discount_amount_uf'])) {
+            $line_discount = (float) $line['line_discount_amount_uf'];
+        } elseif (!empty($line['discount_percent'])) {
+            $line_discount = $line_total_uf * ((float) $line['discount_percent'] / 100);
+        } elseif (!empty($line['discount'])) {
+            $line_discount = (float) $line['discount'];
+        }
+        $total_discount += $line_discount;
     }
 
-    $subtotal_uf = $receipt_details->subtotal_unformatted ?? 0;
-    $discount_uf = $receipt_details->discount_amount_unformatted ?? 0;
-    $total_uf = $receipt_details->total_unformatted ?? 0;
-    $taxable_amount_uf = $subtotal_uf - $discount_uf;
+    $invoice_discount = (float) ($receipt_details->discount_amount_unformatted ?? 0);
 
-    $net_amount = $taxable_amount_uf;
+    $discount_uf = $invoice_discount > 0 ? $invoice_discount : $total_discount;
+
+    $subtotal_excl_vat = $total_taxable_amount;
+
+    $net_amount = $subtotal_excl_vat - $discount_uf;
 
     $calculated_vat = $net_amount * 0.15;
 
     $total_amount_include_vat = $net_amount + $calculated_vat;
 
-    // Calculate VAT percent (assume 15% if not specified)
     $vat_percent = 15;
-    if ($taxable_amount_uf > 0 && $total_vat > 0) {
-        $vat_percent = round(($total_vat / $taxable_amount_uf) * 100);
-    }
 @endphp
 
 <div class="tax-creditnote-wrap">
@@ -354,8 +359,8 @@
                     <div class="tcn-lines-th-ar">المبلغ الإجمالي بدون ضريبة القيمة المضافة</div>
                 </th>
                 <th class="tcn-lines-th tcn-th-vat">
-                    <div class="tcn-lines-th-en">{{ $vat_percent }}% Vat</div>
-                    <div class="tcn-lines-th-ar">{{ $vat_percent }}% ضريبة القيمة المضافة</div>
+                    <div class="tcn-lines-th-en">Vat (%)</div>
+                    <div class="tcn-lines-th-ar">ضريبة القيمة المضافة</div>
                 </th>
                 <th class="tcn-lines-th tcn-th-total">
                     <div class="tcn-lines-th-en">Total Amount Include Vat</div>
@@ -374,12 +379,13 @@
                         ? (float) $line['line_total_exc_tax_uf']
                         : $line_total_uf;
 
-                    $line_tax_amount = $line_taxable_amount * 0.15;
+                    $tax_percent = (float) ($line['tax_percent'] ?? 0);
 
-                    // Total Amount Including VAT
+                    $line_tax_amount = $line_taxable_amount * ($tax_percent / 100);
+
                     $line_total_with_vat = $line_taxable_amount + $line_tax_amount;
                 @endphp
-
+                <tr>
                 <tr>
                     <td class="tcn-lines-td text-center">
                         {{ $loop->iteration }}
@@ -418,7 +424,7 @@
 
                     <!-- VAT 15% -->
                     <td class="tcn-lines-td text-right">
-                        @format_currency($line_tax_amount)
+                        {{ isset($line['tax_percent']) ? $line['tax_percent'] . '%' : 'N/A' }}
                     </td>
 
                     <!-- Total Amount Include VAT -->
@@ -443,12 +449,13 @@
         </tbody>
     </table>
 
+
     <!-- ==================== TOTALS SECTION ==================== -->
     <table class="tcn-totals-table avoid-page-break">
         <tr>
             <td class="tcn-totals-label-en">Total Amount Without Vat</td>
             <td class="tcn-totals-value">
-                @format_currency($net_amount)
+                @format_currency($subtotal_excl_vat)
             </td>
             <td class="tcn-totals-label-ar">
                 المبلغ الإجمالي بدون ضريبة القيمة المضافة
@@ -456,9 +463,7 @@
         </tr>
 
         <tr>
-            <td class="tcn-totals-label-en">
-                Discount
-            </td>
+            <td class="tcn-totals-label-en">Discount</td>
             <td class="tcn-totals-value">
                 @format_currency($discount_uf)
             </td>
@@ -468,7 +473,17 @@
         </tr>
 
         <tr>
-            <td class="tcn-totals-label-en"> Vat %</td>
+            <td class="tcn-totals-label-en">Net Amount (After Discount)</td>
+            <td class="tcn-totals-value">
+                @format_currency($net_amount)
+            </td>
+            <td class="tcn-totals-label-ar">
+                المبلغ الصافي
+            </td>
+        </tr>
+
+        <tr>
+            <td class="tcn-totals-label-en">Vat (15%)</td>
             <td class="tcn-totals-value">
                 @format_currency($calculated_vat)
             </td>
