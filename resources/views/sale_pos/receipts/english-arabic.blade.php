@@ -172,7 +172,7 @@
                 <td class="tcn-cell-label-en">Vat Number:</td>
                 <td class="tcn-cell-value">{{ $receipt_details->tax_info1 ?? '' }}</td>
                 <td class="tcn-cell-label-en">CRN:</td>
-                <td class="tcn-cell-value">{{ $seller_cr }}</td>
+                <td class="tcn-cell-value">{{ $sell->seller_cr_number ?? '' }}</td>
                 <td class="tcn-cell-value-ar">
                     @php echo strtr($seller_cr, $arabic_digits); @endphp
                 </td>
@@ -266,7 +266,7 @@
                 <td class="tcn-cell-label-en">Vat Number:</td>
                 <td class="tcn-cell-value">{{ $customer_tax_number }}</td>
                 <td class="tcn-cell-label-en">CRN:</td>
-                <td class="tcn-cell-value">{{ $buyer_cr }}</td>
+                <td class="tcn-cell-value">{{ $sell->customer_cr_number ?? '' }}</td>
                 <td class="tcn-cell-value-ar">
                     @php echo strtr($buyer_cr, $arabic_digits); @endphp
                 </td>

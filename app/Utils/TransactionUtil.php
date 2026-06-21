@@ -5166,6 +5166,9 @@ class TransactionUtil extends Util
             ->where('transactions.business_id', $business_id)
             ->where('transactions.type', $sale_type);
 
+        $sells->leftJoin('business as b', 'transactions.business_id', '=', 'b.id')
+            ->leftJoin('users as business_owner', 'b.owner_id', '=', 'business_owner.id');
+
         // If only counting, select minimal columns for better performance
         if ($only_count) {
             $sells->select('transactions.id');
@@ -5213,6 +5216,8 @@ class TransactionUtil extends Util
                     'transactions.payment_status',
                     'transactions.final_total',
                     'transactions.tax_amount',
+                    'contacts.tax_number as customer_cr_no',
+                    'business_owner.cr_no as seller_cr_no',
                     'transactions.discount_amount',
                     'transactions.discount_type',
                     'transactions.total_before_tax',

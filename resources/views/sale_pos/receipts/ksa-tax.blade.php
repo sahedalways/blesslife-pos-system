@@ -138,10 +138,10 @@
         ],
         [
             'left_label' => 'CR Number',
-            'left_value' => $seller_other_id,
+            'left_value' => $sell->seller_cr_no ?? '',
             'left_ar' => 'رقم إضافي',
             'right_label' => 'CR Number',
-            'right_value' => $buyer_other_id,
+            'right_value' => $sell->customer_cr_no ?? '',
             'right_ar' => 'رقم إضافي',
         ],
     ];

@@ -417,6 +417,12 @@ class SellController extends Controller
                     'types_of_service_name',
                     '<span class="service-type-label" data-orig-value="{{$types_of_service_name}}" data-status-name="{{$types_of_service_name}}">{{$types_of_service_name}}</span>'
                 )
+                ->addColumn('seller_cr_no', function ($row) {
+                    return $row->seller_cr_no;
+                })
+                ->addColumn('customer_cr_no', function ($row) {
+                    return $row->customer_cr_no;
+                })
                 ->addColumn('net_amount', function ($row) {
 
                     $net_amount = $row->final_total - $row->tax_amount;
