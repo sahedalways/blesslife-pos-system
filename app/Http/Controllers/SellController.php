@@ -233,6 +233,8 @@ class SellController extends Controller
             // Expose shipment-only flag to table rendering
             $only_shipments = request()->only_shipments == 'true' ? true : false;
 
+
+
             $datatable = Datatables::of($sells)
                 ->addColumn(
                     'action',
@@ -377,41 +379,28 @@ class SellController extends Controller
                     }
                 )
                 ->removeColumn('id')
-                ->editColumn(
-                    'final_total',
-                    function ($row) {
+                ->editColumn('final_total', function ($row) {
+                    $totals = $this->calculateTransactionTotals($row);
 
-                        $subtotal = $row->total_before_tax ?? 0;
-                        $discount = $row->total_line_discount ?? 0;
+                    return '<span class="final-total" data-orig-value="' . $totals['final'] . '">'
+                        . $this->transactionUtil->num_f($totals['final'], true) .
+                        '</span>';
+                })
+                ->editColumn('tax_amount', function ($row) {
+                    $totals = $this->calculateTransactionTotals($row);
 
-                        // $net = $subtotal - $discount;
-                        $net = $subtotal;
+                    return '<span class="total-tax" data-orig-value="' . $totals['total_tax'] . '">'
+                        . $this->transactionUtil->num_f($totals['total_tax'], true) .
+                        '</span>';
+                })
+                ->editColumn('total_paid', function ($row) {
+                    $info = $this->getTransactionPaidAndDue($row);
+                    $paid = $info['paid_amount'];
 
-                        $vat = $net * 0.15;
-
-                        $final = $net + $vat;
-
-                        return '<span class="final-total" data-orig-value="' . $final . '">'
-                            . $this->transactionUtil->num_f($final, true) .
-                            '</span>';
-                    }
-                )
-                ->editColumn(
-                    'tax_amount',
-                    function ($row) {
-                        $net = ($row->total_before_tax ?? 0);
-                        // $net = ($row->total_before_tax ?? 0) - ($row->total_line_discount ?? 0);
-                        $vat = $net * 0.15;
-
-                        return '<span class="total-tax" data-orig-value="' . $vat . '">'
-                            . $this->transactionUtil->num_f($vat, true) .
-                            '</span>';
-                    }
-                )
-                ->editColumn(
-                    'total_paid',
-                    '<span class="total-paid" data-orig-value="{{$total_paid}}">@format_currency($total_paid)</span>'
-                )
+                    return '<span class="total-paid" data-orig-value="' . $paid . '">'
+                        . $this->transactionUtil->num_f($paid, true) .
+                        '</span>';
+                })
                 ->editColumn(
                     'total_before_tax',
                     '<span class="total_before_tax" data-orig-value="{{$total_before_tax}}">@format_currency($total_before_tax)</span>'
@@ -448,24 +437,27 @@ class SellController extends Controller
                     return $row->customer_cr_no;
                 })
                 ->addColumn('net_amount', function ($row) {
+                    $totals = $this->calculateTransactionTotals($row);
 
-                    $subtotal = $row->total_before_tax ?? 0;
-
-                    $discount = $row->total_line_discount ?? 0;
-
-                    // $net_amount = $subtotal - $discount;
-                    $net_amount = $subtotal;
-
-                    return '<span class="net-amount"
-        data-orig-value="' . $net_amount . '">' .
-                        $this->transactionUtil->num_f($net_amount, true) .
+                    return '<span class="net-amount" data-orig-value="' . $totals['net_amount'] . '">'
+                        . $this->transactionUtil->num_f($totals['net_amount'], true) .
                         '</span>';
                 })
-                ->addColumn('total_remaining', function ($row) {
-                    $total_remaining = $row->final_total - $row->total_paid;
-                    $total_remaining_html = '<span class="payment_due" data-orig-value="' . $total_remaining . '">' . $this->transactionUtil->num_f($total_remaining, true) . '</span>';
 
-                    return $total_remaining_html;
+                ->addColumn('total_remaining', function ($row) {
+                    $info = $this->getTransactionPaidAndDue($row);
+
+
+                    $due = $info['due_amount'];
+
+
+                    if ($due < 0) {
+                        $due = 0;
+                    }
+
+                    return '<span class="payment_due" data-orig-value="' . $due . '">'
+                        . $this->transactionUtil->num_f($due, true) .
+                        '</span>';
                 })
                 ->addColumn('return_due', function ($row) {
                     $return_due_html = '';
@@ -640,6 +632,83 @@ class SellController extends Controller
         return view('sell.index')
             ->with(compact('business_locations', 'customers', 'is_woocommerce', 'sales_representative', 'is_cmsn_agent_enabled', 'commission_agents', 'service_staffs', 'is_tables_enabled', 'is_service_staff_enabled', 'is_types_service_enabled', 'shipping_statuses', 'sources', 'payment_types'));
     }
+
+
+    private function getTransactionPaidAndDue($transaction)
+    {
+        $totals = $this->calculateTransactionTotals($transaction);
+        $final_total = $totals['final'];
+
+
+        $paid_amount = $this->transactionUtil->getTotalPaid($transaction->id);
+
+
+        $due = $final_total - $paid_amount;
+
+        return [
+            'final_total' => $final_total,
+            'paid_amount' => (float) $paid_amount,
+            'due_amount'  => (float) $due,
+        ];
+    }
+
+    private function calculateTransactionTotals($transaction)
+    {
+        $lines = $transaction->sell_lines()
+            ->whereNull('parent_sell_line_id')
+            ->get();
+
+        $net_amount = 0;
+        $total_tax = 0;
+        $total_discount = 0;
+
+        foreach ($lines as $line) {
+            $qty = (float) $line->quantity;
+            $unit_price = (float) $line->unit_price_before_discount;
+
+            $line_subtotal = $unit_price * $qty;
+
+            // Line discount
+            if ($line->line_discount_type == 'percentage') {
+                $line_discount = $line_subtotal * ((float) $line->line_discount_amount / 100);
+            } else {
+                $line_discount = (float) $line->line_discount_amount * $qty;
+            }
+
+            $line_net = $line_subtotal - $line_discount;
+
+
+            $line_tax = 0;
+            if (!empty($line->tax_id) && (float) $line->item_tax > 0) {
+                $line_tax = (float) $line->item_tax * $qty;
+            }
+
+            $net_amount    += $line_net;
+            $total_discount += $line_discount;
+            $total_tax     += $line_tax;
+        }
+
+        // Transaction level discount
+        if ($transaction->discount_type == 'percentage') {
+            $transaction_discount = $net_amount * ((float) $transaction->discount_amount / 100);
+        } else {
+            $transaction_discount = (float) $transaction->discount_amount;
+        }
+
+        $net_amount    -= $transaction_discount;
+        $total_discount += $transaction_discount;
+
+        $final = $net_amount + $total_tax;
+
+        return [
+            'net_amount' => $net_amount,
+            'total_discount' => $total_discount,
+            'total_tax' => $total_tax,
+            'final' => $final,
+        ];
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

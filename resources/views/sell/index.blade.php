@@ -87,7 +87,7 @@
                             <th>@lang('sale.payment_status')</th>
                             <th>@lang('lang_v1.payment_method')</th>
                             <th>Net Amount</th>
-                            <th>Vat Amount (15%)</th>
+                            <th>Vat Amount</th>
                             <th>@lang('sale.total_amount')</th>
                             <th>@lang('sale.total_paid')</th>
                             <th>@lang('lang_v1.sell_due')</th>

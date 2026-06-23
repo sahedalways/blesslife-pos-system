@@ -24,9 +24,9 @@
     // ── Step 1: Loop through lines ────────────────────────────────────────────
     $total_quantity = 0;
     $total_line_discount = 0;
-    $total_per_product_vat = 0; // Σ per-line VAT (product-wise)
-    $total_taxable_excl_vat = 0; // Σ line_taxable (excl. VAT, net of discount)
-    $total_product_line_with_vat = 0; // Σ (line_taxable + line_vat)
+    $total_per_product_vat = 0;
+    $total_taxable_excl_vat = 0;
+    $total_product_line_with_vat = 0;
 
     $processed_lines = [];
 
@@ -36,23 +36,29 @@
         $tax_percent = (float) ($line['tax_percent'] ?? 0);
 
         $total_quantity += $qty;
-
         $gross = $unit_price * $qty;
 
-        // ── Per-line discount ─────────────────────────────────────────────────
+        // ── Per-line discount (FIXED) ─────────────────────────────────────────
         $line_discount = 0;
+        $discount_type = $line['line_discount_type_uf'] ?? '';
+        $is_percentage = false;
         $discount_label = '';
 
-        if (!empty($line['line_discount_amount_uf'])) {
-            $line_discount = (float) $line['line_discount_amount_uf'];
-            if (!empty($line['discount_percent'])) {
-                $discount_label = '(' . $line['discount_percent'] . '%)';
-            }
-        } elseif (!empty($line['discount_percent'])) {
-            $line_discount = $gross * ((float) $line['discount_percent'] / 100);
-            $discount_label = '(' . $line['discount_percent'] . '%)';
-        } elseif (!empty($line['discount'])) {
-            $line_discount = (float) $line['discount'];
+        if ($discount_type === 'percentage') {
+            $is_percentage = true;
+            $discount_percent = (float) ($line['line_discount_percent'] ?? 0);
+            $discount_label = $discount_percent . '%';
+
+            // Backend থেকে already total discount পাঠালে সেটা use করবে, না হলে calculate করবে
+            $line_discount = !empty($line['total_line_discount'])
+                ? (float) $line['total_line_discount']
+                : $gross * ($discount_percent / 100);
+        } elseif (!empty($line['total_line_discount'])) {
+            // Fixed discount
+            $line_discount = (float) $line['total_line_discount'];
+        } elseif (!empty($line['line_discount_amount_uf'])) {
+            // Fallback: per unit amount × qty
+            $line_discount = (float) $line['line_discount_amount_uf'] * $qty;
         }
 
         $total_line_discount += $line_discount;
@@ -61,7 +67,7 @@
         if (!empty($line['line_total_exc_tax_uf'])) {
             $line_taxable = (float) $line['line_total_exc_tax_uf'];
         } else {
-            $line_taxable = $gross - $line_discount;
+            $line_taxable = max($gross - $line_discount, 0);
         }
 
         // ── Per-product VAT ──────────────────────────────────────────────────
@@ -79,6 +85,7 @@
             'unit_price' => $unit_price,
             'gross' => $gross,
             'line_discount' => $line_discount,
+            'is_percentage' => $is_percentage,
             'discount_label' => $discount_label,
             'line_taxable' => $line_taxable,
             'tax_percent' => $tax_percent,
@@ -87,9 +94,14 @@
         ];
     }
 
-    $subtotal_excl_vat = $total_taxable_excl_vat;
-    $net_amount = $total_product_line_with_vat;
-    $vat_on_total = $net_amount * 0.15;
+    $subtotal_excl_vat = 0;
+    foreach ($processed_lines as $item) {
+        $subtotal_excl_vat += $item['gross'];
+    }
+
+    $discount_amount = $total_line_discount;
+    $net_amount = $subtotal_excl_vat - $discount_amount;
+    $vat_on_total = $total_per_product_vat;
     $total_amount_include_vat = $net_amount + $vat_on_total;
 @endphp
 
@@ -366,42 +378,69 @@
         <tbody>
             @foreach ($receipt_details->lines as $line)
                 @php
+                    // Quantity
                     $qty = (float) ($line['quantity_uf'] ?? ($line['quantity'] ?? 0));
+
+                    // Unit price before discount
                     $unit_price =
                         (float) ($line['unit_price_before_discount_uf'] ?? ($line['unit_price_before_discount'] ?? 0));
+
+                    // VAT %
                     $tax_percent = (float) ($line['tax_percent'] ?? 0);
 
-                    // Gross before discount
+                    // Gross total = unit price × qty
                     $gross = $unit_price * $qty;
 
-                    // Per-line discount ─────────────────────────────────────
+                    // ─────────────────────────────────────────────────────────────
+                    // Discount Calculation (Fixed based on your actual JSON keys)
+                    // ─────────────────────────────────────────────────────────────
                     $line_discount = 0;
-                    $discount_label = '';
+                    $discount_type = $line['line_discount_type_uf'] ?? '';
+                    $discount_show_value = 0;
+                    $is_percentage = false;
 
-                    if (!empty($line['line_discount_amount_uf'])) {
-                        $line_discount = (float) $line['line_discount_amount_uf'];
-                        // build label from percent if available
-                        if (!empty($line['discount_percent'])) {
-                            $discount_label = '(' . $line['discount_percent'] . '%)';
-                        }
-                    } elseif (!empty($line['discount_percent'])) {
-                        $line_discount = $gross * ((float) $line['discount_percent'] / 100);
-                        $discount_label = '(' . $line['discount_percent'] . '%)';
-                    } elseif (!empty($line['discount'])) {
-                        $line_discount = (float) $line['discount'];
+                    if ($discount_type === 'percentage') {
+                        $is_percentage = true;
+                        $discount_show_value = (float) ($line['line_discount_percent'] ?? 0);
+
+                        // Backend থেকে already total discount পাঠালে সেটা use করবে
+                        $line_discount = !empty($line['total_line_discount'])
+                            ? (float) $line['total_line_discount']
+                            : $gross * ($discount_show_value / 100);
+                    } elseif (!empty($line['total_line_discount'])) {
+                        // Fixed discount: total line discount use করবে
+                        $line_discount = (float) $line['total_line_discount'];
+                        $discount_show_value = $line_discount;
+                    } elseif (!empty($line['line_discount_amount_uf'])) {
+                        // Fallback: per unit amount × qty
+                        $per_unit = (float) $line['line_discount_amount_uf'];
+                        $line_discount = $per_unit * $qty;
+                        $discount_show_value = $line_discount;
                     }
 
-                    // Taxable amount (excl. VAT, net of discount) ───────────
-                    if (!empty($line['line_total_exc_tax_uf'])) {
+                    // ─────────────────────────────────────────────────────────────
+                    // Taxable Amount (After Discount, Before VAT)
+                    // ─────────────────────────────────────────────────────────────
+                    if (
+                        isset($line['line_total_exc_tax_uf']) &&
+                        $line['line_total_exc_tax_uf'] !== '' &&
+                        $line['line_total_exc_tax_uf'] !== null
+                    ) {
                         $line_taxable = (float) $line['line_total_exc_tax_uf'];
                     } else {
                         $line_taxable = $gross - $line_discount;
                     }
 
-                    // VAT & total ──────────────────────────────────────────
+                    // Negative protection
+                    $line_taxable = max($line_taxable, 0);
+
+                    // VAT amount
                     $line_tax_amount = $line_taxable * ($tax_percent / 100);
+
+                    // Total including VAT
                     $line_total_with_vat = $line_taxable + $line_tax_amount;
                 @endphp
+
                 <tr>
                     <td class="tcn-lines-td text-center">{{ $loop->iteration }}</td>
 
@@ -409,37 +448,39 @@
                         {{ $line['name'] }}
                         {{ $line['product_variation'] ?? '' }}
                         {{ $line['variation'] ?? '' }}
+
                         @if (!empty($line['sub_sku']))
                             <br><small>{{ $line['sub_sku'] }}</small>
                         @endif
+
                         @if (!empty($line['sell_line_note']))
                             <br><small>{!! strip_tags($line['sell_line_note']) !!}</small>
                         @endif
                     </td>
 
-                    <td class="tcn-lines-td text-center">{{ $line['quantity'] }}</td>
-
-                    <td class="tcn-lines-td text-right">
-                        @if (isset($line['unit_price_before_discount_uf']))
-                            @format_currency($line['unit_price_before_discount_uf'])
-                        @else
-                            {{ $line['unit_price_before_discount'] ?? '' }}
-                        @endif
+                    <td class="tcn-lines-td text-center">
+                        {{ $line['quantity'] ?? $qty }}
+                        {{ $line['units'] ?? '' }}
                     </td>
 
-                    <!-- Per-product discount (shown on line; NOT deducted again in totals) -->
+                    <td class="tcn-lines-td text-right">
+                        @format_currency($unit_price)
+                    </td>
+
+                    <!-- Per product discount -->
                     <td class="tcn-lines-td text-right">
                         @if ($line_discount > 0)
-                            @format_currency($line_discount)
-                            @if (!empty($discount_label))
-                                <br><small>{{ $discount_label }}</small>
+                            @if ($is_percentage)
+                                {{ $discount_show_value }}%
+                            @else
+                                @format_currency($discount_show_value)
                             @endif
                         @else
                             -
                         @endif
                     </td>
 
-                    <!-- Amount Without VAT (already net of discount) -->
+                    <!-- Amount without VAT -->
                     <td class="tcn-lines-td text-right">
                         @format_currency($line_taxable)
                     </td>
@@ -449,14 +490,14 @@
                         {{ $tax_percent > 0 ? $tax_percent . '%' : 'N/A' }}
                     </td>
 
-                    <!-- Total Include VAT -->
+                    <!-- Total including VAT -->
                     <td class="tcn-lines-td text-right">
                         @format_currency($line_total_with_vat)
                     </td>
                 </tr>
             @endforeach
 
-            {{-- Filler rows to keep layout tidy --}}
+            {{-- Filler rows --}}
             @for ($i = count($receipt_details->lines); $i < 2; $i++)
                 <tr>
                     <td class="tcn-lines-td">&nbsp;</td>
@@ -483,15 +524,16 @@
     --}}
     <table class="tcn-totals-table avoid-page-break">
         <tr>
-            <td class="tcn-totals-label-en">Total Amount Without Vat</td>
-            <td class="tcn-totals-value">@format_currency($total_product_line_with_vat)</td>
-            <td class="tcn-totals-label-ar">المبلغ الإجمالي بدون ضريبة القيمة المضافة</td>
+            <td class="tcn-totals-label-en">Subtotal</td>
+            <td class="tcn-totals-value">@format_currency($subtotal_excl_vat)</td>
+            <td class="tcn-totals-label-ar">المجموع الفرعي</td>
         </tr>
+
+
+
         <tr>
-            {{-- Discount row is intentionally 0 because discounts are already
-                 reflected in each line's "Total Amount without Vat" column. --}}
             <td class="tcn-totals-label-en">Discount</td>
-            <td class="tcn-totals-value">@format_currency(0)</td>
+            <td class="tcn-totals-value">@format_currency($discount_amount)</td>
             <td class="tcn-totals-label-ar">الخصم</td>
         </tr>
         <tr>
@@ -500,9 +542,9 @@
             <td class="tcn-totals-label-ar">المبلغ الصافي</td>
         </tr>
         <tr>
-            <td class="tcn-totals-label-en">Vat (15%)</td>
+            <td class="tcn-totals-label-en">Total VAT</td>
             <td class="tcn-totals-value">@format_currency($vat_on_total)</td>
-            <td class="tcn-totals-label-ar">ضريبة القيمة المضافة</td>
+            <td class="tcn-totals-label-ar">إجمالي ضريبة القيمة المضافة</td>
         </tr>
         <tr>
             <td class="tcn-totals-label-en">Total Amount Include Vat</td>
