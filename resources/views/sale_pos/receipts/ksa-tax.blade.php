@@ -131,10 +131,11 @@
         ],
         [
             'left_label' => 'CR Number',
-            'left_value' => $sell->seller_cr_no ?? '',
+            'left_value' => $receipt_details->seller_cr_no ?? '',
             'left_ar' => 'رقم إضافي',
+
             'right_label' => 'CR Number',
-            'right_value' => $sell->customer_cr_no ?? '',
+            'right_value' => $receipt_details->customer_cr_no ?? '',
             'right_ar' => 'رقم إضافي',
         ],
     ];

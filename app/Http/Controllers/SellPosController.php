@@ -781,6 +781,11 @@ class SellPosController extends Controller
 
         $receipt_details = $this->transactionUtil->getReceiptDetails($transaction_id, $location_id, $invoice_layout, $business_details, $location_details, $receipt_printer_type);
 
+        \Log::info(json_encode([
+            'seller_cr_no' => $receipt_details->seller_cr_no ?? '',
+            'customer_cr_no' => $receipt_details->customer_cr_no ?? '',
+        ]));
+
         $currency_details = [
             'symbol' => $business_details->currency_symbol,
             'thousand_separator' => $business_details->thousand_separator,
@@ -789,15 +794,11 @@ class SellPosController extends Controller
         $receipt_details->currency = $currency_details;
 
 
-        \Log::info('Receipt Details:', (array) $receipt_details);
 
 
         if ($is_package_slip) {
 
-            \Log::info('Receipt Branch: PACKAGE_SLIP', [
-                'view' => 'sale_pos.receipts.packing_slip',
-                'transaction_id' => $transaction_id
-            ]);
+
 
             $output['html_content'] = view('sale_pos.receipts.packing_slip', compact('receipt_details'))->render();
 
@@ -806,10 +807,7 @@ class SellPosController extends Controller
 
         if ($is_delivery_note) {
 
-            \Log::info('Receipt Branch: DELIVERY_NOTE', [
-                'view' => 'sale_pos.receipts.delivery_note',
-                'transaction_id' => $transaction_id
-            ]);
+
 
             $output['html_content'] = view('sale_pos.receipts.delivery_note', compact('receipt_details'))->render();
 
@@ -820,11 +818,7 @@ class SellPosController extends Controller
 
         if ($receipt_printer_type == 'printer') {
 
-            \Log::info('Receipt Branch: PRINTER', [
-                'printer_type' => $receipt_printer_type,
-                'transaction_id' => $transaction_id,
-                'design' => $receipt_details->design
-            ]);
+
 
             $output['print_type'] = 'printer';
             $output['printer_config'] = $this->businessUtil->printerConfig($business_id, $location_details->printer_id);
@@ -835,12 +829,7 @@ class SellPosController extends Controller
                 ? 'sale_pos.receipts.' . $receipt_details->design
                 : 'sale_pos.receipts.classic';
 
-            \Log::info('Receipt Branch: BROWSER', [
-                'view' => $layout,
-                'transaction_id' => $transaction_id,
-                'printer_type' => $receipt_printer_type,
-                'design' => $receipt_details->design
-            ]);
+
 
             $output['html_content'] = view($layout, compact('receipt_details'))->render();
         }

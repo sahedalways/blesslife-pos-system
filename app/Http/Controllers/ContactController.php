@@ -535,6 +535,7 @@ class ContactController extends Controller
      */
     public function create()
     {
+        dd('hello');
         if (! auth()->user()->can('supplier.create') && ! auth()->user()->can('customer.create') && ! auth()->user()->can('customer.view_own') && ! auth()->user()->can('supplier.view_own')) {
             abort(403, 'Unauthorized action.');
         }

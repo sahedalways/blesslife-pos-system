@@ -1129,6 +1129,7 @@ class TransactionUtil extends Util
 
             $output['customer_tax_number'] = $customer->tax_number;
             $output['customer_tax_label'] = ! empty($il->client_tax_label) ? $il->client_tax_label : '';
+            $output['customer_cr_no'] = $customer->cr_no ?? '';
 
             $temp = [];
             $customer_custom_fields_settings = ! empty($il->contact_custom_fields) ? $il->contact_custom_fields : [];
@@ -1232,6 +1233,7 @@ class TransactionUtil extends Util
         // added by
         $user = \App\User::find($transaction->created_by);
         $output['added_by'] = $user ? trim("{$user->surname} {$user->first_name} {$user->last_name}") : '';
+        $output['seller_cr_no'] = $user->cr_no ?? '';
 
         //Sales person info
         $output['sales_person'] = '';

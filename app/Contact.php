@@ -12,9 +12,7 @@ class Contact extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
-    protected $fillable = [
-        'cr_no'
-    ];
+
 
     /**
      * The attributes that aren't mass assignable.

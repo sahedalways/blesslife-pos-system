@@ -707,8 +707,17 @@ $(document).ready(function () {
 
     //Finalize invoice, open payment modal
     $('button#pos-finalize').click(function () {
-        if ($('#custom_field_1').val().trim() === '') {
-            toastr.error('Project Name is required');
+        var projectName = $('#custom_field_1').val().trim();
+
+        var projectCode = $('#custom_field_2').val().trim();
+
+        if (projectName.length > 100) {
+            toastr.error('Project Name cannot exceed 100 characters');
+            return false;
+        }
+
+        if (projectCode.length > 50) {
+            toastr.error('Project Code cannot exceed 50 characters');
             return false;
         }
 
@@ -738,8 +747,16 @@ $(document).ready(function () {
 
     //Finalize without showing payment options
     $('button.pos-express-finalize').click(function () {
-        if ($('#custom_field_1').val().trim() === '') {
-            toastr.error('Project Name is required');
+        var projectName = $('#custom_field_1').val().trim();
+        var projectCode = $('#custom_field_2').val().trim();
+
+        if (projectName.length > 100) {
+            toastr.error('Project Name cannot exceed 100 characters');
+            return false;
+        }
+
+        if (projectCode.length > 50) {
+            toastr.error('Project Code cannot exceed 50 characters');
             return false;
         }
 
