@@ -35,8 +35,8 @@
             'arabic' => 'تاريخ إصدار الفاتورة',
         ],
         [
-            'label' => $receipt_details->custom_field_1_label ?? 'Project Name',
-            'value' => !empty($receipt_details->custom_field_1) ? $receipt_details->custom_field_1 : '-',
+            'label' => 'Project Name',
+            'value' => !empty($receipt_details->project_name) ? $receipt_details->project_name : '-',
             'arabic' => 'اسم المشروع',
         ],
         [

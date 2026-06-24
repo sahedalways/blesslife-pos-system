@@ -707,9 +707,9 @@ $(document).ready(function () {
 
     //Finalize invoice, open payment modal
     $('button#pos-finalize').click(function () {
-        var projectName = $('#custom_field_1').val().trim();
+        var projectName = $('#project_name').val().trim();
 
-        var projectCode = $('#custom_field_2').val().trim();
+        var projectCode = $('#project_code').val().trim();
 
         if (projectName.length > 100) {
             toastr.error('Project Name cannot exceed 100 characters');
@@ -747,8 +747,8 @@ $(document).ready(function () {
 
     //Finalize without showing payment options
     $('button.pos-express-finalize').click(function () {
-        var projectName = $('#custom_field_1').val().trim();
-        var projectCode = $('#custom_field_2').val().trim();
+        var projectName = $('#project_name').val().trim();
+        var projectCode = $('#project_code').val().trim();
 
         if (projectName.length > 100) {
             toastr.error('Project Name cannot exceed 100 characters');

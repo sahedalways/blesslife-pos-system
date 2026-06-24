@@ -378,18 +378,13 @@
                                 $label_1 .= '*';
                             }
                         @endphp
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('custom_field_1', $label_1) !!}
-                                {!! Form::text('custom_field_1', null, [
-                                    'class' => 'form-control',
-                                    'placeholder' => $custom_field_1_label,
-                                    'required' => $is_custom_field_1_required,
-                                ]) !!}
-                            </div>
-                        </div>
                     @endif
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('project_name', 'Project Name:') !!}
+                            {!! Form::text('project_name', null, ['class' => 'form-control', 'placeholder' => 'Project Name']) !!}
+                        </div>
+                    </div>
                     @if (!empty($custom_field_2_label))
                         @php
                             $label_2 = $custom_field_2_label . ':';
@@ -446,12 +441,14 @@
                                 ]) !!}
                             </div>
                         </div>
-
                     @endif
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('project_code', __('Project Code') . ':') !!}
-                            {!! Form::text('custom_field_2', null, ['class' => 'form-control', 'placeholder' => __('Project Code')]) !!}
+                            {!! Form::label('project_code', 'Project Code:') !!}
+                            {!! Form::text('project_code', null, [
+                                'class' => 'form-control',
+                                'placeholder' => 'Project Code',
+                            ]) !!}
                         </div>
                     </div>
                     <div class="col-sm-3">

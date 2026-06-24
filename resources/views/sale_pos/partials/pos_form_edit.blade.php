@@ -78,7 +78,43 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-folder"></i>
+                </span>
+                <input type="text"
+                       name="project_name"
+                       id="project_name"
+                       class="form-control"
+                       placeholder="Enter Project Name"
+                       value="{{ $transaction->project_name }}">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-code"></i>
+                </span>
+                <input type="text"
+                       name="project_code"
+                       id="project_code"
+                       class="form-control"
+                       placeholder="Enter Project Code"
+                       value="{{ $transaction->project_code }}">
+            </div>
+        </div>
+    </div>
 </div>
+
+
 <div class="row">
     @if (!empty($pos_settings['show_invoice_layout']))
         <div class="col-md-4">
@@ -192,6 +228,9 @@
                 </small>
             </div>
         </div>
+
+
+
         <div class="modal fade types_of_service_modal"
              tabindex="-1"
              role="dialog"

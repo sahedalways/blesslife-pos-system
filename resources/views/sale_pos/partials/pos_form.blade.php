@@ -94,8 +94,8 @@
                     <i class="fa fa-folder"></i>
                 </span>
                 <input type="text"
-                       name="custom_field_1"
-                       id="custom_field_1"
+                       name="project_name"
+                       id="project_name"
                        class="form-control"
                        placeholder="Enter Project Name">
             </div>
@@ -110,8 +110,8 @@
                     <i class="fa fa-code"></i>
                 </span>
                 <input type="text"
-                       name="custom_field_2"
-                       id="custom_field_2"
+                       name="project_code"
+                       id="project_code"
                        class="form-control"
                        placeholder="Enter Project Code">
             </div>

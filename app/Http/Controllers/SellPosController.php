@@ -498,6 +498,9 @@ class SellPosController extends Controller
 
                 $input['selling_price_group_id'] = $price_group_id;
 
+                $input['project_name'] = $request->input('project_name', null);
+                $input['project_code'] = $request->input('project_code', null);
+
                 if ($this->transactionUtil->isModuleEnabled('tables')) {
                     $input['res_table_id'] = request()->get('res_table_id');
                 }
@@ -1358,6 +1361,9 @@ class SellPosController extends Controller
                 }
 
                 $input['selling_price_group_id'] = $price_group_id;
+
+                $input['project_name'] = $request->input('project_name', null);
+                $input['project_code'] = $request->input('project_code', null);
 
                 if ($this->transactionUtil->isModuleEnabled('tables')) {
                     $input['res_table_id'] = request()->get('res_table_id');

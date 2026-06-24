@@ -83,6 +83,8 @@ class TransactionUtil extends Util
             'custom_field_2' => ! empty($input['custom_field_2']) ? $input['custom_field_2'] : null,
             'custom_field_3' => ! empty($input['custom_field_3']) ? $input['custom_field_3'] : null,
             'custom_field_4' => ! empty($input['custom_field_4']) ? $input['custom_field_4'] : null,
+            'project_name' => ! empty($input['project_name']) ? $input['project_name'] : null,
+            'project_code' => ! empty($input['project_code']) ? $input['project_code'] : null,
             'is_direct_sale' => ! empty($input['is_direct_sale']) ? $input['is_direct_sale'] : 0,
             'commission_agent' => $input['commission_agent'] ?? null,
             'is_quotation' => isset($input['is_quotation']) ? $input['is_quotation'] : 0,
@@ -206,6 +208,8 @@ class TransactionUtil extends Util
             'custom_field_2' => ! empty($input['custom_field_2']) ? $input['custom_field_2'] : null,
             'custom_field_3' => ! empty($input['custom_field_3']) ? $input['custom_field_3'] : null,
             'custom_field_4' => ! empty($input['custom_field_4']) ? $input['custom_field_4'] : null,
+            'project_name' => ! empty($input['project_name']) ? $input['project_name'] : null,
+            'project_code' => ! empty($input['project_code']) ? $input['project_code'] : null,
             'commission_agent' => $input['commission_agent'],
             'is_quotation' => isset($input['is_quotation']) ? $input['is_quotation'] : 0,
             'sub_status' => ! empty($input['sub_status']) ? $input['sub_status'] : null,
@@ -1063,6 +1067,9 @@ class TransactionUtil extends Util
         if (! empty($location_details->custom_field4) && in_array('custom_field4', $location_custom_field_settings)) {
             $temp[] = $location_details->custom_field4;
         }
+
+
+
         if (! empty($temp)) {
             $output['location_custom_fields'] .= implode(', ', $temp);
         }
@@ -1291,8 +1298,8 @@ class TransactionUtil extends Util
         $output['transaction_date'] = $transaction->transaction_date;
         $output['date_time_format'] = $business_details->date_format;
         $output['currency_symbol'] = $business_details->currency_symbol;
-        $output['project_name'] = $transaction['custom_field_1'] ?? null;
-        $output['project_code'] = $transaction['custom_field_2'] ?? null;
+        $output['project_name'] = $transaction['project_name'] ?? null;
+        $output['project_code'] = $transaction['project_code'] ?? null;
 
 
         $output['hide_price'] = ! empty($il->common_settings['hide_price']) ? true : false;
