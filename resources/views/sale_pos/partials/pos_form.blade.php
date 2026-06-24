@@ -97,8 +97,7 @@
                        name="custom_field_1"
                        id="custom_field_1"
                        class="form-control"
-                       placeholder="Enter Project Name"
-                       required>
+                       placeholder="Enter Project Name">
             </div>
         </div>
     </div>
@@ -114,8 +113,7 @@
                        name="custom_field_2"
                        id="custom_field_2"
                        class="form-control"
-                       placeholder="Enter Project Code"
-                       required>
+                       placeholder="Enter Project Code">
             </div>
         </div>
     </div>

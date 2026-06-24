@@ -459,7 +459,11 @@
                 <tr>
                     <td class="ksa-label">Due Amount ( المبلغ المستحق )</td>
                     <td class="ksa-value text-right">
-                        {{ $receipt_details->total_due ?? @format_currency($total_amount) }}
+                        @if (!empty($receipt_details->total_due))
+                            {{ $receipt_details->total_due }}
+                        @else
+                            @format_currency(0)
+                        @endif
                     </td>
                 </tr>
             </table>
