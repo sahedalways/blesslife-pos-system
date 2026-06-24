@@ -279,6 +279,12 @@
 				        </div>
 				    </div>
 		        @endif
+		        <div class="col-md-4">
+		            <div class="form-group">
+		                {!! Form::label('project_code', __('Project Code') . ':') !!}
+		                {!! Form::text('custom_field_2', $transaction->custom_field_2, ['class' => 'form-control', 'placeholder' => __('Project Code')]); !!}
+		            </div>
+		        </div>
 		        <div class="col-sm-3">
 	                <div class="form-group">
 	                    {!! Form::label('upload_document', __('purchase.attach_document') . ':') !!}
