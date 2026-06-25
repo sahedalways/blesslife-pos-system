@@ -21,6 +21,20 @@
         </div>
 
         <div class="col-md-12">
+            <div class="row margin-bottom-20 text-center no-print">
+                <a class="tw-dw-btn-xs tw-dw-btn tw-dw-btn-outline tw-my-2"
+                   href="{{ route('accounting.trialBalance') }}?start_date={{ $start_date }}&end_date={{ $end_date }}&format=csv">
+                   <i class="fa fa-file-csv"></i> @lang('accounting::lang.export_to_csv')
+                </a>
+                <a class="tw-dw-btn-xs tw-dw-btn tw-dw-btn-outline tw-my-2"
+                   href="{{ route('accounting.trialBalance') }}?start_date={{ $start_date }}&end_date={{ $end_date }}&format=excel">
+                   <i class="fa fa-file-excel"></i> @lang('accounting::lang.export_to_excel')
+                </a>
+                <a class="tw-dw-btn-xs tw-dw-btn tw-dw-btn-outline tw-my-2"
+                   href="{{ route('accounting.trialBalance') }}?start_date={{ $start_date }}&end_date={{ $end_date }}&format=pdf">
+                   <i class="fa fa-file-pdf"></i> @lang('accounting::lang.export_to_pdf')
+                </a>
+            </div>
             <div class="trial-balance-wrapper">
 
                 <div class="trial-balance-header">

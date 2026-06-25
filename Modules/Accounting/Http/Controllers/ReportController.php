@@ -6,9 +6,11 @@ use App\BusinessLocation;
 use App\Utils\BusinessUtil;
 use App\Utils\ModuleUtil;
 use DB;
+use Excel;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Accounting\Entities\AccountingAccount;
+use Modules\Accounting\Exports\TrialBalanceExport;
 use Modules\Accounting\Utils\AccountingUtil;
 
 class ReportController extends Controller
@@ -93,6 +95,44 @@ class ReportController extends Controller
                             )
                             ->groupBy('accounting_accounts.name')
                             ->get();
+
+        $format = request()->input('format');
+
+        if ($format == 'pdf') {
+            $html = view('accounting::report.trial_balance_pdf')
+                ->with(compact('accounts', 'start_date', 'end_date'))
+                ->render();
+
+            $output_file_name = 'Trial-Balance-' . $start_date . '-to-' . $end_date . '.pdf';
+
+            $mpdf = new \Mpdf\Mpdf([
+                'tempDir' => public_path('uploads/temp'),
+                'mode' => 'utf-8',
+                'autoScriptToLang' => true,
+                'autoLangToFont' => true,
+                'autoVietnamese' => true,
+                'autoArabic' => true,
+                'useSubstitutions' => true,
+                'orientation' => 'L',
+            ]);
+
+            if (auth()->check() && in_array(auth()->user()->language, config('constants.langs_rtl'))) {
+                $mpdf->SetDirectionality('rtl');
+            }
+
+            $mpdf->WriteHTML($html);
+            $mpdf->Output($output_file_name, 'I');
+        } elseif ($format == 'excel') {
+            $export = new TrialBalanceExport($accounts, $start_date, $end_date);
+            $output_file_name = 'Trial-Balance-' . $start_date . '-to-' . $end_date . '.xlsx';
+
+            return Excel::download($export, $output_file_name);
+        } elseif ($format == 'csv') {
+            $export = new TrialBalanceExport($accounts, $start_date, $end_date);
+            $output_file_name = 'Trial-Balance-' . $start_date . '-to-' . $end_date . '.csv';
+
+            return Excel::download($export, $output_file_name);
+        }
 
         return view('accounting::report.trial_balance')
             ->with(compact('accounts', 'start_date', 'end_date'));
