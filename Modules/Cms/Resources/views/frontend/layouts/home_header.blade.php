@@ -13,7 +13,7 @@
     .hero-nav__link,
     .hero-nav__item-chevron,
     .hero-nav__item>span {
-        color: #fff !important;
+        color: #fff;
     }
 
     .hero-nav__item a:not(.btn) {
@@ -51,6 +51,9 @@
     .hero-nav--is-sticky .hero-nav__link:hover,
     .hero-nav--is-sticky .hero-nav__item a:not(.btn):hover {
         color: #6366f1 !important;
+    }
+    .hero-nav--is-sticky .fa-bars {
+        color: #1e293b !important;
     }
 
     .hero-nav__link:hover,
@@ -163,12 +166,15 @@
         color: #fff;
     }
 
-    .hero-carousel .carousel-control-prev,
-    .hero-carousel .carousel-control-next {
-        display: none;
-    }
-
-    @media (max-width: 768px) {
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next {
+    display: none;
+}
+.ft-menu--js-show.ft-menu .hero-nav__link,
+.ft-menu--js-show.ft-menu .hero-nav__item a:not(.btn) {
+    color: #000000 !important;
+}
+@media (max-width: 768px) {
         .hero-carousel .carousel-item {
             height: 70vh;
             min-height: 400px;
@@ -185,6 +191,12 @@
         .hero-carousel .btn-trial {
             padding: 0.7rem 1.8rem;
             font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 991.98px) {
+        .hero-nav__link {
+            color: #000 !important;
         }
     }
 </style>

@@ -310,6 +310,9 @@ button:focus {
     #hero-menu {
         flex-grow: 0 !important;
     }
+    .ft-menu--js-show.ft-menu .hero-nav__link {
+        color: #000000 !important;
+    }
 }
 
 @media (min-width: 992px) {
@@ -555,6 +558,10 @@ button:focus {
 .hero-nav--is-sticky .btn {
     background: var(--gradient-primary, var(--primary));
     color: var(--primary-invert);
+}
+
+.hero-nav--is-sticky .fa-bars {
+    color: #1e293b;
 }
 
 @-webkit-keyframes slideInDown {
@@ -968,7 +975,7 @@ button:focus {
 .hero__title {
     font-size: 2rem;
     font-weight: 900;
-    background: -webkit-linear-gradient(#1973FE, black);
+    background: -webkit-linear-gradient(#1973fe, black);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
