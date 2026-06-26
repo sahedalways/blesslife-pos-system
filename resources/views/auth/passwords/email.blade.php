@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-4 col-xs-12">
         <div
-            class=" tw-p-2 sm:tw-p-3 tw-mb-4 tw-transition-all tw-duration-200  tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 tw-ring-gray-200">
+            class=" tw-p-2 sm:tw-p-3 tw-mb-4 tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 tw-ring-gray-200">
             <div class="tw-flex tw-flex-col tw-gap-4 tw-dw-rounded-box tw-dw-p-6 tw-dw-max-w-md">
 
                 <h3 class="tw-text-sm tw-font-medium tw-text-gray-500 tw-self-center">@lang('lang_v1.send_password_reset_link')</h3>

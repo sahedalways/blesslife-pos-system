@@ -1057,6 +1057,28 @@ table.table-text-center td, table.table-text-center th{
 .variation-image-preview .preview-thumb img {
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
+.tw-dw-btn.tw-dw-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2.5rem;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+}
+
+.tw-dw-btn.tw-dw-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(99, 102, 241, 0.5);
+  color: #fff;
+}
 .existing-images .img-thumbnail {
   max-width: 50px;
   max-height: 50px;

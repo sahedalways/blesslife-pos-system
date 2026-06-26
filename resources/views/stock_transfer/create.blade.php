@@ -94,10 +94,16 @@
             </div>
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1">
-                    <input type="hidden" id="product_row_index" value="0">
-                    <input type="hidden" id="total_amount" name="final_total" value="0">
+                    <input type="hidden"
+                           id="product_row_index"
+                           value="0">
+                    <input type="hidden"
+                           id="total_amount"
+                           name="final_total"
+                           value="0">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-condensed" id="stock_adjustment_product_table">
+                        <table class="table table-bordered table-striped table-condensed"
+                               id="stock_adjustment_product_table">
                             <thead>
                                 <tr>
                                     <th class="col-sm-4 text-center">
@@ -112,7 +118,8 @@
                                     <th class="col-sm-2 text-center show_price_with_permission">
                                         @lang('sale.subtotal')
                                     </th>
-                                    <th class="col-sm-2 text-center"><i class="fa fa-trash" aria-hidden="true"></i></th>
+                                    <th class="col-sm-2 text-center"><i class="fa fa-trash"
+                                           aria-hidden="true"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,7 +129,7 @@
                                     <td colspan="3"></td>
                                     <td>
                                         <div class="pull-right"><b>@lang('sale.total'): </b> <span
-                                                id="total_adjustment">0.00</span></div>
+                                                  id="total_adjustment">0.00</span></div>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -158,7 +165,9 @@
                 <br>
                 <br>
                 <div class="col-sm-12 text-center">
-                    <button type="submit" id="save_stock_transfer" class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-lg tw-text-white">@lang('messages.save')</button>
+                    <button type="submit"
+                            id="save_stock_transfer"
+                            class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-lg tw-text-white">@lang('messages.save')</button>
                 </div>
             </div>
         @endcomponent

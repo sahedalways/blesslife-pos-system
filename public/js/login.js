@@ -1,6 +1,6 @@
 var recaptchaRendered = false;
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
     // registration form steps start
@@ -15,7 +15,7 @@ $(document).ready(function() {
                 next: LANG.next,
                 previous: LANG.previous,
             },
-            onStepChanging: function(event, currentIndex, newIndex) {
+            onStepChanging: function (event, currentIndex, newIndex) {
                 // Allways allow previous action even if the current form is not valid!
                 if (currentIndex > newIndex) {
                     return true;
@@ -29,22 +29,23 @@ $(document).ready(function() {
                 form.validate().settings.ignore = ':disabled,:hidden';
                 return form.valid();
             },
-            onStepChanged: function(event, currentIndex, priorIndex) {
+            onStepChanged: function (event, currentIndex, priorIndex) {
                 // Render reCAPTCHA on last step
-                if (currentIndex === 2 && !recaptchaRendered) { // change 2 to your last step index
+                if (currentIndex === 2 && !recaptchaRendered) {
+                    // change 2 to your last step index
                     if (typeof grecaptcha !== 'undefined') {
                         grecaptcha.render('recaptcha-container', {
-                            'sitekey': window.RECAPTCHA_SITE_KEY
+                            sitekey: window.RECAPTCHA_SITE_KEY,
                         });
                         recaptchaRendered = true;
                     }
                 }
             },
-            onFinishing: function(event, currentIndex) {
+            onFinishing: function (event, currentIndex) {
                 form.validate().settings.ignore = ':disabled';
                 return form.valid();
             },
-            onFinished: function(event, currentIndex) {
+            onFinished: function (event, currentIndex) {
                 form.submit();
             },
         });
@@ -61,10 +62,13 @@ $(document).ready(function() {
     });
 
     $('form#business_register_form').validate({
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             if (element.parent('.input-group').length) {
                 error.insertAfter(element.parent());
-            } else if (element.hasClass('input-icheck') && element.parent().hasClass('icheckbox_square-blue')) {
+            } else if (
+                element.hasClass('input-icheck') &&
+                element.parent().hasClass('icheckbox_square-blue')
+            ) {
                 error.insertAfter(element.parent().parent().parent());
             } else {
                 error.insertAfter(element);
@@ -78,26 +82,35 @@ $(document).ready(function() {
                     url: '/business/register/check-email',
                     type: 'post',
                     data: {
-                        email: function() {
+                        email: function () {
                             return $('#email').val();
                         },
                         is_disposable_email: true,
                     },
-                    dataFilter: function(response) {
+                    dataFilter: function (response) {
                         try {
                             // jQuery Validate expects 'true' or a quoted string as the error message
                             if (response === 'true' || response === true) {
                                 return '"true"';
                             }
-                            var msg = (typeof response === 'string' && response.trim().length)
-                                ? response
-                                : ((typeof LANG !== 'undefined' && LANG.email_taken) ? LANG.email_taken : 'This email has already been taken.');
+                            var msg =
+                                typeof response === 'string' && response.trim().length
+                                    ? response
+                                    : typeof LANG !== 'undefined' && LANG.email_taken
+                                      ? LANG.email_taken
+                                      : 'This email has already been taken.';
                             // Escape quotes in message
                             return '"' + msg.replace(/"/g, '\\"') + '"';
                         } catch (e) {
-                            return '"' + ((typeof LANG !== 'undefined' && LANG.email_taken) ? LANG.email_taken : 'This email has already been taken.') + '"';
+                            return (
+                                '"' +
+                                (typeof LANG !== 'undefined' && LANG.email_taken
+                                    ? LANG.email_taken
+                                    : 'This email has already been taken.') +
+                                '"'
+                            );
                         }
-                    }
+                    },
                 },
             },
             password: {
@@ -114,7 +127,7 @@ $(document).ready(function() {
                     url: '/business/register/check-username',
                     type: 'post',
                     data: {
-                        username: function() {
+                        username: function () {
                             return $('#username').val();
                         },
                     },

@@ -18,7 +18,7 @@
                         <ul>
                             @if (!empty($not_linked_payments))
                                 <li>{!! __('account.payments_not_linked_with_account', ['payments' => $not_linked_payments]) !!} <a
-                                        href="{{ action([\App\Http\Controllers\AccountReportsController::class, 'paymentAccountReport']) }}">@lang('account.view_details')</a>
+                                       href="{{ action([\App\Http\Controllers\AccountReportsController::class, 'paymentAccountReport']) }}">@lang('account.view_details')</a>
                                 </li>
                             @endif
                         </ul>
@@ -33,7 +33,8 @@
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
                                 <li class="active">
-                                    <a href="#other_accounts" data-toggle="tab">
+                                    <a href="#other_accounts"
+                                       data-toggle="tab">
                                         <i class="fa fa-book"></i> <strong>@lang('account.accounts')</strong>
                                     </a>
                                 </li>
@@ -46,14 +47,16 @@
                     </li>
                     --}}
                                 <li>
-                                    <a href="#account_types" data-toggle="tab">
+                                    <a href="#account_types"
+                                       data-toggle="tab">
                                         <i class="fa fa-list"></i> <strong>
                                             @lang('lang_v1.account_types') </strong>
                                     </a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="other_accounts">
+                                <div class="tab-pane active"
+                                     id="other_accounts">
                                     <div class="row">
                                         <div class="col-md-12">
                                             {{-- @component('components.widget') --}}
@@ -66,24 +69,35 @@
                                                 ) !!}
                                             </div>
                                             <div class="col-md-8">
-                                                    <button type="button" class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full btn-modal pull-right"
+                                                <button type="button"
+                                                        class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full btn-modal pull-right"
                                                         data-container=".account_model"
                                                         data-href="{{ action([\App\Http\Controllers\AccountController::class, 'create']) }}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                            <path d="M12 5l0 14" />
-                                                            <path d="M5 12l14 0" />
-                                                        </svg> @lang('messages.add')
-                                                    </button>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         width="24"
+                                                         height="24"
+                                                         viewBox="0 0 24 24"
+                                                         fill="none"
+                                                         stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round"
+                                                         stroke-linejoin="round"
+                                                         class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                                        <path stroke="none"
+                                                              d="M0 0h24v24H0z"
+                                                              fill="none" />
+                                                        <path d="M12 5l0 14" />
+                                                        <path d="M5 12l14 0" />
+                                                    </svg> @lang('messages.add')
+                                                </button>
                                             </div>
                                             {{-- @endcomponent --}}
                                         </div>
                                         <div class="col-sm-12">
                                             <br>
                                             <div class="table-responsive">
-                                                <table class="table table-bordered table-striped" id="other_account_table">
+                                                <table class="table table-bordered table-striped"
+                                                       id="other_account_table">
                                                     <thead>
                                                         <tr>
                                                             <th>@lang('lang_v1.name')</th>
@@ -124,20 +138,23 @@
                         </table>
                     </div>
                     --}}
-                                <div class="tab-pane" id="account_types">
+                                <div class="tab-pane"
+                                     id="account_types">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm btn-modal pull-right"
-                                                data-href="{{ action([\App\Http\Controllers\AccountTypeController::class, 'create']) }}"
-                                                data-container="#account_type_modal">
+                                            <button type="button"
+                                                    class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm btn-modal pull-right"
+                                                    data-href="{{ action([\App\Http\Controllers\AccountTypeController::class, 'create']) }}"
+                                                    data-container="#account_type_modal">
                                                 <i class="fa fa-plus"></i> @lang('messages.add')</button>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <table class="table table-striped table-bordered" id="account_types_table"
-                                                style="width: 100%;">
+                                            <table class="table table-striped table-bordered"
+                                                   id="account_types_table"
+                                                   style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>@lang('lang_v1.name')</th>
@@ -154,13 +171,14 @@
                                                                     'url' => action([\App\Http\Controllers\AccountTypeController::class, 'destroy'], $account_type->id),
                                                                     'method' => 'delete',
                                                                 ]) !!}
-                                                                <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-outline tw-dw-btn-xs btn-modal"
-                                                                    data-href="{{ action([\App\Http\Controllers\AccountTypeController::class, 'edit'], $account_type->id) }}"
-                                                                    data-container="#account_type_modal">
+                                                                <button type="button"
+                                                                        class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-outline tw-dw-btn-xs btn-modal"
+                                                                        data-href="{{ action([\App\Http\Controllers\AccountTypeController::class, 'edit'], $account_type->id) }}"
+                                                                        data-container="#account_type_modal">
                                                                     <i class="fa fa-edit"></i> @lang('messages.edit')</button>
 
                                                                 <button type="button"
-                                                                    class="tw-dw-btn tw-dw-btn-xs tw-dw-btn-outline  tw-dw-btn-error delete_account_type">
+                                                                        class="tw-dw-btn tw-dw-btn-xs tw-dw-btn-outline  tw-dw-btn-error delete_account_type">
                                                                     <i class="fa fa-trash"></i> @lang('messages.delete')</button>
                                                                 {!! Form::close() !!}
                                                             </td>
@@ -175,12 +193,13 @@
                                                                         'url' => action([\App\Http\Controllers\AccountTypeController::class, 'destroy'], $sub_type->id),
                                                                         'method' => 'delete',
                                                                     ]) !!}
-                                                                    <button type="button" class="tw-dw-btn tw-dw-btn-xs tw-dw-btn-outline  tw-dw-btn-primary btn-modal"
-                                                                        data-href="{{ action([\App\Http\Controllers\AccountTypeController::class, 'edit'], $sub_type->id) }}"
-                                                                        data-container="#account_type_modal">
+                                                                    <button type="button"
+                                                                            class="tw-dw-btn tw-dw-btn-xs tw-dw-btn-outline  tw-dw-btn-primary btn-modal"
+                                                                            data-href="{{ action([\App\Http\Controllers\AccountTypeController::class, 'edit'], $sub_type->id) }}"
+                                                                            data-container="#account_type_modal">
                                                                         <i class="fa fa-edit"></i> @lang('messages.edit')</button>
                                                                     <button type="button"
-                                                                        class="tw-dw-btn tw-dw-btn-xs tw-dw-btn-outline  tw-dw-btn-error delete_account_type">
+                                                                            class="tw-dw-btn tw-dw-btn-xs tw-dw-btn-outline  tw-dw-btn-error delete_account_type">
                                                                         <i class="fa fa-trash"></i> @lang('messages.delete')</button>
                                                                     {!! Form::close() !!}
                                                                 </td>
@@ -199,11 +218,17 @@
             </div>
         @endcan
 
-        <div class="modal fade account_model" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal fade account_model"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="gridSystemModalLabel">
         </div>
 
-        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel"
-            id="account_type_modal">
+        <div class="modal fade"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="gridSystemModalLabel"
+             id="account_type_modal">
         </div>
     </section>
     <!-- /.content -->
@@ -289,7 +314,7 @@
             capital_account_table = $('#capital_account_table').DataTable({
                 processing: true,
                 serverSide: true,
-                fixedHeader:false,
+                fixedHeader: false,
                 ajax: '/account/account?account_type=capital',
                 columnDefs: [{
                     "targets": 5,
@@ -326,7 +351,7 @@
             other_account_table = $('#other_account_table').DataTable({
                 processing: true,
                 serverSide: true,
-                fixedHeader:false,
+                fixedHeader: false,
                 ajax: {
                     url: '/account/account?account_type=other',
                     data: function(d) {

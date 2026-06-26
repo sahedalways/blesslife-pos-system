@@ -19,18 +19,21 @@
             <div class="col-md-4 col-xs-12">
                 <div class="input-group">
                     <span class="input-group-addon bg-light-blue"><i class="fa fa-map-marker"></i></span>
-                    <select class="form-control select2" id="profit_loss_location_filter">
+                    <select class="form-control select2"
+                            id="profit_loss_location_filter">
                         @foreach ($business_locations as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-        
+
             <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                     <div class="input-group">
-                        <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm" id="profit_loss_date_filter">
+                        <button type="button"
+                                class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm"
+                                id="profit_loss_date_filter">
                             <span>
                                 <i class="fa fa-calendar"></i> {{ __('messages.filter_by_date') }}
                             </span>
@@ -40,7 +43,8 @@
                 </div>
             </div>
             <div class="col-md-4 col-xs-12">
-                <div id="ai-analysis-container" class="ai-analysis-content"></div>
+                <div id="ai-analysis-container"
+                     class="ai-analysis-content"></div>
             </div>
         </div>
         <div class="row">
@@ -51,12 +55,22 @@
 
         <div class="row no-print">
             <div class="col-sm-12 tw-mb-2">
-                <button class="tw-dw-btn tw-dw-btn-primary tw-text-white pull-right" aria-label="Print"
-                    onclick="window.print();">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-printer">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <button class="tw-dw-btn tw-dw-btn-primary tw-text-white pull-right"
+                        aria-label="Print"
+                        onclick="window.print();">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="24"
+                         height="24"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         class="icon icon-tabler icons-tabler-outline icon-tabler-printer">
+                        <path stroke="none"
+                              d="M0 0h24v24H0z"
+                              fill="none" />
                         <path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
                         <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
                         <path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" />
@@ -70,81 +84,108 @@
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#profit_by_products" data-toggle="tab" aria-expanded="true"><i class="fa fa-cubes"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_products')</a>
+                            <a href="#profit_by_products"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-cubes"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_products')</a>
                         </li>
 
                         <li>
-                            <a href="#profit_by_categories" data-toggle="tab" aria-expanded="true"><i class="fa fa-tags"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_categories')</a>
+                            <a href="#profit_by_categories"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-tags"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_categories')</a>
                         </li>
 
                         <li>
-                            <a href="#profit_by_brands" data-toggle="tab" aria-expanded="true"><i class="fa fa-diamond"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_brands')</a>
+                            <a href="#profit_by_brands"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-diamond"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_brands')</a>
                         </li>
 
                         <li>
-                            <a href="#profit_by_locations" data-toggle="tab" aria-expanded="true"><i
-                                    class="fa fa-map-marker" aria-hidden="true"></i> @lang('lang_v1.profit_by_locations')</a>
+                            <a href="#profit_by_locations"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-map-marker"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_locations')</a>
                         </li>
 
                         <li>
-                            <a href="#profit_by_invoice" data-toggle="tab" aria-expanded="true"><i class="fa fa-file-alt"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_invoice')</a>
+                            <a href="#profit_by_invoice"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-file-alt"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_invoice')</a>
                         </li>
 
                         <li>
-                            <a href="#profit_by_date" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_date')</a>
+                            <a href="#profit_by_date"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-calendar"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_date')</a>
                         </li>
                         <li>
-                            <a href="#profit_by_customer" data-toggle="tab" aria-expanded="true"><i class="fa fa-user"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_customer')</a>
+                            <a href="#profit_by_customer"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-user"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_customer')</a>
                         </li>
                         <li>
-                            <a href="#profit_by_day" data-toggle="tab" aria-expanded="true"><i class="fa fa-calendar"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_day')</a>
+                            <a href="#profit_by_day"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-calendar"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_day')</a>
                         </li>
                         <li>
-                            <a href="#profit_by_service_staff" data-toggle="tab" aria-expanded="true"><i class="fa fa-user-secret"
-                                    aria-hidden="true"></i> @lang('lang_v1.profit_by_service_staff')</a>
+                            <a href="#profit_by_service_staff"
+                               data-toggle="tab"
+                               aria-expanded="true"><i class="fa fa-user-secret"
+                                   aria-hidden="true"></i> @lang('lang_v1.profit_by_service_staff')</a>
                         </li>
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane active" id="profit_by_products">
+                        <div class="tab-pane active"
+                             id="profit_by_products">
                             @include('report.partials.profit_by_products')
                         </div>
 
-                        <div class="tab-pane" id="profit_by_categories">
+                        <div class="tab-pane"
+                             id="profit_by_categories">
                             @include('report.partials.profit_by_categories')
                         </div>
 
-                        <div class="tab-pane" id="profit_by_brands">
+                        <div class="tab-pane"
+                             id="profit_by_brands">
                             @include('report.partials.profit_by_brands')
                         </div>
 
-                        <div class="tab-pane" id="profit_by_locations">
+                        <div class="tab-pane"
+                             id="profit_by_locations">
                             @include('report.partials.profit_by_locations')
                         </div>
 
-                        <div class="tab-pane" id="profit_by_invoice">
+                        <div class="tab-pane"
+                             id="profit_by_invoice">
                             @include('report.partials.profit_by_invoice')
                         </div>
 
-                        <div class="tab-pane" id="profit_by_date">
+                        <div class="tab-pane"
+                             id="profit_by_date">
                             @include('report.partials.profit_by_date')
                         </div>
 
-                        <div class="tab-pane" id="profit_by_customer">
+                        <div class="tab-pane"
+                             id="profit_by_customer">
                             @include('report.partials.profit_by_customer')
                         </div>
-                        <div class="tab-pane" id="profit_by_service_staff">
+                        <div class="tab-pane"
+                             id="profit_by_service_staff">
                             @include('report.partials.profit_by_service_staff')
                         </div>
 
-                        <div class="tab-pane" id="profit_by_day">
+                        <div class="tab-pane"
+                             id="profit_by_day">
 
                         </div>
                     </div>
@@ -164,7 +205,7 @@
             profit_by_products_table = $('#profit_by_products_table').DataTable({
                 processing: true,
                 serverSide: true,
-                fixedHeader:false,
+                fixedHeader: false,
                 "ajax": {
                     "url": "/reports/get-profit/product",
                     "data": function(d) {
@@ -205,7 +246,7 @@
                         profit_by_categories_datatable = $('#profit_by_categories_table').DataTable({
                             processing: true,
                             serverSide: true,
-                            fixedHeader:false,
+                            fixedHeader: false,
                             "ajax": {
                                 "url": "/reports/get-profit/category",
                                 "data": function(d) {
@@ -247,7 +288,7 @@
                         profit_by_brands_datatable = $('#profit_by_brands_table').DataTable({
                             processing: true,
                             serverSide: true,
-                            fixedHeader:false,
+                            fixedHeader: false,
                             "ajax": {
                                 "url": "/reports/get-profit/brand",
                                 "data": function(d) {
@@ -289,7 +330,7 @@
                         profit_by_locations_datatable = $('#profit_by_locations_table').DataTable({
                             processing: true,
                             serverSide: true,
-                            fixedHeader:false,
+                            fixedHeader: false,
                             "ajax": {
                                 "url": "/reports/get-profit/location",
                                 "data": function(d) {
@@ -331,7 +372,7 @@
                         profit_by_invoice_datatable = $('#profit_by_invoice_table').DataTable({
                             processing: true,
                             serverSide: true,
-                            fixedHeader:false,
+                            fixedHeader: false,
                             "ajax": {
                                 "url": "/reports/get-profit/invoice",
                                 "data": function(d) {
@@ -373,7 +414,7 @@
                         profit_by_date_datatable = $('#profit_by_date_table').DataTable({
                             processing: true,
                             serverSide: true,
-                            fixedHeader:false,
+                            fixedHeader: false,
                             "ajax": {
                                 "url": "/reports/get-profit/date",
                                 "data": function(d) {
@@ -415,7 +456,7 @@
                         profit_by_customers_table = $('#profit_by_customer_table').DataTable({
                             processing: true,
                             serverSide: true,
-                            fixedHeader:false,
+                            fixedHeader: false,
                             "ajax": {
                                 "url": "/reports/get-profit/customer",
                                 "data": function(d) {
@@ -454,11 +495,11 @@
                     }
                 } else if (target == '#profit_by_service_staff') {
                     if (typeof profit_by_service_staffs_table == 'undefined') {
-                        
+
                         profit_by_service_staffs_table = $('#profit_by_service_staff_table').DataTable({
                             processing: true,
                             serverSide: true,
-                            fixedHeader:false,
+                            fixedHeader: false,
                             "ajax": {
                                 "url": "/reports/get-profit/service_staff",
                                 "data": function(d) {

@@ -7,17 +7,17 @@
         <div class="col-sm-3 mt-56">
             @include('contact.contact_more_info')
         </div>
-        @if( $contact->type != 'customer')
+        @if ($contact->type != 'customer')
             <div class="col-sm-3 mt-56">
                 @include('contact.contact_tax_info')
             </div>
         @endif
         {{--
         <div class="col-sm-3 mt-56">
-            @include('contact.contact_payment_info') 
+            @include('contact.contact_payment_info')
         </div>
-        @if( $contact->type == 'customer' || $contact->type == 'both')
-            <div class="col-sm-3 @if($contact->type != 'both') mt-56 @endif">
+        @if ($contact->type == 'customer' || $contact->type == 'both')
+            <div class="col-sm-3 @if ($contact->type != 'both') mt-56 @endif">
                 <strong>@lang('lang_v1.total_sell_return')</strong>
                 <p class="text-muted">
                     <span class="display_currency" data-currency_symbol="true">
@@ -32,16 +32,22 @@
         @endif
         --}}
 
-        @if( $contact->type == 'supplier' || $contact->type == 'both')
+        @if ($contact->type == 'supplier' || $contact->type == 'both')
             <div class="clearfix"></div>
             <div class="col-sm-12">
-                @if(($contact->total_purchase - $contact->purchase_paid) > 0)
-                    <a href="{{action([\App\Http\Controllers\TransactionPaymentController::class, 'getPayContactDue'], [$contact->id])}}?type=purchase" class="pay_purchase_due tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm pull-right"><i class="fas fa-money-bill-alt" aria-hidden="true"></i> @lang("contact.pay_due_amount")</a>
+                @if ($contact->total_purchase - $contact->purchase_paid > 0)
+                    <a href="{{ action([\App\Http\Controllers\TransactionPaymentController::class, 'getPayContactDue'], [$contact->id]) }}?type=purchase"
+                       class="pay_purchase_due tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm pull-right"><i
+                           class="fas fa-money-bill-alt"
+                           aria-hidden="true"></i> @lang('contact.pay_due_amount')</a>
                 @endif
             </div>
         @endif
         <div class="col-sm-12">
-            <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm pull-right tw-m-2" data-toggle="modal" data-target="#add_discount_modal">@lang('lang_v1.add_discount')</button>
+            <button type="button"
+                    class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm pull-right tw-m-2"
+                    data-toggle="modal"
+                    data-target="#add_discount_modal">@lang('lang_v1.add_discount')</button>
         </div>
     </div>
 </div>

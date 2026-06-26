@@ -1,8 +1,16 @@
-<div class="modal-dialog modal-lg" role="document">
-    {!! Form::open(['action' => '\App\Http\Controllers\DocumentAndNoteController@store', 'id' => 'docus_notes_form', 'method' => 'post']) !!}
+<div class="modal-dialog modal-lg"
+     role="document">
+    {!! Form::open([
+        'action' => '\App\Http\Controllers\DocumentAndNoteController@store',
+        'id' => 'docus_notes_form',
+        'method' => 'post',
+    ]) !!}
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title">
@@ -16,17 +24,17 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-12">
-                   <div class="form-group">
-                        {!! Form::label('heading', __('lang_v1.heading') . ':*' )!!}
-                        {!! Form::text('heading', null, ['class' => 'form-control', 'required' ]) !!}
-                   </div>
+                    <div class="form-group">
+                        {!! Form::label('heading', __('lang_v1.heading') . ':*') !!}
+                        {!! Form::text('heading', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         {!! Form::label('description', __('lang_v1.description') . ':') !!}
-                        {!! Form::textarea('description', null, ['class' => 'form-control ', 'id' => 'docs_note_description']); !!}
+                        {!! Form::textarea('description', null, ['class' => 'form-control ', 'id' => 'docs_note_description']) !!}
                     </div>
                 </div>
             </div>
@@ -36,9 +44,13 @@
                         <label for="fileupload">
                             @lang('lang_v1.documents'):
                         </label>
-                        <div class="dropzone" id="docusUpload"></div>
+                        <div class="dropzone"
+                             id="docusUpload"></div>
                     </div>
-                    <input type="hidden" id="docus_notes_media" name="file_name[]" value="">
+                    <input type="hidden"
+                           id="docus_notes_media"
+                           name="file_name[]"
+                           value="">
                 </div>
             </div>
             <div class="row">
@@ -46,8 +58,12 @@
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="is_private" value="1"> @lang('lang_v1.is_private')
-                                <i class="fa fa-info-circle" data-toggle="tooltip" title="@lang('lang_v1.note_will_be_visible_to_u_only')"></i>
+                                <input type="checkbox"
+                                       name="is_private"
+                                       value="1"> @lang('lang_v1.is_private')
+                                <i class="fa fa-info-circle"
+                                   data-toggle="tooltip"
+                                   title="@lang('lang_v1.note_will_be_visible_to_u_only')"></i>
                             </label>
                         </div>
                     </div>
@@ -55,10 +71,13 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="tw-dw-btn tw-dw-btn-primary tw-text-white">
+            <button type="submit"
+                    class="tw-dw-btn tw-dw-btn-primary tw-text-white">
                 @lang('messages.save')
             </button>
-             <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white" data-dismiss="modal">
+            <button type="button"
+                    class="tw-dw-btn tw-dw-btn-neutral tw-text-white"
+                    data-dismiss="modal">
                 @lang('messages.close')
             </button>
         </div>

@@ -1,4 +1,5 @@
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog"
+         role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="row">
@@ -9,8 +10,10 @@
                         <h3 class="modal-title pull-right">{{ $transaction->invoice_no }}</h3>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="close mt-3" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                        <button type="button"
+                                class="close mt-3"
+                                data-dismiss="modal"
+                                aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                 </div>
             </div>
@@ -68,8 +71,9 @@
                                                 {!! $product_name !!}
                                             </td>
                                             <td>
-                                                <input type="hidden" name="sell_details[{{ $key }}][id]"
-                                                    value="{{ $sell_detail->id }}">
+                                                <input type="hidden"
+                                                       name="sell_details[{{ $key }}][id]"
+                                                       value="{{ $sell_detail->id }}">
                                                 <div class="form-group">
                                                     {!! Form::select(
                                                         'sell_details[' . $key . '][res_service_staff_id]',
@@ -78,7 +82,7 @@
                                                         [
                                                             'class' => 'form-control select',
                                                             'placeholder' => __('restaurant.select_service_staff'),
-                                                            'required' => $is_service_staff_required
+                                                            'required' => $is_service_staff_required,
                                                         ],
                                                     ) !!}
                                                 </div>
@@ -93,8 +97,11 @@
             </div>
             <div class="modal-footer"> <!-- Footer Section -->
                 <div class="col-md-12">
-                    <button class="tw-dw-btn tw-dw-btn-primary tw-text-white"> {{ __('messages.save') }} </button>
-                    <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white" data-dismiss="modal">Close</button>
+                    <button class="tw-dw-btn tw-dw-btn-primary tw-text-white"> {{ __('messages.save') }}
+                    </button>
+                    <button type="button"
+                            class="tw-dw-btn tw-dw-btn-neutral tw-text-white"
+                            data-dismiss="modal">Close</button>
                 </div>
             </div>
             {!! Form::close() !!}
