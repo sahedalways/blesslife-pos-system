@@ -342,7 +342,7 @@ class PurchaseController extends Controller
                 return $this->moduleUtil->expiredResponse(action([\App\Http\Controllers\PurchaseController::class, 'index']));
             }
 
-            $transaction_data = $request->only(['ref_no', 'status', 'contact_id', 'transaction_date', 'total_before_tax', 'location_id', 'discount_type', 'discount_amount', 'tax_id', 'tax_amount', 'shipping_details', 'shipping_charges', 'final_total', 'additional_notes', 'exchange_rate', 'pay_term_number', 'pay_term_type', 'purchase_order_ids']);
+            $transaction_data = $request->only(['ref_no', 'status', 'contact_id', 'transaction_date', 'total_before_tax', 'location_id', 'discount_type', 'discount_amount', 'tax_id', 'tax_amount', 'shipping_details', 'shipping_charges', 'final_total', 'additional_notes', 'exchange_rate', 'pay_term_number', 'pay_term_type', 'purchase_order_ids', 'packing_charge', 'rp_redeemed_amount', 'round_off_amount']);
 
             $exchange_rate = $transaction_data['exchange_rate'];
 
@@ -381,9 +381,16 @@ class PurchaseController extends Controller
                 $transaction_data['discount_amount'] = 0;
             }
 
-            $transaction_data['tax_amount'] = $this->productUtil->num_uf($transaction_data['tax_amount'], $currency_details) * $exchange_rate;
+            if (!empty($transaction_data['tax_id'])) {
+                $tax = TaxRate::find($transaction_data['tax_id']);
+                $transaction_data['tax_amount'] = ($tax ? $tax->amount : 0) * $exchange_rate;
+            } else {
+                $transaction_data['tax_amount'] = 0;
+            }
             $transaction_data['shipping_charges'] = $this->productUtil->num_uf($transaction_data['shipping_charges'], $currency_details) * $exchange_rate;
-            $transaction_data['final_total'] = $this->productUtil->num_uf($transaction_data['final_total'], $currency_details) * $exchange_rate;
+            $transaction_data['packing_charge'] = $this->productUtil->num_uf($transaction_data['packing_charge'] ?? 0, $currency_details) * $exchange_rate;
+            $transaction_data['rp_redeemed_amount'] = $this->productUtil->num_uf($transaction_data['rp_redeemed_amount'] ?? 0, $currency_details);
+            $transaction_data['round_off_amount'] = $this->productUtil->num_uf($transaction_data['round_off_amount'] ?? 0, $currency_details);
 
             $transaction_data['business_id'] = $business_id;
             $transaction_data['created_by'] = $user_id;
@@ -424,6 +431,23 @@ class PurchaseController extends Controller
                 $transaction_data['additional_expense_key_4'] = $request->input('additional_expense_key_4');
                 $transaction_data['additional_expense_value_4'] = $this->productUtil->num_uf($request->input('additional_expense_value_4'), $currency_details) * $exchange_rate;
             }
+
+            $discount_actual = $transaction_data['discount_amount'];
+            if ($transaction_data['discount_type'] == 'percentage') {
+                $discount_actual = $transaction_data['total_before_tax'] * $discount_actual / 100;
+            }
+            $transaction_data['final_total'] = 
+                $transaction_data['total_before_tax']
+                + $transaction_data['tax_amount']
+                + $transaction_data['shipping_charges']
+                + $transaction_data['packing_charge']
+                + ($transaction_data['additional_expense_value_1'] ?? 0)
+                + ($transaction_data['additional_expense_value_2'] ?? 0)
+                + ($transaction_data['additional_expense_value_3'] ?? 0)
+                + ($transaction_data['additional_expense_value_4'] ?? 0)
+                - $discount_actual
+                - $transaction_data['rp_redeemed_amount']
+                + $transaction_data['round_off_amount'];
 
             DB::beginTransaction();
 
@@ -728,6 +752,9 @@ class PurchaseController extends Controller
                 'pay_term_number',
                 'pay_term_type',
                 'purchase_order_ids',
+                'packing_charge',
+                'rp_redeemed_amount',
+                'round_off_amount',
             ]);
 
             $exchange_rate = $update_data['exchange_rate'];
@@ -749,9 +776,17 @@ class PurchaseController extends Controller
                 $update_data['discount_amount'] = 0;
             }
 
-            $update_data['tax_amount'] = $this->productUtil->num_uf($update_data['tax_amount'], $currency_details) * $exchange_rate;
+            if (!empty($update_data['tax_id'])) {
+                $tax = TaxRate::find($update_data['tax_id']);
+                $update_data['tax_amount'] = ($tax ? $tax->amount : 0) * $exchange_rate;
+            } else {
+                $update_data['tax_amount'] = 0;
+            }
             $update_data['shipping_charges'] = $this->productUtil->num_uf($update_data['shipping_charges'], $currency_details) * $exchange_rate;
-            $update_data['final_total'] = $this->productUtil->num_uf($update_data['final_total'], $currency_details) * $exchange_rate;
+            $update_data['packing_charge'] = $this->productUtil->num_uf($update_data['packing_charge'] ?? 0, $currency_details) * $exchange_rate;
+            $update_data['rp_redeemed_amount'] = $this->productUtil->num_uf($update_data['rp_redeemed_amount'] ?? 0, $currency_details);
+            $update_data['round_off_amount'] = $this->productUtil->num_uf($update_data['round_off_amount'] ?? 0, $currency_details);
+
             //unformat input values ends
 
             $update_data['custom_field_1'] = $request->input('custom_field_1', null);
@@ -782,6 +817,23 @@ class PurchaseController extends Controller
             $update_data['additional_expense_value_2'] = $request->input('additional_expense_value_2') != '' ? $this->productUtil->num_uf($request->input('additional_expense_value_2'), $currency_details) * $exchange_rate : 0;
             $update_data['additional_expense_value_3'] = $request->input('additional_expense_value_3') != '' ? $this->productUtil->num_uf($request->input('additional_expense_value_3'), $currency_details) * $exchange_rate : 0;
             $update_data['additional_expense_value_4'] = $request->input('additional_expense_value_4') != '' ? $this->productUtil->num_uf($request->input('additional_expense_value_4'), $currency_details) * $exchange_rate : 0;
+
+            $discount_actual = $update_data['discount_amount'];
+            if ($update_data['discount_type'] == 'percentage') {
+                $discount_actual = $update_data['total_before_tax'] * $discount_actual / 100;
+            }
+            $update_data['final_total'] = 
+                $update_data['total_before_tax']
+                + $update_data['tax_amount']
+                + $update_data['shipping_charges']
+                + $update_data['packing_charge']
+                + ($update_data['additional_expense_value_1'] ?? 0)
+                + ($update_data['additional_expense_value_2'] ?? 0)
+                + ($update_data['additional_expense_value_3'] ?? 0)
+                + ($update_data['additional_expense_value_4'] ?? 0)
+                - $discount_actual
+                - $update_data['rp_redeemed_amount']
+                + $update_data['round_off_amount'];
 
             DB::beginTransaction();
 
