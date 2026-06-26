@@ -299,6 +299,19 @@ button:focus {
     }
 }
 
+@media (max-width: 991.98px) {
+    .hero-nav > .nav {
+        justify-content: space-between;
+        width: 100%;
+    }
+    .hero-nav > .nav > .hero-nav__item {
+        margin: 0;
+    }
+    #hero-menu {
+        flex-grow: 0 !important;
+    }
+}
+
 @media (min-width: 992px) {
     .nav--lg-side {
         flex-direction: row-reverse;
@@ -955,7 +968,7 @@ button:focus {
 .hero__title {
     font-size: 2rem;
     font-weight: 900;
-    background: -webkit-linear-gradient(#1973FE, black);
+    background: -webkit-linear-gradient(#1973fe, black);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
