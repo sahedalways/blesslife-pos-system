@@ -3,30 +3,15 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-        /* ================================
-           BACKGROUND OPTIONS
-           ================================ */
-         /* Note: Only uncomment one of the options below. */
-        /* OPTION 1: Background Color/Gradient */
-        /* Uncomment below for color background */
-        
         html {
             height: 100%;
-            background: linear-gradient(to right, #6366f1, #3b82f6);
-        }
-       
-        
-        /* OPTION 2: Background Image */
-        /* Uncomment below for image background */
-        /* html {
-            height: 100%;
-            background-image: url('{{ asset('img/bg-image.jpg') }}');
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(30, 41, 59, 0.8)), url('{{ asset("img/home-bg.jpg") }}');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-        } */
+            background-attachment: fixed;
+        }
         
-        /* Common Body Styles (Always Keep This) */
         body {
             min-height: 100vh;
             background: transparent;
@@ -34,8 +19,19 @@
             padding: 0;
         }
 
-        h1 {
-            color: #fff;
+        .login-input {
+            transition: all 0.2s ease;
+        }
+        .login-input:focus {
+            border-color: #6366f1 !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+        .login-card {
+            animation: fadeSlideUp 0.5s ease-out;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 

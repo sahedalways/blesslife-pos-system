@@ -86,8 +86,17 @@ class AppServiceProvider extends ServiceProvider
                     $__is_pusher_enabled = false;
                 }
 
+                $__logo_url = 'https://ui-avatars.com/api/?size=60&rounded=true&bold=true&background=0A1F44&color=ffffff&name=' . config('app.name');
+                if (class_exists(\Modules\Cms\Entities\CmsSiteDetail::class)) {
+                    $logo = \Modules\Cms\Entities\CmsSiteDetail::getValue('logo', false);
+                    if (!empty($logo) && $logo->logo_url) {
+                        $__logo_url = $logo->logo_url;
+                    }
+                }
+
                 $view->with('enabled_modules', $enabled_modules);
                 $view->with('__is_pusher_enabled', $__is_pusher_enabled);
+                $view->with('__logo_url', $__logo_url);
             }
         );
 
