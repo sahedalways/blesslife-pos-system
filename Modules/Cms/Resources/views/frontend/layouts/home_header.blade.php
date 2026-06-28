@@ -66,6 +66,12 @@
         overflow: hidden;
     }
 
+    #heroCarousel {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
     .hero-carousel .carousel-item {
         height: 90vh;
         min-height: 500px;
