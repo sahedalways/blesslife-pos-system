@@ -4,8 +4,7 @@
         .stats-section {
             position: relative;
             padding: 2.5rem 0;
-
-
+            margin-top: 3rem;
             margin-bottom: 3rem;
             overflow: hidden;
         }
