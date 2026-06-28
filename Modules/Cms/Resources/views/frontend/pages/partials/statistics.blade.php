@@ -4,9 +4,9 @@
         .stats-section {
             position: relative;
             padding: 2.5rem 0;
-            /* Reduced from var(--space-between-blocks) */
+
             background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
-            /* Light green tint */
+            margin-bottom: 3rem;
             overflow: hidden;
         }
 
