@@ -1,89 +1,457 @@
 @php
     $industry = [];
-    if(
-        isset($page_meta['industry']) && 
+    if (
+        isset($page_meta['industry']) &&
         isset($page_meta['industry']['meta_value']) &&
         !empty($page_meta['industry']['meta_value'])
     ) {
         $industry = json_decode($page_meta['industry']['meta_value'], true);
     }
-    @endphp
-@if(!empty($industry))
-    <div class="block-2 space-between-blocks overflow-hidden">
-        <div class="container-xl px-lg-4 px-xl-0 position-relative">
-            <div class="row align-items-center mx-auto" id="block__container">
-                <div class="col-lg-5 col-xl-6 position-relative" style="z-index: 2">
-                    <h1 class="block__title block__title--big mb-4">
-                        {{$industry['title'] ?? ''}}
-                    </h1>
-                    <p class="block__paragraph mb-3">
-                        {!!$industry['description'] ?? ''!!}
-                    </p>
-                    <div class="mb-5 mt-4 mb-lg-0 mt-lg-5">
-                        <a href="{{ $industry_btn['link'] }}" class="btn btn-primary">
-                            {{$industry_btn['text']}}
+@endphp
+
+@if (!empty($industry))
+    <!-- Unique Wrapper ID to prevent Global Style Conflict -->
+    <div id="custom-industries-section-wrapper">
+
+        <style>
+            /* -----------------------------------------------------------
+           CUSTOM INDUSTRY SECTION STYLES
+           Fixed: Prevented Slider Overlap with Heading
+           ----------------------------------------------------------- */
+            #custom-industries-section-wrapper {
+                position: relative;
+                width: 100%;
+                padding: 6rem 0;
+                overflow: hidden;
+                font-family: var(--text-font, sans-serif);
+            }
+
+            /* Background Gradient & Dots */
+            #custom-industries-section-wrapper .cus-ind-bg-layer {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(0, 128, 0, 0.08) 0%, rgba(229, 142, 36, 0.07) 100%);
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-dots-decoration {
+                position: absolute;
+                top: -50px;
+                left: -50px;
+                width: 300px;
+                height: 300px;
+                background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 2px, transparent 2px);
+                background-size: 20px 20px;
+                opacity: 0.4;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-dots-right {
+                right: -50px;
+                bottom: -50px;
+                left: auto;
+                top: auto;
+                transform: rotate(180deg);
+            }
+
+            /* Main Container Layout */
+            #custom-industries-section-wrapper .cus-ind-container {
+                position: relative;
+                z-index: 1;
+                max-width: 1600px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+
+            /* Grid System Override for this Block Only */
+            #custom-industries-section-wrapper .cus-ind-grid-row {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0;
+                /* Important: Removes gap to control precise alignment */
+            }
+
+            #custom-industries-section-wrapper .cus-ind-col-half {
+                flex: 0 0 100%;
+                max-width: 100%;
+                position: relative;
+                /* Reset for Z-Index */
+            }
+
+            @media (min-width: 992px) {
+                #custom-industries-section-wrapper .cus-ind-col-half {
+                    flex: 0 0 50%;
+                    max-width: 50%;
+                    padding-left: 20px;
+                }
+
+                #custom-industries-section-wrapper .cus-ind-text-panel {
+                    flex: 0 0 38%;
+                    max-width: 38%;
+                }
+
+                #custom-industries-section-wrapper .cus-ind-slider-panel {
+                    flex: 0 0 62%;
+                    max-width: 62%;
+                }
+            }
+
+            /* --- LEFT SIDE (Text) Fix --- */
+            #custom-industries-section-wrapper .cus-ind-text-panel {
+                order: 2;
+                z-index: 10;
+                /* Highest priority to keep text visible */
+            }
+
+            @media (min-width: 992px) {
+                #custom-industries-section-wrapper .cus-ind-text-panel {
+                    order: 1;
+                    /* Text moves back to left on desktop */
+                }
+            }
+
+            #custom-industries-section-wrapper .cus-ind-subtitle-tag {
+                display: inline-block;
+                font-size: 11px;
+                font-weight: 700;
+                color: #E58E24;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                border-bottom: 1px solid rgba(229, 142, 36, 0.3);
+                padding-bottom: 4px;
+                margin-bottom: 16px;
+                line-height: 1.4;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-title {
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: #1F2937;
+                line-height: 1.2;
+                margin-bottom: 1.5rem;
+                letter-spacing: -0.5px;
+                /* Added shadow for safety against background */
+                text-shadow: 0 1px 0 #fff;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-description {
+                font-size: 1rem;
+                color: #6B7280;
+                line-height: 1.7;
+                margin-bottom: 2.5rem;
+                max-width: 90%;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-btn-wrapper {
+                display: inline-flex;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-primary-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 12px 30px;
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: #FFFFFF;
+                background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
+                border-radius: 50px;
+                box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
+                transition: all 0.3s ease;
+                text-decoration: none;
+                cursor: pointer;
+                border: none;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-primary-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 30px rgba(229, 142, 36, 0.3);
+                color: #ffffff;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-btn-icon {
+                margin-left: 8px;
+                transition: transform 0.3s ease;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-primary-btn:hover .cus-ind-btn-icon {
+                transform: translateX(5px);
+            }
+
+            /* --- RIGHT SIDE (Slider) Fix --- */
+            #custom-industries-section-wrapper .cus-ind-slider-panel {
+                order: 1;
+                position: relative;
+                z-index: 1;
+                overflow: hidden;
+                width: 100%;
+            }
+
+            @media (min-width: 992px) {
+                #custom-industries-section-wrapper .cus-ind-slider-panel {
+                    order: 2;
+                }
+            }
+
+            #custom-industries-section-wrapper .cus-ind-nav-controls {
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+                margin-bottom: 25px;
+                margin-top: -10px;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-nav-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #FFFFFF;
+                border: 1px solid #E5E7EB;
+                color: #1F2937;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                padding: 0;
+                outline: none;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            }
+
+            #custom-industries-section-wrapper .cus-ind-nav-btn svg {
+                width: 20px;
+                height: 20px;
+                stroke: currentColor;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-nav-btn:hover {
+                border-color: #008000;
+                color: #008000;
+                background: #f0fdf4;
+            }
+
+            /* Slider Cards */
+            #custom-industries-section-wrapper .cus-ind-slide-item {
+                height: auto !important;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-card-box {
+                background: #FFFFFF;
+                border-radius: 12px;
+                padding: 20px 18px;
+                border: 1px solid rgba(229, 128, 0, 0.05);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+                transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-card-box:hover {
+                transform: translateY(-6px);
+                border-color: rgba(0, 128, 0, 0.15);
+                box-shadow: 0 15px 40px rgba(0, 128, 0, 0.1);
+            }
+
+            #custom-industries-section-wrapper .cus-ind-icon-wrap {
+                width: 42px;
+                height: 42px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.1rem;
+                color: #FFFFFF;
+                background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
+                margin-bottom: 14px;
+                box-shadow: 0 6px 15px rgba(0, 128, 0, 0.2);
+                flex-shrink: 0;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-title-txt {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #1F2937;
+                margin: 0 0 8px 0;
+                line-height: 1.3;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-desc-txt {
+                font-size: 0.82rem;
+                color: #6B7280;
+                line-height: 1.5;
+                margin: 0;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            /* Slider Track Adjustments */
+            #custom-industries-section-wrapper .splide {
+                width: 100%;
+            }
+
+            #custom-industries-section-wrapper .splide__track {
+                overflow: hidden;
+            }
+
+            #custom-industries-section-wrapper .splide__slide {
+                height: auto;
+                padding: 8px 4px;
+            }
+
+            /* Responsive Tweaks */
+            @media (max-width: 768px) {
+                #custom-industries-section-wrapper {
+                    padding: 4rem 0;
+                }
+
+                #custom-industries-section-wrapper .cus-ind-title {
+                    font-size: 1.8rem;
+                }
+
+                #custom-industries-section-wrapper .cus-ind-nav-controls {
+                    justify-content: center;
+                }
+
+                #custom-industries-section-wrapper .cus-ind-card-box {
+                    padding: 16px 14px;
+                }
+            }
+        </style>
+
+        <!-- Decorative Background Elements -->
+        <div class="cus-ind-bg-layer"></div>
+        <div class="cus-ind-dots-decoration"></div>
+        <div class="cus-ind-dots-right cus-ind-dots-decoration"></div>
+
+        <!-- Main Container -->
+        <div class="cus-ind-container">
+            <div class="cus-ind-grid-row">
+
+                <!-- Left Side: Content -->
+                <div class="cus-ind-col-half cus-ind-text-panel">
+                    @if (isset($industry['tagline']))
+                        <span class="cus-ind-subtitle-tag">{{ $industry['tagline'] }}</span>
+                    @endif
+
+                    <h2 class="cus-ind-title">{{ $industry['title'] ?? '' }}</h2>
+
+                    <div class="cus-ind-description">
+                        {!! $industry['description'] ?? '' !!}
+                    </div>
+
+                    <div class="cus-ind-btn-wrapper">
+                        <a href="{{ $industry_btn['link'] }}"
+                           class="cus-ind-primary-btn">
+                            {{ $industry_btn['text'] }}
+                            <i class="fas fa-arrow-right cus-ind-btn-icon"></i>
                         </a>
                     </div>
                 </div>
-                @if(!empty($industry['content']))
-                    <div id="unique-id-2" class="splide block-2__splide col-lg-7 col-xl-6">
-                        <div class="block-2__custom-arrows splide__arrows">
-                            <button class="block-2__splide-btn splide__arrow splide__arrow--prev d-none"></button>
-                            <button class="block-2__splide-btn splide__arrow splide__arrow--next">
-                                <svg width="1.5rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="splide__track">
-                            <div class="splide__list">
-                                @foreach($industry['content'] as $content)
-                                    @if(!empty($content['icon']) && !empty($content['title']) && !empty($content['description']))
-                                        <div class="splide__slide block-2-card d-flex">
-                                            <div>
-                                                <span class="fr-icon fr-icon--large mx-auto">
-                                                    <i class="{{$content['icon']}} fa-lg"></i>
-                                                </span>
-                                            </div>
-                                            <div class="pe-3 pe-lg-4"></div>
-                                            <div>
-                                                <h3 class="block-2-card__title mb-2">
-                                                    {{$content['title'] ?? ''}}
+
+                <!-- Right Side: Slider -->
+                <div class="cus-ind-col-half cus-ind-slider-panel">
+
+                    <!-- Navigation Arrows -->
+                    <div class="cus-ind-nav-controls">
+                        <button type="button"
+                                class="cus-ind-nav-btn cus-ind-prev-btn">
+                            <svg fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button type="button"
+                                class="cus-ind-nav-btn cus-ind-next-btn">
+                            <svg fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Splide Slider Area -->
+                    <div class="splide"
+                         id="cus-ind-splide-track">
+                        <div class="splide__track"
+                             aria-label="Industry Slider">
+                            <ul class="splide__list">
+                                @foreach ($industry['content'] as $item)
+                                    @if (!empty($item['icon']) && !empty($item['title']) && !empty($item['description']))
+                                        <li class="splide__slide cus-ind-slide-item">
+                                            <div class="cus-ind-card-box">
+                                                <div class="cus-ind-icon-wrap">
+                                                    <i class="{{ $item['icon'] }}"></i>
+                                                </div>
+                                                <h3 class="cus-ind-title-txt">
+                                                    {{ $item['title'] ?? '' }}
                                                 </h3>
-                                                <p class="block-2-card__paragraph">
-                                                    {{$content['description'] ?? ''}}
+                                                <p class="cus-ind-desc-txt">
+                                                    {{ $item['description'] ?? '' }}
                                                 </p>
                                             </div>
-                                        </div>
+                                        </li>
                                     @endif
                                 @endforeach
-                            </div>
+                            </ul>
                         </div>
                     </div>
-                @endif
-            </div>
-            <div class="block-2__svg-shapes">
-                <svg class="block-2__dots-svg--left" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <defs>
-                        <pattern id="pattern" width="19" height="19" viewBox="0 0 40 40" patternUnits="userSpaceOnUse" patternTransform="rotate(90)">
-                            <rect id="pattern-background" x="0" y="0" width="400%" height="400%" fill="transparent"></rect>
-                            <circle cx="20" cy="20" r="5" fill="currentColor" stroke="currentColor" stroke-width="0"></circle>
-                            <circle cx="20" cy="20" r="0" fill="currentColor" stroke="currentColor" stroke-width="0"></circle>
-                        </pattern>
-                    </defs>
-                    <rect fill="url(#pattern)" height="100%" width="100%" y="0" x="0"></rect>
-                </svg>
-                <svg class="block-2__dots-svg--right" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <defs>
-                        <pattern id="pattern" width="19" height="19" viewBox="0 0 40 40" patternUnits="userSpaceOnUse" patternTransform="rotate(90)">
-                            <rect id="pattern-background" x="0" y="0" width="400%" height="400%" fill="transparent"></rect>
-                            <circle cx="20" cy="20" r="5" fill="currentColor" stroke="currentColor" stroke-width="0"></circle>
-                            <circle cx="20" cy="20" r="0" fill="currentColor" stroke="currentColor" stroke-width="0"></circle>
-                        </pattern>
-                    </defs>
-                    <rect fill="url(#pattern)" height="100%" width="100%" y="0" x="0"></rect>
-                </svg>
+
+                </div>
             </div>
         </div>
+
     </div>
 @endif
+
+<script>
+    // Scoped Initialization Script
+    document.addEventListener('DOMContentLoaded', function() {
+        const splideId = '#cus-ind-splide-track';
+        const prevBtn = document.querySelector('.cus-ind-prev-btn');
+        const nextBtn = document.querySelector('.cus-ind-next-btn');
+
+        if (typeof Splide !== 'undefined') {
+            const instance = new Splide(splideId, {
+                type: 'loop',
+                perPage: 3,
+                gap: '12px',
+                autoplay: true,
+                interval: 5000,
+                speed: 800,
+                arrows: false,
+                pagination: false,
+                breakpoints: {
+                    768: {
+                        perPage: 1
+                    }
+                }
+            }).mount();
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => instance.go('<'));
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => instance.go('>'));
+            }
+        }
+    });
+</script>
