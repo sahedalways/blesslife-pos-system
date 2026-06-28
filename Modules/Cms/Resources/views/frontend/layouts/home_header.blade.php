@@ -78,12 +78,20 @@
     }
 
     .hero-nav--is-sticky {
+        position: fixed !important;
+        top: 0 !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        padding: 0 !important;
         background: rgba(240, 248, 240, 0.7) !important;
         backdrop-filter: blur(12px) !important;
         -webkit-backdrop-filter: blur(12px) !important;
         border-bottom: 1px solid rgba(0, 128, 0, 0.15) !important;
         border-radius: 0 0 16px 16px;
         box-shadow: 0 4px 30px rgba(0, 128, 0, 0.12);
+        height: auto !important;
+        animation: none !important;
     }
 
     .hero-nav--is-sticky .hero-nav__link,
@@ -112,6 +120,12 @@
     }
 
     @media (max-width: 991.98px) {
+        .hero-nav--is-sticky {
+            width: 85% !important;
+            max-width: 360px !important;
+            right: auto !important;
+        }
+
         .hero-nav__link {
             color: #000 !important;
         }
