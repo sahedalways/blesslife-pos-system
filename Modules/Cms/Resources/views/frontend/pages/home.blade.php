@@ -85,6 +85,19 @@
     @php
         $page_meta = $page->pageMeta->keyBy('meta_key');
     @endphp
+
+    <!------------------------------>
+    <!--Stats---------------->
+    <!------------------------------>
+    @includeIf('cms::frontend.pages.partials.statistics', ['statistics' => $statistics ?? []])
+
+
+    <!------------------------------>
+    <!--Testimonial---------------->
+    <!------------------------------>
+    @includeIf('cms::frontend.pages.partials.testimonial', ['testimonials' => $testimonials ?? []])
+
+
     <!------------------------------>
     <!--Features---------------->
     <!------------------------------>
@@ -95,15 +108,7 @@
     <!------------------------------>
     @includeIf('cms::frontend.pages.partials.industries', ['page_meta' => $page_meta])
 
-    <!------------------------------>
-    <!--Stats---------------->
-    <!------------------------------>
-    @includeIf('cms::frontend.pages.partials.statistics', ['statistics' => $statistics ?? []])
 
-    <!------------------------------>
-    <!--Testimonial---------------->
-    <!------------------------------>
-    @includeIf('cms::frontend.pages.partials.testimonial', ['testimonials' => $testimonials ?? []])
 
     <!------------------------------>
     <!--CTA---------------->
