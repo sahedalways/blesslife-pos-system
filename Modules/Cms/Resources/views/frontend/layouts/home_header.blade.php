@@ -121,25 +121,9 @@
 
     @media (max-width: 991.98px) {
         .hero-nav--is-sticky {
-            position: relative !important;
-            top: auto !important;
-            left: auto !important;
-            transform: none !important;
-            width: 90% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            background: transparent !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            border: none !important;
-            border-bottom: none !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            height: var(--hero-nav-height) !important;
-            animation: none !important;
-        }
-        .hero-nav--is-sticky .fa-bars {
-            color: #fff !important;
+            width: calc(100vw - 30px) !important;
+            max-width: 100% !important;
+            right: auto !important;
         }
 
         .hero-nav__link {
