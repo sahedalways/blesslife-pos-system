@@ -132,93 +132,43 @@
             /* ===== LEFT SIDE - STICKY CONTENT ===== */
 
             #pro-feature-section-wrap .pfs-badge-tag {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                padding: 8px 18px;
-                background: linear-gradient(135deg, rgba(0, 128, 0, 0.1), rgba(229, 142, 36, 0.1));
-                border: 1px solid rgba(0, 128, 0, 0.2);
-                border-radius: 50px;
-                font-size: 12px;
+                display: inline-block;
+                font-size: 11px;
                 font-weight: 700;
-                color: #008000;
+                color: #E58E24;
                 text-transform: uppercase;
-                letter-spacing: 1.5px;
-                margin-bottom: 24px;
-            }
-
-            #pro-feature-section-wrap .pfs-badge-tag::before {
-                content: '';
-                width: 8px;
-                height: 8px;
-                background: #008000;
-                border-radius: 50%;
-                animation: pfsPulse 1.8s infinite;
-            }
-
-            @keyframes pfsPulse {
-                0% {
-                    box-shadow: 0 0 0 0 rgba(0, 128, 0, 0.7);
-                }
-
-                70% {
-                    box-shadow: 0 0 0 8px rgba(0, 128, 0, 0);
-                }
-
-                100% {
-                    box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);
-                }
+                letter-spacing: 2px;
+                border-bottom: 1px solid rgba(229, 142, 36, 0.3);
+                padding-bottom: 4px;
+                margin-bottom: 16px;
+                line-height: 1.4;
             }
 
             #pro-feature-section-wrap .pfs-main-title {
-                font-size: 42px;
-                font-weight: 800;
+                font-size: 30px;
+                font-weight: 700;
                 color: #1F2937;
-                line-height: 1.2;
-                margin-bottom: 20px;
-                letter-spacing: -1px;
-                background: linear-gradient(135deg, #1F2937 0%, #4B5563 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
-
-            #pro-feature-section-wrap .pfs-title-underline {
-                width: 70px;
-                height: 4px;
-                background: linear-gradient(90deg, #008000, #E58E24);
-                border-radius: 4px;
-                margin-bottom: 24px;
-                position: relative;
-                overflow: hidden;
-            }
-
-            #pro-feature-section-wrap .pfs-title-underline::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 30px;
-                height: 100%;
-                background: rgba(255, 255, 255, 0.5);
-                animation: pfsShine 2s infinite;
-            }
-
-            @keyframes pfsShine {
-                0% {
-                    transform: translateX(-100%);
-                }
-
-                100% {
-                    transform: translateX(300%);
-                }
+                line-height: 1.3;
+                margin-bottom: 12px;
+                letter-spacing: -0.5px;
             }
 
             #pro-feature-section-wrap .pfs-main-desc {
-                font-size: 1.05rem;
+                font-size: 1rem;
                 color: #6B7280;
-                line-height: 1.8;
-                margin-bottom: 32px;
+                line-height: 1.7;
+                margin-bottom: 2.5rem;
+                max-width: 90%;
+            }
+
+            /* ===== Section Header Hover Effect ===== */
+            #pro-feature-section-wrap .cus-ind-section-header {
+                cursor: default;
+            }
+
+            #pro-feature-section-wrap .cus-ind-section-header:hover .ds-title-bar {
+                width: 160px;
+                box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
             }
 
             /* Stats Box */
@@ -448,7 +398,7 @@
                 }
 
                 #pro-feature-section-wrap .pfs-main-title {
-                    font-size: 32px;
+                    font-size: 30px;
                 }
 
                 #pro-feature-section-wrap .pfs-left-col {
@@ -458,13 +408,19 @@
                 }
             }
 
+            @media (max-width: 768px) {
+                #pro-feature-section-wrap .pfs-main-title {
+                    font-size: 22px;
+                }
+
+                #pro-feature-section-wrap .cus-ind-section-header:hover .ds-title-bar {
+                    width: 100px;
+                }
+            }
+
             @media (max-width: 575px) {
                 #pro-feature-section-wrap {
                     padding: 4rem 0;
-                }
-
-                #pro-feature-section-wrap .pfs-main-title {
-                    font-size: 26px;
                 }
 
                 #pro-feature-section-wrap .pfs-card {
@@ -496,13 +452,16 @@
                 <div class="pfs-left-col">
                     <div class="pfs-sticky-box">
 
-                        <span class="pfs-badge-tag">Our Features</span>
+                        <div class="cus-ind-section-header">
+                            <span class="pfs-badge-tag">Our Features</span>
 
-                        <h2 class="pfs-main-title">
-                            {{ $feature['title'] ?? '' }}
-                        </h2>
+                            <h2 class="pfs-main-title">
+                                {{ $feature['title'] ?? '' }}
+                            </h2>
 
-                        <div class="pfs-title-underline"></div>
+                            <div class="ds-title-bar"
+                                 style="margin-left: 0; margin-right: auto; margin-bottom: 24px;"></div>
+                        </div>
 
                         <div class="pfs-main-desc">
                             {!! $feature['description'] ?? '' !!}
