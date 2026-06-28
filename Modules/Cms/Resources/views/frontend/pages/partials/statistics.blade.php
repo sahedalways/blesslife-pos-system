@@ -5,7 +5,7 @@
             position: relative;
             padding: 2.5rem 0;
 
-            background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+
             margin-bottom: 3rem;
             overflow: hidden;
         }
@@ -25,7 +25,7 @@
             right: -50px;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(0, 128, 0, 0.05) 0%, transparent 70%);
+
             border-radius: 50%;
             pointer-events: none;
         }
@@ -37,7 +37,7 @@
             left: -50px;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(229, 142, 36, 0.05) 0%, transparent 70%);
+
             border-radius: 50%;
             pointer-events: none;
         }
