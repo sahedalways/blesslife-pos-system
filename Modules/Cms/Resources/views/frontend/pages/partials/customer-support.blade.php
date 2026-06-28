@@ -106,8 +106,7 @@
         padding: 50px 45px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        min-height: 480px;
+        justify-content: center;
         background: linear-gradient(135deg, rgba(0, 128, 0, 0.08) 0%, rgba(0, 128, 0, 0.03) 100%);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -253,52 +252,7 @@
     }
 
     /* Chat Button */
-    #support-247-section .sup-hero-actions {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        position: relative;
-        z-index: 2;
-    }
 
-    #support-247-section .sup-btn-primary,
-    #support-247-section .sup-btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 12px 30px;
-        border-radius: 50px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #FFFFFF;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        border: none;
-        cursor: pointer;
-    }
-
-    #support-247-section .sup-btn-primary {
-        background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
-        box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
-    }
-
-    #support-247-section .sup-btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 30px rgba(229, 142, 36, 0.3);
-        color: #ffffff;
-    }
-
-    #support-247-section .sup-btn-secondary {
-        background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
-        box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
-    }
-
-    #support-247-section .sup-btn-secondary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 30px rgba(229, 142, 36, 0.3);
-        color: #ffffff;
-    }
 
     /* ===== RIGHT SIDE - CONTACT CARDS (Stacked Vertically) ===== */
     #support-247-section .sup-contact-grid {
@@ -482,16 +436,6 @@
             font-size: 20px;
         }
 
-        #support-247-section .sup-hero-actions {
-            flex-direction: column;
-        }
-
-        #support-247-section .sup-btn-primary,
-        #support-247-section .sup-btn-secondary {
-            justify-content: center;
-            width: 100%;
-        }
-
         #support-247-section .sup-contact-card {
             padding: 22px 20px;
             gap: 16px;
@@ -545,19 +489,7 @@
                 </div>
 
 
-                <!-- Action Buttons -->
-                <div class="sup-hero-actions">
-                    <a href="mailto:haquebd08@gmail.com"
-                       class="sup-btn-primary">
-                        <i class="fas fa-envelope"></i>
-                        Email Us Now
-                    </a>
-                    <a href="tel:+966531674978"
-                       class="sup-btn-secondary">
-                        <i class="fas fa-phone-alt"></i>
-                        Call Now
-                    </a>
-                </div>
+
             </div>
 
             <!-- RIGHT SIDE: Contact Cards (Email & Phone Only) -->
