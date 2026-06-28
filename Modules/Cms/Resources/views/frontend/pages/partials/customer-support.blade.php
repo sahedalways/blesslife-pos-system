@@ -120,10 +120,10 @@
     #support-247-section .sup-hero-card::before {
         content: 'Blesslife';
         position: absolute;
-        bottom: -10px;
-        right: -10px;
+        bottom: 10px;
+        right: 15px;
         transform: rotate(-12deg);
-        font-size: 70px;
+        font-size: 50px;
         font-weight: 800;
         color: rgba(0, 128, 0, 0.04);
         pointer-events: none;
