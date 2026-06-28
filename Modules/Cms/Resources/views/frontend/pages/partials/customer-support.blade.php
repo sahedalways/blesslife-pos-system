@@ -10,7 +10,7 @@
     #support-247-section .sup-container {
         position: relative;
         z-index: 2;
-        max-width: 1320px;
+        max-width: 1600px;
         margin: 0 auto;
         padding: 0 20px;
     }
