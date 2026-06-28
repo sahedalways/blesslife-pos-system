@@ -164,7 +164,7 @@
     }
 
     #support-247-section .sup-hero-title {
-        font-size: 30px;
+        font-size: 24px;
         font-weight: 700;
         color: #1F2937;
         line-height: 1.3;
@@ -479,7 +479,7 @@
         }
 
         #support-247-section .sup-hero-title {
-            font-size: 22px;
+            font-size: 20px;
         }
 
         #support-247-section .sup-hero-actions {

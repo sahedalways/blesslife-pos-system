@@ -479,7 +479,7 @@
                         @if (isset($industry['tagline']))
                             <span class="cus-ind-subtitle-tag">{{ $industry['tagline'] }}</span>
                         @endif
-
+                        <span class="ds-subtitle">Ready to Grow</span>
                         <h2 class="cus-ind-title">{{ $industry['title'] ?? '' }}</h2>
                         <div class="ds-title-bar"
                              style="margin-left: 0; margin-right: auto; margin-bottom: 24px;"></div>
