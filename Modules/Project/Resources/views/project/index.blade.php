@@ -4,7 +4,7 @@
 @section('content')
     @include('project::layouts.nav')
     <section class="content-header">
-        <h1 class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black" >
+        <h1 class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black">
             @lang('project::lang.projects')
             <small> @lang('project::lang.all_projects')</small>
         </h1>
@@ -15,38 +15,51 @@
             <div class="row">
                 @foreach ($project_stats as $project)
                     <div class="col-md-3 col-sm-6 col-xs-12 col-custom project_stats">
-						@component('components.static', [
-    'svg' => '<svg xmlns="http://www.w3.org/2000/svg" 
-                     width="24"  
-                     height="24"  
-                     viewBox="0 0 24 24"  
-                     fill="none"  
-                     stroke="currentColor"  
-                     stroke-width="2"  
-                     stroke-linecap="round"  
-                     stroke-linejoin="round"  
-                     class="icon icon-tabler icons-tabler-outline icon-tabler-exclamation-mark {{ $svg_bg }}">
-                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                     <path d="M12 19v.01" />
-                     <path d="M12 15v-10" />
-             </svg>',
-    'svg_text' => $project->status == 'not_started' ? 'tw-text-red-500' : 
-                  ($project->status == 'on_hold' ? 'tw-text-yellow-500' : 
-                  ($project->status == 'cancelled' ? 'tw-text-red-500' : 
-                  ($project->status == 'in_progress' ? 'tw-text-cyan-500' : 
-                  ($project->status == 'completed' ? 'tw-text-green-500' : '')))),
-    'svg_bg' => $project->status == 'not_started' ? 'tw-bg-red-100' : 
-                ($project->status == 'on_hold' ? 'tw-bg-yellow-100' : 
-                ($project->status == 'cancelled' ? 'tw-bg-red-100' : 
-                ($project->status == 'in_progress' ? 'tw-bg-cyan-300' : 
-                ($project->status == 'completed' ? 'tw-bg-green-200' : ''))))
-])
-
-						                            <p class="tw-text-sm tw-font-medium tw-text-gray-500 tw-truncate tw-whitespace-nowrap">
+                        @component('components.static', [
+                            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                                             width="24"
+                                             height="24"
+                                             viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="2"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round"
+                                             class="icon icon-tabler icons-tabler-outline icon-tabler-exclamation-mark {{ $svg_bg }}">
+                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                             <path d="M12 19v.01" />
+                                             <path d="M12 15v-10" />
+                                     </svg>',
+                            'svg_text' =>
+                                $project->status == 'not_started'
+                                    ? 'tw-text-red-500'
+                                    : ($project->status == 'on_hold'
+                                        ? 'tw-text-yellow-500'
+                                        : ($project->status == 'cancelled'
+                                            ? 'tw-text-red-500'
+                                            : ($project->status == 'in_progress'
+                                                ? 'tw-text-cyan-500'
+                                                : ($project->status == 'completed'
+                                                    ? 'tw-text-green-500'
+                                                    : '')))),
+                            'svg_bg' =>
+                                $project->status == 'not_started'
+                                    ? 'tw-bg-red-100'
+                                    : ($project->status == 'on_hold'
+                                        ? 'tw-bg-yellow-100'
+                                        : ($project->status == 'cancelled'
+                                            ? 'tw-bg-red-100'
+                                            : ($project->status == 'in_progress'
+                                                ? 'tw-bg-cyan-300'
+                                                : ($project->status == 'completed'
+                                                    ? 'tw-bg-green-200'
+                                                    : '')))),
+                        ])
+                            <p class="tw-text-sm tw-font-medium tw-text-gray-500 tw-truncate tw-whitespace-nowrap">
                                 {{ $statuses[$project->status] }}
                             </p>
                             <p
-                                class="tw-mt-0.5 tw-text-gray-900 tw-text-xl tw-truncate tw-font-semibold tw-tracking-tight tw-font-mono">
+                               class="tw-mt-0.5 tw-text-gray-900 tw-text-xl tw-truncate tw-font-semibold tw-tracking-tight tw-font-mono">
                                 {{ $project->count }}
                             </p>
                         @endcomponent
@@ -58,21 +71,29 @@
             <div class="box-header with-border">
                 <h3 class="box-title">@lang('project::lang.projects')</h3>
                 <div class="box-tools pull-right">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <div class="btn-group btn-group-toggle"
+                         data-toggle="buttons">
                         <label class="btn btn-info btn-sm active list">
-                            <input type="radio" name="project_view" value="list_view" class="project_view"
-                                data-href="{{ action([\Modules\Project\Http\Controllers\ProjectController::class, 'index']) . '?project_view=list_view' }}">
+                            <input type="radio"
+                                   name="project_view"
+                                   value="list_view"
+                                   class="project_view"
+                                   data-href="{{ action([\Modules\Project\Http\Controllers\ProjectController::class, 'index']) . '?project_view=list_view' }}">
                             @lang('project::lang.list_view')
                         </label>
                         <label class="btn btn-info btn-sm kanban">
-                            <input type="radio" name="project_view" value="kanban" class="project_view"
-                                data-href="{{ action([\Modules\Project\Http\Controllers\ProjectController::class, 'index']) . '?project_view=kanban' }}">
+                            <input type="radio"
+                                   name="project_view"
+                                   value="kanban"
+                                   class="project_view"
+                                   data-href="{{ action([\Modules\Project\Http\Controllers\ProjectController::class, 'index']) . '?project_view=kanban' }}">
                             @lang('project::lang.kanban_board')
                         </label>
                     </div>
                     @can('project.create_project')
-                        <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm add_new_project"
-                            data-href="{{ action([\Modules\Project\Http\Controllers\ProjectController::class, 'create']) }}">
+                        <button type="button"
+                                class="tw-dw-btn tw-dw-btn-primary global-btn tw-text-white tw-dw-btn-sm add_new_project"
+                                data-href="{{ action([\Modules\Project\Http\Controllers\ProjectController::class, 'create']) }}">
                             @lang('project::lang.new_project')&nbsp;
                             <i class="fa fa-plus"></i>
                         </button>
@@ -124,7 +145,8 @@
                         <div class="page">
                             <div class="main">
                                 <div class="meta-tasks-wrapper">
-                                    <div id="myKanban" class="meta-tasks">
+                                    <div id="myKanban"
+                                         class="meta-tasks">
                                     </div>
                                 </div>
                             </div>
@@ -134,9 +156,13 @@
             </div>
         @endcomponent
         <!-- /.box -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="project_model"></div>
+        <div class="modal fade"
+             tabindex="-1"
+             role="dialog"
+             id="project_model"></div>
     </section>
-    <link rel="stylesheet" href="{{ asset('modules/project/sass/project.css?v=' . $asset_v) }}">
+    <link rel="stylesheet"
+          href="{{ asset('modules/project/sass/project.css?v=' . $asset_v) }}">
 @endsection
 @section('javascript')
     <script src="{{ asset('modules/project/js/project.js?v=' . $asset_v) }}"></script>

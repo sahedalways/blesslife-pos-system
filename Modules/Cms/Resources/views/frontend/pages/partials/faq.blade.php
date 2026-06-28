@@ -71,7 +71,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            max-width: 1580px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
