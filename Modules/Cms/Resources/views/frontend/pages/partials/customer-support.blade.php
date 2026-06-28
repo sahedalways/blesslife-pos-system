@@ -113,7 +113,7 @@
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(0, 128, 0, 0.1);
         box-shadow:
-            0 8px 32px rgba(0, 128, 0, 0.06),
+            0 8px 32px rgba(229, 142, 36, 0.15),
             0 2px 8px rgba(0, 0, 0, 0.04),
             inset 0 1px 0 rgba(255, 255, 255, 0.6);
     }
