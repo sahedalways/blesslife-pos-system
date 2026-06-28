@@ -1,5 +1,80 @@
 @if (!empty($faqs) && isset($faqs))
     <style>
+        /* Full width section like footer */
+        .ds-faq-section {
+            width: 100%;
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .ds-section-header-wrapper {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            cursor: default;
+        }
+
+        .ds-subtitle {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #E58E24;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 12px;
+            position: relative;
+            padding: 0 16px;
+        }
+
+        .ds-subtitle::before,
+        .ds-subtitle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #E58E24);
+        }
+
+        .ds-subtitle::after {
+            right: -20px;
+            transform: scaleX(-1);
+        }
+
+        .ds-subtitle::before {
+            left: -20px;
+        }
+
+        .ds-page-title {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #1F2937;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .ds-title-bar {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #008000 0%, #E58E24 100%);
+            border-radius: 2px;
+            margin: 0 auto;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ds-section-header-wrapper:hover .ds-title-bar {
+            width: 140px;
+            box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
+        }
+
+        .ds-accordion-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 1580px;
+            margin: 0 auto;
+        }
+
         .ds-accordion-item {
             background: #ffffff;
             border-radius: 12px;
@@ -17,7 +92,7 @@
         }
 
         .ds-accordion-item.is-active {
-            border-left: 4px solid var(--primary, #008000);
+            border-left: 4px solid #008000;
             box-shadow: 0 12px 32px rgba(0, 128, 0, 0.12);
         }
 
@@ -42,7 +117,7 @@
         .ds-card-title {
             font-size: 17px;
             font-weight: 600;
-            color: var(--neutral-dark, #1F2937);
+            color: #1F2937;
             line-height: 1.5;
             padding-right: 20px;
             transition: color 0.3s ease;
@@ -50,7 +125,7 @@
         }
 
         .ds-accordion-item.is-active .ds-card-title {
-            color: var(--primary, #008000);
+            color: #008000;
         }
 
         .ds-arrow-icon {
@@ -68,8 +143,8 @@
             left: 50%;
             width: 8px;
             height: 8px;
-            border-right: 2px solid var(--primary, #008000);
-            border-bottom: 2px solid var(--primary, #008000);
+            border-right: 2px solid #008000;
+            border-bottom: 2px solid #008000;
             transform: translate(-50%, -70%) rotate(45deg);
             transition: all 0.3s ease;
         }
@@ -79,7 +154,7 @@
         }
 
         .ds-accordion-item.is-active .ds-arrow-icon::before {
-            border-color: var(--secondary, #E58E24);
+            border-color: #E58E24;
         }
 
         .ds-accordion-content {
@@ -97,9 +172,8 @@
             margin: 0;
             font-size: 15px;
             line-height: 1.8;
-            color: var(--neutral-medium, #4B5563);
+            color: #4B5563;
             border-top: 1px solid transparent;
-            transition: border-color 0.3s ease;
         }
 
         .ds-accordion-item.is-active .ds-body-text {
@@ -107,9 +181,41 @@
             padding-top: 20px;
             margin-top: 4px;
         }
+
+        @media (max-width: 768px) {
+            .ds-faq-section {
+                padding: 3rem 0;
+            }
+
+            .ds-page-title {
+                font-size: 28px;
+            }
+
+            .ds-accordion-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ds-accordion-trigger {
+                padding: 20px 24px;
+            }
+
+            .ds-card-title {
+                font-size: 16px;
+            }
+
+            .ds-body-text {
+                padding: 0 24px 20px 24px;
+                font-size: 14px;
+            }
+
+            .ds-subtitle::before,
+            .ds-subtitle::after {
+                display: none;
+            }
+        }
     </style>
 
-    <div class="ds-section-space-between">
+    <section class="ds-faq-section">
         <div class="container">
             <div class="ds-section-header-wrapper">
                 <span class="ds-subtitle">Common Questions</span>
@@ -119,16 +225,15 @@
 
             <div class="ds-accordion-grid">
                 @foreach ($faqs as $index => $faq)
-                    <div class="ds-accordion-item {{ $index === 0 ? 'is-active' : '' }}"
+                    <div class="ds-accordion-item"
                          data-index="{{ $index }}">
                         <button type="button"
                                 class="ds-accordion-trigger"
-                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
+                                aria-expanded="false">
                             <h3 class="ds-card-title">{{ $faq['question'] ?? '' }}</h3>
                             <span class="ds-arrow-icon"></span>
                         </button>
-                        <div class="ds-accordion-content"
-                             style="max-height: {{ $index === 0 ? '600px' : '0' }};">
+                        <div class="ds-accordion-content">
                             <div class="ds-accordion-inner">
                                 <p class="ds-body-text">{{ $faq['answer'] ?? '' }}</p>
                             </div>
@@ -137,7 +242,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -160,7 +265,7 @@
 
                     if (!isActive) {
                         item.classList.add('is-active');
-                        if (content) content.style.maxHeight = '600px';
+                        if (content) content.style.maxHeight = content.scrollHeight + 'px';
                         trigger.setAttribute('aria-expanded', 'true');
                     }
                 });
