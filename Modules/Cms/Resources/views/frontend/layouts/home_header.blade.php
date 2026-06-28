@@ -79,7 +79,7 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(0, 128, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+        background: linear-gradient(135deg, rgba(0, 128, 0, 0.55) 0%, rgba(0, 0, 0, 0.7) 100%);
         z-index: 1;
     }
 
