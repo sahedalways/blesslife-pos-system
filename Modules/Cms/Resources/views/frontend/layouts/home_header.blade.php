@@ -63,13 +63,7 @@
 
     .hero-carousel {
         position: relative;
-        overflow: visible;
-    }
-
-    #heroCarousel {
-        position: sticky;
-        top: 0;
-        z-index: 1;
+        overflow: hidden;
     }
 
     .hero-carousel .carousel-item {
@@ -78,6 +72,7 @@
         background-size: cover;
         background-position: center;
         position: relative;
+        background-attachment: fixed;
     }
 
     .hero-carousel .carousel-item::before {
