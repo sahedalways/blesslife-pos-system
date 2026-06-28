@@ -18,14 +18,6 @@
     --white: #ffffff;
 }
 
-.ds-page-title {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--neutral-dark);
-    margin-bottom: 0.5rem;
-}
-
 .ds-title-bar {
     width: 50px;
     height: 3px;
@@ -93,10 +85,6 @@
 }
 
 @media (max-width: 767px) {
-    .ds-page-title {
-        font-size: 24px;
-    }
-
     .ds-content-card {
         padding: 16px;
     }

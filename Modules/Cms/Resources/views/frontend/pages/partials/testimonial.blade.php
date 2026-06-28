@@ -1,45 +1,150 @@
-@if(!empty($testimonials) && count($testimonials) > 0)
-    <div class="block-20 space-between-blocks">
+@php
+    $partners = [
+        ['name' => 'Google', 'img' => 'https://sherazipos.com/landlord/images/clients/elec.jpg'],
+        ['name' => 'Microsoft', 'img' => 'https://sherazipos.com/landlord/images/clients/iwear.jpg'],
+        ['name' => 'Amazon', 'img' => 'https://sherazipos.com/landlord/images/clients/aspire.jpg'],
+        ['name' => 'Adobe', 'img' => 'https://sherazipos.com/landlord/images/clients/tabas.jpg'],
+        ['name' => 'Spotify', 'img' => 'https://sherazipos.com/landlord/images/clients/china.jpg'],
+        ['name' => 'Netflix', 'img' => 'https://sherazipos.com/landlord/images/clients/edorkar.jpg'],
+    ];
+@endphp
+
+@if (!empty($partners) && count($partners) > 0)
+    <section class="ds-section-space-between partner-section-wrapper">
         <div class="container">
-            <div class="col-lg-9 mx-auto text-center px-0 mb-5">
-                <p class="block__paragraph--big">We have happy customers</p>
-                <h1 class="block__title--big pb-5">What They Says About Us</h1>
+            <!-- Using Global Design System Header Classes -->
+            <div class="ds-section-header-wrapper mb-5 text-center">
+                <span class="ds-subtitle">Trusted Partners</span>
+                <h2 class="ds-page-title">Our Client Portfolio</h2>
+                <div class="ds-title-bar"></div>
             </div>
-            <div class="row px-2 pt-4 mx-xxl-auto" id="block__container">
-                @foreach($testimonials as $testimonial)
-                    <div class="col-lg-4 mb-1">
-                        <div class="testimonial-card-1">
-                            <div class="block-20-person">
-                                <div class="mb-2">
-                                    <img class="block-20-person__avatar" src="{{$testimonial->feature_image_url ?? 'https://ui-avatars.com/api/?name='.$testimonial->title}}"
-                                        loading="lazy">
-                                </div>
-                                <div class="flex-grow-1 d-flex flex-column">
-                                    <span class="block-20-person__rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </span>
-                                    <span class="block-20-person__name my-1">
-                                        {{$testimonial->title}}
-                                    </span>
-                                    <!-- <span class="block-20-person__info">
-                                        Designation
-                                    </span> -->
-                                </div>
-                            </div>
-                            <div class="testimonial-card-1__paragraph mb-3">
-                                {!!$testimonial->content!!}
-                            </div>
-                            <span class="testimonial-card-1__quote-symbol">
-                                <i class="fas fa-quote-left"></i>
-                            </span>
+
+            <!-- Infinite Logo Slider (Pure CSS Marquee) -->
+            <div class="partner-slider-container">
+                <div class="partner-track"
+                     id="partnerTrack">
+                    @foreach ($partners as $partner)
+                        <div class="partner-slide">
+                            <a href="#"
+                               class="d-block">
+                                <!-- Ensure these paths are absolute or relative to your asset folder -->
+                                <img src="{{ isset($partner['img']) ? $partner['img'] : asset('assets/img/logo.png') }}"
+                                     alt="{{ $partner['name'] }} Partner"
+                                     class="partner-img">
+                            </a>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                    <!-- Duplicate for seamless looping -->
+                    @foreach ($partners as $partner)
+                        <div class="partner-slide">
+                            <a href="#"
+                               class="d-block">
+                                <img src="{{ isset($partner['img']) ? $partner['img'] : asset('assets/img/logo.png') }}"
+                                     alt="{{ $partner['name'] }} Partner"
+                                     class="partner-img">
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 @endif
+
+<style>
+    .partner-section-wrapper {
+        padding: 5rem 0;
+        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        overflow-x: hidden;
+    }
+
+    /* Infinite Marquee Layout */
+    .partner-slider-container {
+        width: 100%;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    }
+
+    .partner-track {
+        display: flex;
+        width: max-content;
+        gap: 4rem;
+        animation: marquee-scroll 40s linear infinite;
+    }
+
+    .partner-track:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes marquee-scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(calc(-50% - 1rem));
+            /* Adjusts for half content + gaps */
+        }
+    }
+
+    .partner-slide a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(8px);
+        border-radius: 16px;
+        padding: 18px 28px;
+        transition: all .3s ease;
+        border: 1px solid rgba(255, 255, 255, .4);
+    }
+
+    .partner-slide a:hover {
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+        transform: translateY(-4px);
+    }
+
+    .partner-img {
+        max-width: 180px;
+        max-height: 70px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        transition: all 0.35s ease;
+
+
+        filter: none;
+        opacity: 1;
+    }
+
+    .partner-section-wrapper {
+        padding: 5rem 0;
+        background: linear-gradient(135deg,
+                rgba(0, 128, 0, 0.05) 0%,
+                rgba(229, 142, 36, 0.05) 100%);
+        overflow-x: hidden;
+    }
+
+
+    .partner-slide:hover .partner-img {
+        transform: scale(1.08);
+    }
+
+    @media (max-width: 768px) {
+        .partner-track {
+            gap: 2rem;
+            animation-duration: 30s;
+        }
+
+        .partner-img {
+            max-width: 140px;
+            max-height: 50px;
+        }
+
+        .partner-section-wrapper {
+            padding: 3rem 0;
+        }
+    }
+</style>

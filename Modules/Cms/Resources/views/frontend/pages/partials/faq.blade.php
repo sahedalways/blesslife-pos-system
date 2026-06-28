@@ -44,14 +44,7 @@
             left: -20px;
         }
 
-        .ds-page-title {
-            font-size: 36px;
-            font-weight: 800;
-            line-height: 1.2;
-            color: #1F2937;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
+
 
         .ds-title-bar {
             width: 80px;
@@ -187,10 +180,6 @@
                 padding: 3rem 0;
             }
 
-            .ds-page-title {
-                font-size: 28px;
-            }
-
             .ds-accordion-grid {
                 grid-template-columns: 1fr;
             }
@@ -217,11 +206,8 @@
 
     <section class="ds-faq-section">
         <div class="container">
-            <div class="ds-section-header-wrapper">
-                <span class="ds-subtitle">Common Questions</span>
-                <h2 class="ds-page-title">Frequently Asked Questions</h2>
-                <div class="ds-title-bar"></div>
-            </div>
+            <x-section-header subtitle="Common Questions"
+                              title="Frequently Asked Questions" />
 
             <div class="ds-accordion-grid">
                 @foreach ($faqs as $index => $faq)

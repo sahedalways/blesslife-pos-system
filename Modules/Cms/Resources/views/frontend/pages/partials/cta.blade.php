@@ -40,7 +40,7 @@
     }
 
     .cta-title {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 800;
         color: var(--white);
         line-height: 1.2;
@@ -171,7 +171,7 @@
         }
 
         .cta-title {
-            font-size: 2rem;
+            font-size: 23px;
         }
 
         .cta-text {
@@ -190,7 +190,7 @@
         }
 
         .cta-title {
-            font-size: 1.75rem;
+            font-size: 23px;
         }
 
         .cta-text {

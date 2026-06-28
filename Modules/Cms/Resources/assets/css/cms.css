@@ -1883,7 +1883,7 @@ blockquote {
 }
 
 .ds-page-title {
-    font-size: 36px;
+    font-size: 30px !important;
     font-weight: 800;
     line-height: 1.2;
     color: var(--neutral-dark);
@@ -1933,7 +1933,7 @@ blockquote {
 
 @media (max-width: 768px) {
     .ds-page-title {
-        font-size: 28px;
+        font-size: 22px !important;
     }
     .ds-section-header-wrapper:hover .ds-title-bar {
         width: 100px;
