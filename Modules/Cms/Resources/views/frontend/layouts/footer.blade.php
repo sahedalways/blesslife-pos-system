@@ -144,7 +144,8 @@
         left: -80px;
         width: 250px;
         height: 250px;
-        background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+        /* Updated from purple to primary green */
+        background: radial-gradient(circle, rgba(0, 128, 0, 0.18) 0%, transparent 70%);
         border-radius: 50%;
         z-index: 0;
     }
@@ -156,6 +157,7 @@
         right: -100px;
         width: 300px;
         height: 300px;
+        /* Secondary orange kept */
         background: radial-gradient(circle, rgba(229, 142, 36, 0.18) 0%, transparent 70%);
         border-radius: 50%;
         z-index: 0;
@@ -180,7 +182,8 @@
     .footer-title-bar {
         width: 50px;
         height: 3px;
-        background: linear-gradient(90deg, #6366f1 0%, #E58E24 100%);
+        /* Updated from purple to primary green */
+        background: linear-gradient(90deg, #008000 0%, #E58E24 100%);
         border-radius: 10px;
         margin-bottom: 22px;
         position: relative;
@@ -219,7 +222,8 @@
     }
 
     .footer-links a i {
-        color: #6366f1;
+        /* Updated from purple to primary green */
+        color: #008000;
         transition: all 0.3s ease;
         font-size: 12px;
     }
@@ -250,7 +254,8 @@
     }
 
     .footer-contacts a:hover {
-        color: #6366f1;
+        /* Updated from purple to primary green */
+        color: #008000;
     }
 
     .contact-icon {
@@ -258,14 +263,16 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #6366f1 0%, #E58E24 100%);
+        /* Updated gradient from purple/green to primary green/secondary orange */
+        background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
         color: #fff;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         margin-right: 12px;
         font-size: 12px;
-        box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);
+        /* Updated shadow from purple to green */
+        box-shadow: 0 4px 10px rgba(0, 128, 0, 0.25);
     }
 
     /* ===== Social Icons ===== */
@@ -281,13 +288,15 @@
         height: 42px;
         border-radius: 50%;
         background: #fff;
-        color: #6366f1;
+        /* Updated from purple to primary green */
+        color: #008000;
         font-size: 15px;
         text-decoration: none;
         position: relative;
         transition: all 0.4s ease;
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
-        border: 1px solid rgba(99, 102, 241, 0.15);
+        /* Updated shadow/border from purple to green */
+        box-shadow: 0 4px 12px rgba(0, 128, 0, 0.15);
+        border: 1px solid rgba(0, 128, 0, 0.15);
     }
 
     .social-icons li a::before {
@@ -295,7 +304,8 @@
         position: absolute;
         inset: 0;
         border-radius: 50%;
-        background: linear-gradient(135deg, #6366f1 0%, #E58E24 100%);
+        /* This matches your new theme: Green to Orange */
+        background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
         opacity: 0;
         transition: opacity 0.4s ease;
         z-index: 0;
@@ -331,7 +341,8 @@
     .footer-bottom {
         position: relative;
         z-index: 1;
-        background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #E58E24 100%);
+        /* Matches primary (green) to secondary (orange) */
+        background: linear-gradient(90deg, #008000 0%, #728712 50%, #E58E24 100%);
         padding: 18px 0;
         color: #fff;
         font-size: 14px;
