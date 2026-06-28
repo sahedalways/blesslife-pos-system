@@ -131,34 +131,42 @@
     /* ===== Footer Wrapper ===== */
     .footer-section {
         position: relative;
-        background: linear-gradient(135deg, #f5f3ff 0%, #fff7ed 100%);
+        background: linear-gradient(135deg,
+                #f7fcf8 0%,
+                #f2faf4 45%,
+                #fffaf3 100%);
         color: #1f2937;
         overflow: hidden;
     }
 
-    /* Decorative gradient blobs */
+    /* Top Left Green Glow */
     .footer-section::before {
         content: "";
         position: absolute;
-        top: -80px;
-        left: -80px;
-        width: 250px;
-        height: 250px;
-        /* Updated from purple to primary green */
-        background: radial-gradient(circle, rgba(0, 128, 0, 0.18) 0%, transparent 70%);
+        top: -90px;
+        left: -90px;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle,
+                rgba(21, 153, 71, 0.12) 0%,
+                rgba(21, 153, 71, 0.06) 35%,
+                transparent 75%);
         border-radius: 50%;
         z-index: 0;
     }
 
+    /* Bottom Right Orange Glow */
     .footer-section::after {
         content: "";
         position: absolute;
-        bottom: 40px;
+        bottom: -100px;
         right: -100px;
-        width: 300px;
-        height: 300px;
-        /* Secondary orange kept */
-        background: radial-gradient(circle, rgba(229, 142, 36, 0.18) 0%, transparent 70%);
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle,
+                rgba(229, 142, 36, 0.12) 0%,
+                rgba(229, 142, 36, 0.06) 35%,
+                transparent 75%);
         border-radius: 50%;
         z-index: 0;
     }
@@ -341,11 +349,50 @@
     .footer-bottom {
         position: relative;
         z-index: 1;
-        /* Matches primary (green) to secondary (orange) */
-        background: linear-gradient(90deg, #008000 0%, #728712 50%, #E58E24 100%);
         padding: 18px 0;
         color: #fff;
         font-size: 14px;
+        overflow: hidden;
+
+        background: linear-gradient(135deg,
+                rgba(11, 93, 42, 0.92) 0%,
+                rgba(21, 153, 71, 0.88) 60%,
+                rgba(229, 142, 36, 0.82) 100%);
+
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, .25),
+            0 -8px 25px rgba(11, 93, 42, .15);
+    }
+
+    /* Glossy Shine */
+    .footer-bottom::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg,
+                rgba(255, 255, 255, .28) 0%,
+                rgba(255, 255, 255, .12) 25%,
+                transparent 60%);
+        pointer-events: none;
+    }
+
+    /* Soft Orange Glow */
+    .footer-bottom::after {
+        content: "";
+        position: absolute;
+        right: -80px;
+        top: -60px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(circle,
+                rgba(229, 142, 36, .18) 0%,
+                transparent 70%);
+        pointer-events: none;
     }
 
     .footer-bottom p {

@@ -1,12 +1,15 @@
 <style>
     .cta-section {
         position: relative;
-        background: var(--gradient-primary);
+        background: linear-gradient(135deg,
+                #0B5D2A 0%,
+                #0F7A38 70%,
+                #D8902A 100%);
         border-radius: 24px;
         padding: 3rem 2.5rem;
         margin: 4rem auto;
         overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0, 128, 0, 0.25);
+        box-shadow: 0 20px 50px rgba(11, 93, 42, 0.22);
     }
 
     /* Decorative background elements */
