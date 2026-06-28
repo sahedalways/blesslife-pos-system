@@ -123,13 +123,13 @@
         bottom: 10px;
         right: 15px;
         transform: rotate(-12deg);
-        font-size: 50px;
+        font-size: 36px;
         font-weight: 800;
         color: rgba(0, 128, 0, 0.04);
         pointer-events: none;
         z-index: 0;
         white-space: nowrap;
-        letter-spacing: 6px;
+        letter-spacing: 4px;
         text-transform: uppercase;
         line-height: 1;
     }
