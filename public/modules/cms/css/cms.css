@@ -1,27 +1,21 @@
 :root {
-    --primary: #1973fe;
-    --secondary: #0a1f44;
-    --primary-invert: #fff;
-    --secondary-invert: #fff;
+    --primary-green: #008000;
+    --secondary-orange: #e58e24;
+    --neutral-dark: #1f2937;
+    --neutral-medium: #4b5563;
+    --neutral-light: #6b7280;
+    --white: #ffffff;
 
-    --gradient-primary: linear-gradient(25deg, #1973fe, #1973fe);
-    --gradient-secondary: linear-gradient(230deg, #0a1f44, #020024);
+    --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+    --gradient-secondary: linear-gradient(90deg, var(--primary-green), var(--secondary-orange));
 
-    /* EXTRA COLORS */
-    --Green: #00a761;
-    --Yellow: #f2b100;
-    --Blue: #06b7f9;
-    --Purple: #7a7aff;
+    --text-primary: var(--neutral-dark);
+    --text-secondary: var(--neutral-medium);
 
-    /* DEFAULT COLOR OF TEXTS */
-    --text-primary: #0a1f44;
+    --elements-roundness: 10px;
 
-    /* FOR BUTTONS & INPUTS */
-    --elements-roundness: 4px;
-
-    --space-between-blocks: 2rem;
-    /* for mobiles */
-    --space-between-blocks-small-screens: 1rem;
+    --space-between-blocks: 3rem;
+    --space-between-blocks-small-screens: 1.5rem;
 }
 
 @font-face {
@@ -1982,43 +1976,129 @@ blockquote {
     }
 }
 
-/*------------------------------*/
-/*--FAQ----------------*/
-/*------------------------------*/
-.block-39 {
-    --block-background: white;
-    --block-text-color: var(--text-primary);
-    background: var(--block-background);
-    color: var(--block-text-color);
+/* global section css */
+.ds-section-header-wrapper {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    cursor: default;
 }
 
-.content-block {
-    text-align: initial;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.ds-subtitle {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--secondary, #e58e24);
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-bottom: 12px;
+    position: relative;
+    padding: 0 16px;
 }
 
-@media (min-width: 992px) {
-    .content-block {
-        width: 90%;
+.ds-subtitle::before,
+.ds-subtitle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--secondary, #e58e24));
+}
+
+.ds-subtitle::after {
+    right: -20px;
+    transform: scaleX(-1);
+}
+
+.ds-subtitle::before {
+    left: -20px;
+}
+
+.ds-page-title {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--neutral-dark, #1f2937);
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.ds-title-bar {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary, #008000) 0%, var(--secondary, #e58e24) 100%);
+    border-radius: 2px;
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ds-title-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, var(--primary, #008000) 0%, var(--secondary, #e58e24) 100%);
+    border-radius: 2px;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ds-section-header-wrapper:hover .ds-title-bar {
+    width: 140px;
+    box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
+}
+
+.ds-section-header-wrapper:hover .ds-title-bar::before {
+    opacity: 0.3;
+    transform: scaleX(1.5);
+    filter: blur(8px);
+}
+
+.ds-section-space-between {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.ds-accordion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .ds-page-title {
+        font-size: 28px;
     }
-}
 
-.content-block__title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-
-@media (min-width: 992px) {
-    .content-block__title {
-        font-size: 1.5rem;
+    .ds-section-header-wrapper:hover .ds-title-bar {
+        width: 100px;
     }
-}
 
-.content-block__paragraph {
-    font-size: 1rem;
-    opacity: 0.9;
-    line-height: 1.7;
+    .ds-accordion-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ds-accordion-trigger {
+        padding: 20px 24px;
+    }
+
+    .ds-card-title {
+        font-size: 16px;
+    }
+
+    .ds-body-text {
+        padding: 0 24px 20px 24px;
+        font-size: 14px;
+    }
+
+    .ds-subtitle::before,
+    .ds-subtitle::after {
+        display: none;
+    }
 }
