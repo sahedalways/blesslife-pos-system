@@ -10,14 +10,10 @@
 @endphp
 
 @if (!empty($industry))
-    <!-- Unique Wrapper ID to prevent Global Style Conflict -->
+
     <div id="custom-industries-section-wrapper">
 
         <style>
-            /* -----------------------------------------------------------
-           CUSTOM INDUSTRY SECTION STYLES
-           Fixed: Prevented Slider Overlap with Heading
-           ----------------------------------------------------------- */
             #custom-industries-section-wrapper {
                 position: relative;
                 width: 100%;
@@ -40,23 +36,21 @@
 
             #custom-industries-section-wrapper .cus-ind-dots-decoration {
                 position: absolute;
-                top: -50px;
-                left: -50px;
-                width: 300px;
-                height: 300px;
-                background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 2px, transparent 2px);
+                top: 30px;
+                left: 15px;
+                width: 200px;
+                height: 200px;
+                background-image: radial-gradient(circle, rgba(0, 128, 0, 0.25) 2px, transparent 2px);
                 background-size: 20px 20px;
-                opacity: 0.4;
                 pointer-events: none;
                 z-index: 0;
             }
 
             #custom-industries-section-wrapper .cus-ind-dots-right {
-                right: -50px;
-                bottom: -50px;
+                right: 15px;
+                bottom: 30px;
                 left: auto;
                 top: auto;
-                transform: rotate(180deg);
             }
 
             /* Main Container Layout */
@@ -130,14 +124,18 @@
             }
 
             #custom-industries-section-wrapper .cus-ind-title {
-                font-size: 2.2rem;
+                font-size: 30px;
                 font-weight: 700;
                 color: #1F2937;
-                line-height: 1.2;
-                margin-bottom: 1.5rem;
+                line-height: 1.3;
+                margin-bottom: 12px;
                 letter-spacing: -0.5px;
-                /* Added shadow for safety against background */
                 text-shadow: 0 1px 0 #fff;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-text-panel:hover .ds-title-bar {
+                width: 160px;
+                box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
             }
 
             #custom-industries-section-wrapper .cus-ind-description {
@@ -203,8 +201,8 @@
                 display: flex;
                 justify-content: flex-end;
                 gap: 12px;
-                margin-bottom: 25px;
-                margin-top: -10px;
+                margin-top: 24px;
+                margin-bottom: 0;
             }
 
             #custom-industries-section-wrapper .cus-ind-nav-btn {
@@ -243,36 +241,64 @@
 
             #custom-industries-section-wrapper .cus-ind-card-box {
                 background: #FFFFFF;
-                border-radius: 12px;
-                padding: 20px 18px;
-                border: 1px solid rgba(229, 128, 0, 0.05);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+                border-radius: 14px;
+                padding: 22px 20px;
+                border: 1px solid rgba(0, 128, 0, 0.08);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
                 transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
                 height: 100%;
                 display: flex;
                 flex-direction: column;
                 min-height: auto;
+                position: relative;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-card-box::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: linear-gradient(90deg, #008000, #E58E24);
+                border-radius: 14px 14px 0 0;
+                opacity: 0;
+                transition: opacity 0.4s ease;
             }
 
             #custom-industries-section-wrapper .cus-ind-card-box:hover {
-                transform: translateY(-6px);
-                border-color: rgba(0, 128, 0, 0.15);
-                box-shadow: 0 15px 40px rgba(0, 128, 0, 0.1);
+                transform: translateY(-8px);
+                border-color: rgba(0, 128, 0, 0.2);
+                box-shadow: 0 20px 50px rgba(0, 128, 0, 0.12);
+            }
+
+            #custom-industries-section-wrapper .cus-ind-card-box:hover::before {
+                opacity: 1;
             }
 
             #custom-industries-section-wrapper .cus-ind-icon-wrap {
-                width: 42px;
-                height: 42px;
-                border-radius: 10px;
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 1.1rem;
+                font-size: 1.15rem;
                 color: #FFFFFF;
                 background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
                 margin-bottom: 14px;
                 box-shadow: 0 6px 15px rgba(0, 128, 0, 0.2);
                 flex-shrink: 0;
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+            }
+
+            #custom-industries-section-wrapper .cus-ind-card-box:hover .cus-ind-icon-wrap {
+                transform: scale(1.1) rotate(-5deg);
+                box-shadow: 0 10px 25px rgba(0, 128, 0, 0.35);
+            }
+
+            #custom-industries-section-wrapper .cus-ind-card-box:hover .cus-ind-title-txt {
+                color: #008000;
             }
 
             #custom-industries-section-wrapper .cus-ind-title-txt {
@@ -315,7 +341,7 @@
                 }
 
                 #custom-industries-section-wrapper .cus-ind-title {
-                    font-size: 1.8rem;
+                    font-size: 22px;
                 }
 
                 #custom-industries-section-wrapper .cus-ind-nav-controls {
@@ -344,6 +370,8 @@
                     @endif
 
                     <h2 class="cus-ind-title">{{ $industry['title'] ?? '' }}</h2>
+                    <div class="ds-title-bar"
+                         style="margin-left: 0; margin-right: auto; margin-bottom: 24px;"></div>
 
                     <div class="cus-ind-description">
                         {!! $industry['description'] ?? '' !!}
@@ -360,32 +388,6 @@
 
                 <!-- Right Side: Slider -->
                 <div class="cus-ind-col-half cus-ind-slider-panel">
-
-                    <!-- Navigation Arrows -->
-                    <div class="cus-ind-nav-controls">
-                        <button type="button"
-                                class="cus-ind-nav-btn cus-ind-prev-btn">
-                            <svg fill="none"
-                                 viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button type="button"
-                                class="cus-ind-nav-btn cus-ind-next-btn">
-                            <svg fill="none"
-                                 viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
 
                     <!-- Splide Slider Area -->
                     <div class="splide"
@@ -412,6 +414,32 @@
                                 @endforeach
                             </ul>
                         </div>
+                    </div>
+
+                    <!-- Navigation Arrows -->
+                    <div class="cus-ind-nav-controls">
+                        <button type="button"
+                                class="cus-ind-nav-btn cus-ind-prev-btn">
+                            <svg fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button type="button"
+                                class="cus-ind-nav-btn cus-ind-next-btn">
+                            <svg fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </div>
 
                 </div>

@@ -56,7 +56,7 @@
         }
 
         .ds-section-header-wrapper:hover .ds-title-bar {
-            width: 140px;
+            width: 190px;
             box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
         }
 
