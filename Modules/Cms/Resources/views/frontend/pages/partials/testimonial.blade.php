@@ -122,8 +122,8 @@
     .partner-section-wrapper {
         padding: 5rem 0;
         background: linear-gradient(135deg,
-                rgba(0, 128, 0, 0.05) 0%,
-                rgba(229, 142, 36, 0.05) 100%);
+                rgba(0, 128, 0, 0.08) 0%,
+                rgba(229, 142, 36, 0.07) 100%);
         overflow-x: hidden;
     }
 

@@ -1,29 +1,284 @@
-@if(!empty($statistics))
-    <div class="block-38 space-between-blocks">
+@if (!empty($statistics))
+    <style>
+        /* Stats Section - Compact & Light */
+        .stats-section {
+            position: relative;
+            padding: 2.5rem 0;
+            /* Reduced from var(--space-between-blocks) */
+            background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+            /* Light green tint */
+            overflow: hidden;
+        }
+
+        @media (max-width: 991px) {
+            .stats-section {
+                padding: 2rem 0;
+                /* Smaller on mobile */
+            }
+        }
+
+        /* Subtle background decoration */
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 128, 0, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .stats-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(229, 142, 36, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Header Styling - Compact */
+        .stats-header {
+            margin-bottom: 2rem;
+            /* Reduced from 3rem */
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Stats Container - Tighter */
+        .stats-container {
+            position: relative;
+            z-index: 2;
+            background: var(--gradient-secondary);
+            padding: 1.5rem;
+            /* Reduced from 3rem 2rem */
+            border-radius: 16px;
+            /* Slightly smaller radius */
+            box-shadow: 0 15px 30px -10px rgba(0, 128, 0, 0.2);
+            /* Softer shadow */
+            overflow: hidden;
+        }
+
+        .stats-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Individual Stat Item - Compact */
+        .stat-item {
+            position: relative;
+            padding: 1rem 0.5rem;
+            /* Reduced padding */
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+            border-radius: 12px;
+        }
+
+        /* Icon Container - Smaller */
+        .stat-icon {
+            width: 45px;
+            /* Reduced from 50px */
+            height: 45px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            /* Reduced margin */
+            font-size: 1.25rem;
+            /* Slightly smaller icon */
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-icon {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Number Styling - Adjusted size */
+        .stat-number {
+            font-size: 2.2rem;
+            /* Reduced from 2.8rem */
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            display: block;
+            font-family: 'Preevio', sans-serif;
+        }
+
+        .stat-number::after {
+            content: attr(data-suffix);
+            font-size: 1.2rem;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+
+        /* Label Styling */
+        .stat-label {
+            font-size: 0.9rem;
+            /* Slightly smaller */
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 991px) {
+            .stats-container {
+                padding: 1.5rem 1rem;
+                border-radius: 16px;
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 1.25rem 0.5rem;
+            }
+
+            .stat-item:nth-child(2n) {
+                border-right: none;
+            }
+
+            .stat-item:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-container {
+                padding: 1rem;
+                border-radius: 12px;
+            }
+
+            .stat-item {
+                padding: 1rem 0.25rem;
+            }
+
+            .stat-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.6rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+    <div class="stats-section">
         <div class="container">
-            <!-- HEADER -->
-            <div class="col-lg-9 mx-auto text-center px-0 mb-5">
-                <h1 class="block__title--big mb-3">
-                    {{$statistics['tagline'] ?? ''}}
-                </h1>
-                <p class="block__paragraph--big mb-0 mx-3">
-                    {{$statistics['description'] ?? ''}}
-                </p>
+            <!-- Compact Header -->
+            <div class="stats-header">
+                <x-section-header subtitle="Our Achievements"
+                                  title="Numbers That Speak for Themselves" />
             </div>
-            <ul class="stats row list-unstyled text-center mx-auto p-4 p-lg-5">
-                @if(isset($statistics['content']) && !empty($statistics['content']))
-                    @foreach($statistics['content'] as $stats)
-                        <li class="stats__li col-6 col-lg-3 p-0">
-                            <span class="stats__number">
-                                {{$stats['stats'] ?? ''}}
-                            </span>
-                            <p class="stats__text">
-                                {{$stats['title'] ?? ''}}
-                            </p>
-                        </li>
-                    @endforeach
-                @endif
-            </ul>
+
+            <!-- Compact Stats Container -->
+            <div class="stats-container">
+                <div class="row g-0">
+                    @if (isset($statistics['content']) && !empty($statistics['content']))
+                        @foreach ($statistics['content'] as $index => $stats)
+                            <div class="col-6 col-lg-3 stat-item"
+                                 data-aos="fade-up"
+                                 data-aos-delay="{{ $index * 100 }}">
+                                <div class="stat-icon">
+                                    @if ($index == 0)
+                                        <i class="fas fa-users"></i>
+                                    @elseif($index == 1)
+                                        <i class="fas fa-project-diagram"></i>
+                                    @elseif($index == 2)
+                                        <i class="fas fa-award"></i>
+                                    @else
+                                        <i class="fas fa-headset"></i>
+                                    @endif
+                                </div>
+                                <span class="stat-number counter"
+                                      data-target="{{ preg_replace('/[^0-9]/', '', $stats['stats'] ?? '0') }}"
+                                      data-suffix="{{ preg_replace('/[0-9]/', '', $stats['stats'] ?? '') }}">
+                                    0
+                                </span>
+                                <p class="stat-label">{{ $stats['title'] ?? '' }}</p>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Counter Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.counter');
+
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const suffix = counter.getAttribute('data-suffix') || '';
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+                        let current = 0;
+
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) {
+                                counter.textContent = target + suffix;
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = Math.floor(current) + suffix;
+                            }
+                        }, 16);
+
+                        observer.unobserve(counter);
+                    }
+                });
+            }, observerOptions);
+
+            counters.forEach(counter => observer.observe(counter));
+        });
+    </script>
 @endif
