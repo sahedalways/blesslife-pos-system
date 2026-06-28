@@ -85,7 +85,7 @@
             #pro-feature-section-wrap .pfs-container {
                 position: relative;
                 z-index: 2;
-                max-width: 1320px;
+                max-width: 1600px;
                 margin: 0 auto;
                 padding: 0 20px;
                 /* ❌ NO overflow here either */
@@ -453,7 +453,8 @@
                     <div class="pfs-sticky-box">
 
                         <div class="cus-ind-section-header">
-                            <span class="pfs-badge-tag">Our Features</span>
+                            <span class="ds-subtitle">Our Features</span>
+
 
                             <h2 class="pfs-main-title">
                                 {{ $feature['title'] ?? '' }}
