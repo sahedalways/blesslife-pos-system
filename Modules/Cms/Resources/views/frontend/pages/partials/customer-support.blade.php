@@ -3,43 +3,7 @@
     #support-247-section {
         position: relative;
         padding: 6rem 0;
-        overflow: hidden;
         font-family: 'Poppins', sans-serif;
-    }
-
-    /* Decorative Background Elements */
-    #support-247-section .sup-bg-circle {
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    #support-247-section .sup-circle-1 {
-        width: 400px;
-        height: 400px;
-        top: -150px;
-        left: -150px;
-        background: radial-gradient(circle, rgba(0, 128, 0, 0.08) 0%, transparent 70%);
-    }
-
-    #support-247-section .sup-circle-2 {
-        width: 350px;
-        height: 350px;
-        bottom: -100px;
-        right: -100px;
-        background: radial-gradient(circle, rgba(229, 142, 36, 0.08) 0%, transparent 70%);
-    }
-
-    #support-247-section .sup-dot-grid {
-        position: absolute;
-        width: 180px;
-        height: 180px;
-        background-image: radial-gradient(circle, rgba(0, 128, 0, 0.2) 1.5px, transparent 1.5px);
-        background-size: 20px 20px;
-        top: 40px;
-        right: 40px;
-        z-index: 0;
     }
 
     /* ===== CONTAINER ===== */
@@ -138,55 +102,12 @@
     /* ===== LEFT SIDE - HERO CARD ===== */
     #support-247-section .sup-hero-card {
         position: relative;
-        background: linear-gradient(135deg, #008000 0%, #2d5016 50%, #E58E24 100%);
         border-radius: 28px;
         padding: 50px 45px;
-        color: #ffffff;
-        overflow: hidden;
-        box-shadow: 0 25px 60px rgba(0, 128, 0, 0.25);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         min-height: 480px;
-    }
-
-    /* Animated Background Pattern */
-    #support-247-section .sup-hero-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image:
-            radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
-        pointer-events: none;
-    }
-
-    /* Floating Bubbles */
-    #support-247-section .sup-hero-card::after {
-        content: '';
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 250px;
-        height: 250px;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-        border-radius: 50%;
-        animation: supFloat 6s ease-in-out infinite;
-    }
-
-    @keyframes supFloat {
-
-        0%,
-        100% {
-            transform: translateY(0) scale(1);
-        }
-
-        50% {
-            transform: translateY(-20px) scale(1.05);
-        }
     }
 
     #support-247-section .sup-hero-content {
@@ -198,10 +119,10 @@
         display: inline-block;
         font-size: 11px;
         font-weight: 700;
-        color: #ffffff;
+        color: #E58E24;
         text-transform: uppercase;
         letter-spacing: 2px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(229, 142, 36, 0.3);
         padding-bottom: 4px;
         margin-bottom: 16px;
         line-height: 1.4;
@@ -225,6 +146,7 @@
     #support-247-section .sup-hero-title {
         font-size: 30px;
         font-weight: 700;
+        color: #1F2937;
         line-height: 1.3;
         margin-bottom: 12px;
         letter-spacing: -0.5px;
@@ -232,11 +154,10 @@
 
     #support-247-section .sup-hero-desc {
         font-size: 1rem;
-        color: #ffffff;
+        color: #6B7280;
         line-height: 1.7;
         margin-bottom: 2.5rem;
         max-width: 90%;
-        opacity: 0.9;
     }
 
     /* Support Agent Avatars */
@@ -349,14 +270,13 @@
     }
 
     #support-247-section .sup-btn-secondary {
-        background: rgba(255, 255, 255, 0.18);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
+        box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
     }
 
     #support-247-section .sup-btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.28);
         transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(229, 142, 36, 0.3);
         color: #ffffff;
     }
 
@@ -568,11 +488,6 @@
 
 <!-- ===== 24/7 CUSTOMER SUPPORT SECTION ===== -->
 <section id="support-247-section">
-
-    <!-- Decorative Backgrounds -->
-    <div class="sup-bg-circle sup-circle-1"></div>
-    <div class="sup-bg-circle sup-circle-2"></div>
-    <div class="sup-dot-grid"></div>
 
     <div class="sup-container">
 
