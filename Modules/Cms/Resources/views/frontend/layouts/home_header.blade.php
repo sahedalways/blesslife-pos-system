@@ -121,8 +121,8 @@
 
     @media (max-width: 991.98px) {
         .hero-nav--is-sticky {
-            width: 85% !important;
-            max-width: 360px !important;
+            width: calc(100vw - 30px) !important;
+            max-width: 100% !important;
             right: auto !important;
         }
 
