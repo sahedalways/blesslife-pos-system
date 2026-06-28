@@ -24,7 +24,7 @@
         $navbar_btn['link'] = $__site_details['btns']['navbar']['link'] ?? route('business.getRegister');
     }
 @endphp
-@includeIf('cms::frontend.layouts.header')
+@includeIf('cms::frontend.layouts.home_header')
 <div class="article-block space-between-blocks">
     <div class="container col-xxl-10 px-xxl-0">
         <div class="article col-xl-10 mx-auto">

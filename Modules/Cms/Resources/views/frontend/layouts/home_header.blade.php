@@ -12,19 +12,46 @@
 
     .hero-nav__link,
     .hero-nav__item-chevron,
-    .hero-nav__item>span {
-        color: #fff;
-    }
-
-    .hero-nav__item a:not(.btn) {
+    .hero-nav__item>span,
+    .hero-nav__item a {
         color: #fff !important;
     }
 
+    .hero-nav__link,
+    .hero-nav__item a:not(.btn) {
+        position: relative !important;
+        transition: color 0.3s ease, text-shadow 0.3s ease !important;
+    }
+
+    .hero-nav__link::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: -2px !important;
+        left: 50% !important;
+        width: 0 !important;
+        height: 2px !important;
+        background: var(--secondary-orange) !important;
+        transition: all 0.3s ease !important;
+        transform: translateX(-50%) !important;
+        border-radius: 1px !important;
+    }
+
+    .hero-nav__link:hover::after {
+        width: 100% !important;
+    }
+
+    .hero-nav__link:hover,
+    .hero-nav__item a:not(.btn):hover {
+        color: #fff !important;
+        opacity: 1 !important;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.4) !important;
+    }
+
     .hero-nav__item .btn-primary {
-        background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange)) !important;
         border: none !important;
         border-radius: 50px !important;
-        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3) !important;
+        box-shadow: 0 4px 15px rgba(0, 128, 0, 0.3) !important;
         padding: 0.5rem 1.5rem !important;
         font-weight: 700 !important;
         transition: all 0.3s ease !important;
@@ -32,13 +59,31 @@
 
     .hero-nav__item .btn-primary:hover {
         transform: translateY(-1px) !important;
-        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45) !important;
+        box-shadow: 0 8px 25px rgba(229, 142, 36, 0.45) !important;
+    }
+
+    .hero-nav__item a[href*="login"] strong {
+        font-size: 0.9rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        padding: 5px 18px !important;
+        border-radius: 50px !important;
+        font-weight: 600 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .hero-nav__item a[href*="login"]:hover strong {
+        border-color: rgba(255, 255, 255, 0.7) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.15) !important;
     }
 
     .hero-nav--is-sticky {
-        background: #fff !important;
-        border-radius: 0 0 12px 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        background: rgba(240, 248, 240, 0.7) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border-bottom: 1px solid rgba(0, 128, 0, 0.15) !important;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 30px rgba(0, 128, 0, 0.12);
     }
 
     .hero-nav--is-sticky .hero-nav__link,
@@ -50,279 +95,236 @@
 
     .hero-nav--is-sticky .hero-nav__link:hover,
     .hero-nav--is-sticky .hero-nav__item a:not(.btn):hover {
-        color: #6366f1 !important;
+        color: var(--primary-green) !important;
     }
+
+    .hero-nav--is-sticky .hero-nav__item a[href*="login"] strong {
+        border-color: rgba(0, 0, 0, 0.2) !important;
+    }
+
     .hero-nav--is-sticky .fa-bars {
         color: #1e293b !important;
     }
 
-    .hero-nav__link:hover,
-    .hero-nav__item a:not(.btn):hover {
-        color: rgba(255, 255, 255, 0.8) !important;
-    }
-
-    .hero-carousel {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero-carousel .carousel-item {
-        height: 90vh;
-        min-height: 500px;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        background-attachment: fixed;
-    }
-
-    .hero-carousel .carousel-item::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(0, 128, 0, 0.55) 0%, rgba(0, 0, 0, 0.85) 100%);
-        z-index: 1;
-    }
-
-    .hero-carousel .carousel-caption {
-        bottom: auto;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 2;
-        left: 10%;
-        right: 10%;
-        text-align: center;
-    }
-
-    .hero-carousel .carousel-caption h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        color: #fff;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        min-height: 1.2em;
-    }
-
-    .hero-carousel .carousel-caption p {
-        font-size: 1.15rem;
-        color: rgba(255, 255, 255, 0.85);
-        max-width: 600px;
-        margin: 1rem auto 0;
-    }
-
-    .hero-carousel .carousel-indicators {
-        z-index: 3;
-    }
-
-    .hero-carousel .carousel-indicators button {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        background: transparent;
-        margin: 0 6px;
-    }
-
-    .hero-carousel .carousel-indicators button.active {
-        background: #fff;
-        border-color: #fff;
-    }
-
-    .typewriter-cursor::after {
-        content: '|';
-        animation: blink 0.8s infinite;
-        color: #6366f1;
-        font-weight: 300;
-    }
-
-    @keyframes blink {
-
-        0%,
-        50% {
-            opacity: 1;
-        }
-
-        51%,
-        100% {
-            opacity: 0;
-        }
-    }
-
-    .hero-carousel .btn-trial {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 1.5rem;
-        padding: 12px 30px;
-        background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
-        color: #FFFFFF;
-        font-size: 0.95rem;
-        font-weight: 600;
-        border: none;
-        border-radius: 50px;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
-    }
-
-    .hero-carousel .btn-trial:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 30px rgba(229, 142, 36, 0.3);
-        color: #ffffff;
-    }
-
-    .hero-carousel .btn-trial i {
-        margin-left: 8px;
-        transition: transform 0.3s ease;
-    }
-
-    .hero-carousel .btn-trial:hover i {
-        transform: translateX(5px);
-    }
-
-.hero-carousel .carousel-control-prev,
-.hero-carousel .carousel-control-next {
-    display: none;
-}
-.ft-menu--js-show.ft-menu .hero-nav__link,
-.ft-menu--js-show.ft-menu .hero-nav__item a:not(.btn) {
-    color: #000000 !important;
-}
-@media (max-width: 768px) {
-        .hero-carousel .carousel-item {
-            height: 70vh;
-            min-height: 400px;
-        }
-
-        .hero-carousel .carousel-caption h1 {
-            font-size: 1.75rem;
-        }
-
-        .hero-carousel .carousel-caption p {
-            font-size: 0.95rem;
-        }
-
-        .hero-carousel .btn-trial {
-            padding: 0.7rem 1.8rem;
-            font-size: 0.95rem;
-        }
+    .ft-menu--js-show.ft-menu .hero-nav__link,
+    .ft-menu--js-show.ft-menu .hero-nav__item a:not(.btn) {
+        color: #000000 !important;
     }
 
     @media (max-width: 991.98px) {
         .hero-nav__link {
             color: #000 !important;
         }
+
+        .ft-menu::before {
+            background: linear-gradient(135deg, rgba(0, 128, 0, 0.6), rgba(229, 142, 36, 0.4)) !important;
+            backdrop-filter: blur(4px) !important;
+            -webkit-backdrop-filter: blur(4px) !important;
+        }
+
+        .ft-menu__slider {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 40%, #f0fdf4 100%) !important;
+            width: 85% !important;
+            max-width: 340px !important;
+            border-radius: 0 20px 20px 0 !important;
+            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15) !important;
+            padding-top: 80px !important;
+            overflow-y: auto !important;
+        }
+
+        .ft-menu--js-show .ft-menu__close-btn {
+            top: 16px !important;
+            right: 16px !important;
+            width: 40px !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange)) !important;
+            border-radius: 50% !important;
+            color: #fff !important;
+            font-size: 1.4rem !important;
+            margin: 0 !important;
+            z-index: 2001 !important;
+            border: 2px solid rgba(255, 255, 255, 0.4) !important;
+            transform: none !important;
+            position: fixed !important;
+            box-shadow: 0 4px 15px rgba(0, 128, 0, 0.3) !important;
+            animation: none !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .ft-menu__close-btn svg {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        .ft-menu ul,
+        .ft-menu ul ul {
+            padding: 0 !important;
+            margin: 0 !important;
+            list-style: none !important;
+        }
+
+        .ft-menu .flex-grow-1 {
+            width: 100% !important;
+        }
+
+        .ft-menu .hero-nav__item {
+            margin: 0 12px !important;
+            border-radius: 0 !important;
+            position: relative !important;
+        }
+
+        .ft-menu .hero-nav__item::after {
+            content: '' !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 20px !important;
+            right: 20px !important;
+            height: 1px !important;
+            background: linear-gradient(90deg, transparent, rgba(0, 128, 0, 0.1), rgba(229, 142, 36, 0.08), transparent) !important;
+        }
+
+        .ft-menu .hero-nav__item:last-child::after {
+            display: none !important;
+        }
+
+        .ft-menu .hero-nav__item .hero-nav__link,
+        .ft-menu .hero-nav__item a:not(.btn) {
+            padding: 16px 20px 16px 24px !important;
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+            color: var(--neutral-dark) !important;
+            transition: all 0.3s ease !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            position: relative !important;
+        }
+
+        .ft-menu .hero-nav__item .hero-nav__link::before,
+        .ft-menu .hero-nav__item a:not(.btn)::before {
+            content: '' !important;
+            width: 6px !important;
+            height: 6px !important;
+            border-radius: 50% !important;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange)) !important;
+            flex-shrink: 0 !important;
+            transition: all 0.3s ease !important;
+            opacity: 0.5 !important;
+        }
+
+        .ft-menu .hero-nav__item:not(.hero-nav__item--with-dropdown) .hero-nav__link:hover,
+        .ft-menu .hero-nav__item a:not(.btn):hover {
+            background: linear-gradient(135deg, rgba(0, 128, 0, 0.06), rgba(229, 142, 36, 0.04)) !important;
+            color: var(--primary-green) !important;
+        }
+
+        .ft-menu .hero-nav__item:not(.hero-nav__item--with-dropdown) .hero-nav__link:hover::before,
+        .ft-menu .hero-nav__item a:not(.btn):hover::before {
+            opacity: 1 !important;
+            transform: scale(1.3) !important;
+            box-shadow: 0 0 10px rgba(0, 128, 0, 0.3) !important;
+        }
+
+        .ft-menu .hero-nav__item .hero-nav__link::after,
+        .ft-menu .hero-nav__item a::after {
+            display: none !important;
+        }
+
+        .ft-menu .hero-nav__item--with-dropdown > .hero-nav__link {
+            background: linear-gradient(135deg, rgba(0, 128, 0, 0.04), rgba(229, 142, 36, 0.03)) !important;
+            border-radius: 10px !important;
+            margin: 4px 0 !important;
+            font-weight: 600 !important;
+        }
+
+        .ft-menu .hero-nav__item--with-dropdown .hero-nav__item-chevron {
+            margin-left: auto !important;
+            color: var(--primary-green) !important;
+            opacity: 0.6 !important;
+        }
+
+        .ft-menu .hero-nav__item--with-dropdown.hero-nav__item--show-dropdown > .hero-nav__link {
+            border-radius: 10px 10px 0 0 !important;
+            background: linear-gradient(135deg, rgba(0, 128, 0, 0.08), rgba(229, 142, 36, 0.05)) !important;
+        }
+
+        .ft-menu .btn-primary {
+            width: auto !important;
+            min-width: 160px !important;
+            text-align: center !important;
+            padding: 12px 28px !important;
+            font-size: 0.95rem !important;
+            margin: 8px 12px !important;
+            border-radius: 50px !important;
+            display: inline-flex !important;
+        }
+
+        .ft-menu .hero-nav__dropdown {
+            position: static !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            padding: 0 8px !important;
+            margin: 0 !important;
+            max-height: 0 !important;
+            overflow: hidden !important;
+            transition: max-height 0.3s ease !important;
+        }
+
+        .ft-menu .hero-nav__item--show-dropdown .hero-nav__dropdown {
+            max-height: 500px !important;
+        }
+
+        .ft-menu .dropdown__link {
+            padding: 12px 16px 12px 36px !important;
+            margin-bottom: 2px !important;
+            border-radius: 8px !important;
+            transition: all 0.3s ease !important;
+            font-size: 0.9rem !important;
+            position: relative !important;
+        }
+
+        .ft-menu .dropdown__link::before {
+            content: '' !important;
+            position: absolute !important;
+            left: 20px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 4px !important;
+            height: 4px !important;
+            border-radius: 50% !important;
+            background: var(--secondary-orange) !important;
+            opacity: 0.4 !important;
+        }
+
+        .ft-menu .dropdown__link:hover {
+            background: linear-gradient(135deg, rgba(0, 128, 0, 0.06), rgba(229, 142, 36, 0.04)) !important;
+            color: var(--primary-green) !important;
+            padding-left: 42px !important;
+        }
+
+        .ft-menu .dropdown__link:hover::before {
+            opacity: 1 !important;
+            background: var(--primary-green) !important;
+        }
     }
 </style>
 
-<div id="heroCarousel"
-     class="carousel slide hero-carousel"
-     data-bs-ride="carousel"
-     data-bs-interval="6000">
-    <div class="carousel-indicators">
-        <button type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide-to="0"
-                class="active"></button>
-        <button type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide-to="1"></button>
-        <button type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide-to="2"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active"
-             style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80');">
-            <div class="carousel-caption">
-                <h1 class="typewriter"
-                    data-text="Streamline Your Business with Ultimate POS"></h1>
-                <p>From inventory to sales — one integrated platform to manage your entire retail operation seamlessly.
-                </p>
-                <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="carousel-item"
-             style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80');">
-            <div class="carousel-caption">
-                <h1 class="typewriter"
-                    data-text="Real-Time Insights, Smarter Decisions"></h1>
-                <p>Powerful analytics and reporting give you full visibility into your business performance at a glance.
-                </p>
-                <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="carousel-item"
-             style="background-image: url('https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?w=1600&q=80');">
-            <div class="carousel-caption">
-                <h1 class="typewriter"
-                    data-text="Multi-Store Management Made Easy"></h1>
-                <p>Handle multiple locations, users, and currencies from a single dashboard — scale without limits.</p>
-                <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev"
-            type="button"
-            data-bs-target="#heroCarousel"
-            data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next"
-            type="button"
-            data-bs-target="#heroCarousel"
-            data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const typewriters = document.querySelectorAll('.typewriter');
-        const carousel = document.getElementById('heroCarousel');
-
-        function typeText(el, text, callback) {
-            el.classList.add('typewriter-cursor');
-            el.textContent = '';
-            let i = 0;
-
-            function type() {
-                if (i < text.length) {
-                    el.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, 40 + Math.random() * 30);
-                } else {
-                    if (callback) setTimeout(callback, 3000);
+        var menu = document.querySelector('#hero-menu');
+        if (menu) {
+            menu.addEventListener('click', function(e) {
+                if (e.target === menu && menu.classList.contains('ft-menu--js-show')) {
+                    menu.classList.remove('ft-menu--js-show');
+                    if (typeof bodyScrollLock !== 'undefined') {
+                        bodyScrollLock.unlock(menu);
+                    }
                 }
-            }
-            type();
-        }
-
-        function clearTypewriter(el) {
-            el.classList.remove('typewriter-cursor');
-            el.textContent = '';
-        }
-
-        function startCurrentSlide() {
-            const active = carousel.querySelector('.carousel-item.active .typewriter');
-            if (active) {
-                active.textContent = '';
-                typeText(active, active.dataset.text);
-            }
-        }
-
-        carousel.addEventListener('slide.bs.carousel', function() {
-            document.querySelectorAll('.typewriter').forEach(function(el) {
-                clearTypewriter(el);
             });
-        });
-
-        carousel.addEventListener('slid.bs.carousel', function() {
-            setTimeout(startCurrentSlide, 300);
-        });
-
-        startCurrentSlide();
+        }
     });
 </script>

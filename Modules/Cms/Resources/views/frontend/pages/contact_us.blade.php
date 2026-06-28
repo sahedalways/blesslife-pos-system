@@ -14,7 +14,7 @@
         $navbar_btn['link'] = $__site_details['btns']['navbar']['link'] ?? route('business.getRegister');
     }
 @endphp
-@includeIf('cms::frontend.layouts.header')
+@includeIf('cms::frontend.layouts.home_header')
 @section('meta')
     <meta name="description" content="{{$page->meta_description}}">
 @endsection
