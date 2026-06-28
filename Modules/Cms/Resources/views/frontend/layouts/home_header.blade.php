@@ -63,7 +63,7 @@
 
     .hero-carousel {
         position: relative;
-        overflow: hidden;
+        overflow: visible;
     }
 
     #heroCarousel {
