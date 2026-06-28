@@ -147,24 +147,36 @@
     }
 
     .hero-carousel .btn-trial {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         margin-top: 1.5rem;
-        padding: 0.85rem 2.5rem;
-        background: linear-gradient(135deg, #6366f1, #4f46e5);
-        color: #fff;
-        font-size: 1.05rem;
-        font-weight: 700;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
+        color: #FFFFFF;
+        font-size: 0.95rem;
+        font-weight: 600;
         border: none;
         border-radius: 50px;
         text-decoration: none;
+        cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+        box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
     }
 
     .hero-carousel .btn-trial:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 35px rgba(99, 102, 241, 0.5);
-        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(229, 142, 36, 0.3);
+        color: #ffffff;
+    }
+
+    .hero-carousel .btn-trial i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .hero-carousel .btn-trial:hover i {
+        transform: translateX(5px);
     }
 
 .hero-carousel .carousel-control-prev,
@@ -227,7 +239,7 @@
                 <p>From inventory to sales — one integrated platform to manage your entire retail operation seamlessly.
                 </p>
                 <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }}</a>
+                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         <div class="carousel-item"
@@ -238,7 +250,7 @@
                 <p>Powerful analytics and reporting give you full visibility into your business performance at a glance.
                 </p>
                 <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }}</a>
+                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         <div class="carousel-item"
@@ -248,7 +260,7 @@
                     data-text="Multi-Store Management Made Easy"></h1>
                 <p>Handle multiple locations, users, and currencies from a single dashboard — scale without limits.</p>
                 <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }}</a>
+                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
