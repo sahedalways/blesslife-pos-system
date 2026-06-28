@@ -108,6 +108,26 @@
         flex-direction: column;
         justify-content: space-between;
         min-height: 480px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.25) 100%);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow:
+            0 8px 32px rgba(0, 128, 0, 0.06),
+            0 2px 8px rgba(0, 0, 0, 0.04),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    #support-247-section .sup-hero-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.35) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
     }
 
     #support-247-section .sup-hero-content {
