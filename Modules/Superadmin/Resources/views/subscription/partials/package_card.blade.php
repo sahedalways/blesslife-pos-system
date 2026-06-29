@@ -222,30 +222,12 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 14px 24px;
-            background: linear-gradient(135deg, #008000 0%, #E58E24 100%);
-            color: #ffffff !important;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            width: 100%;
+            min-height: 50px;
             position: relative;
             z-index: 2;
-            box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
-            height: auto;
-            min-height: 50px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .pps-card-wrapper .pps-pkg-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(229, 142, 36, 0.4);
-            color: #ffffff !important;
-            background: linear-gradient(135deg, #E58E24 0%, #008000 100%);
+            cursor: pointer;
+            text-decoration: none;
         }
 
         .pps-card-wrapper .pps-pkg-btn::after {
@@ -386,13 +368,13 @@
         <!-- CTA Button -->
         @if ($package->enable_custom_link == 1)
             <a href="{{ $package->custom_link }}"
-               class="pps-pkg-btn">
+               class="pps-pkg-btn btn-blc">
                 {{ $package->custom_link_text }}
             </a>
         @else
             @if (isset($action_type) && $action_type == 'register')
                 <a href="{{ route('business.getRegister') }}?package={{ $package->id }}"
-                   class="pps-pkg-btn">
+                   class="pps-pkg-btn btn-blc">
                     @if ($package->price != 0)
                         @lang('superadmin::lang.register_subscribe')
                     @else
@@ -401,7 +383,7 @@
                 </a>
             @else
                 <a href="{{ action([\Modules\Superadmin\Http\Controllers\SubscriptionController::class, 'pay'], [$package->id]) }}"
-                   class="pps-pkg-btn">
+                   class="pps-pkg-btn btn-blc">
                     @if ($package->price != 0)
                         @lang('superadmin::lang.pay_and_subscribe')
                     @else
