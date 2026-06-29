@@ -207,25 +207,25 @@
             }
 
             /* ===== PRICING GRID ===== */
+            #pro-pricing-section .blc-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 28px;
+                align-items: stretch;
+            }
+
+            @media (max-width: 991px) {
                 #pro-pricing-section .blc-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 32px;
-                    align-items: stretch;
+                    grid-template-columns: repeat(2, 1fr);
                 }
+            }
 
-                @media (max-width: 991px) {
-                    #pro-pricing-section .blc-grid {
-                        grid-template-columns: repeat(2, 1fr);
-                    }
+            @media (max-width: 640px) {
+                #pro-pricing-section .blc-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
                 }
-
-                @media (max-width: 640px) {
-                    #pro-pricing-section .blc-grid {
-                        grid-template-columns: 1fr;
-                        gap: 20px;
-                    }
-                }
+            }
 
             /* ===== PRICING CARD ===== */
             #pro-pricing-section .blc-card {
