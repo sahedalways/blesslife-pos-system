@@ -81,7 +81,6 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
         }
 
         /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
