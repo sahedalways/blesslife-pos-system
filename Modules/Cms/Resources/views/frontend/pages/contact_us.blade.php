@@ -163,13 +163,52 @@
         }
 
         .contact-split__form-col .enquire_response_alert {
-            border-radius: 12px;
-            border: 1px solid rgba(0, 128, 0, 0.25);
-            background: linear-gradient(135deg, rgba(0, 128, 0, 0.08), rgba(229, 142, 36, 0.08));
-            color: #008000;
-            padding: 14px 20px;
+            border-radius: 14px;
+            padding: 16px 20px;
             font-weight: 500;
             font-size: 0.92rem;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            animation: proAlertSlide 0.4s ease;
+        }
+
+        .contact-split__form-col .enquire_response_alert.alert-success {
+            border: 1px solid rgba(0, 128, 0, 0.3);
+            background: linear-gradient(135deg, rgba(0, 128, 0, 0.1), rgba(0, 128, 0, 0.05));
+            color: #008000;
+            display: flex;
+        }
+
+        .contact-split__form-col .enquire_response_alert.alert-error {
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05));
+            color: #dc2626;
+            display: flex;
+        }
+
+        .contact-split__form-col .enquire_response_alert i {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-split__form-col .enquire_response_alert .alert-icon-success,
+        .contact-split__form-col .enquire_response_alert .alert-icon-error {
+            display: none;
+        }
+
+        .contact-split__form-col .enquire_response_alert.alert-success .alert-icon-success {
+            display: inline-block;
+        }
+
+        .contact-split__form-col .enquire_response_alert.alert-error .alert-icon-error {
+            display: inline-block;
+        }
+
+        @keyframes proAlertSlide {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .contact-split__form-col .contact-form__input {
@@ -191,6 +230,16 @@
             font-weight: 400;
         }
 
+        .contact-split__form-col .contact-form__input.input-error {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .contact-split__form-col .contact-form__input.input-error:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+        }
+
         .contact-split__form-col .contact-form__input:focus {
             background: #ffffff;
             border-color: #008000;
@@ -200,6 +249,10 @@
 
         .contact-split__form-col .contact-form__input:hover:not(:focus) {
             border-color: rgba(0, 128, 0, 0.3);
+        }
+
+        .contact-split__form-col .contact-form__input.input-error:hover:not(:focus) {
+            border-color: #dc2626;
         }
 
         .contact-split__form-col textarea.contact-form__input {
@@ -464,9 +517,10 @@
                         {!! $page->content ?? "We're happy to receive your message. Ask us anything, we'll respond as soon as possible." !!}
                     </p>
                 </div>
-                <div class="alert mt-4 alert-primary enquire_response_alert"
-                     role="alert"
-                     style="display:none;">
+                <div class="enquire_response_alert"
+                     role="alert">
+                    <i class="fas fa-check-circle alert-icon-success"></i>
+                    <i class="fas fa-exclamation-circle alert-icon-error"></i>
                     <span class="enquire_response"></span>
                 </div>
                 <input type="text"
@@ -538,11 +592,36 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            function showAlert(msg, type) {
+                var alert = $(".enquire_response_alert");
+                alert.removeClass('alert-success alert-error');
+                if (type === 'success') {
+                    alert.addClass('alert-success');
+                    alert.find('.alert-icon-success').show();
+                    alert.find('.alert-icon-error').hide();
+                } else {
+                    alert.addClass('alert-error');
+                    alert.find('.alert-icon-success').hide();
+                    alert.find('.alert-icon-error').show();
+                }
+                alert.find('.enquire_response').text(msg);
+            }
+
+            $(".contact-form__input").on('input', function() {
+                $(this).removeClass('input-error');
+            });
+
             $("#contact_form").validate({
+                errorClass: 'input-error',
+                errorPlacement: function(error, element) {
+                    element.addClass('input-error');
+                },
                 submitHandler: function(form, e) {
                     if ($('#contact_form').valid()) {
-                        let data = $('form#contact_form').serialize();
+                        var data = $('form#contact_form').serialize();
                         $("#submit-btn").attr('disabled', true);
+                        $(".enquire_response_alert").removeClass('alert-success alert-error');
                         $.ajax({
                             method: 'POST',
                             dataType: "json",
@@ -553,16 +632,20 @@
                                 if (result.success) {
                                     $('form#contact_form').trigger("reset");
                                     $('form#enquire_now_form').trigger("reset");
-                                    $(".enquire_response_alert").css({
-                                        'display': ''
-                                    });
-                                    $(".enquire_response").text(result.msg);
+                                    showAlert(result.msg, 'success');
                                 } else {
-                                    $(".enquire_response_alert").css({
-                                        'display': ''
-                                    });
-                                    $(".enquire_response").text(result.msg);
+                                    showAlert(result.msg, 'error');
                                 }
+                            },
+                            error: function(xhr) {
+                                $("#submit-btn").attr('disabled', false);
+                                var msg = 'Something went wrong. Please try again later.';
+                                if (xhr.responseJSON && xhr.responseJSON.msg) {
+                                    msg = xhr.responseJSON.msg;
+                                } else if (xhr.status === 422) {
+                                    msg = 'Please fill in all required fields correctly.';
+                                }
+                                showAlert(msg, 'error');
                             }
                         });
                     }
