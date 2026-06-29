@@ -1,5 +1,11 @@
-@extends('layouts.auth')
+@extends('cms::frontend.layouts.app')
+@section('body-class', 'nav-overflow-hidden')
 @section('title', __('superadmin::lang.pricing'))
+
+@section('meta')
+    <meta name="description"
+          content="Choose the perfect pricing plan for your business. Compare features, flexible subscription options, and affordable plans designed to help you manage sales, inventory, customers, and business operations efficiently.">
+@endsection
 
 @section('content')
     @php
@@ -12,6 +18,7 @@
             heroSubtitle="Pricing"
             heroTitle="Choose Your Plan"
             description="Select the perfect plan for your business. Start with a free trial, no credit card required." />
+
     <div class="">
         @include('superadmin::layouts.partials.currency')
         <div class="pricing">
@@ -27,8 +34,10 @@
                     <!-- Montly/annual-->
                     <div class="tw-flex tw-gap-2 mt-5 md:tw-mt-5">
                         <span class="tw-text-white">Montly</span>
-                        <input type="checkbox" id="durationCheck" class="tw-dw-toggle tw-dw-toggle-secondary duration_check"
-                            style="margin: 0px" />
+                        <input type="checkbox"
+                               id="durationCheck"
+                               class="tw-dw-toggle tw-dw-toggle-secondary duration_check"
+                               style="margin: 0px" />
 
                         <span class="tw-flex tw-flex-col tw-text-white"> Annual </span>
                     </div>
@@ -36,7 +45,7 @@
 
                 {{-- <div class="box-body tw-mt-6"> --}}
                 <div class="tw-flex tw-flex-col md:tw-flex-row tw-gap-5 md:tw-gap-0 tw-mt-5 md:tw-mt-7 tw-mb-10 tw-h-auto"
-                    id="packages">
+                     id="packages">
                     {{-- @include('superadmin::subscription.partials.packages', [
                             'action_type' => 'register',
                         ]) --}}
@@ -51,7 +60,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('.change_lang').click(function() {
-                window.location = "{{ route('pricing')}}?lang=" + $(this).attr('value');
+                window.location = "{{ route('pricing') }}?lang=" + $(this).attr('value');
             });
 
             $('#durationCheck').off('change').on('change', function() {
