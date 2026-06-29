@@ -501,7 +501,7 @@
             <div class="sup-contact-grid">
 
                 <!-- Email Card -->
-                <a href="mailto:haquebd08@gmail.com"
+                <a href="mailto:info@blesslifeltd.com"
                    class="sup-contact-card">
                     <div class="sup-contact-icon sup-icon-email">
                         <i class="fas fa-envelope"></i>
@@ -509,13 +509,13 @@
                     <div class="sup-contact-body">
                         <span class="sup-contact-label">Email Us</span>
                         <h4 class="sup-contact-title">Drop a Message</h4>
-                        <p class="sup-contact-value">haquebd08@gmail.com</p>
+                        <p class="sup-contact-value">info@blesslifeltd.com</p>
                         <span class="sup-status-tag">Reply within 1 hour</span>
                     </div>
                 </a>
 
                 <!-- Phone Card -->
-                <a href="tel:+8801234567890"
+                <a href="tel:+112242650"
                    class="sup-contact-card">
                     <div class="sup-contact-icon sup-icon-phone">
                         <i class="fas fa-phone-alt"></i>
@@ -523,7 +523,7 @@
                     <div class="sup-contact-body">
                         <span class="sup-contact-label">Call Us</span>
                         <h4 class="sup-contact-title">Talk to Expert</h4>
-                        <p class="sup-contact-value">+966 53 167 4978</p>
+                        <p class="sup-contact-value">+112242650</p>
                         <span class="sup-status-tag">Available 24/7</span>
                     </div>
                 </a>
