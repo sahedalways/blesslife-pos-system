@@ -39,7 +39,7 @@
     height: 100%;
     background: #E58E24;
     border-radius: 50px;
-    transition: width 0.4s ease;
+    transition: width 0.45s ease;
     z-index: 0;
 }
 .bls-submit-btn:hover::after,
@@ -49,22 +49,24 @@
 .bls-submit-btn:hover,
 .bls-submit-btn:focus {
     color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(229, 142, 36, 0.4);
-    animation: blsTextFlipCircle 0.55s ease forwards;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(229, 142, 36, 0.5);
+    animation: blsTextPop 0.5s ease;
 }
-@keyframes blsTextFlipCircle {
+@keyframes blsTextPop {
     0% {
-        clip-path: circle(150% at 50% 50%);
+        letter-spacing: normal;
     }
-    35% {
-        clip-path: circle(0% at 50% 0%);
+    30% {
+        letter-spacing: 3px;
+        text-shadow: 0 0 10px rgba(255,255,255,0.6);
     }
-    65% {
-        clip-path: circle(0% at 50% 0%);
+    70% {
+        letter-spacing: -1px;
     }
     100% {
-        clip-path: circle(150% at 50% 50%);
+        letter-spacing: normal;
+        text-shadow: none;
     }
 }
 </style>
