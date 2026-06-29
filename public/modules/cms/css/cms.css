@@ -164,14 +164,30 @@ button:focus {
     display: inline-block;
     text-align: center;
     text-decoration: none;
+    perspective: 600px;
 }
 
 .bls-submit-btn:hover,
 .bls-submit-btn:focus {
     background: #E58E24;
     color: #fff;
-    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(229, 142, 36, 0.4);
+    animation: blsBtnFlip 0.45s ease forwards;
+}
+
+@keyframes blsBtnFlip {
+    0% {
+        transform: translateY(0px) rotateX(0deg);
+    }
+    40% {
+        transform: translateY(-2px) rotateX(90deg);
+    }
+    70% {
+        transform: translateY(-3px) rotateX(0deg);
+    }
+    100% {
+        transform: translateY(-2px) rotateX(0deg);
+    }
 }
 
 .highlight {
