@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="{{ asset('css/app.css?v='.$asset_v) }}">
 
 <style>
-.btn-blc {
+.bls-submit-btn {
     background: #008000;
     color: #fff;
     border: none;
@@ -26,8 +26,8 @@
     text-align: center;
     text-decoration: none;
 }
-.btn-blc:hover,
-.btn-blc:focus {
+.bls-submit-btn:hover,
+.bls-submit-btn:focus {
     background: #E58E24;
     color: #fff;
     transform: translateY(-2px);
