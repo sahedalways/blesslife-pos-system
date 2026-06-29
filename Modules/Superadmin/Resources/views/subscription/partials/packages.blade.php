@@ -1,6 +1,7 @@
 @php
 	$count = 0;
 @endphp
+<div class="row">
 @foreach ($packages as $package)
 	@if($package->is_private == 1 && !auth()->user()->can('superadmin'))
 		@php
@@ -25,3 +26,4 @@
 	@endif
 	
 @endforeach
+</div>

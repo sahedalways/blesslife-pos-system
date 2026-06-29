@@ -1,4 +1,4 @@
-<div class="col-md-4 tw-mb-5 {{ $package->interval }} tw-relative price_card pps-card-wrapper">
+<div class="col-md-4 col-sm-6 mb-4 {{ $package->interval }} price_card pps-card-wrapper">
 
     <style>
         /* ===== PRICING CARD WRAPPER ===== */
