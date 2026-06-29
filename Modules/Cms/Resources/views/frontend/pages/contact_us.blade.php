@@ -85,8 +85,8 @@
                     <input type="number" name="mobile" class="contact-form__input" placeholder="Mobile" required>
                     <input type="email" name="email" class="contact-form__input" placeholder="Email" required>
                     <textarea class="contact-form__input" name="message" placeholder="Message" required></textarea>
-                    <button id="submit-btn" class="btn btn-primary w-100">
-                        SEND MESSAGE
+                    <button id="submit-btn" class="bls-global-btn w-100">
+                        <span>SEND MESSAGE</span>
                     </button>
                 </form>
             </div>
