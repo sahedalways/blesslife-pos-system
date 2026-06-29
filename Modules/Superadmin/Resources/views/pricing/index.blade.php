@@ -33,14 +33,14 @@
             }
 
             /* Decorative Background Elements */
-            #pro-pricing-section .blc-bg-shape {
+            #pro-pricing-section .plc-bg-shape {
                 position: absolute;
                 border-radius: 50%;
                 pointer-events: none;
                 z-index: 0;
             }
 
-            #pro-pricing-section .blc-shape-1 {
+            #pro-pricing-section .plc-shape-1 {
                 width: 450px;
                 height: 450px;
                 top: -150px;
@@ -48,7 +48,7 @@
                 background: radial-gradient(circle, rgba(0, 128, 0, 0.06) 0%, transparent 70%);
             }
 
-            #pro-pricing-section .blc-shape-2 {
+            #pro-pricing-section .plc-shape-2 {
                 width: 400px;
                 height: 400px;
                 bottom: -120px;
@@ -56,7 +56,7 @@
                 background: radial-gradient(circle, rgba(229, 142, 36, 0.15) 0%, transparent 70%);
             }
 
-            #pro-pricing-section .blc-dot-grid {
+            #pro-pricing-section .plc-dot-grid {
                 position: absolute;
                 width: 200px;
                 height: 200px;
@@ -69,7 +69,7 @@
             }
 
             /* ===== CONTAINER ===== */
-            #pro-pricing-section .blc-container {
+            #pro-pricing-section .plc-container {
                 position: relative;
                 z-index: 2;
                 max-width: 1600px;
@@ -78,7 +78,7 @@
             }
 
             /* ===== HEADER ===== */
-            #pro-pricing-section .blc-header {
+            #pro-pricing-section .plc-header {
                 text-align: center;
                 max-width: 700px;
                 margin: 0 auto 50px;
@@ -102,7 +102,7 @@
             }
 
             /* ===== TOGGLE SWITCH ===== */
-            #pro-pricing-section .blc-toggle-wrap {
+            #pro-pricing-section .plc-toggle-wrap {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -118,7 +118,7 @@
                 box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
             }
 
-            #pro-pricing-section .blc-toggle-label {
+            #pro-pricing-section .plc-toggle-label {
                 font-size: 15px;
                 font-weight: 600;
                 color: #9CA3AF;
@@ -127,12 +127,12 @@
                 user-select: none;
             }
 
-            #pro-pricing-section .blc-toggle-label.active {
+            #pro-pricing-section .plc-toggle-label.active {
                 color: #008000;
             }
 
             /* Custom Toggle */
-            #pro-pricing-section .blc-toggle-switch {
+            #pro-pricing-section .plc-toggle-switch {
                 position: relative;
                 display: inline-block;
                 width: 56px;
@@ -140,13 +140,13 @@
                 flex-shrink: 0;
             }
 
-            #pro-pricing-section .blc-toggle-switch input {
+            #pro-pricing-section .plc-toggle-switch input {
                 opacity: 0;
                 width: 0;
                 height: 0;
             }
 
-            #pro-pricing-section .blc-toggle-slider {
+            #pro-pricing-section .plc-toggle-slider {
                 position: absolute;
                 cursor: pointer;
                 top: 0;
@@ -159,7 +159,7 @@
                 box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
             }
 
-            #pro-pricing-section .blc-toggle-slider::before {
+            #pro-pricing-section .plc-toggle-slider::before {
                 content: '';
                 position: absolute;
                 height: 22px;
@@ -172,12 +172,12 @@
                 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
             }
 
-            #pro-pricing-section .blc-toggle-switch input:checked+.blc-toggle-slider::before {
+            #pro-pricing-section .plc-toggle-switch input:checked+.plc-toggle-slider::before {
                 transform: translateX(26px);
             }
 
             /* Save Badge */
-            #pro-pricing-section .blc-save-tag {
+            #pro-pricing-section .plc-save-tag {
                 display: inline-flex;
                 align-items: center;
                 gap: 4px;
@@ -207,7 +207,7 @@
             }
 
             /* ===== PRICING GRID ===== */
-                #pro-pricing-section .blc-grid {
+                #pro-pricing-section .plc-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
                     gap: 32px;
@@ -215,20 +215,20 @@
                 }
 
                 @media (max-width: 991px) {
-                    #pro-pricing-section .blc-grid {
+                    #pro-pricing-section .plc-grid {
                         grid-template-columns: repeat(2, 1fr);
                     }
                 }
 
                 @media (max-width: 640px) {
-                    #pro-pricing-section .blc-grid {
+                    #pro-pricing-section .plc-grid {
                         grid-template-columns: 1fr;
                         gap: 20px;
                     }
                 }
 
             /* ===== PRICING CARD ===== */
-            #pro-pricing-section .blc-card {
+            #pro-pricing-section .plc-card {
                 position: relative;
                 background: #ffffff;
                 border-radius: 24px;
@@ -242,7 +242,7 @@
             }
 
             /* Background shimmer */
-            #pro-pricing-section .blc-card::before {
+            #pro-pricing-section .plc-card::before {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -255,18 +255,18 @@
                 transition: transform 0.5s ease;
             }
 
-            #pro-pricing-section .blc-card:hover {
+            #pro-pricing-section .plc-card:hover {
                 transform: translateY(-12px);
                 box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
                 border-color: rgba(0, 128, 0, 0.2);
             }
 
-            #pro-pricing-section .blc-card:hover::before {
+            #pro-pricing-section .plc-card:hover::before {
                 transform: scaleX(1);
             }
 
             /* ===== POPULAR/FEATURED CARD ===== */
-            #pro-pricing-section .blc-card.blc-featured {
+            #pro-pricing-section .plc-card.plc-featured {
                 background: linear-gradient(160deg, #008000 0%, #2d5016 60%, #E58E24 100%);
                 color: #ffffff;
                 transform: scale(1.05);
@@ -275,17 +275,17 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .blc-card.blc-featured:hover {
+            #pro-pricing-section .plc-card.plc-featured:hover {
                 transform: scale(1.05) translateY(-12px);
             }
 
-            #pro-pricing-section .blc-card.blc-featured::before {
+            #pro-pricing-section .plc-card.plc-featured::before {
                 background: linear-gradient(90deg, #FFD700, #ffffff);
                 transform: scaleX(1);
             }
 
             /* Featured background pattern */
-            #pro-pricing-section .blc-card.blc-featured::after {
+            #pro-pricing-section .plc-card.plc-featured::after {
                 content: '';
                 position: absolute;
                 top: -50px;
@@ -310,7 +310,7 @@
             }
 
             /* Popular Ribbon */
-            #pro-pricing-section .blc-popular-tag {
+            #pro-pricing-section .plc-popular-tag {
                 position: absolute;
                 top: 20px;
                 right: 20px;
@@ -329,12 +329,12 @@
                 gap: 4px;
             }
 
-            #pro-pricing-section .blc-popular-tag i {
+            #pro-pricing-section .plc-popular-tag i {
                 font-size: 0.7rem;
             }
 
             /* ===== CARD CONTENT ===== */
-            #pro-pricing-section .blc-card-icon {
+            #pro-pricing-section .plc-card-icon {
                 width: 64px;
                 height: 64px;
                 border-radius: 18px;
@@ -350,18 +350,18 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-card-icon {
+            #pro-pricing-section .plc-card.plc-featured .plc-card-icon {
                 background: rgba(255, 255, 255, 0.2);
                 backdrop-filter: blur(10px);
                 color: #ffffff;
                 border: 1px solid rgba(255, 255, 255, 0.3);
             }
 
-            #pro-pricing-section .blc-card:hover .blc-card-icon {
+            #pro-pricing-section .plc-card:hover .plc-card-icon {
                 transform: rotate(-8deg) scale(1.1);
             }
 
-            #pro-pricing-section .blc-card-name {
+            #pro-pricing-section .plc-card-name {
                 font-size: 1.5rem;
                 font-weight: 700;
                 color: #1F2937;
@@ -371,11 +371,11 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-card-name {
+            #pro-pricing-section .plc-card.plc-featured .plc-card-name {
                 color: #ffffff;
             }
 
-            #pro-pricing-section .blc-card-desc {
+            #pro-pricing-section .plc-card-desc {
                 font-size: 0.9rem;
                 color: #6B7280;
                 line-height: 1.6;
@@ -384,12 +384,12 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-card-desc {
+            #pro-pricing-section .plc-card.plc-featured .plc-card-desc {
                 color: rgba(255, 255, 255, 0.9);
             }
 
             /* Price */
-            #pro-pricing-section .blc-price-wrap {
+            #pro-pricing-section .plc-price-wrap {
                 position: relative;
                 z-index: 2;
                 margin-bottom: 28px;
@@ -397,29 +397,29 @@
                 border-bottom: 1px dashed rgba(0, 128, 0, 0.2);
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-price-wrap {
+            #pro-pricing-section .plc-card.plc-featured .plc-price-wrap {
                 border-bottom-color: rgba(255, 255, 255, 0.25);
             }
 
-            #pro-pricing-section .blc-price-box {
+            #pro-pricing-section .plc-price-box {
                 display: flex;
                 align-items: baseline;
                 gap: 4px;
                 margin-bottom: 6px;
             }
 
-            #pro-pricing-section .blc-currency {
+            #pro-pricing-section .plc-currency {
                 font-size: 1.5rem;
                 font-weight: 700;
                 color: #1F2937;
                 line-height: 1;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-currency {
+            #pro-pricing-section .plc-card.plc-featured .plc-currency {
                 color: #ffffff;
             }
 
-            #pro-pricing-section .blc-amount {
+            #pro-pricing-section .plc-amount {
                 font-size: 3.2rem;
                 font-weight: 800;
                 color: #1F2937;
@@ -431,36 +431,36 @@
                 background-clip: text;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-amount {
+            #pro-pricing-section .plc-card.plc-featured .plc-amount {
                 background: linear-gradient(135deg, #FFD700, #ffffff);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
             }
 
-            #pro-pricing-section .blc-period {
+            #pro-pricing-section .plc-period {
                 font-size: 0.95rem;
                 color: #6B7280;
                 font-weight: 500;
                 margin-left: 4px;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-period {
+            #pro-pricing-section .plc-card.plc-featured .plc-period {
                 color: rgba(255, 255, 255, 0.85);
             }
 
-            #pro-pricing-section .blc-price-note {
+            #pro-pricing-section .plc-price-note {
                 font-size: 0.78rem;
                 color: #9CA3AF;
                 font-weight: 500;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-price-note {
+            #pro-pricing-section .plc-card.plc-featured .plc-price-note {
                 color: rgba(255, 255, 255, 0.75);
             }
 
             /* Features List */
-            #pro-pricing-section .blc-features {
+            #pro-pricing-section .plc-features {
                 list-style: none;
                 padding: 0;
                 margin: 0 0 28px 0;
@@ -469,7 +469,7 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .blc-features li {
+            #pro-pricing-section .plc-features li {
                 display: flex;
                 align-items: flex-start;
                 gap: 12px;
@@ -479,11 +479,11 @@
                 line-height: 1.5;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-features li {
+            #pro-pricing-section .plc-card.plc-featured .plc-features li {
                 color: rgba(255, 255, 255, 0.95);
             }
 
-            #pro-pricing-section .blc-features li .blc-check-icon {
+            #pro-pricing-section .plc-features li .plc-check-icon {
                 flex-shrink: 0;
                 width: 22px;
                 height: 22px;
@@ -497,23 +497,23 @@
                 margin-top: 2px;
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-features li .blc-check-icon {
+            #pro-pricing-section .plc-card.plc-featured .plc-features li .plc-check-icon {
                 background: rgba(255, 255, 255, 0.2);
                 color: #FFD700;
             }
 
-            #pro-pricing-section .blc-features li.blc-disabled {
+            #pro-pricing-section .plc-features li.plc-disabled {
                 color: #D1D5DB;
                 text-decoration: line-through;
             }
 
-            #pro-pricing-section .blc-features li.blc-disabled .blc-check-icon {
+            #pro-pricing-section .plc-features li.plc-disabled .plc-check-icon {
                 background: rgba(0, 0, 0, 0.05);
                 color: #D1D5DB;
             }
 
             /* CTA Button */
-            #pro-pricing-section .blc-cta-btn {
+            #pro-pricing-section .plc-cta-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -533,39 +533,90 @@
                 box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
             }
 
-            #pro-pricing-section .blc-cta-btn:hover {
+            #pro-pricing-section .plc-cta-btn:hover {
                 transform: translateY(-3px);
                 box-shadow: 0 15px 35px rgba(229, 142, 36, 0.4);
                 color: #ffffff;
             }
 
-            #pro-pricing-section .blc-cta-btn i {
+            #pro-pricing-section .plc-cta-btn i {
                 transition: transform 0.3s ease;
             }
 
-            #pro-pricing-section .blc-cta-btn:hover i {
+            #pro-pricing-section .plc-cta-btn:hover i {
                 transform: translateX(5px);
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-cta-btn {
+            #pro-pricing-section .plc-card.plc-featured .plc-cta-btn {
                 background: #ffffff;
                 color: #008000;
                 box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             }
 
-            #pro-pricing-section .blc-card.blc-featured .blc-cta-btn:hover {
+            #pro-pricing-section .plc-card.plc-featured .plc-cta-btn:hover {
                 color: #E58E24;
                 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             }
 
+            /* ===== NEW ENHANCED STYLES ===== */
+            #pro-pricing-section .plc-card {
+                backdrop-filter: blur(10px);
+            }
+
+            #pro-pricing-section .plc-card-icon {
+                background: linear-gradient(135deg, #008000, #E58E24);
+                color: #fff;
+                box-shadow: 0 8px 20px rgba(0, 128, 0, 0.2);
+            }
+
+            #pro-pricing-section .plc-features li .plc-check-icon {
+                background: #008000;
+                color: #fff;
+                box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+            }
+
+            #pro-pricing-section .plc-features li.plc-disabled .plc-check-icon {
+                background: #D1D5DB;
+                color: #fff;
+                box-shadow: none;
+            }
+
+            #pro-pricing-section .plc-card:hover .plc-card-icon {
+                transform: rotate(0deg) scale(1.15);
+                box-shadow: 0 12px 30px rgba(229, 142, 36, 0.3);
+            }
+
+            #pro-pricing-section .plc-cta-btn {
+                position: relative;
+                overflow: hidden;
+            }
+
+            #pro-pricing-section .plc-cta-btn::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: all 0.6s ease;
+            }
+
+            #pro-pricing-section .plc-cta-btn:hover::after {
+                width: 300px;
+                height: 300px;
+            }
+
             /* Trust Section */
-            #pro-pricing-section .blc-trust {
+            #pro-pricing-section .plc-trust {
                 text-align: center;
                 margin-top: 50px;
                 color: #4B5563;
             }
 
-            #pro-pricing-section .blc-trust-items {
+            #pro-pricing-section .plc-trust-items {
                 display: flex;
                 justify-content: center;
                 gap: 30px;
@@ -573,7 +624,7 @@
                 margin-top: 16px;
             }
 
-            #pro-pricing-section .blc-trust-item {
+            #pro-pricing-section .plc-trust-item {
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
@@ -581,7 +632,7 @@
                 font-weight: 500;
             }
 
-            #pro-pricing-section .blc-trust-item i {
+            #pro-pricing-section .plc-trust-item i {
                 color: #E58E24;
                 font-size: 1rem;
             }
@@ -592,41 +643,41 @@
                     padding: 3.5rem 0 4rem;
                 }
 
-                #pro-pricing-section .blc-title {
+                #pro-pricing-section .plc-title {
                     font-size: 30px;
                 }
 
-                #pro-pricing-section .blc-card {
+                #pro-pricing-section .plc-card {
                     padding: 30px 24px;
                 }
 
-                #pro-pricing-section .blc-card.blc-featured {
+                #pro-pricing-section .plc-card.plc-featured {
                     transform: scale(1);
                 }
 
-                #pro-pricing-section .blc-card.blc-featured:hover {
+                #pro-pricing-section .plc-card.plc-featured:hover {
                     transform: translateY(-12px);
                 }
 
-                #pro-pricing-section .blc-amount {
+                #pro-pricing-section .plc-amount {
                     font-size: 2.5rem;
                 }
 
-                #pro-pricing-section .blc-trust-items {
+                #pro-pricing-section .plc-trust-items {
                     gap: 16px;
                 }
             }
         </style>
 
         <!-- Decorative Backgrounds -->
-        <div class="blc-bg-shape blc-shape-1"></div>
-        <div class="blc-bg-shape blc-shape-2"></div>
-        <div class="blc-dot-grid"></div>
+        <div class="plc-bg-shape plc-shape-1"></div>
+        <div class="plc-bg-shape plc-shape-2"></div>
+        <div class="plc-dot-grid"></div>
 
-        <div class="blc-container">
+        <div class="plc-container">
 
             <!-- Header -->
-            <div class="blc-header">
+            <div class="plc-header">
                 <div class="ds-section-header-wrapper">
                     <span class="ds-subtitle">Pricing</span>
                     <h2 class="ds-page-title">Choose Your Perfect Plan</h2>
@@ -638,21 +689,21 @@
                 </p>
 
                 <!-- Toggle Switch -->
-                <div class="blc-toggle-wrap">
-                    <span class="blc-toggle-label active"
+                <div class="plc-toggle-wrap">
+                    <span class="plc-toggle-label active"
                           id="monthlyLabel">Monthly</span>
 
-                    <label class="blc-toggle-switch">
+                    <label class="plc-toggle-switch">
                         <input type="checkbox"
                                id="durationCheck"
                                class="duration_check">
-                        <span class="blc-toggle-slider"></span>
+                        <span class="plc-toggle-slider"></span>
                     </label>
 
-                    <span class="blc-toggle-label"
+                    <span class="plc-toggle-label"
                           id="annualLabel">
                         Annual
-                        <span class="blc-save-tag">
+                        <span class="plc-save-tag">
                             <i class="fas fa-tag"></i> Save 20%
                         </span>
                     </span>
@@ -660,7 +711,7 @@
             </div>
 
             <!-- Pricing Cards Grid -->
-            <div class="blc-grid"
+            <div class="plc-grid"
                  id="packages">
 
 
@@ -670,18 +721,18 @@
             </div>
 
             <!-- Trust Indicators -->
-            <div class="blc-trust">
-                <div class="blc-trust-items">
-                    <span class="blc-trust-item">
+            <div class="plc-trust">
+                <div class="plc-trust-items">
+                    <span class="plc-trust-item">
                         <i class="fas fa-shield-alt"></i> Secure Payment
                     </span>
-                    <span class="blc-trust-item">
+                    <span class="plc-trust-item">
                         <i class="fas fa-undo"></i> 30-Day Money Back
                     </span>
-                    <span class="blc-trust-item">
+                    <span class="plc-trust-item">
                         <i class="fas fa-headset"></i> 24/7 Support
                     </span>
-                    <span class="blc-trust-item">
+                    <span class="plc-trust-item">
                         <i class="fas fa-sync-alt"></i> Cancel Anytime
                     </span>
                 </div>
