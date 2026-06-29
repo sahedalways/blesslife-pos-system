@@ -130,8 +130,15 @@ class CmsController extends Controller
                     ->where('is_enabled', 1)
                     ->findOrFail($id);
 
+        $suggestedBlogs = CmsPage::where('type', 'blog')
+                    ->where('is_enabled', 1)
+                    ->where('id', '!=', $blog->id)
+                    ->inRandomOrder()
+                    ->limit(3)
+                    ->get();
+
         return view('cms::frontend.blogs.show')
-            ->with(compact('blog'));
+            ->with(compact('blog', 'suggestedBlogs'));
     }
 
     public function contactUs(Request $request)

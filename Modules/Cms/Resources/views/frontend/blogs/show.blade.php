@@ -2,7 +2,8 @@
 @section('body-class', 'nav-overflow-hidden')
 @section('title', $blog->title)
 @section('meta')
-    <meta name="description" content="{{$blog->meta_description}}">
+    <meta name="description"
+          content="{{ $blog->meta_description }}">
 @endsection
 @section('content')
     @php
@@ -32,26 +33,532 @@
         }
     @endphp
     @includeIf('cms::frontend.layouts.home_header')
-    <div class="article-block space-between-blocks">
-        <div class="container col-xxl-10 px-xxl-0">
-            <div class="article col-xl-10 mx-auto">
-                <div class="px-4 mb-4 text-center">
-                    <p class="article-block__info">
-                        <span class="article-block__author">
-                            {{$blog->createdBy->user_full_name ?? ''}}
-                        </span>
-                        <span class="article-block__time">{{\Carbon\Carbon::parse($blog->created_at)->diffForHumans()}}</span>
-                    </p>
-                    <h1 class="article-block__title">
-                        {{$blog->title}}
-                    </h1>
+    <x-hero heroImage="{{ $blog->feature_image_url ?? asset('modules/cms/img/default.png') }}"
+            heroSubtitle="{{ $blog->createdBy->user_full_name ?? '' }}"
+            heroTitle="{{ $blog->title }}"
+            description="{{ \Carbon\Carbon::parse($blog->created_at)->diffForHumans() }}" />
+    <div id="pro-article-section"
+         class="pro-article-wrapper">
+
+        <style>
+            /* ===== MAIN WRAPPER ===== */
+            #pro-article-section {
+                position: relative;
+                padding: 4rem 0 5rem;
+                font-family: var(--text-font, 'Poppins', sans-serif);
+            }
+
+            /* Decorative Backgrounds */
+            #pro-article-section .pas-bg-shape {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            #pro-article-section .pas-shape-1 {
+                width: 350px;
+                height: 350px;
+                top: 80px;
+                left: -120px;
+                background: radial-gradient(circle, rgba(0, 128, 0, 0.05) 0%, transparent 70%);
+            }
+
+            #pro-article-section .pas-shape-2 {
+                width: 300px;
+                height: 300px;
+                bottom: 100px;
+                right: -100px;
+                background: radial-gradient(circle, rgba(229, 142, 36, 0.05) 0%, transparent 70%);
+            }
+
+            /* ===== CONTAINER ===== */
+            #pro-article-section .pas-container {
+                position: relative;
+                z-index: 2;
+                max-width: 1320px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            /* ===== ARTICLE CARD ===== */
+            #pro-article-section .pas-article-card {
+                background: #ffffff;
+                border-radius: 24px;
+                padding: 50px 55px;
+                box-shadow: 0 15px 50px rgba(0, 0, 0, 0.06);
+                border: 1px solid rgba(0, 128, 0, 0.08);
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Top accent line */
+            #pro-article-section .pas-article-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 5px;
+                background: linear-gradient(90deg, #008000, #E58E24, #008000);
+                background-size: 200% 100%;
+                animation: pasGradientShift 4s linear infinite;
+            }
+
+            @keyframes pasGradientShift {
+                0% {
+                    background-position: 0% 50%;
+                }
+
+                100% {
+                    background-position: 200% 50%;
+                }
+            }
+
+            /* ===== ARTICLE CONTENT TYPOGRAPHY ===== */
+            #pro-article-section .pas-article-body {
+                color: #374151;
+                font-size: 1.05rem;
+                line-height: 1.85;
+                word-wrap: break-word;
+            }
+
+            /* Headings */
+            #pro-article-section .pas-article-body h1,
+            #pro-article-section .pas-article-body h2,
+            #pro-article-section .pas-article-body h3,
+            #pro-article-section .pas-article-body h4,
+            #pro-article-section .pas-article-body h5,
+            #pro-article-section .pas-article-body h6 {
+                color: #1F2937;
+                font-weight: 700;
+                line-height: 1.3;
+                margin-top: 2.2em;
+                margin-bottom: 0.8em;
+                letter-spacing: -0.5px;
+                position: relative;
+            }
+
+            #pro-article-section .pas-article-body h1 {
+                font-size: 2.2rem;
+                font-weight: 800;
+            }
+
+            #pro-article-section .pas-article-body h2 {
+                font-size: 1.85rem;
+                padding-bottom: 12px;
+                border-bottom: 2px solid rgba(0, 128, 0, 0.1);
+            }
+
+            #pro-article-section .pas-article-body h2::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 60px;
+                height: 2px;
+                background: linear-gradient(90deg, #008000, #E58E24);
+            }
+
+            #pro-article-section .pas-article-body h3 {
+                font-size: 1.5rem;
+                padding-left: 16px;
+                border-left: 4px solid #008000;
+            }
+
+            #pro-article-section .pas-article-body h4 {
+                font-size: 1.25rem;
+                color: #008000;
+            }
+
+            #pro-article-section .pas-article-body h5 {
+                font-size: 1.1rem;
+            }
+
+            #pro-article-section .pas-article-body h6 {
+                font-size: 1rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #E58E24;
+            }
+
+            /* First heading: no top margin */
+            #pro-article-section .pas-article-body>*:first-child {
+                margin-top: 0;
+            }
+
+            /* Paragraphs */
+            #pro-article-section .pas-article-body p {
+                margin-bottom: 1.5em;
+                color: #4B5563;
+                font-size: 1.05rem;
+                line-height: 1.85;
+            }
+
+            /* First paragraph - lead style */
+            #pro-article-section .pas-article-body>p:first-of-type {
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: #1F2937;
+                line-height: 1.7;
+                margin-bottom: 2em;
+                padding-left: 18px;
+                border-left: 3px solid #008000;
+            }
+
+            /* Links */
+            #pro-article-section .pas-article-body a {
+                color: #008000;
+                font-weight: 600;
+                text-decoration: none;
+                border-bottom: 2px solid rgba(0, 128, 0, 0.25);
+                transition: all 0.3s ease;
+            }
+
+            #pro-article-section .pas-article-body a:hover {
+                color: #E58E24;
+                border-bottom-color: #E58E24;
+            }
+
+            /* Strong, Bold */
+            #pro-article-section .pas-article-body strong,
+            #pro-article-section .pas-article-body b {
+                color: #1F2937;
+                font-weight: 700;
+            }
+
+            /* Italic */
+            #pro-article-section .pas-article-body em,
+            #pro-article-section .pas-article-body i {
+                color: #4B5563;
+                font-style: italic;
+            }
+
+            /* Images */
+            #pro-article-section .pas-article-body img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 16px;
+                margin: 2em auto;
+                display: block;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+                transition: transform 0.4s ease;
+            }
+
+            #pro-article-section .pas-article-body img:hover {
+                transform: scale(1.02);
+            }
+
+            /* Figures with captions */
+            #pro-article-section .pas-article-body figure {
+                margin: 2em 0;
+                text-align: center;
+            }
+
+            #pro-article-section .pas-article-body figcaption {
+                font-size: 0.88rem;
+                color: #6B7280;
+                font-style: italic;
+                margin-top: 12px;
+                padding: 0 20px;
+            }
+
+            /* Blockquotes */
+            #pro-article-section .pas-article-body blockquote {
+                position: relative;
+                margin: 2em 0;
+                padding: 28px 32px 28px 70px;
+                background: linear-gradient(135deg, rgba(0, 128, 0, 0.05), rgba(229, 142, 36, 0.05));
+                border-left: 5px solid #008000;
+                border-radius: 12px;
+                font-size: 1.1rem;
+                font-style: italic;
+                color: #1F2937;
+                line-height: 1.7;
+            }
+
+            #pro-article-section .pas-article-body blockquote::before {
+                content: '\201C';
+                position: absolute;
+                top: 0;
+                left: 20px;
+                font-size: 5rem;
+                color: #008000;
+                opacity: 0.4;
+                font-family: Georgia, serif;
+                line-height: 1;
+            }
+
+            #pro-article-section .pas-article-body blockquote p {
+                margin-bottom: 0;
+                color: inherit;
+            }
+
+            /* Lists */
+            #pro-article-section .pas-article-body ul,
+            #pro-article-section .pas-article-body ol {
+                margin: 1.5em 0;
+                padding-left: 28px;
+            }
+
+            #pro-article-section .pas-article-body li {
+                margin-bottom: 0.6em;
+                color: #4B5563;
+                line-height: 1.75;
+                padding-left: 8px;
+            }
+
+            #pro-article-section .pas-article-body ul li::marker {
+                color: #008000;
+            }
+
+            #pro-article-section .pas-article-body ol li::marker {
+                color: #E58E24;
+                font-weight: 700;
+            }
+
+            #pro-article-section .pas-article-body li::marker {
+                font-size: 1.1em;
+            }
+
+            /* Nested lists */
+            #pro-article-section .pas-article-body ul ul,
+            #pro-article-section .pas-article-body ol ol,
+            #pro-article-section .pas-article-body ul ol,
+            #pro-article-section .pas-article-body ol ul {
+                margin: 0.5em 0;
+            }
+
+            /* Code Inline */
+            #pro-article-section .pas-article-body code {
+                background: rgba(0, 128, 0, 0.08);
+                color: #008000;
+                padding: 3px 8px;
+                border-radius: 6px;
+                font-size: 0.92em;
+                font-family: 'Courier New', monospace;
+                font-weight: 600;
+                border: 1px solid rgba(0, 128, 0, 0.15);
+            }
+
+            /* Code Block */
+            #pro-article-section .pas-article-body pre {
+                background: #1F2937;
+                color: #f3f4f6;
+                padding: 24px 28px;
+                border-radius: 14px;
+                overflow-x: auto;
+                margin: 1.8em 0;
+                font-size: 0.92rem;
+                line-height: 1.6;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                position: relative;
+            }
+
+            #pro-article-section .pas-article-body pre::before {
+                content: '● ● ●';
+                position: absolute;
+                top: 10px;
+                left: 16px;
+                color: #4B5563;
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+            }
+
+            #pro-article-section .pas-article-body pre code {
+                background: transparent;
+                color: inherit;
+                padding: 0;
+                border: none;
+                font-size: inherit;
+                display: block;
+                padding-top: 20px;
+            }
+
+            /* Tables */
+            #pro-article-section .pas-article-body table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 2em 0;
+                background: #ffffff;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            }
+
+            #pro-article-section .pas-article-body thead {
+                background: linear-gradient(135deg, #008000, #E58E24);
+                color: #ffffff;
+            }
+
+            #pro-article-section .pas-article-body th {
+                padding: 14px 18px;
+                text-align: left;
+                font-weight: 700;
+                font-size: 0.92rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            #pro-article-section .pas-article-body td {
+                padding: 14px 18px;
+                border-bottom: 1px solid #f3f4f6;
+                color: #4B5563;
+                font-size: 0.95rem;
+            }
+
+            #pro-article-section .pas-article-body tbody tr:hover {
+                background: rgba(0, 128, 0, 0.03);
+            }
+
+            #pro-article-section .pas-article-body tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+            /* Horizontal Rule */
+            #pro-article-section .pas-article-body hr {
+                border: none;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, rgba(0, 128, 0, 0.3), rgba(229, 142, 36, 0.3), transparent);
+                margin: 3em 0;
+            }
+
+            /* Iframes / Videos */
+            #pro-article-section .pas-article-body iframe,
+            #pro-article-section .pas-article-body video {
+                max-width: 100%;
+                border-radius: 14px;
+                margin: 2em 0;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+                display: block;
+            }
+
+            /* ===== RESPONSIVE ===== */
+            @media (max-width: 991px) {
+                #pro-article-section {
+                    padding: 3rem 0 4rem;
+                }
+
+                #pro-article-section .pas-article-card {
+                    padding: 40px 35px;
+                    border-radius: 20px;
+                }
+
+                #pro-article-section .pas-article-body h1 {
+                    font-size: 1.85rem;
+                }
+
+                #pro-article-section .pas-article-body h2 {
+                    font-size: 1.55rem;
+                }
+
+                #pro-article-section .pas-article-body h3 {
+                    font-size: 1.3rem;
+                }
+            }
+
+            @media (max-width: 575px) {
+                #pro-article-section {
+                    padding: 2rem 0 3rem;
+                }
+
+                #pro-article-section .pas-article-card {
+                    padding: 28px 22px;
+                    border-radius: 16px;
+                }
+
+                #pro-article-section .pas-article-body {
+                    font-size: 1rem;
+                }
+
+                #pro-article-section .pas-article-body p {
+                    font-size: 1rem;
+                }
+
+                #pro-article-section .pas-article-body>p:first-of-type {
+                    font-size: 1.08rem;
+                    padding-left: 14px;
+                }
+
+                #pro-article-section .pas-article-body h1 {
+                    font-size: 1.6rem;
+                }
+
+                #pro-article-section .pas-article-body h2 {
+                    font-size: 1.35rem;
+                }
+
+                #pro-article-section .pas-article-body h3 {
+                    font-size: 1.18rem;
+                }
+
+                #pro-article-section .pas-article-body blockquote {
+                    padding: 22px 22px 22px 55px;
+                    font-size: 1rem;
+                }
+
+                #pro-article-section .pas-article-body blockquote::before {
+                    font-size: 4rem;
+                }
+
+                #pro-article-section .pas-article-body pre {
+                    padding: 20px 18px;
+                    font-size: 0.85rem;
+                }
+
+                #pro-article-section .pas-article-body th,
+                #pro-article-section .pas-article-body td {
+                    padding: 10px 12px;
+                    font-size: 0.85rem;
+                }
+            }
+        </style>
+
+        <!-- Decorative Backgrounds -->
+        <div class="pas-bg-shape pas-shape-1"></div>
+        <div class="pas-bg-shape pas-shape-2"></div>
+
+        <div class="pas-container">
+
+            <!-- Article Card -->
+            <article class="pas-article-card">
+                <div class="pas-article-body">
+                    {!! $blog->content !!}
                 </div>
-                <div class="article-block__header mb-5 py-4 px-xxl-5">
-                    <img src="{{$blog->feature_image_url ?? asset('modules/cms/img/default.png')}}" 
-                    class="article-block__header-img w-100" loading="lazy">
-                </div>
-                {!!$blog->content!!}
-            </div>
+            </article>
+
         </div>
+
     </div>
+
+    @if ($suggestedBlogs->isNotEmpty())
+        <section style="padding: 3rem 0 5rem; background: #f9fafb;">
+            <div class="pas-container">
+                <h2 style="font-size: 1.75rem; font-weight: 700; color: #1F2937; margin-bottom: 2rem; text-align: center;">
+                    Suggested Blogs
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                    @foreach ($suggestedBlogs as $suggested)
+                        <a href="{{ action([\Modules\Cms\Http\Controllers\CmsController::class, 'viewBlog'], ['id' => $suggested->id, 'slug' => $suggested->slug]) }}"
+                           style="text-decoration: none; color: inherit; display: block;">
+                            <div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+                                 onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.12)'"
+                                 onmouseout="this.style.transform=''; this.style.boxShadow=''">
+                                <img src="{{ $suggested->feature_image_url ?? asset('modules/cms/img/default.png') }}"
+                                     style="width: 100%; height: 200px; object-fit: cover; display: block;">
+                                <div style="padding: 1.25rem;">
+                                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #1F2937; margin: 0 0 0.5rem;">
+                                        {{ $suggested->title }}
+                                    </h3>
+                                    <p style="font-size: 0.9rem; color: #6B7280; margin: 0;">
+                                        {{ \Carbon\Carbon::parse($suggested->created_at)->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 @endsection

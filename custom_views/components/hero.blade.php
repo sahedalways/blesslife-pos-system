@@ -5,8 +5,8 @@
     }
 
     .hero-carousel .carousel-item {
-        height: 80vh;
-        min-height: 450px;
+        height: 75vh;
+        min-height: 400px;
         background-size: cover;
         background-position: center bottom;
         position: relative;
