@@ -3,7 +3,7 @@
 
 <div
      class="tw-transition-all tw-duration-5000 tw-border-b tw-shrink-0 lg:tw-h-15 no-print"
-     style="background: linear-gradient(180deg, #ffffff 0%, #f0f7f0 50%, #e8f0e8 100%); box-shadow: inset 0 2px 6px rgba(0,128,0,0.08), 0 2px 8px rgba(0,0,0,0.06); color: #000;">
+     style="background: linear-gradient(135deg, #ffffff 0%, #f5faf5 40%, #edf5ed 70%, #e8f2e8 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -2px 6px rgba(0,128,0,0.06), 0 2px 12px rgba(0,128,0,0.08); border-bottom: 2px solid rgba(0,128,0,0.12); color: #000;">
     <style>
         .bls-header-glossy button,
         .bls-header-glossy a,
@@ -12,21 +12,30 @@
         .bls-header-glossy summary,
         .bls-header-glossy span:not(.tw-sr-only),
         .bls-header-glossy .tw-font-mono {
-            color: #000 !important;
+            color: #1a1a1a !important;
         }
         .bls-header-glossy svg {
-            stroke: #000 !important;
+            stroke: #1a1a1a !important;
         }
         .bls-header-glossy button,
         .bls-header-glossy a,
         .bls-header-glossy summary {
-            background: rgba(0,128,0,0.06) !important;
-            border-color: rgba(0,128,0,0.15) !important;
+            background: rgba(0,128,0,0.05) !important;
+            border: 1px solid rgba(0,128,0,0.1) !important;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease !important;
         }
         .bls-header-glossy button:hover,
         .bls-header-glossy a:hover,
         .bls-header-glossy summary:hover {
-            background: rgba(0,128,0,0.12) !important;
+            background: rgba(0,128,0,0.1) !important;
+            border-color: rgba(0,128,0,0.2) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,128,0,0.12);
+        }
+        .bls-header-glossy .tw-dw-dropdown ul {
+            border: 1px solid rgba(0,128,0,0.1);
+            box-shadow: 0 8px 30px rgba(0,128,0,0.1);
         }
     </style>
     <div class="bls-header-glossy tw-px-5 tw-py-3">
