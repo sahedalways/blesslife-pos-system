@@ -37,7 +37,7 @@
     left: 0;
     width: 0;
     height: 100%;
-    background: #E58E24;
+    background: linear-gradient(135deg, #E58E24, #b36b10, #6b3f00);
     border-radius: 50px;
     transition: width 0.45s ease;
     z-index: 0;
