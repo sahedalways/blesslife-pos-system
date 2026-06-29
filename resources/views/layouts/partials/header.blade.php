@@ -20,18 +20,29 @@
         .bls-header-glossy button,
         .bls-header-glossy a,
         .bls-header-glossy summary {
-            background: rgba(0,128,0,0.05) !important;
-            border: 1px solid rgba(0,128,0,0.1) !important;
+            background: rgba(0,128,0,0.15) !important;
+            border: 1px solid rgba(0,128,0,0.25) !important;
             backdrop-filter: blur(4px);
             transition: all 0.3s ease !important;
         }
         .bls-header-glossy button:hover,
         .bls-header-glossy a:hover,
         .bls-header-glossy summary:hover {
-            background: rgba(0,128,0,0.1) !important;
-            border-color: rgba(0,128,0,0.2) !important;
+            background: rgba(0,128,0,0.25) !important;
+            border-color: rgba(0,128,0,0.35) !important;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,128,0,0.12);
+            box-shadow: 0 4px 12px rgba(0,128,0,0.15);
+        }
+        .bls-header-glossy .left-buttons button {
+            background: #008000 !important;
+            border-color: #006600 !important;
+            color: #fff !important;
+        }
+        .bls-header-glossy .left-buttons button svg {
+            stroke: #fff !important;
+        }
+        .bls-header-glossy .left-buttons button:hover {
+            background: #006600 !important;
         }
         .bls-header-glossy .tw-dw-dropdown ul {
             border: 1px solid rgba(0,128,0,0.1);
@@ -40,7 +51,7 @@
     </style>
     <div class="bls-header-glossy tw-px-5 tw-py-3">
         <div class="tw-flex tw-items-start tw-justify-between tw-gap-6 lg:tw-items-center">
-            <div class="tw-flex tw-items-center tw-gap-3">
+            <div class="left-buttons tw-flex tw-items-center tw-gap-3">
                 <button type="button"
                         class="small-view-button xl:tw-w-20 lg:tw-hidden tw-inline-flex tw-items-center tw-justify-center tw-text-sm tw-font-medium tw-text-white tw-transition-all tw-duration-200 tw-bg-@if (!empty(session('business.theme_color'))) {{ session('business.theme_color') }}@else{{ 'primary' }} @endif-800 hover:tw-bg-@if (!empty(session('business.theme_color'))) {{ session('business.theme_color') }}@else{{ 'primary' }} @endif-700 tw-p-1.5 tw-rounded-lg tw-ring-1 hover:tw-text-white tw-ring-white/10">
                     <span class="tw-sr-only">
