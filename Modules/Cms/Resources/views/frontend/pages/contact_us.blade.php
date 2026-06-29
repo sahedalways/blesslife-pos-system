@@ -152,7 +152,7 @@
         }
 
         .contact-split__form-col .contact-form__header:hover::after {
-            width: 140px;
+            width: 100%;
         }
 
         .contact-split__form-col .contact-form__paragraph {
