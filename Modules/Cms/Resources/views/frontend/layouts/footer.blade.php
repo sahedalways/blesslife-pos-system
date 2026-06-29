@@ -55,6 +55,13 @@
                                 info@blesslifeltd.com
                             </a>
                         </li>
+
+                        <li>
+                            <span class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                            <span>9137 Al Shafi, Complex, Olaya Street, Riyadh 12611</span>
+                        </li>
                     </ul>
                 </div>
 
