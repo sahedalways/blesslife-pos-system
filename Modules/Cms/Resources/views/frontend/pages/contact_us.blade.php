@@ -1,21 +1,6 @@
 @extends('cms::frontend.layouts.app')
 @section('body-class', 'nav-overflow-hidden')
 @section('title', 'Contact us')
-@php
-   $navbar_btn['text'] = 'Try For Free';
-    $navbar_btn['drop_down_text'] = 'Pages';
-    $navbar_btn['link'] = route('business.getRegister');
-    if(isset($__site_details['btns']) && isset($__site_details['btns']['navbar']) && !empty($__site_details['btns']['navbar']['text'])) {
-        $navbar_btn['text'] = $__site_details['btns']['navbar']['text'] ?? 'Try For Free';
-    }
-    if(isset($__site_details['btns']) && isset($__site_details['btns']['navbar']) && !empty($__site_details['btns']['navbar']['drop_down_text'])) {
-        $navbar_btn['drop_down_text'] = $__site_details['btns']['navbar']['drop_down_text'] ?? 'Pages';
-    }
-    if(isset($__site_details['btns']) && isset($__site_details['btns']['navbar']) && !empty($__site_details['btns']['navbar']['link'])) {
-        $navbar_btn['link'] = $__site_details['btns']['navbar']['link'] ?? route('business.getRegister');
-    }
-@endphp
-@includeIf('cms::frontend.layouts.home_header')
 @section('meta')
     <meta name="description" content="{{$page->meta_description}}">
 @endsection
@@ -33,6 +18,37 @@
 </style>
 @endsection
 @section('content')
+@php
+    $navbar_btn['text'] = 'Try For Free';
+    $navbar_btn['drop_down_text'] = 'Pages';
+    $navbar_btn['link'] = route('business.getRegister');
+    if (
+        isset($__site_details['btns']) &&
+        isset($__site_details['btns']['navbar']) &&
+        !empty($__site_details['btns']['navbar']['text'])
+    ) {
+        $navbar_btn['text'] = $__site_details['btns']['navbar']['text'] ?? 'Try For Free';
+    }
+    if (
+        isset($__site_details['btns']) &&
+        isset($__site_details['btns']['navbar']) &&
+        !empty($__site_details['btns']['navbar']['drop_down_text'])
+    ) {
+        $navbar_btn['drop_down_text'] = $__site_details['btns']['navbar']['drop_down_text'] ?? 'Pages';
+    }
+    if (
+        isset($__site_details['btns']) &&
+        isset($__site_details['btns']['navbar']) &&
+        !empty($__site_details['btns']['navbar']['link'])
+    ) {
+        $navbar_btn['link'] = $__site_details['btns']['navbar']['link'] ?? route('business.getRegister');
+    }
+@endphp
+@includeIf('cms::frontend.layouts.home_header')
+<x-hero heroImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80"
+        heroSubtitle="Get In Touch"
+        heroTitle="Contact Us"
+        description="We'd love to hear from you. Reach out with any questions, feedback, or inquiries." />
 <!------------------------------>
 <!--Section Name---------------->
 <!------------------------------>
