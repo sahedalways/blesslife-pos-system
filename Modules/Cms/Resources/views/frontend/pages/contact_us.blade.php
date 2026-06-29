@@ -45,7 +45,7 @@
             $navbar_btn['link'] = $__site_details['btns']['navbar']['link'] ?? route('business.getRegister');
         }
 
-        $bg_img_url = asset('modules/cms/img/contact.jpg');
+        $bg_img_url = 'https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1000&q=80';
         if (!empty($page->feature_image_url)) {
             $bg_img_url = $page->feature_image_url;
         }
@@ -65,19 +65,21 @@
             flex: 0 0 45%;
             max-width: 45%;
             position: relative;
-            overflow: hidden;
         }
 
         .contact-split__image-inner {
             position: sticky;
-            top: 0;
-            height: 100vh;
+            top: 80px;
+            height: calc(100vh - 120px);
+            border-radius: 24px;
+            margin: 20px;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
         }
 
         /* Gradient overlay */
@@ -419,12 +421,15 @@
             .contact-split__image-col {
                 flex: none;
                 max-width: 100%;
-                height: 50vh;
-                min-height: 300px;
             }
             .contact-split__image-inner {
                 position: relative;
-                height: 100%;
+                top: 0;
+                height: 50vh;
+                min-height: 300px;
+                border-radius: 0;
+                margin: 0;
+                box-shadow: none;
             }
             .contact-split__image-text h2 {
                 font-size: 2rem;
@@ -446,7 +451,7 @@
         }
 
         @media (max-width: 575px) {
-            .contact-split__image-col {
+            .contact-split__image-inner {
                 height: 40vh;
                 min-height: 250px;
             }
