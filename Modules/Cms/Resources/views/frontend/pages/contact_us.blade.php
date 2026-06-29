@@ -79,7 +79,7 @@
             top: 0;
             height: 100vh;
             background-size: cover;
-            background-position: center;
+            background-position: center 60%;
             background-repeat: no-repeat;
         }
 
