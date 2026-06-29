@@ -171,22 +171,28 @@ button:focus {
 .bls-submit-btn:focus {
     background: #E58E24;
     color: #fff;
+    transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(229, 142, 36, 0.4);
-    animation: blsBtnFlip 0.45s ease forwards;
 }
 
-@keyframes blsBtnFlip {
+.bls-submit-btn span {
+    display: inline-block;
+    transition: transform 0.4s ease;
+}
+
+.bls-submit-btn:hover span {
+    animation: blsTextFlip 0.45s ease forwards;
+}
+
+@keyframes blsTextFlip {
     0% {
-        transform: translateY(0px) rotateX(0deg);
+        transform: rotateX(0deg);
     }
-    40% {
-        transform: translateY(-2px) rotateX(90deg);
-    }
-    70% {
-        transform: translateY(-3px) rotateX(0deg);
+    50% {
+        transform: rotateX(90deg);
     }
     100% {
-        transform: translateY(-2px) rotateX(0deg);
+        transform: rotateX(0deg);
     }
 }
 
