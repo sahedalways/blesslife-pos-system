@@ -29,7 +29,7 @@
                 padding: 5rem 0 6rem;
                 overflow: hidden;
                 font-family: var(--text-font, 'Poppins', sans-serif);
-                    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+                    background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 40%, #fefce8 100%);
             }
 
             /* Decorative Background Elements */
