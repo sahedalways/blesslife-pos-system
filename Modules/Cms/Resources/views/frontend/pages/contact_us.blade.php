@@ -72,7 +72,6 @@
             flex: 0 0 45%;
             max-width: 45%;
             position: relative;
-            background: linear-gradient(135deg, #008000 0%, #004d00 100%);
         }
 
         .contact-split__image-inner {
@@ -82,6 +81,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
         }
 
         /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
