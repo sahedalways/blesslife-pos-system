@@ -80,7 +80,9 @@
             height: calc(100vh - 120px);
             border-radius: 24px;
             margin: 20px;
-            background: #f0fdf4;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -465,7 +467,7 @@
     <div class="contact-split">
         <div class="contact-split__image-col">
             <div class="contact-split__image-inner"
-                 style="background-image: url('{{ $bg_img_url }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                 style="background-image: url('{{ $bg_img_url }}');">
                 <div class="contact-split__image-text"></div>
             </div>
         </div>
