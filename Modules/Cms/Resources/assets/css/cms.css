@@ -184,7 +184,7 @@ button:focus {
     box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.1);
     border-radius: 50px;
     transition: width 0.45s ease;
-    z-index: 0;
+    z-index: -1;
 }
 
 .bls-global-btn:hover::before,
