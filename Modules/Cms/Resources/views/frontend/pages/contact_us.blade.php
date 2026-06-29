@@ -11,6 +11,7 @@
             color: #e55151 !important;
             margin-bottom: 0.5rem;
         }
+
         .non-bullet-list {
             list-style: none;
             margin-left: 0px;
@@ -45,6 +46,10 @@
             $navbar_btn['link'] = $__site_details['btns']['navbar']['link'] ?? route('business.getRegister');
         }
 
+        $bg_img_url = asset('modules/cms/img/contact.jpg');
+        if (!empty($page->feature_image_url)) {
+            $bg_img_url = $page->feature_image_url;
+        }
     @endphp
     @includeIf('cms::frontend.layouts.home_header')
     <x-hero heroImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80"
@@ -58,6 +63,8 @@
             display: flex;
             min-height: calc(100vh - 80px);
             font-family: var(--text-font, 'Poppins', sans-serif);
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
         /* ===== LEFT: IMAGE COLUMN (sticky) ===== */
@@ -80,7 +87,7 @@
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
         }
 
-            /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
+        /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
         .contact-split__form-col {
             flex: 0 0 55%;
             max-width: 55%;
@@ -114,8 +121,13 @@
         }
 
         @keyframes proContactShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
         }
 
         .contact-split__form-col .contact-form__header {
@@ -363,10 +375,12 @@
                 flex-direction: column;
                 min-height: auto;
             }
+
             .contact-split__image-col {
                 flex: none;
                 max-width: 100%;
             }
+
             .contact-split__image-inner {
                 position: relative;
                 top: 0;
@@ -376,20 +390,25 @@
                 margin: 0;
                 box-shadow: none;
             }
+
             .contact-split__image-text h2 {
                 font-size: 2rem;
             }
+
             .contact-split__form-col {
                 flex: none;
                 max-width: 100%;
                 padding: 2rem 1.5rem 3rem;
             }
+
             .contact-split__form-col .contact-form {
                 padding: 35px 28px;
             }
+
             .contact-split__form-col .contact-form__title {
                 font-size: 1.6rem;
             }
+
             .contact-split__form-col .pro-info-card {
                 padding: 24px 22px;
             }
@@ -400,19 +419,24 @@
                 height: 40vh;
                 min-height: 250px;
             }
+
             .contact-split__form-col {
                 padding: 1.5rem 1rem 2.5rem;
             }
+
             .contact-split__form-col .contact-form {
                 padding: 28px 20px;
                 border-radius: 18px;
             }
+
             .contact-split__form-col .contact-form__title {
                 font-size: 1.4rem;
             }
+
             .contact-split__form-col .pro-info-card h4 {
                 font-size: 1.1rem;
             }
+
             .contact-split__form-col .non-bullet-list li {
                 padding: 10px 12px;
                 gap: 10px;
@@ -422,9 +446,7 @@
 
     @php
         $mail_us =
-            isset($__site_details['mail_us']) && !empty($__site_details['mail_us'])
-                ? $__site_details['mail_us']
-                : [];
+            isset($__site_details['mail_us']) && !empty($__site_details['mail_us']) ? $__site_details['mail_us'] : [];
         $mail_us_collection = collect($mail_us);
         $filtered_mail_us = $mail_us_collection->filter(function ($value, $key) {
             return !empty($value['label']) && !empty($value['email']);
@@ -442,41 +464,9 @@
 
     <div class="contact-split">
         <div class="contact-split__image-col">
-            <div class="contact-split__image-inner">
-                <div class="contact-split__image-text">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" style="width: 100%; max-width: 400px;">
-                        <defs>
-                            <linearGradient id="cg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#008000"/>
-                                <stop offset="100%" stop-color="#E58E24"/>
-                            </linearGradient>
-                            <linearGradient id="cg2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#e8f5e9"/>
-                                <stop offset="100%" stop-color="#fff8e1"/>
-                            </linearGradient>
-                            <linearGradient id="cg3" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stop-color="#f0fdf4"/>
-                                <stop offset="100%" stop-color="#e8f5e9"/>
-                            </linearGradient>
-                        </defs>
-                        <rect x="80" y="60" rx="24" ry="24" width="340" height="280" fill="url(#cg3)" stroke="#c8e6c9" stroke-width="2"/>
-                        <rect x="100" y="100" rx="12" ry="12" width="120" height="40" fill="url(#cg1)" opacity="0.15"/>
-                        <rect x="100" y="160" rx="12" ry="12" width="180" height="40" fill="url(#cg1)" opacity="0.1"/>
-                        <rect x="100" y="220" rx="12" ry="12" width="160" height="40" fill="url(#cg1)" opacity="0.1"/>
-                        <rect x="100" y="280" rx="12" ry="12" width="300" height="40" fill="url(#cg1)" opacity="0.08"/>
-                        <circle cx="370" cy="120" r="40" fill="url(#cg1)" opacity="0.12"/>
-                        <circle cx="370" cy="120" r="25" fill="url(#cg1)" opacity="0.2"/>
-                        <path d="M358 120 l8 10 l16 -14" stroke="url(#cg1)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-                        <g transform="translate(180, 130)">
-                            <rect x="0" y="0" width="140" height="100" rx="12" ry="12" fill="#ffffff" stroke="#c8e6c9" stroke-width="1.5"/>
-                            <path d="M0 12 Q70 55 140 12" stroke="#008000" stroke-width="2" fill="none" opacity="0.4"/>
-                            <rect x="20" y="35" width="100" height="6" rx="3" fill="#e8f5e9"/>
-                            <rect x="20" y="48" width="80" height="6" rx="3" fill="#e8f5e9"/>
-                            <rect x="20" y="61" width="60" height="6" rx="3" fill="#e8f5e9"/>
-                            <circle cx="120" cy="75" r="10" fill="url(#cg1)" opacity="0.3"/>
-                        </g>
-                    </svg>
-                </div>
+            <div class="contact-split__image-inner"
+                 style="background-image: url('{{ $bg_img_url }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="contact-split__image-text"></div>
             </div>
         </div>
         <div class="contact-split__form-col">
