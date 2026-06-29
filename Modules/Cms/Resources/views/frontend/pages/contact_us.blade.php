@@ -77,22 +77,11 @@
             height: calc(100vh - 120px);
             border-radius: 24px;
             margin: 20px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: #f0fdf4;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Gradient overlay */
-        .contact-split__image-inner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0, 128, 0, 0.6) 0%, rgba(229, 142, 36, 0.4) 100%);
-            z-index: 1;
         }
 
             /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
@@ -457,9 +446,12 @@
 
     <div class="contact-split">
         <div class="contact-split__image-col">
-            <div class="contact-split__image-inner"
-                 style="background-image: url('{{ $bg_img_url }}');">
-                <div class="contact-split__image-text"></div>
+            <div class="contact-split__image-inner">
+                <div class="contact-split__image-text">
+                    <img src="https://illustrations.popsy.co/amber/email-campaign.svg"
+                         alt="Contact us"
+                         style="width: 100%; height: auto; max-width: 380px;">
+                </div>
             </div>
         </div>
         <div class="contact-split__form-col">
