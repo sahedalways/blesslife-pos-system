@@ -532,30 +532,77 @@
     </div>
 
     @if ($suggestedBlogs->isNotEmpty())
-        <section style="padding: 3rem 0 5rem; background: #f9fafb;">
-            <div class="pas-container">
-                <h2 style="font-size: 1.75rem; font-weight: 700; color: #1F2937; margin-bottom: 2rem; text-align: center;">
-                    Suggested Blogs
+        <section style="padding: 2rem 0 4rem;">
+            <div style="max-width: 1600px; margin: 0 auto; padding: 0 20px;">
+                <h2 class="suggested-heading"
+                    style="font-size: 30px; font-weight: 700; color: #1F2937; margin-bottom: 0.5rem; text-align: center;">
+                    Related Articles
                 </h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="ds-title-bar" style="margin: 0 auto 2.5rem;"></div>
+                <style>
+                    .suggested-heading {
+                        font-size: 30px;
+                    }
+                    .suggested-heading:hover ~ .ds-title-bar,
+                    .ds-title-bar:hover {
+                        width: 160px !important;
+                    }
+                    @media (max-width: 768px) {
+                        .suggested-heading {
+                            font-size: 23px;
+                        }
+                    }
+                </style>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;">
                     @foreach ($suggestedBlogs as $suggested)
                         <a href="{{ action([\Modules\Cms\Http\Controllers\CmsController::class, 'viewBlog'], ['id' => $suggested->id, 'slug' => $suggested->slug]) }}"
-                           style="text-decoration: none; color: inherit; display: block;">
-                            <div style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease;"
-                                 onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.12)'"
-                                 onmouseout="this.style.transform=''; this.style.boxShadow=''">
-                                <img src="{{ $suggested->feature_image_url ?? asset('modules/cms/img/default.png') }}"
-                                     style="width: 100%; height: 200px; object-fit: cover; display: block;">
-                                <div style="padding: 1.25rem;">
-                                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #1F2937; margin: 0 0 0.5rem;">
+                           class="suggested-card-link"
+                           style="text-decoration: none; color: inherit; display: block; flex: 0 0 300px; max-width: 400px;">
+                            <div class="suggested-card"
+                                 style="background: #fff; border-radius: 16px; overflow: hidden; transition: all 0.4s ease; border: 1px solid rgba(0,128,0,0.08); position: relative;">
+                                <div style="position: relative; overflow: hidden;">
+                                    <img src="{{ $suggested->feature_image_url ?? asset('modules/cms/img/default.png') }}"
+                                         class="suggested-card-img"
+                                         style="width: 100%; height: 200px; object-fit: cover; display: block; transition: transform 0.5s ease;">
+                                    <div
+                                         style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,128,0,0.1) 100%);">
+                                    </div>
+                                </div>
+                                <div style="padding: 1.5rem 1.25rem 1.25rem;">
+                                    <h3
+                                        style="font-size: 1.1rem; font-weight: 600; color: #1F2937; margin: 0 0 0.5rem; line-height: 1.4;">
                                         {{ $suggested->title }}
                                     </h3>
-                                    <p style="font-size: 0.9rem; color: #6B7280; margin: 0;">
-                                        {{ \Carbon\Carbon::parse($suggested->created_at)->diffForHumans() }}
-                                    </p>
+                                    <div class="suggested-read-more"
+                                         style="display: flex; align-items: center; gap: 0.5rem; transform: translateY(20px); opacity: 0; transition: all 0.4s ease;">
+                                        <span style="font-size: 0.85rem; color: #008000; font-weight: 500;">
+                                            Read More
+                                        </span>
+                                        <span style="font-size: 0.85rem; color: #008000; display: inline-block;">→</span>
+                                        <span style="margin-left: auto; font-size: 0.8rem; color: #9CA3AF;">
+                                            {{ \Carbon\Carbon::parse($suggested->created_at)->diffForHumans() }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </a>
+                        <style>
+                            .suggested-card-link .suggested-card {
+                                box-shadow: 0 8px 30px rgba(229,142,36,0.2);
+                            }
+                            .suggested-card-link:hover .suggested-card {
+                                transform: translateY(-6px);
+                                box-shadow: 0 16px 45px rgba(0,128,0,0.3);
+                                border-color: rgba(0,128,0,0.2);
+                            }
+                            .suggested-card-link:hover .suggested-card-img {
+                                transform: scale(1.08);
+                            }
+                            .suggested-card-link:hover .suggested-read-more {
+                                transform: translateY(0) !important;
+                                opacity: 1 !important;
+                            }
+                        </style>
                     @endforeach
                 </div>
             </div>

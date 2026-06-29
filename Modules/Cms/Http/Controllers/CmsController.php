@@ -118,6 +118,21 @@ class CmsController extends Controller
                     ->where('is_enabled', 1)
                     ->get();
 
+        if ($blogs->isEmpty()) {
+            $dummy = [];
+            for ($i = 1; $i <= 6; $i++) {
+                $blog = new \stdClass();
+                $blog->id = $i;
+                $blog->title = "Dummy Blog Title {$i}";
+                $blog->slug = "dummy-blog-{$i}";
+                $blog->feature_image_url = "https://picsum.photos/seed/blog{$i}/800/600";
+                $blog->meta_description = "This is a dummy meta description for blog post {$i}. It is used for testing the blog listing page layout.";
+                $blog->created_at = \Carbon\Carbon::now()->subDays($i);
+                $dummy[] = $blog;
+            }
+            $blogs = collect($dummy);
+        }
+
         return view('cms::frontend.blogs.index')
             ->with(compact('blogs'));
     }
@@ -128,7 +143,20 @@ class CmsController extends Controller
 
         $blog = CmsPage::where('type', 'blog')
                     ->where('is_enabled', 1)
-                    ->findOrFail($id);
+                    ->find($id);
+
+        if (! $blog) {
+            $blog = new \stdClass();
+            $blog->id = $id;
+            $blog->title = "Dummy Blog Title {$id}";
+            $blog->slug = "dummy-blog-{$id}";
+            $blog->feature_image_url = "https://picsum.photos/seed/blog{$id}/1600/900";
+            $blog->meta_description = 'This is a dummy meta description for testing the blog show page.';
+            $blog->content = '<h2>Introduction</h2><p>This is dummy content for testing the blog show page. It includes various HTML elements to verify the styling.</p><h2>Key Points</h2><ul><li>First important point about the topic</li><li>Second important point with <strong>emphasis</strong></li><li>Third point with a <a href="#">sample link</a></li></ul><blockquote>This is a blockquote used for highlighting important quotes or testimonials within the article.</blockquote><p>Here is a paragraph with <em>italic text</em>, <strong>bold text</strong>, and <code>inline code</code> for testing purposes.</p><h2>Conclusion</h2><p>This concludes the dummy blog content. The layout and typography should look consistent and professional.</p>';
+            $blog->createdBy = new \stdClass();
+            $blog->createdBy->user_full_name = 'John Doe';
+            $blog->created_at = \Carbon\Carbon::now()->subDays($id);
+        }
 
         $suggestedBlogs = CmsPage::where('type', 'blog')
                     ->where('is_enabled', 1)
@@ -136,6 +164,20 @@ class CmsController extends Controller
                     ->inRandomOrder()
                     ->limit(3)
                     ->get();
+
+        if ($suggestedBlogs->isEmpty()) {
+            $dummy = [];
+            for ($i = 1; $i <= 3; $i++) {
+                $s = new \stdClass();
+                $s->id = 100 + $i;
+                $s->title = "Suggested Blog {$i}";
+                $s->slug = "suggested-blog-{$i}";
+                $s->feature_image_url = "https://picsum.photos/seed/suggested{$i}/800/600";
+                $s->created_at = \Carbon\Carbon::now()->subDays($i * 2);
+                $dummy[] = $s;
+            }
+            $suggestedBlogs = collect($dummy);
+        }
 
         return view('cms::frontend.blogs.show')
             ->with(compact('blog', 'suggestedBlogs'));
