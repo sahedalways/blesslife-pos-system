@@ -33,14 +33,14 @@
             }
 
             /* Decorative Background Elements */
-            #pro-pricing-section .pps-bg-shape {
+            #pro-pricing-section .blc-bg-shape {
                 position: absolute;
                 border-radius: 50%;
                 pointer-events: none;
                 z-index: 0;
             }
 
-            #pro-pricing-section .pps-shape-1 {
+            #pro-pricing-section .blc-shape-1 {
                 width: 450px;
                 height: 450px;
                 top: -150px;
@@ -48,7 +48,7 @@
                     background: radial-gradient(circle, rgba(0, 128, 0, 0.06) 0%, transparent 70%);
             }
 
-            #pro-pricing-section .pps-shape-2 {
+            #pro-pricing-section .blc-shape-2 {
                 width: 400px;
                 height: 400px;
                 bottom: -120px;
@@ -56,7 +56,7 @@
                 background: radial-gradient(circle, rgba(229, 142, 36, 0.15) 0%, transparent 70%);
             }
 
-            #pro-pricing-section .pps-dot-grid {
+            #pro-pricing-section .blc-dot-grid {
                 position: absolute;
                 width: 200px;
                 height: 200px;
@@ -69,7 +69,7 @@
             }
 
             /* ===== CONTAINER ===== */
-            #pro-pricing-section .pps-container {
+            #pro-pricing-section .blc-container {
                 position: relative;
                 z-index: 2;
                 max-width: 1320px;
@@ -78,7 +78,7 @@
             }
 
             /* ===== HEADER ===== */
-            #pro-pricing-section .pps-header {
+            #pro-pricing-section .blc-header {
                 text-align: center;
                 max-width: 700px;
                 margin: 0 auto 50px;
@@ -102,7 +102,7 @@
             }
 
                 /* ===== TOGGLE SWITCH ===== */
-                #pro-pricing-section .pps-toggle-wrap {
+                #pro-pricing-section .blc-toggle-wrap {
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -118,7 +118,7 @@
                     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
                 }
 
-                #pro-pricing-section .pps-toggle-label {
+                #pro-pricing-section .blc-toggle-label {
                     font-size: 15px;
                     font-weight: 600;
                     color: #9CA3AF;
@@ -127,12 +127,12 @@
                     user-select: none;
                 }
 
-                #pro-pricing-section .pps-toggle-label.active {
+                #pro-pricing-section .blc-toggle-label.active {
                     color: #008000;
                 }
 
             /* Custom Toggle */
-            #pro-pricing-section .pps-toggle-switch {
+            #pro-pricing-section .blc-toggle-switch {
                 position: relative;
                 display: inline-block;
                 width: 56px;
@@ -140,13 +140,13 @@
                 flex-shrink: 0;
             }
 
-            #pro-pricing-section .pps-toggle-switch input {
+            #pro-pricing-section .blc-toggle-switch input {
                 opacity: 0;
                 width: 0;
                 height: 0;
             }
 
-            #pro-pricing-section .pps-toggle-slider {
+            #pro-pricing-section .blc-toggle-slider {
                 position: absolute;
                 cursor: pointer;
                 top: 0;
@@ -159,7 +159,7 @@
                 box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
             }
 
-            #pro-pricing-section .pps-toggle-slider::before {
+            #pro-pricing-section .blc-toggle-slider::before {
                 content: '';
                 position: absolute;
                 height: 22px;
@@ -172,12 +172,12 @@
                 box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
             }
 
-            #pro-pricing-section .pps-toggle-switch input:checked+.pps-toggle-slider::before {
+            #pro-pricing-section .blc-toggle-switch input:checked+.blc-toggle-slider::before {
                 transform: translateX(26px);
             }
 
             /* Save Badge */
-            #pro-pricing-section .pps-save-tag {
+            #pro-pricing-section .blc-save-tag {
                 display: inline-flex;
                 align-items: center;
                 gap: 4px;
@@ -207,7 +207,7 @@
             }
 
             /* ===== PRICING GRID ===== */
-            #pro-pricing-section .pps-grid {
+            #pro-pricing-section .blc-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 28px;
@@ -215,20 +215,20 @@
             }
 
             @media (max-width: 991px) {
-                #pro-pricing-section .pps-grid {
+                #pro-pricing-section .blc-grid {
                     grid-template-columns: repeat(2, 1fr);
                 }
             }
 
             @media (max-width: 640px) {
-                #pro-pricing-section .pps-grid {
+                #pro-pricing-section .blc-grid {
                     grid-template-columns: 1fr;
                     gap: 20px;
                 }
             }
 
             /* ===== PRICING CARD ===== */
-            #pro-pricing-section .pps-card {
+            #pro-pricing-section .blc-card {
                 position: relative;
                 background: #ffffff;
                 border-radius: 24px;
@@ -242,7 +242,7 @@
             }
 
             /* Background shimmer */
-            #pro-pricing-section .pps-card::before {
+            #pro-pricing-section .blc-card::before {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -255,18 +255,18 @@
                 transition: transform 0.5s ease;
             }
 
-            #pro-pricing-section .pps-card:hover {
+            #pro-pricing-section .blc-card:hover {
                 transform: translateY(-12px);
                 box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
                 border-color: rgba(0, 128, 0, 0.2);
             }
 
-            #pro-pricing-section .pps-card:hover::before {
+            #pro-pricing-section .blc-card:hover::before {
                 transform: scaleX(1);
             }
 
             /* ===== POPULAR/FEATURED CARD ===== */
-            #pro-pricing-section .pps-card.pps-featured {
+            #pro-pricing-section .blc-card.blc-featured {
                 background: linear-gradient(160deg, #008000 0%, #2d5016 60%, #E58E24 100%);
                 color: #ffffff;
                 transform: scale(1.05);
@@ -275,17 +275,17 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .pps-card.pps-featured:hover {
+            #pro-pricing-section .blc-card.blc-featured:hover {
                 transform: scale(1.05) translateY(-12px);
             }
 
-            #pro-pricing-section .pps-card.pps-featured::before {
+            #pro-pricing-section .blc-card.blc-featured::before {
                 background: linear-gradient(90deg, #FFD700, #ffffff);
                 transform: scaleX(1);
             }
 
             /* Featured background pattern */
-            #pro-pricing-section .pps-card.pps-featured::after {
+            #pro-pricing-section .blc-card.blc-featured::after {
                 content: '';
                 position: absolute;
                 top: -50px;
@@ -310,7 +310,7 @@
             }
 
             /* Popular Ribbon */
-            #pro-pricing-section .pps-popular-tag {
+            #pro-pricing-section .blc-popular-tag {
                 position: absolute;
                 top: 20px;
                 right: 20px;
@@ -329,12 +329,12 @@
                 gap: 4px;
             }
 
-            #pro-pricing-section .pps-popular-tag i {
+            #pro-pricing-section .blc-popular-tag i {
                 font-size: 0.7rem;
             }
 
             /* ===== CARD CONTENT ===== */
-            #pro-pricing-section .pps-card-icon {
+            #pro-pricing-section .blc-card-icon {
                 width: 64px;
                 height: 64px;
                 border-radius: 18px;
@@ -350,18 +350,18 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-card-icon {
+            #pro-pricing-section .blc-card.blc-featured .blc-card-icon {
                 background: rgba(255, 255, 255, 0.2);
                 backdrop-filter: blur(10px);
                 color: #ffffff;
                 border: 1px solid rgba(255, 255, 255, 0.3);
             }
 
-            #pro-pricing-section .pps-card:hover .pps-card-icon {
+            #pro-pricing-section .blc-card:hover .blc-card-icon {
                 transform: rotate(-8deg) scale(1.1);
             }
 
-            #pro-pricing-section .pps-card-name {
+            #pro-pricing-section .blc-card-name {
                 font-size: 1.5rem;
                 font-weight: 700;
                 color: #1F2937;
@@ -371,11 +371,11 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-card-name {
+            #pro-pricing-section .blc-card.blc-featured .blc-card-name {
                 color: #ffffff;
             }
 
-            #pro-pricing-section .pps-card-desc {
+            #pro-pricing-section .blc-card-desc {
                 font-size: 0.9rem;
                 color: #6B7280;
                 line-height: 1.6;
@@ -384,12 +384,12 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-card-desc {
+            #pro-pricing-section .blc-card.blc-featured .blc-card-desc {
                 color: rgba(255, 255, 255, 0.9);
             }
 
             /* Price */
-            #pro-pricing-section .pps-price-wrap {
+            #pro-pricing-section .blc-price-wrap {
                 position: relative;
                 z-index: 2;
                 margin-bottom: 28px;
@@ -397,29 +397,29 @@
                 border-bottom: 1px dashed rgba(0, 128, 0, 0.2);
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-price-wrap {
+            #pro-pricing-section .blc-card.blc-featured .blc-price-wrap {
                 border-bottom-color: rgba(255, 255, 255, 0.25);
             }
 
-            #pro-pricing-section .pps-price-box {
+            #pro-pricing-section .blc-price-box {
                 display: flex;
                 align-items: baseline;
                 gap: 4px;
                 margin-bottom: 6px;
             }
 
-            #pro-pricing-section .pps-currency {
+            #pro-pricing-section .blc-currency {
                 font-size: 1.5rem;
                 font-weight: 700;
                 color: #1F2937;
                 line-height: 1;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-currency {
+            #pro-pricing-section .blc-card.blc-featured .blc-currency {
                 color: #ffffff;
             }
 
-            #pro-pricing-section .pps-amount {
+            #pro-pricing-section .blc-amount {
                 font-size: 3.2rem;
                 font-weight: 800;
                 color: #1F2937;
@@ -431,36 +431,36 @@
                 background-clip: text;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-amount {
+            #pro-pricing-section .blc-card.blc-featured .blc-amount {
                 background: linear-gradient(135deg, #FFD700, #ffffff);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
             }
 
-            #pro-pricing-section .pps-period {
+            #pro-pricing-section .blc-period {
                 font-size: 0.95rem;
                 color: #6B7280;
                 font-weight: 500;
                 margin-left: 4px;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-period {
+            #pro-pricing-section .blc-card.blc-featured .blc-period {
                 color: rgba(255, 255, 255, 0.85);
             }
 
-            #pro-pricing-section .pps-price-note {
+            #pro-pricing-section .blc-price-note {
                 font-size: 0.78rem;
                 color: #9CA3AF;
                 font-weight: 500;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-price-note {
+            #pro-pricing-section .blc-card.blc-featured .blc-price-note {
                 color: rgba(255, 255, 255, 0.75);
             }
 
             /* Features List */
-            #pro-pricing-section .pps-features {
+            #pro-pricing-section .blc-features {
                 list-style: none;
                 padding: 0;
                 margin: 0 0 28px 0;
@@ -469,7 +469,7 @@
                 z-index: 2;
             }
 
-            #pro-pricing-section .pps-features li {
+            #pro-pricing-section .blc-features li {
                 display: flex;
                 align-items: flex-start;
                 gap: 12px;
@@ -479,11 +479,11 @@
                 line-height: 1.5;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-features li {
+            #pro-pricing-section .blc-card.blc-featured .blc-features li {
                 color: rgba(255, 255, 255, 0.95);
             }
 
-            #pro-pricing-section .pps-features li .pps-check-icon {
+            #pro-pricing-section .blc-features li .blc-check-icon {
                 flex-shrink: 0;
                 width: 22px;
                 height: 22px;
@@ -497,23 +497,23 @@
                 margin-top: 2px;
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-features li .pps-check-icon {
+            #pro-pricing-section .blc-card.blc-featured .blc-features li .blc-check-icon {
                 background: rgba(255, 255, 255, 0.2);
                 color: #FFD700;
             }
 
-            #pro-pricing-section .pps-features li.pps-disabled {
+            #pro-pricing-section .blc-features li.blc-disabled {
                 color: #D1D5DB;
                 text-decoration: line-through;
             }
 
-            #pro-pricing-section .pps-features li.pps-disabled .pps-check-icon {
+            #pro-pricing-section .blc-features li.blc-disabled .blc-check-icon {
                 background: rgba(0, 0, 0, 0.05);
                 color: #D1D5DB;
             }
 
             /* CTA Button */
-            #pro-pricing-section .pps-cta-btn {
+            #pro-pricing-section .blc-cta-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -533,39 +533,39 @@
                 box-shadow: 0 10px 25px rgba(0, 128, 0, 0.25);
             }
 
-            #pro-pricing-section .pps-cta-btn:hover {
+            #pro-pricing-section .blc-cta-btn:hover {
                 transform: translateY(-3px);
                 box-shadow: 0 15px 35px rgba(229, 142, 36, 0.4);
                 color: #ffffff;
             }
 
-            #pro-pricing-section .pps-cta-btn i {
+            #pro-pricing-section .blc-cta-btn i {
                 transition: transform 0.3s ease;
             }
 
-            #pro-pricing-section .pps-cta-btn:hover i {
+            #pro-pricing-section .blc-cta-btn:hover i {
                 transform: translateX(5px);
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-cta-btn {
+            #pro-pricing-section .blc-card.blc-featured .blc-cta-btn {
                 background: #ffffff;
                 color: #008000;
                 box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             }
 
-            #pro-pricing-section .pps-card.pps-featured .pps-cta-btn:hover {
+            #pro-pricing-section .blc-card.blc-featured .blc-cta-btn:hover {
                 color: #E58E24;
                 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             }
 
             /* Trust Section */
-                #pro-pricing-section .pps-trust {
+                #pro-pricing-section .blc-trust {
                     text-align: center;
                     margin-top: 50px;
                     color: #4B5563;
                 }
 
-            #pro-pricing-section .pps-trust-items {
+            #pro-pricing-section .blc-trust-items {
                 display: flex;
                 justify-content: center;
                 gap: 30px;
@@ -573,7 +573,7 @@
                 margin-top: 16px;
             }
 
-            #pro-pricing-section .pps-trust-item {
+            #pro-pricing-section .blc-trust-item {
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
@@ -581,7 +581,7 @@
                 font-weight: 500;
             }
 
-                #pro-pricing-section .pps-trust-item i {
+                #pro-pricing-section .blc-trust-item i {
                     color: #E58E24;
                     font-size: 1rem;
                 }
@@ -592,41 +592,41 @@
                     padding: 3.5rem 0 4rem;
                 }
 
-                #pro-pricing-section .pps-title {
+                #pro-pricing-section .blc-title {
                     font-size: 30px;
                 }
 
-                #pro-pricing-section .pps-card {
+                #pro-pricing-section .blc-card {
                     padding: 30px 24px;
                 }
 
-                #pro-pricing-section .pps-card.pps-featured {
+                #pro-pricing-section .blc-card.blc-featured {
                     transform: scale(1);
                 }
 
-                #pro-pricing-section .pps-card.pps-featured:hover {
+                #pro-pricing-section .blc-card.blc-featured:hover {
                     transform: translateY(-12px);
                 }
 
-                #pro-pricing-section .pps-amount {
+                #pro-pricing-section .blc-amount {
                     font-size: 2.5rem;
                 }
 
-                #pro-pricing-section .pps-trust-items {
+                #pro-pricing-section .blc-trust-items {
                     gap: 16px;
                 }
             }
         </style>
 
         <!-- Decorative Backgrounds -->
-        <div class="pps-bg-shape pps-shape-1"></div>
-        <div class="pps-bg-shape pps-shape-2"></div>
-        <div class="pps-dot-grid"></div>
+        <div class="blc-bg-shape blc-shape-1"></div>
+        <div class="blc-bg-shape blc-shape-2"></div>
+        <div class="blc-dot-grid"></div>
 
-        <div class="pps-container">
+        <div class="blc-container">
 
             <!-- Header -->
-            <div class="pps-header">
+            <div class="blc-header">
                 <div class="ds-section-header-wrapper">
                     <span class="ds-subtitle">Pricing</span>
                     <h2 class="ds-page-title">Choose Your Perfect Plan</h2>
@@ -639,21 +639,21 @@
                 </p>
 
                 <!-- Toggle Switch -->
-                <div class="pps-toggle-wrap">
-                    <span class="pps-toggle-label active"
+                <div class="blc-toggle-wrap">
+                    <span class="blc-toggle-label active"
                           id="monthlyLabel">Monthly</span>
 
-                    <label class="pps-toggle-switch">
+                    <label class="blc-toggle-switch">
                         <input type="checkbox"
                                id="durationCheck"
                                class="duration_check">
-                        <span class="pps-toggle-slider"></span>
+                        <span class="blc-toggle-slider"></span>
                     </label>
 
-                    <span class="pps-toggle-label"
+                    <span class="blc-toggle-label"
                           id="annualLabel">
                         Annual
-                        <span class="pps-save-tag">
+                        <span class="blc-save-tag">
                             <i class="fas fa-tag"></i> Save 20%
                         </span>
                     </span>
@@ -661,7 +661,7 @@
             </div>
 
             <!-- Pricing Cards Grid -->
-            <div class="pps-grid"
+            <div class="blc-grid"
                  id="packages">
 
                 {{-- @include('superadmin::subscription.partials.packages', [
@@ -673,100 +673,100 @@
                 {{-- ============================================ --}}
 
                 <!-- Card 1: Starter -->
-                <div class="pps-card">
-                    <div class="pps-card-icon">
+                <div class="blc-card">
+                    <div class="blc-card-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
-                    <h3 class="pps-card-name">Starter</h3>
-                    <p class="pps-card-desc">Perfect for small businesses getting started</p>
+                    <h3 class="blc-card-name">Starter</h3>
+                    <p class="blc-card-desc">Perfect for small businesses getting started</p>
 
-                    <div class="pps-price-wrap">
-                        <div class="pps-price-box">
-                            <span class="pps-currency">$</span>
-                            <span class="pps-amount">19</span>
-                            <span class="pps-period">/month</span>
+                    <div class="blc-price-wrap">
+                        <div class="blc-price-box">
+                            <span class="blc-currency">$</span>
+                            <span class="blc-amount">19</span>
+                            <span class="blc-period">/month</span>
                         </div>
-                        <span class="pps-price-note">Billed monthly</span>
+                        <span class="blc-price-note">Billed monthly</span>
                     </div>
 
-                    <ul class="pps-features">
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Up to 5 users</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> 10GB Storage</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Basic Reports</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Email Support</li>
-                        <li class="pps-disabled"><span class="pps-check-icon"><i class="fas fa-times"></i></span>
+                    <ul class="blc-features">
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Up to 5 users</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> 10GB Storage</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Basic Reports</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Email Support</li>
+                        <li class="blc-disabled"><span class="blc-check-icon"><i class="fas fa-times"></i></span>
                             Priority Support</li>
                     </ul>
 
                     <a href="#"
-                       class="pps-cta-btn">
+                       class="blc-cta-btn">
                         Get Started <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
 
                 <!-- Card 2: Professional (FEATURED) -->
-                <div class="pps-card pps-featured">
-                    <span class="pps-popular-tag">
+                <div class="blc-card blc-featured">
+                    <span class="blc-popular-tag">
                         <i class="fas fa-star"></i> Most Popular
                     </span>
 
-                    <div class="pps-card-icon">
+                    <div class="blc-card-icon">
                         <i class="fas fa-gem"></i>
                     </div>
-                    <h3 class="pps-card-name">Professional</h3>
-                    <p class="pps-card-desc">Best for growing businesses with advanced needs</p>
+                    <h3 class="blc-card-name">Professional</h3>
+                    <p class="blc-card-desc">Best for growing businesses with advanced needs</p>
 
-                    <div class="pps-price-wrap">
-                        <div class="pps-price-box">
-                            <span class="pps-currency">$</span>
-                            <span class="pps-amount">49</span>
-                            <span class="pps-period">/month</span>
+                    <div class="blc-price-wrap">
+                        <div class="blc-price-box">
+                            <span class="blc-currency">$</span>
+                            <span class="blc-amount">49</span>
+                            <span class="blc-period">/month</span>
                         </div>
-                        <span class="pps-price-note">Billed monthly</span>
+                        <span class="blc-price-note">Billed monthly</span>
                     </div>
 
-                    <ul class="pps-features">
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Up to 25 users</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> 100GB Storage</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Advanced Reports</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Priority Support</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> API Access</li>
+                    <ul class="blc-features">
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Up to 25 users</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> 100GB Storage</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Advanced Reports</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Priority Support</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> API Access</li>
                     </ul>
 
                     <a href="#"
-                       class="pps-cta-btn">
+                       class="blc-cta-btn">
                         Choose Plan <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
 
                 <!-- Card 3: Enterprise -->
-                <div class="pps-card">
-                    <div class="pps-card-icon">
+                <div class="blc-card">
+                    <div class="blc-card-icon">
                         <i class="fas fa-crown"></i>
                     </div>
-                    <h3 class="pps-card-name">Enterprise</h3>
-                    <p class="pps-card-desc">For large teams with unlimited possibilities</p>
+                    <h3 class="blc-card-name">Enterprise</h3>
+                    <p class="blc-card-desc">For large teams with unlimited possibilities</p>
 
-                    <div class="pps-price-wrap">
-                        <div class="pps-price-box">
-                            <span class="pps-currency">$</span>
-                            <span class="pps-amount">99</span>
-                            <span class="pps-period">/month</span>
+                    <div class="blc-price-wrap">
+                        <div class="blc-price-box">
+                            <span class="blc-currency">$</span>
+                            <span class="blc-amount">99</span>
+                            <span class="blc-period">/month</span>
                         </div>
-                        <span class="pps-price-note">Billed monthly</span>
+                        <span class="blc-price-note">Billed monthly</span>
                     </div>
 
-                    <ul class="pps-features">
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Unlimited users</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Unlimited Storage</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> Custom Reports</li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> 24/7 Dedicated Support
+                    <ul class="blc-features">
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Unlimited users</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Unlimited Storage</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Custom Reports</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> 24/7 Dedicated Support
                         </li>
-                        <li><span class="pps-check-icon"><i class="fas fa-check"></i></span> White Label Solution</li>
+                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> White Label Solution</li>
                     </ul>
 
                     <a href="#"
-                       class="pps-cta-btn">
+                       class="blc-cta-btn">
                         Contact Sales <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -774,18 +774,18 @@
             </div>
 
             <!-- Trust Indicators -->
-            <div class="pps-trust">
-                <div class="pps-trust-items">
-                    <span class="pps-trust-item">
+            <div class="blc-trust">
+                <div class="blc-trust-items">
+                    <span class="blc-trust-item">
                         <i class="fas fa-shield-alt"></i> Secure Payment
                     </span>
-                    <span class="pps-trust-item">
+                    <span class="blc-trust-item">
                         <i class="fas fa-undo"></i> 30-Day Money Back
                     </span>
-                    <span class="pps-trust-item">
+                    <span class="blc-trust-item">
                         <i class="fas fa-headset"></i> 24/7 Support
                     </span>
-                    <span class="pps-trust-item">
+                    <span class="blc-trust-item">
                         <i class="fas fa-sync-alt"></i> Cancel Anytime
                     </span>
                 </div>
