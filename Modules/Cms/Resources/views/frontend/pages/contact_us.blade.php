@@ -51,6 +51,10 @@
         }
     @endphp
     @includeIf('cms::frontend.layouts.home_header')
+    <x-hero heroImage="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&q=80"
+            heroSubtitle="Get In Touch"
+            heroTitle="Contact Us"
+            description="We'd love to hear from you. Reach out with any questions, feedback, or inquiries." />
 
     <style>
         /* ===== SPLIT CONTACT LAYOUT ===== */
