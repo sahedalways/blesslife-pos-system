@@ -72,21 +72,16 @@
             flex: 0 0 45%;
             max-width: 45%;
             position: relative;
+            background: linear-gradient(135deg, #008000 0%, #004d00 100%);
         }
 
         .contact-split__image-inner {
             position: sticky;
-            top: 80px;
-            height: calc(100vh - 120px);
-            border-radius: 24px;
-            margin: 20px;
+            top: 0;
+            height: 100vh;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
         }
 
         /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
@@ -385,12 +380,8 @@
 
             .contact-split__image-inner {
                 position: relative;
-                top: 0;
-                height: 50vh;
-                min-height: 300px;
-                border-radius: 0;
-                margin: 0;
-                box-shadow: none;
+                height: 40vh;
+                min-height: 250px;
             }
 
             .contact-split__image-text h2 {
@@ -418,8 +409,8 @@
 
         @media (max-width: 575px) {
             .contact-split__image-inner {
-                height: 40vh;
-                min-height: 250px;
+                height: 30vh;
+                min-height: 200px;
             }
 
             .contact-split__form-col {
