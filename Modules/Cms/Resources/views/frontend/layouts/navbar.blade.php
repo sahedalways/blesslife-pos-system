@@ -163,3 +163,11 @@
         </ul>
     </nav>
 </div>
+
+
+<style>
+    html,
+    body {
+        overflow-x: hidden;
+    }
+</style>
