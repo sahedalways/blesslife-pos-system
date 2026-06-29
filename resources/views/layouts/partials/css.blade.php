@@ -14,7 +14,8 @@
 <style>
 .bls-submit-btn {
     position: relative;
-    background: #008000;
+    background: linear-gradient(180deg, #009a00 0%, #008000 40%, #006600 100%);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -2px 4px rgba(0,0,0,0.15);
     color: #fff;
     border: none;
     padding: 0.75rem 2rem;
