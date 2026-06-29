@@ -91,51 +91,7 @@
             z-index: 1;
         }
 
-        /* Text on image */
-        .contact-split__image-text {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 2rem;
-            max-width: 400px;
-        }
-
-        .contact-split__image-text .ds-subtitle {
-            color: #E58E24;
-            font-size: 1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .contact-split__image-text h2 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.15;
-            margin: 0 0 1rem;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-split__image-text p {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        /* Decorative line */
-        .contact-split__image-text .split-line {
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #E58E24, #fff);
-            border-radius: 4px;
-            margin: 1.2rem auto;
-        }
-
-        /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
+            /* ===== RIGHT: FORM COLUMN (scrollable) ===== */
         .contact-split__form-col {
             flex: 0 0 55%;
             max-width: 55%;
@@ -499,12 +455,7 @@
         <div class="contact-split__image-col">
             <div class="contact-split__image-inner"
                  style="background-image: url('{{ $bg_img_url }}');">
-                <div class="contact-split__image-text">
-                    <span class="ds-subtitle">Get In Touch</span>
-                    <h2>Contact Us</h2>
-                    <div class="split-line"></div>
-                    <p>We'd love to hear from you. Reach out with any questions, feedback, or inquiries.</p>
-                </div>
+                <div class="contact-split__image-text"></div>
             </div>
         </div>
         <div class="contact-split__form-col">
