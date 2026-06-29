@@ -166,8 +166,20 @@
 
 
 <style>
-    html,
-    body {
-        overflow-x: hidden;
+    @media (max-width: 991.98px) {
+
+        html,
+        body {
+            overflow-x: hidden;
+        }
+    }
+
+
+    @media (max-width: 767.98px) {
+
+        html,
+        body {
+            overflow-x: hidden;
+        }
     }
 </style>
