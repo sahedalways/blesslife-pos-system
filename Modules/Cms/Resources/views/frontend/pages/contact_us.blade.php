@@ -438,21 +438,12 @@
     </style>
 
     @php
-        $mail_us =
-            isset($__site_details['mail_us']) && !empty($__site_details['mail_us']) ? $__site_details['mail_us'] : [];
-        $mail_us_collection = collect($mail_us);
-        $filtered_mail_us = $mail_us_collection->filter(function ($value, $key) {
-            return !empty($value['label']) && !empty($value['email']);
-        });
-
-        $contact_us =
-            isset($__site_details['contact_us']) && !empty($__site_details['contact_us'])
-                ? $__site_details['contact_us']
-                : [];
-        $contact_us_collection = collect($contact_us);
-        $filtered_contact_us = $contact_us_collection->filter(function ($value, $key) {
-            return !empty($value['label']) && !empty($value['num']);
-        });
+        $custom_contact = [
+            ['label' => 'Phone', 'num' => '+112242650'],
+        ];
+        $custom_mail = [
+            ['label' => 'Email', 'email' => 'info@blesslifeltd.com'],
+        ];
     @endphp
 
     <div class="contact-split">
@@ -503,52 +494,38 @@
                 </button>
             </form>
 
-            @if (!empty($filtered_contact_us) || !empty($filtered_mail_us))
-                @if (!empty($filtered_contact_us))
-                    <div class="pro-info-card pro-call-card">
-                        <h4 class="pt-3">
-                            Call <strong>Us</strong>
-                        </h4>
-                        <ul class="non-bullet-list mt-2">
-                            @foreach ($filtered_contact_us as $filtered_contact)
-                                <li>
-                                    <i class="fas fa-phone"></i> &nbsp;
-                                    <strong class="text-dark">
-                                        {{ $filtered_contact['label'] }}:
-                                    </strong> &nbsp;
-                                    <a href="tel:{{ $filtered_contact['num'] }}"
-                                       class="text-dark text-decoration-none"
-                                       target="_blank">
-                                        {{ $filtered_contact['num'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if (!empty($filtered_mail_us))
-                    <div class="pro-info-card pro-mail-card">
-                        <h4 class="pt-3">
-                            Mail <strong>Us</strong>
-                        </h4>
-                        <ul class="non-bullet-list mt-2">
-                            @foreach ($filtered_mail_us as $filtered_mail)
-                                <li>
-                                    <i class="fas fa-envelope"></i> &nbsp;
-                                    <strong class="text-dark">
-                                        {{ $filtered_mail['label'] }}:
-                                    </strong> &nbsp;
-                                    <a href="mailto:{{ $filtered_mail['email'] }}"
-                                       target="_blank"
-                                       class="text-dark text-decoration-none">
-                                        {{ $filtered_mail['email'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            @endif
+            <div class="pro-info-card pro-call-card">
+                <h4 class="pt-3">
+                    Call <strong>Us</strong>
+                </h4>
+                <ul class="non-bullet-list mt-2">
+                    @foreach ($custom_contact as $item)
+                        <li>
+                            <i class="fas fa-phone"></i> &nbsp;
+                            <strong class="text-dark">{{ $item['label'] }}:</strong> &nbsp;
+                            <a href="tel:{{ $item['num'] }}"
+                               class="text-dark text-decoration-none"
+                               target="_blank">{{ $item['num'] }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="pro-info-card pro-mail-card">
+                <h4 class="pt-3">
+                    Mail <strong>Us</strong>
+                </h4>
+                <ul class="non-bullet-list mt-2">
+                    @foreach ($custom_mail as $item)
+                        <li>
+                            <i class="fas fa-envelope"></i> &nbsp;
+                            <strong class="text-dark">{{ $item['label'] }}:</strong> &nbsp;
+                            <a href="mailto:{{ $item['email'] }}"
+                               target="_blank"
+                               class="text-dark text-decoration-none">{{ $item['email'] }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 @endsection
