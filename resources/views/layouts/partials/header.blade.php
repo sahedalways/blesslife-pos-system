@@ -375,7 +375,8 @@
 
                     </summary>
 
-                    <ul class="tw-p-2 tw-space-y-2 tw-w-48 tw-absolute tw-right-0 tw-z-10 tw-mt-2 tw-origin-top-right tw-bg-white tw-rounded-lg tw-shadow-lg tw-ring-1 tw-ring-gray-200 focus:tw-outline-none"
+                    <ul class="tw-p-2 tw-w-48 tw-absolute tw-right-0 tw-z-10 tw-mt-2 tw-origin-top-right tw-bg-white tw-rounded-lg tw-shadow-lg tw-ring-1 tw-ring-gray-200 focus:tw-outline-none"
+                        style="display: flex; flex-direction: column; gap: 8px;"
                         role="menu"
                         tabindex="-1">
                         <div class="tw-px-4 tw-pt-3 tw-pb-1"
