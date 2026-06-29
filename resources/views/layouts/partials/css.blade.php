@@ -85,6 +85,55 @@
             transform: rotateX(0deg);
         }
     }
+
+    .tw-dw-btn.tw-dw-btn-primary {
+        position: relative;
+        background: linear-gradient(180deg, #009a00 0%, #008000 40%, #006600 100%);
+        box-shadow: inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -2px 4px rgba(0,0,0,0.15);
+        color: #fff;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-align: center;
+        text-decoration: none;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .tw-dw-btn.tw-dw-btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(180deg, #f5a623 0%, #E58E24 40%, #cc7a1a 100%);
+        box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.1);
+        border-radius: 50px;
+        transition: width 0.45s ease;
+        z-index: -1;
+    }
+
+    .tw-dw-btn.tw-dw-btn-primary:hover::before,
+    .tw-dw-btn.tw-dw-btn-primary:focus::before {
+        width: 100%;
+    }
+
+    .tw-dw-btn.tw-dw-btn-primary:hover,
+    .tw-dw-btn.tw-dw-btn-primary:focus {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(229, 142, 36, 0.5);
+        color: #fff;
+        background: transparent;
+    }
 </style>
 
 
