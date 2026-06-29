@@ -151,6 +151,29 @@ button:focus {
     padding: 0.8rem;
 }
 
+.bls-submit-btn {
+    background: #008000;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.bls-submit-btn:hover,
+.bls-submit-btn:focus {
+    background: #E58E24;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(229, 142, 36, 0.4);
+}
+
 .highlight {
     color: var(--primary-green);
 }
@@ -1916,7 +1939,7 @@ blockquote {
 }
 
 .ds-section-header-wrapper:hover .ds-title-bar {
-    width: 140px;
+    width: 160px;
     box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
 }
 
