@@ -83,50 +83,18 @@
                     max-width: 700px;
                     margin: 0 auto 50px;
                 }
-
-                #pro-pricing-section .pps-badge {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    padding: 8px 20px;
-                    background: rgba(255, 255, 255, 0.15);
-                    backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.25);
-                    border-radius: 50px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    color: #ffffff;
-                    text-transform: uppercase;
-                    letter-spacing: 2px;
-                    margin-bottom: 20px;
+                #pro-pricing-section .ds-subtitle {
+                    color: #E58E24;
                 }
-
-                #pro-pricing-section .pps-badge i {
-                    color: #FFD700;
+                #pro-pricing-section .ds-subtitle::before,
+                #pro-pricing-section .ds-subtitle::after {
+                    background: linear-gradient(90deg, transparent, #E58E24);
                 }
-
-                #pro-pricing-section .pps-title {
-                    font-size: 44px;
-                    font-weight: 800;
-                    color: #ffffff;
-                    line-height: 1.2;
-                    margin-bottom: 14px;
-                    letter-spacing: -1px;
-                    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+                #pro-pricing-section .ds-title-bar {
+                    background: linear-gradient(90deg, #008000, #E58E24);
                 }
-
-                #pro-pricing-section .pps-title .pps-highlight {
-                    background: linear-gradient(135deg, #FFD700, #E58E24);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    background-clip: text;
-                }
-
-                #pro-pricing-section .pps-subtitle {
-                    font-size: 1.05rem;
-                    color: rgba(255, 255, 255, 0.85);
-                    line-height: 1.7;
-                    margin: 0;
+                #pro-pricing-section .ds-title-bar::before {
+                    background: linear-gradient(90deg, #008000, #E58E24);
                 }
 
                 /* ===== TOGGLE SWITCH ===== */
@@ -656,16 +624,12 @@
 
                 <!-- Header -->
                 <div class="pps-header">
-                    <span class="pps-badge">
-                        <i class="fas fa-crown"></i>
-                        @lang('superadmin::lang.pricing')
-                    </span>
-
-                    <h2 class="pps-title">
-                        Choose Your <span class="pps-highlight">Perfect Plan</span>
-                    </h2>
-
-                    <p class="pps-subtitle">
+                    <div class="ds-section-header-wrapper">
+                        <span class="ds-subtitle">Pricing</span>
+                        <h2 class="ds-page-title" style="color: #ffffff;">Choose Your Perfect Plan</h2>
+                        <div class="ds-title-bar"></div>
+                    </div>
+                    <p style="font-size: 1.05rem; color: rgba(255,255,255,0.85); line-height: 1.7; margin: 0; margin-top: 1.5rem;">
                         Select the best {{ config('app.name', 'ultimatePOS') }} pricing plan that fits your business needs.
                         Upgrade or downgrade anytime — no hidden fees.
                     </p>
