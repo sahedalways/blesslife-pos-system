@@ -259,7 +259,7 @@
                 <!-- /.box-body -->
                 
                 <div class="box-footer">
-                    <button type="button" class="btn btn-success pull-right">Register</button>
+                    <button type="button" class="bls-global-btn pull-right"><span>Register</span></button>
                 </div>
 
             {!! Form::close() !!}

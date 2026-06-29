@@ -60,8 +60,9 @@
                             @endif
                         </label>
                     </div>
-                    <button type="submit" class="tw-bg-gradient-to-r tw-from-indigo-500 tw-to-blue-500 tw-h-12 tw-rounded-xl tw-text-sm md:tw-text-base tw-text-white tw-font-semibold tw-w-full tw-max-w-full mt-2 hover:tw-from-indigo-600 hover:tw-to-blue-600 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2 active:tw-from-indigo-700 active:tw-to-blue-700">
-                        @lang('lang_v1.reset_password')</button>
+                    <button type="submit" class="bls-global-btn tw-w-full">
+                        <span>@lang('lang_v1.reset_password')</span>
+                    </button>
                 </form>
             </div>
         </div>
