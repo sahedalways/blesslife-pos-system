@@ -2,6 +2,11 @@
 @section('title', __('superadmin::lang.pricing'))
 
 @section('content')
+    @php
+        $navbar_btn['text'] = 'Try For Free';
+        $navbar_btn['drop_down_text'] = 'Pages';
+        $navbar_btn['link'] = route('business.getRegister');
+    @endphp
     @includeIf('cms::frontend.layouts.home_header')
     <x-hero heroImage="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1600&q=80"
             heroSubtitle="Pricing"
