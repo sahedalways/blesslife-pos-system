@@ -175,24 +175,31 @@ button:focus {
     box-shadow: 0 8px 25px rgba(229, 142, 36, 0.4);
 }
 
+.bls-submit-btn {
+    overflow: hidden;
+}
+
 .bls-submit-btn span {
     display: inline-block;
     transition: transform 0.4s ease;
 }
 
 .bls-submit-btn:hover span {
-    animation: blsTextFlip 0.45s ease forwards;
+    animation: blsTextSlideUp 0.45s ease forwards;
 }
 
-@keyframes blsTextFlip {
+@keyframes blsTextSlideUp {
     0% {
-        transform: rotateX(0deg);
+        transform: translateY(0);
     }
-    50% {
-        transform: rotateX(90deg);
+    40% {
+        transform: translateY(100%);
+    }
+    60% {
+        transform: translateY(-30%);
     }
     100% {
-        transform: rotateX(0deg);
+        transform: translateY(0);
     }
 }
 
