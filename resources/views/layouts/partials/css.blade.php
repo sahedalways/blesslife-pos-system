@@ -30,7 +30,7 @@
     overflow: hidden;
     z-index: 1;
 }
-.bls-submit-btn::before {
+.bls-submit-btn::after {
     content: '';
     position: absolute;
     top: 0;
@@ -40,10 +40,10 @@
     background: #E58E24;
     border-radius: 50px;
     transition: width 0.4s ease;
-    z-index: -1;
+    z-index: 0;
 }
-.bls-submit-btn:hover::before,
-.bls-submit-btn:focus::before {
+.bls-submit-btn:hover::after,
+.bls-submit-btn:focus::after {
     width: 100%;
 }
 .bls-submit-btn:hover,
@@ -51,6 +51,21 @@
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(229, 142, 36, 0.4);
+    animation: blsTextFlipCircle 0.55s ease forwards;
+}
+@keyframes blsTextFlipCircle {
+    0% {
+        clip-path: circle(150% at 50% 50%);
+    }
+    35% {
+        clip-path: circle(0% at 50% 0%);
+    }
+    65% {
+        clip-path: circle(0% at 50% 0%);
+    }
+    100% {
+        clip-path: circle(150% at 50% 50%);
+    }
 }
 </style>
 
