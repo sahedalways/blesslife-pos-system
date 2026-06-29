@@ -29,7 +29,7 @@
                 padding: 5rem 0 6rem;
                 overflow: hidden;
                 font-family: var(--text-font, 'Poppins', sans-serif);
-                    background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 40%, #fefce8 100%);
+                background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 40%, #fefce8 100%);
             }
 
             /* Decorative Background Elements */
@@ -45,7 +45,7 @@
                 height: 450px;
                 top: -150px;
                 left: -150px;
-                    background: radial-gradient(circle, rgba(0, 128, 0, 0.06) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(0, 128, 0, 0.06) 0%, transparent 70%);
             }
 
             #pro-pricing-section .blc-shape-2 {
@@ -60,7 +60,7 @@
                 position: absolute;
                 width: 200px;
                 height: 200px;
-                    background-image: radial-gradient(circle, rgba(0, 128, 0, 0.1) 1.5px, transparent 1.5px);
+                background-image: radial-gradient(circle, rgba(0, 128, 0, 0.1) 1.5px, transparent 1.5px);
                 background-size: 20px 20px;
                 top: 80px;
                 right: 60px;
@@ -101,35 +101,35 @@
                 background: linear-gradient(90deg, #008000, #E58E24);
             }
 
-                /* ===== TOGGLE SWITCH ===== */
-                #pro-pricing-section .blc-toggle-wrap {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 18px;
-                    margin: 35px 0 50px;
-                    padding: 12px 22px;
-                    background: #ffffff;
-                    border: 1px solid rgba(0, 128, 0, 0.1);
-                    border-radius: 60px;
-                    width: fit-content;
-                    margin-left: auto;
-                    margin-right: auto;
-                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-                }
+            /* ===== TOGGLE SWITCH ===== */
+            #pro-pricing-section .blc-toggle-wrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 18px;
+                margin: 35px 0 50px;
+                padding: 12px 22px;
+                background: #ffffff;
+                border: 1px solid rgba(0, 128, 0, 0.1);
+                border-radius: 60px;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            }
 
-                #pro-pricing-section .blc-toggle-label {
-                    font-size: 15px;
-                    font-weight: 600;
-                    color: #9CA3AF;
-                    cursor: pointer;
-                    transition: color 0.3s ease;
-                    user-select: none;
-                }
+            #pro-pricing-section .blc-toggle-label {
+                font-size: 15px;
+                font-weight: 600;
+                color: #9CA3AF;
+                cursor: pointer;
+                transition: color 0.3s ease;
+                user-select: none;
+            }
 
-                #pro-pricing-section .blc-toggle-label.active {
-                    color: #008000;
-                }
+            #pro-pricing-section .blc-toggle-label.active {
+                color: #008000;
+            }
 
             /* Custom Toggle */
             #pro-pricing-section .blc-toggle-switch {
@@ -207,25 +207,25 @@
             }
 
             /* ===== PRICING GRID ===== */
-            #pro-pricing-section .blc-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 28px;
-                align-items: stretch;
-            }
-
-            @media (max-width: 991px) {
                 #pro-pricing-section .blc-grid {
+                    display: grid;
                     grid-template-columns: repeat(2, 1fr);
+                    gap: 28px;
+                    align-items: stretch;
                 }
-            }
 
-            @media (max-width: 640px) {
-                #pro-pricing-section .blc-grid {
-                    grid-template-columns: 1fr;
-                    gap: 20px;
+                @media (max-width: 991px) {
+                    #pro-pricing-section .blc-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
                 }
-            }
+
+                @media (max-width: 640px) {
+                    #pro-pricing-section .blc-grid {
+                        grid-template-columns: 1fr;
+                        gap: 20px;
+                    }
+                }
 
             /* ===== PRICING CARD ===== */
             #pro-pricing-section .blc-card {
@@ -559,11 +559,11 @@
             }
 
             /* Trust Section */
-                #pro-pricing-section .blc-trust {
-                    text-align: center;
-                    margin-top: 50px;
-                    color: #4B5563;
-                }
+            #pro-pricing-section .blc-trust {
+                text-align: center;
+                margin-top: 50px;
+                color: #4B5563;
+            }
 
             #pro-pricing-section .blc-trust-items {
                 display: flex;
@@ -581,10 +581,10 @@
                 font-weight: 500;
             }
 
-                #pro-pricing-section .blc-trust-item i {
-                    color: #E58E24;
-                    font-size: 1rem;
-                }
+            #pro-pricing-section .blc-trust-item i {
+                color: #E58E24;
+                font-size: 1rem;
+            }
 
             /* ===== RESPONSIVE ===== */
             @media (max-width: 767px) {
@@ -632,8 +632,7 @@
                     <h2 class="ds-page-title">Choose Your Perfect Plan</h2>
                     <div class="ds-title-bar"></div>
                 </div>
-                <p
-                   style="font-size: 1.05rem; color: #4B5563; line-height: 1.7; margin: 0; margin-top: 1.5rem;">
+                <p style="font-size: 1.05rem; color: #4B5563; line-height: 1.7; margin: 0; margin-top: 1.5rem;">
                     Select the best {{ config('app.name', 'ultimatePOS') }} pricing plan that fits your business needs.
 
                 </p>
@@ -664,112 +663,9 @@
             <div class="blc-grid"
                  id="packages">
 
-                {{-- @include('superadmin::subscription.partials.packages', [
-                'action_type' => 'register',
-            ]) --}}
 
-                {{-- ============================================ --}}
-                {{-- DEMO CARDS - Replace with your @include --}}
-                {{-- ============================================ --}}
 
-                <!-- Card 1: Starter -->
-                <div class="blc-card">
-                    <div class="blc-card-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="blc-card-name">Starter</h3>
-                    <p class="blc-card-desc">Perfect for small businesses getting started</p>
 
-                    <div class="blc-price-wrap">
-                        <div class="blc-price-box">
-                            <span class="blc-currency">$</span>
-                            <span class="blc-amount">19</span>
-                            <span class="blc-period">/month</span>
-                        </div>
-                        <span class="blc-price-note">Billed monthly</span>
-                    </div>
-
-                    <ul class="blc-features">
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Up to 5 users</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> 10GB Storage</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Basic Reports</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Email Support</li>
-                        <li class="blc-disabled"><span class="blc-check-icon"><i class="fas fa-times"></i></span>
-                            Priority Support</li>
-                    </ul>
-
-                    <a href="#"
-                       class="blc-cta-btn">
-                        Get Started <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- Card 2: Professional (FEATURED) -->
-                <div class="blc-card blc-featured">
-                    <span class="blc-popular-tag">
-                        <i class="fas fa-star"></i> Most Popular
-                    </span>
-
-                    <div class="blc-card-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3 class="blc-card-name">Professional</h3>
-                    <p class="blc-card-desc">Best for growing businesses with advanced needs</p>
-
-                    <div class="blc-price-wrap">
-                        <div class="blc-price-box">
-                            <span class="blc-currency">$</span>
-                            <span class="blc-amount">49</span>
-                            <span class="blc-period">/month</span>
-                        </div>
-                        <span class="blc-price-note">Billed monthly</span>
-                    </div>
-
-                    <ul class="blc-features">
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Up to 25 users</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> 100GB Storage</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Advanced Reports</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Priority Support</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> API Access</li>
-                    </ul>
-
-                    <a href="#"
-                       class="blc-cta-btn">
-                        Choose Plan <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-                <!-- Card 3: Enterprise -->
-                <div class="blc-card">
-                    <div class="blc-card-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3 class="blc-card-name">Enterprise</h3>
-                    <p class="blc-card-desc">For large teams with unlimited possibilities</p>
-
-                    <div class="blc-price-wrap">
-                        <div class="blc-price-box">
-                            <span class="blc-currency">$</span>
-                            <span class="blc-amount">99</span>
-                            <span class="blc-period">/month</span>
-                        </div>
-                        <span class="blc-price-note">Billed monthly</span>
-                    </div>
-
-                    <ul class="blc-features">
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Unlimited users</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Unlimited Storage</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> Custom Reports</li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> 24/7 Dedicated Support
-                        </li>
-                        <li><span class="blc-check-icon"><i class="fas fa-check"></i></span> White Label Solution</li>
-                    </ul>
-
-                    <a href="#"
-                       class="blc-cta-btn">
-                        Contact Sales <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
 
             </div>
 
