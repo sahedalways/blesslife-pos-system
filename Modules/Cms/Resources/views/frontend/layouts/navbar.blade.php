@@ -58,12 +58,12 @@
 
                             <li class="hero-nav__item">
                                 <a href="{{ route('cms.contact.us') }}"
-                                   class="hero-nav__link">Contact us</a>
+                                   class="hero-nav__link{{ request()->routeIs('cms.contact.us') ? ' hero-nav__link--active' : '' }}">Contact us</a>
                             </li>
                             @if (Route::has('pricing') && config('app.env') != 'demo')
                                 <li class="hero-nav__item">
                                     <a href="{{ action([\Modules\Superadmin\Http\Controllers\PricingController::class, 'index']) }}"
-                                       class="hero-nav__link">
+                                       class="hero-nav__link{{ request()->routeIs('pricing*') ? ' hero-nav__link--active' : '' }}">
                                         @lang('superadmin::lang.pricing')
                                     </a>
                                 </li>
@@ -71,14 +71,24 @@
                             @if ($__blog_count >= 1)
                                 <li class="hero-nav__item">
                                     <a href="{{ action([\Modules\Cms\Http\Controllers\CmsController::class, 'getBlogList']) }}"
-                                       class="hero-nav__link">
+                                       class="hero-nav__link{{ request()->is('c/blog*') ? ' hero-nav__link--active' : '' }}">
                                         {{ __('cms::lang.blogs') }}
                                     </a>
                                 </li>
                             @endif
 
+                            @php
+                                $any_page_active = false;
+                                $page_urls = [];
+                                foreach ($__pages ?? [] as $p) {
+                                    $page_urls[$p->slug] = action([\Modules\Cms\Http\Controllers\CmsPageController::class, 'showPage'], ['page' => $p->slug]);
+                                    if (request()->url() === $page_urls[$p->slug]) {
+                                        $any_page_active = true;
+                                    }
+                                }
+                            @endphp
                             @if (count($__pages) > 0)
-                                <li class="hero-nav__item hero-nav__item--with-dropdown">
+                                <li class="hero-nav__item hero-nav__item--with-dropdown{{ $any_page_active ? ' hero-nav__item--active-dropdown' : '' }}">
                                     <span class="hero-nav__link"
                                           tabindex="1"
                                           role="button">
@@ -100,8 +110,8 @@
                                         <div class="row flex-wrap">
                                             <div class="col-lg-12">
                                                 @foreach ($__pages as $page)
-                                                    <a href="{{ action([\Modules\Cms\Http\Controllers\CmsPageController::class, 'showPage'], ['page' => $page->slug]) }}"
-                                                       class="dropdown__link">
+                                                    <a href="{{ $page_urls[$page->slug] }}"
+                                                       class="dropdown__link{{ request()->url() === $page_urls[$page->slug] ? ' dropdown__link--active' : '' }}">
                                                         <!-- Don't remove this empty "span" -->
                                                         <span class="mx-2"></span>
                                                         <!-- ------------------------------ -->
@@ -119,21 +129,25 @@
                             @endif
                             @if (count($__seperate_menu_pages) > 0)
                                 @foreach ($__seperate_menu_pages as $s_page)
+                                    @php
+                                        $s_page_url = action([\Modules\Cms\Http\Controllers\CmsPageController::class, 'showPage'], ['page' => $s_page->slug]);
+                                        $s_is_active = request()->url() === $s_page_url;
+                                    @endphp
                                     <li class="hero-nav__item">
-                                        <a
-                                           href="{{ action([\Modules\Cms\Http\Controllers\CmsPageController::class, 'showPage'], ['page' => $s_page->slug]) }}"class="hero-nav__link">
+                                        <a href="{{ $s_page_url }}"
+                                           class="hero-nav__link{{ $s_is_active ? ' hero-nav__link--active' : '' }}">
                                             {{ $s_page->title }}
                                         </a>
                                     </li>
                                 @endforeach
                             @endif
 
-                            <li class="hero-nav__item">
-                                <a href="{{ url('/') }}"
-                                   class="hero-nav__link">
-                                    Home
-                                </a>
-                            </li>
+    <li class="hero-nav__item">
+        <a href="{{ url('/') }}"
+           class="hero-nav__link{{ request()->is('/') ? ' hero-nav__link--active' : '' }}">
+            Home
+        </a>
+    </li>
                         </ul>
                     </li>
                 </ul>
@@ -200,15 +214,25 @@
         border-radius: 1px !important;
     }
 
+    .hero-nav__link--active::after,
     .hero-nav__link:hover::after {
         width: 100% !important;
     }
 
+    .hero-nav__item--active-dropdown .hero-nav__link::after {
+        width: 100% !important;
+    }
+
+    .hero-nav__link--active,
     .hero-nav__link:hover,
     .hero-nav__item a:not(.btn):hover {
         color: #fff !important;
         opacity: 1 !important;
         text-shadow: 0 0 12px rgba(255, 255, 255, 0.4) !important;
+    }
+
+    .dropdown__link--active .dropdown__item-title {
+        color: var(--secondary-orange) !important;
     }
 
     .hero-nav__item .btn-primary {
