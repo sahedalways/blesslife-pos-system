@@ -286,7 +286,7 @@
             align-items: center;
             justify-content: center;
             color: #ffffff;
-            font-family: 'Font Awesome 6 Free', 'FontAwesome';
+            font-family: 'Font Awesome 5 Free', 'FontAwesome';
             font-weight: 900;
             font-size: 1rem;
             box-shadow: 0 6px 15px rgba(0, 128, 0, 0.25);
