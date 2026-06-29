@@ -2,6 +2,11 @@
 @section('title', __('superadmin::lang.pricing'))
 
 @section('content')
+    @includeIf('cms::frontend.layouts.home_header')
+    <x-hero heroImage="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1600&q=80"
+            heroSubtitle="Pricing"
+            heroTitle="Choose Your Plan"
+            description="Select the perfect plan for your business. Start with a free trial, no credit card required." />
     <div class="">
         @include('superadmin::layouts.partials.currency')
         <div class="pricing">
