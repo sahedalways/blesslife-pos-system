@@ -7,11 +7,6 @@
 @endsection
 @section('css')
     <style type="text/css">
-        .error {
-            color: #e55151 !important;
-            margin-bottom: 0.5rem;
-        }
-
         .non-bullet-list {
             list-style: none;
             margin-left: 0px;
@@ -614,8 +609,18 @@
 
             $("#contact_form").validate({
                 errorClass: 'input-error',
+                errorElement: 'span',
                 errorPlacement: function(error, element) {
                     element.addClass('input-error');
+                    error.css({
+                        'display': 'block',
+                        'color': '#dc2626',
+                        'font-size': '0.85rem',
+                        'margin': '-12px 0 16px',
+                        'padding': '0 4px',
+                        'font-weight': '500'
+                    });
+                    element.after(error);
                 },
                 submitHandler: function(form, e) {
                     if ($('#contact_form').valid()) {
