@@ -24,13 +24,16 @@
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     text-align: center;
     text-decoration: none;
     overflow: hidden;
     z-index: 1;
 }
-.bls-global-btn::after {
+.bls-global-btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -43,8 +46,8 @@
     transition: width 0.45s ease;
     z-index: 0;
 }
-.bls-global-btn:hover::after,
-.bls-global-btn:focus::after {
+.bls-global-btn:hover::before,
+.bls-global-btn:focus::before {
     width: 100%;
 }
 .bls-global-btn:hover,
