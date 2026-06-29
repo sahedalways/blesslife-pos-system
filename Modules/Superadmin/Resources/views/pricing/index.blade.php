@@ -72,7 +72,7 @@
             #pro-pricing-section .blc-container {
                 position: relative;
                 z-index: 2;
-                max-width: 1320px;
+                max-width: 1600px;
                 margin: 0 auto;
                 padding: 0 20px;
             }
@@ -209,8 +209,8 @@
             /* ===== PRICING GRID ===== */
                 #pro-pricing-section .blc-grid {
                     display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 28px;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 32px;
                     align-items: stretch;
                 }
 
@@ -232,7 +232,7 @@
                 position: relative;
                 background: #ffffff;
                 border-radius: 24px;
-                padding: 38px 32px;
+                padding: 38px 40px;
                 border: 2px solid transparent;
                 box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
                 transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
