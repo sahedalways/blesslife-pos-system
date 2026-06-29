@@ -42,8 +42,8 @@
                             <span class="contact-icon">
                                 <i class="fas fa-phone"></i>
                             </span>
-                            <a href="tel:+966531674978">
-                                +966 53 167 4978
+                            <a href="tel:+112242650">
+                                +112242650
                             </a>
                         </li>
 
@@ -51,16 +51,9 @@
                             <span class="contact-icon">
                                 <i class="fas fa-envelope"></i>
                             </span>
-                            <a href="mailto:haquebd08@gmail.com">
-                                haquebd08@gmail.com
+                            <a href="mailto:info@blesslifeltd.com">
+                                info@blesslifeltd.com
                             </a>
-                        </li>
-
-                        <li>
-                            <span class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </span>
-                            <span>9137 Al Shafi, Complex, Olaya Street, Riyadh 12611</span>
                         </li>
                     </ul>
                 </div>
