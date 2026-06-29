@@ -132,7 +132,7 @@
         }
 
         .contact-split__form-col .contact-form__title {
-            font-size: 1.8rem;
+            font-size: 30px;
             font-weight: 800;
             color: #1F2937;
             line-height: 1.2;
@@ -398,7 +398,7 @@
             }
 
             .contact-split__form-col .contact-form__title {
-                font-size: 1.6rem;
+                font-size: 23px;
             }
 
             .contact-split__form-col .pro-info-card {
@@ -422,7 +422,7 @@
             }
 
             .contact-split__form-col .contact-form__title {
-                font-size: 1.4rem;
+                font-size: 23px;
             }
 
             .contact-split__form-col .pro-info-card h4 {
