@@ -369,26 +369,26 @@
         @if ($package->enable_custom_link == 1)
             <a href="{{ $package->custom_link }}"
                class="pps-pkg-btn bls-submit-btn">
-                <span>{{ $package->custom_link_text }}</span>
+                {{ $package->custom_link_text }}
             </a>
         @else
             @if (isset($action_type) && $action_type == 'register')
                 <a href="{{ route('business.getRegister') }}?package={{ $package->id }}"
                    class="pps-pkg-btn bls-submit-btn">
-                    <span>@if ($package->price != 0)
+                    @if ($package->price != 0)
                         @lang('superadmin::lang.register_subscribe')
                     @else
                         @lang('superadmin::lang.register_free')
-                    @endif</span>
+                    @endif
                 </a>
             @else
                 <a href="{{ action([\Modules\Superadmin\Http\Controllers\SubscriptionController::class, 'pay'], [$package->id]) }}"
                    class="pps-pkg-btn bls-submit-btn">
-                    <span>@if ($package->price != 0)
+                    @if ($package->price != 0)
                         @lang('superadmin::lang.pay_and_subscribe')
                     @else
                         @lang('superadmin::lang.subscribe')
-                    @endif</span>
+                    @endif
                 </a>
             @endif
         @endif

@@ -152,6 +152,7 @@ button:focus {
 }
 
 .bls-submit-btn {
+    position: relative;
     background: #008000;
     color: #fff;
     border: none;
@@ -160,47 +161,37 @@ button:focus {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.35s ease;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    perspective: 600px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.bls-submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #E58E24;
+    border-radius: 50px;
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.bls-submit-btn:hover::before,
+.bls-submit-btn:focus::before {
+    width: 100%;
 }
 
 .bls-submit-btn:hover,
 .bls-submit-btn:focus {
-    background: #E58E24;
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(229, 142, 36, 0.4);
-}
-
-.bls-submit-btn {
-    overflow: hidden;
-}
-
-.bls-submit-btn span {
-    display: inline-block;
-    transition: transform 0.4s ease;
-}
-
-.bls-submit-btn:hover span {
-    animation: blsTextSlideUp 0.45s ease forwards;
-}
-
-@keyframes blsTextSlideUp {
-    0% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(100%);
-    }
-    60% {
-        transform: translateY(-30%);
-    }
-    100% {
-        transform: translateY(0);
-    }
 }
 
 .highlight {
