@@ -248,7 +248,8 @@
                 <p>From inventory to sales — one integrated platform to manage your entire retail operation seamlessly.
                 </p>
                 <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
+                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i
+                       class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         <div class="carousel-item"
@@ -259,7 +260,8 @@
                 <p>Powerful analytics and reporting give you full visibility into your business performance at a glance.
                 </p>
                 <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
+                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i
+                       class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         <div class="carousel-item"
@@ -269,7 +271,8 @@
                     data-text="Multi-Store Management Made Easy"></h1>
                 <p>Handle multiple locations, users, and currencies from a single dashboard — scale without limits.</p>
                 <a href="{{ $hero_btn['link'] ?? route('business.getRegister') }}"
-                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i class="fas fa-arrow-right"></i></a>
+                   class="btn-trial">{{ $hero_btn['text'] ?? 'Start your Free Trial' }} <i
+                       class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 @extends('cms::frontend.layouts.app')
+@section('body-class', 'nav-overflow-hidden')
 @section('title', $page->title)
 @php
     $navbar_btn['text'] = 'Try For Free';
