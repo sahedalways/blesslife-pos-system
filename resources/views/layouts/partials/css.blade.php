@@ -36,6 +36,7 @@
         text-decoration: none;
         overflow: hidden;
         z-index: 1;
+        perspective: 600px;
     }
 
     .bls-global-btn::before {
@@ -57,20 +58,33 @@
         width: 100%;
     }
 
-.bls-global-btn:hover,
-.bls-global-btn:focus {
-    color: #fff;
-    box-shadow: 0 12px 35px rgba(229, 142, 36, 0.5);
-    animation: blsRollText 0.6s ease;
-}
-@keyframes blsRollText {
-    0% { transform: translateY(-3px) translateX(0); }
-    20% { transform: translateY(-3px) translateX(10px); }
-    40% { transform: translateY(-3px) translateX(-10px); }
-    60% { transform: translateY(-3px) translateX(6px); }
-    80% { transform: translateY(-3px) translateX(-3px); }
-    100% { transform: translateY(-3px) translateX(0); }
-}
+    .bls-global-btn:hover,
+    .bls-global-btn:focus {
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(229, 142, 36, 0.5);
+    }
+
+    .bls-global-btn span {
+        display: inline-block;
+        transition: transform 0.4s ease;
+    }
+
+    .bls-global-btn:hover span {
+        animation: blsTextFlip 0.5s ease forwards;
+    }
+
+    @keyframes blsTextFlip {
+        0% {
+            transform: rotateX(0deg);
+        }
+        50% {
+            transform: rotateX(90deg);
+        }
+        100% {
+            transform: rotateX(0deg);
+        }
+    }
 </style>
 
 
