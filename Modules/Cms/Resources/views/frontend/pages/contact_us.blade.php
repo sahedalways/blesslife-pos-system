@@ -134,13 +134,9 @@
         .contact-split__form-col .contact-form__title {
             font-size: 30px;
             font-weight: 800;
-            color: #1F2937;
+            color: #000000;
             line-height: 1.2;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #008000, #E58E24);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             display: inline-block;
         }
 
@@ -152,6 +148,11 @@
             background: linear-gradient(90deg, #008000, #E58E24);
             margin: 14px auto 20px;
             border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        .contact-split__form-col .contact-form__header:hover::after {
+            width: 140px;
         }
 
         .contact-split__form-col .contact-form__paragraph {
