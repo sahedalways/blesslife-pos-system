@@ -40,9 +40,6 @@
     }
 </style>
 
-<!-- Lenis smooth scroll -->
-<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-
 <!-- app css -->
 <link rel="stylesheet"
       href="{{ asset('css/app.css?v=' . $asset_v) }}">

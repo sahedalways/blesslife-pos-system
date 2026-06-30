@@ -31,7 +31,6 @@
                 background: linear-gradient(180deg, #00e676, #009a00, #007700);
             }
         </style>
-        <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
         <!-- Styles -->
         <style>

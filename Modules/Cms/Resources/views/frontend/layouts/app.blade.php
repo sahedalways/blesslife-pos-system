@@ -36,7 +36,6 @@
                 background: linear-gradient(180deg, #00e676, #009a00, #007700);
             }
         </style>
-        <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
         <script src="https://unpkg.com/tua-body-scroll-lock"></script>
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -180,12 +179,5 @@
             @includeIf('cms::components.chat_widget.js.chat_widget-style1')
         @endif
         @yield('javascript')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                window.lenis = new Lenis({ duration: 1.2, smoothWheel: true });
-                function lenisRaf(time) { window.lenis.raf(time); requestAnimationFrame(lenisRaf); }
-                requestAnimationFrame(lenisRaf);
-            });
-        </script>
     </body>
 </html>
