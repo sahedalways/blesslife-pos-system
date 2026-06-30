@@ -21,6 +21,7 @@ Route::get('c/blog/{slug}-{id}', [Modules\Cms\Http\Controllers\CmsController::cl
 Route::get('faq', [Modules\Cms\Http\Controllers\CmsController::class, 'faq'])->name('cms.faq');
 Route::get('privacy-policy', [Modules\Cms\Http\Controllers\CmsController::class, 'privacyPolicy'])->name('cms.privacy');
 Route::get('terms-and-conditions', [Modules\Cms\Http\Controllers\CmsController::class, 'termsAndConditions'])->name('cms.terms');
+Route::get('return-and-refund-policy', [Modules\Cms\Http\Controllers\CmsController::class, 'returnAndRefundPolicy'])->name('cms.refund');
 Route::get('c/contact-us', [Modules\Cms\Http\Controllers\CmsController::class, 'contactUs'])->name('cms.contact.us');
 Route::post('c/submit-contact-form', [Modules\Cms\Http\Controllers\CmsController::class, 'postContactForm'])->name('cms.submit.contact.form');
 

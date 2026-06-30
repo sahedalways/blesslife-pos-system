@@ -193,6 +193,11 @@ class CmsController extends Controller
         return view('cms::frontend.terms-and-conditions.index');
     }
 
+    public function returnAndRefundPolicy()
+    {
+        return view('cms::frontend.return-and-refund-policy.index');
+    }
+
     public function faq()
     {
         $faqs = CmsSiteDetail::getValue('faqs');
