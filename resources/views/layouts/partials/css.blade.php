@@ -11,9 +11,12 @@
 
 @yield('css')
 
-<!-- global css -->
-<link rel="stylesheet"
-      href="{{ asset('css/global.css?v=' . $asset_v) }}">
+<!-- global css -- inline to ensure deployment (public/css/ is gitignored) -->
+<style>
+    html { overflow-x: clip; }
+    body { scrollbar-width: none; -ms-overflow-style: none; }
+    body::-webkit-scrollbar { display: none; }
+</style>
 
 <!-- app css -->
 <link rel="stylesheet"

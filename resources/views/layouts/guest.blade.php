@@ -15,7 +15,11 @@
     <link rel="stylesheet" href="{{ asset('css/vendor.css?v='.$asset_v) }}">
 
     <!-- global css -->
-    <link rel="stylesheet" href="{{ asset('css/global.css?v='.$asset_v) }}">
+    <style>
+        html { overflow-x: clip; }
+        body { scrollbar-width: none; -ms-overflow-style: none; }
+        body::-webkit-scrollbar { display: none; }
+    </style>
 
     <!-- app css -->
     <link rel="stylesheet" href="{{ asset('css/app.css?v='.$asset_v) }}">

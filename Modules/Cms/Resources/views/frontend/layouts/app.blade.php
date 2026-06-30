@@ -21,7 +21,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css"/>
         <!-- Your Custom CSS file that will include your blocks CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('modules/cms/css/cms.css?v=' . $asset_v) }}">
-        <link rel="stylesheet" href="{{ asset('css/global.css?v=' . $asset_v) }}">
+        <style>
+            html { overflow-x: clip; }
+            body { scrollbar-width: none; -ms-overflow-style: none; }
+            body::-webkit-scrollbar { display: none; }
+        </style>
         <script src="https://unpkg.com/tua-body-scroll-lock"></script>
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
