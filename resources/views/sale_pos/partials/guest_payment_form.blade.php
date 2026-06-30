@@ -85,7 +85,7 @@
                                 data-amount="{{$total_payable*100}}"
                                 data-buttontext="Pay with Razorpay"
                                 data-name="{{$transaction->business->name}}"
-                                data-theme.color="#3c8dbc"
+                                data-theme.color="#007200"
                             ></script>
                             {{ csrf_field() }}
                         </form>

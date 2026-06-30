@@ -10,7 +10,7 @@
         -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid rgba(0, 128, 0, 0.1);
         box-shadow: 0 4px 30px rgba(0, 128, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-        padding: 10px 0;
+        padding: 15px 0;
     }
     .auth-navbar .nav-container {
         display: flex;
@@ -32,6 +32,10 @@
         margin: 0;
         padding: 0;
     }
+    .auth-navbar .nav-links li {
+        display: flex;
+        align-items: center;
+    }
     .auth-navbar .nav-links li a {
         color: rgba(0, 80, 0, 0.85);
         text-decoration: none;
@@ -43,9 +47,13 @@
         color: #008000;
     }
     .auth-navbar .bls-global-btn {
-        padding: 0.5rem 1.5rem;
-        font-size: 0.85rem;
+        padding: 0.75rem 1.75rem;
+        font-size: 0.9rem;
         color: #fff !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1;
     }
     .auth-navbar details summary {
         color: rgba(0, 80, 0, 0.85) !important;

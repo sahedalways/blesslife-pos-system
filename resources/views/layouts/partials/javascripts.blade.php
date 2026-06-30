@@ -216,6 +216,16 @@
         // });
    
     });
+
+    function blsWrapBtnText(selector) {
+        $(selector).each(function() {
+            var $this = $(this);
+            var text = $this.text().trim();
+            if (text && !$this.find('.bls-btn-text').length) {
+                $this.html('<span class="bls-btn-text">' + text + '</span>');
+            }
+        });
+    }
 </script>
 
 

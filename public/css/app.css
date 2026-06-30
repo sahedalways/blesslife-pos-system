@@ -459,9 +459,9 @@ div.pos-tab-menu div.list-group>a:last-child{
 /* div.pos-tab-menu div.list-group>a.active,
 div.pos-tab-menu div.list-group>a.active .glyphicon,
 div.pos-tab-menu div.list-group>a.active .fa{
-  background-color: #3c8dbc;
+  background-color: #007200;
   color: #ffffff;
-    border-color: #3c8dbc;
+    border-color: #007200;
 } */
 
 div.pos-tab-menu div.list-group > a.active,
@@ -482,7 +482,7 @@ div.pos-tab-menu div.list-group>a.active:after{
   border-left: 0;
   border-bottom: 13px solid transparent;
   border-top: 13px solid transparent;
-  border-left: 10px solid #3c8dbc;
+  border-left: 10px solid #007200;
 }
 
 div.pos-tab-content{
@@ -501,7 +501,7 @@ div.pos-tab div.pos-tab-content:not(.active){
     color: white;
 }
 .blue-header th {
-	background-color: #3c8dbc;
+	background-color: #007200;
     color: white;
 }
 .table-th-green th{
@@ -517,7 +517,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 .active-cell {
-    border: 2px dotted #3c8dbc !important;
+    border: 2px dotted #007200 !important;
 }
 .cursor-pointer{
     cursor: pointer !important;

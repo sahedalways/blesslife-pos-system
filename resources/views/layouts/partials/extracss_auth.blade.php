@@ -154,9 +154,134 @@
            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
        }
 
-       .text:hover {
-           transform: translateY(-2px);
-           box-shadow: 0 12px 35px rgba(99, 102, 241, 0.5);
-           color: #fff;
-       }
-   </style>
+        .text:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.5);
+            color: #fff;
+        }
+
+        .input-group .select2-container {
+            width: 100% !important;
+        }
+
+        .input-group .select2-container--default .select2-selection--single {
+            border: 2px solid #e5e7eb;
+            background: #f9fafb;
+            border-radius: 0 14px 14px 0;
+            height: auto;
+            padding: 0;
+        }
+
+        .input-group .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #1F2937;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 13px 36px 11px 20px;
+        }
+
+        .input-group .select2-container--default .select2-selection--single .select2-selection__arrow {
+            top: 12px;
+            right: 16px;
+        }
+
+        .input-group .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #9CA3AF;
+        }
+
+        .input-group .select2-container--default.select2-container--open .select2-selection--single,
+        .input-group .select2-container--default.select2-container--focus .select2-selection--single {
+            border-color: #1B5E20;
+            box-shadow: 0 0 0 4px rgba(27, 94, 32, 0.12);
+            background: #ffffff;
+        }
+
+        /* Upload Logo - fileinput widget */
+        .file-input .input-group {
+            width: 100%;
+            height: auto;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+
+        .file-input .input-group:hover:not(:focus-within) {
+            border-color: #d1d5db;
+        }
+
+        .file-input .input-group:focus-within {
+            background: #ffffff;
+            border-color: #1B5E20;
+            box-shadow: 0 0 0 4px rgba(27, 94, 32, 0.12);
+        }
+
+        .file-input .input-group .file-caption.form-control {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent;
+            border-radius: 0;
+            height: auto;
+            padding: 0;
+            font-size: 0.95rem;
+            color: #1F2937;
+            float: none;
+        }
+
+        .file-input .input-group .file-caption-name {
+            padding: 14px 20px;
+            height: auto;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            color: #9CA3AF;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .file-input.file-input-exists .file-caption-name {
+            color: #1F2937;
+        }
+
+        .file-input .input-group-btn .btn-file {
+            background: linear-gradient(180deg, #4ade80, #22c55e);
+            border: none;
+            color: #fff;
+            padding: 14px 24px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -2px 4px rgba(0,0,0,0.15);
+            line-height: 1.5;
+            height: auto;
+        }
+
+        .file-input .input-group-btn .btn-file:hover {
+            background: linear-gradient(180deg, #22c55e, #16a34a);
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .file-input .input-group-btn .btn-file:active {
+            transform: translateY(0);
+        }
+
+        .file-input .input-group-btn .fileinput-remove.fileinput-remove-button {
+            background: #fff;
+            border: none;
+            color: #dc2626;
+            padding: 14px 16px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            line-height: 1.5;
+            height: auto;
+        }
+
+        .file-input .input-group-btn .fileinput-remove.fileinput-remove-button:hover {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+    </style>

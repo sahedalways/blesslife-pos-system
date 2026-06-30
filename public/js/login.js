@@ -50,8 +50,15 @@ $(document).ready(function () {
             },
         });
         form.find('a[href="#previous"]').addClass('tw-dw-btn');
-        form.find('a[href="#next"]').addClass('tw-dw-btn tw-dw-btn-primary');
-        form.find('a[href="#finish"]').addClass('tw-dw-btn tw-dw-btn-primary');
+        form.find('a[href="#next"]').addClass('bls-global-btn');
+        form.find('a[href="#finish"]').addClass('bls-global-btn');
+
+        form.find('.wizard > .content fieldset').each(function () {
+            var $cols = $(this).children('[class*="col-"]');
+            if ($cols.length) {
+                $cols.wrapAll('<div class="row" style="max-width:440px;margin:0 auto" />');
+            }
+        });
     }
     // registration form steps end
 

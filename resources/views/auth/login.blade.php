@@ -142,13 +142,13 @@
             <div
                  class="tw-p-5 md:tw-p-6 tw-mb-4 tw-rounded-2xl tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-ring-1 tw-ring-gray-200">
                 <div class="tw-flex tw-flex-col tw-gap-4 tw-dw-rounded-box tw-dw-p-6 tw-dw-max-w-md">
-                    <div class="tw-flex tw-items-center tw-flex-col">
-                        <h1 class="tw-text-lg md:tw-text-xl tw-font-semibold tw-text-[#1e1e1e]">
+                    <div style="margin-bottom: 30px; text-align: center;">
+                        <h1 style="font-size: 30px; font-weight: 900; color: #1e1e1e; margin: 0;">
                             @lang('lang_v1.welcome_back')
                         </h1>
-                        <h2 class="tw-text-sm tw-font-medium tw-text-gray-500">
+                        <p style="font-size: 15px; font-weight: 400; color: #4b5563; margin-top: 5px; font-style: italic;">
                             @lang('lang_v1.login_to_your') {{ config('app.name', 'ultimatePOS') }}
-                        </h2>
+                        </p>
                     </div>
 
                     <form method="POST"
@@ -156,43 +156,32 @@
                           id="login-form">
                         {{ csrf_field() }}
                         <div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label class="tw-dw-form-control">
-                                <div class="tw-dw-label">
-                                    <span
-                                          class="tw-text-xs md:tw-text-sm tw-font-medium tw-text-black">@lang('lang_v1.username')</span>
-                                </div>
-
-                                <input class="tw-border tw-border-[#D1D5DA] tw-outline-none tw-h-12 tw-bg-transparent tw-rounded-lg tw-px-3 tw-font-medium tw-text-black placeholder:tw-text-gray-500 placeholder:tw-font-medium"
-                                       name="username"
-                                       required
-                                       autofocus
-                                       placeholder="@lang('lang_v1.username')"
-                                       data-last-active-input=""
-                                       id="username"
-                                       type="text"
-                                       name="username"
-                                       value="{{ $username }}" />
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </label>
+                            <label for="username" class="login-label">@lang('lang_v1.username')<span class="required-star">*</span></label>
+                            <input class="auth-input"
+                                   name="username"
+                                   required
+                                   autofocus
+                                   placeholder="@lang('lang_v1.username')"
+                                   id="username"
+                                   type="text"
+                                   value="{{ $username }}" />
+                            @if ($errors->has('username'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('username') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="tw-dw-form-control">
-                                <div class="tw-dw-label">
-                                    <span
-                                          class="tw-text-xs md:tw-text-sm tw-font-medium tw-text-black">@lang('lang_v1.password')</span>
-                                    @if (config('app.env') != 'demo')
-                                        <a href="{{ route('password.request') }}"
-                                           class="tw-text-xs md:tw-text-sm tw-font-medium tw-bg-gradient-to-r tw-from-indigo-500 tw-to-blue-500 tw-inline-block tw-text-transparent tw-bg-clip-text hover:tw-text-[#467BF5]"
-                                           tabindex="-1">@lang('lang_v1.forgot_your_password')</a>
-                                    @endif
-                                </div>
-
-                                <input class="tw-border tw-border-[#D1D5DA] tw-outline-none tw-h-12 tw-bg-transparent tw-rounded-lg tw-px-3 tw-font-medium tw-text-black placeholder:tw-text-gray-500 placeholder:tw-font-medium"
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                                <label for="password" class="login-label" style="margin-bottom:0;">@lang('lang_v1.password')<span class="required-star">*</span></label>
+                                @if (config('app.env') != 'demo')
+                                    <a href="{{ route('password.request') }}"
+                                       class="tw-text-xs md:tw-text-sm tw-font-medium" style="color:#16a34a !important;" tabindex="-1">@lang('lang_v1.forgot_your_password')</a>
+                                @endif
+                            </div>
+                            <div style="position:relative;">
+                                <input class="auth-input"
                                        id="password"
                                        type="password"
                                        name="password"
@@ -202,7 +191,7 @@
                                 <button type="button"
                                         id="show_hide_icon"
                                         class="show_hide_icon"
-                                        style="position: absolute; top:48px;right:5px;">
+                                        style="position: absolute; top:13px;right:16px;">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          class="icon icon-tabler icon-tabler-eye tw-w-6"
                                          viewBox="0 0 24 24"
@@ -219,7 +208,7 @@
                                               d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
                                     </svg>
                                 </button>
-                            </label>
+                            </div>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -266,7 +255,7 @@
                                 <a href="{{ route('business.getRegister') }}@if (!empty(request()->lang)) {{ '?lang=' . request()->lang }} @endif"
                                    class="tw-text-sm tw-font-medium tw-text-gray-500 hover:tw-text-gray-500 tw-mt-2">{{ __('business.not_yet_registered') }}
                                     <span
-                                          class="tw-text-sm tw-font-medium tw-bg-gradient-to-r tw-from-indigo-500 tw-to-blue-500 tw-inline-block tw-text-transparent tw-bg-clip-text hover:tw-text-[#467BF5] hover:tw-underline">{{ __('business.register_now') }}</span></a>
+                                           class="tw-text-sm tw-font-medium hover:tw-underline" style="color:#16a34a !important;">{{ __('business.register_now') }}</span></a>
                             @endif
                         @endif
                     </div>

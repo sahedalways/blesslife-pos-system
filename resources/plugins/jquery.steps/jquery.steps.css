@@ -116,7 +116,7 @@
 .wizard > .steps .current a:hover,
 .wizard > .steps .current a:active
 {
-    background: #2184be;
+    background: linear-gradient(180deg, #00aa00, #006600);
     color: #fff;
     cursor: default;
 }
@@ -125,8 +125,8 @@
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active
 {
-    background: #9dc8e2;
-    color: #fff;
+    background: #f5e6c8;
+    color: #7a6b3a;
 }
 
 .wizard > .steps .error a,
