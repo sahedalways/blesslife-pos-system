@@ -88,7 +88,7 @@
              style="background-image: url('{{ $heroImage }}');">
             <div class="carousel-caption">
                 @if ($heroSubtitle)
-                    <span class="ds-subtitle" style="color: #E58E24; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 0.75rem;">{{ $heroSubtitle }}</span>
+                    <span style="color: #E58E24; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 0.75rem;">{{ $heroSubtitle }}</span>
                 @endif
                 <h1>{{ $heroTitle }}</h1>
                 @if ($description)

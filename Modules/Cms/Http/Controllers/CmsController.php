@@ -183,6 +183,14 @@ class CmsController extends Controller
             ->with(compact('blog', 'suggestedBlogs'));
     }
 
+    public function faq()
+    {
+        $faqs = CmsSiteDetail::getValue('faqs');
+
+        return view('cms::frontend.faq.index')
+            ->with(compact('faqs'));
+    }
+
     public function contactUs(Request $request)
     {
         $page = $this->cmsUtil->getPageByLayout('contact');

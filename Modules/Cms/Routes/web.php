@@ -18,6 +18,7 @@ Route::get('/', [Modules\Cms\Http\Controllers\CmsController::class, 'index']);
 Route::get('c/page/{page}', [Modules\Cms\Http\Controllers\CmsPageController::class, 'showPage']);
 Route::get('c/blogs', [Modules\Cms\Http\Controllers\CmsController::class, 'getBlogList']);
 Route::get('c/blog/{slug}-{id}', [Modules\Cms\Http\Controllers\CmsController::class, 'viewBlog']);
+Route::get('faq', [Modules\Cms\Http\Controllers\CmsController::class, 'faq'])->name('cms.faq');
 Route::get('c/contact-us', [Modules\Cms\Http\Controllers\CmsController::class, 'contactUs'])->name('cms.contact.us');
 Route::post('c/submit-contact-form', [Modules\Cms\Http\Controllers\CmsController::class, 'postContactForm'])->name('cms.submit.contact.form');
 
