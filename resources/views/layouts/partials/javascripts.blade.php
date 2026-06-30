@@ -230,17 +230,15 @@
     // Lenis smooth scroll
     document.addEventListener('DOMContentLoaded', function() {
         var lenisWrapper = document.getElementById('scrollable-container');
-        if (lenisWrapper) {
-            var lenisContent = lenisWrapper.querySelector(':scope > div');
-            if (lenisContent) {
-                window.lenis = new Lenis({
-                    wrapper: lenisWrapper,
-                    content: lenisContent,
-                    duration: 1.2,
-                    smoothWheel: true,
-                    orientation: 'vertical'
-                });
-            }
+        var lenisContent = lenisWrapper ? lenisWrapper.querySelector('.lenis-content') : null;
+        if (lenisWrapper && lenisContent) {
+            window.lenis = new Lenis({
+                wrapper: lenisWrapper,
+                content: lenisContent,
+                duration: 1.2,
+                smoothWheel: true,
+                orientation: 'vertical'
+            });
         } else {
             window.lenis = new Lenis({
                 duration: 1.2,
