@@ -26,6 +26,18 @@
     body::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(180deg, #00e676, #009a00, #007700);
     }
+    #scrollable-container { scrollbar-width: thin; scrollbar-color: #008000 #e8f5e9; }
+    #scrollable-container::-webkit-scrollbar { width: 8px; }
+    #scrollable-container::-webkit-scrollbar-track { background: #e8f5e9; }
+    #scrollable-container::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #00c853, #008000, #006600);
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: inset 0 1px 3px rgba(255,255,255,0.4), 0 2px 6px rgba(0,128,0,0.3);
+    }
+    #scrollable-container::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #00e676, #009a00, #007700);
+    }
 </style>
 
 <!-- app css -->
