@@ -81,7 +81,7 @@
             #pro-blog-section .pbs-container {
                 position: relative;
                 z-index: 2;
-                max-width: 1320px;
+                max-width: 1640px;
                 margin: 0 auto;
                 padding: 0 20px;
             }

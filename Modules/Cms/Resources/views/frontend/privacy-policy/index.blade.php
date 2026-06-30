@@ -1,5 +1,5 @@
 @extends('cms::frontend.layouts.app')
-@section('title', 'Terms and Conditions')
+@section('title', 'Privacy Policy')
 @php
     $navbar_btn['text'] = 'Try For Free';
     $navbar_btn['link'] = route('business.getRegister');
@@ -28,10 +28,10 @@
 @endphp
 @includeIf('cms::frontend.layouts.home_header')
 
-<x-hero heroImage="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80"
-        heroSubtitle="Legal"
-        heroTitle="Terms & Conditions"
-        description="Please review our terms before using our website and services." />
+<x-hero heroImage="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&q=80"
+        heroSubtitle="Privacy"
+        heroTitle="Privacy Policy"
+        description="Learn how we collect, use, and protect your personal information." />
 
 @section('content')
 
@@ -39,11 +39,6 @@
              class="pro-terms-wrapper">
 
         <style>
-            #pro-terms-section i[class^="fa-"],
-            #pro-terms-section i[class*=" fa-"] {
-                font-family: "Font Awesome 5 Free" !important;
-                font-weight: 900 !important;
-            }
             /* ===== MAIN WRAPPER ===== */
             #pro-terms-section {
                 position: relative;
@@ -121,8 +116,6 @@
                 justify-content: center;
                 font-size: 0.9rem;
                 box-shadow: 0 4px 12px rgba(0, 128, 0, 0.2);
-                font-family: "Font Awesome 5 Free";
-                font-weight: 900;
             }
 
             #pro-terms-section .pts-info-item strong {
@@ -156,15 +149,12 @@
                 top: 100px;
                 max-height: calc(100vh - 120px);
                 overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
             }
 
             #pro-terms-section .pts-sidebar::-webkit-scrollbar {
                 display: none;
-            }
-
-            #pro-terms-section .pts-sidebar {
-                scrollbar-width: none;
-                -ms-overflow-style: none;
             }
 
             @media (max-width: 991px) {
@@ -372,43 +362,79 @@
                 font-weight: 500;
             }
 
-            /* Definition List */
-            #pro-terms-section .pts-def-list {
+            /* Data Type Cards Grid */
+            #pro-terms-section .pts-data-grid {
                 display: grid;
-                grid-template-columns: 1fr;
-                gap: 12px;
-                margin-top: 14px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+                margin: 18px 0;
             }
 
-            #pro-terms-section .pts-def-item {
+            @media (max-width: 575px) {
+                #pro-terms-section .pts-data-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            #pro-terms-section .pts-data-card {
+                padding: 22px 20px;
+                border-radius: 16px;
+                background: linear-gradient(135deg, rgba(0, 128, 0, 0.06), rgba(229, 142, 36, 0.04));
+                border: 1px solid rgba(0, 128, 0, 0.15);
+                transition: all 0.4s ease;
+            }
+
+            #pro-terms-section .pts-data-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 128, 0, 0.1);
+            }
+
+            #pro-terms-section .pts-data-card h4 {
                 display: flex;
-                align-items: flex-start;
-                gap: 14px;
-                padding: 14px 18px;
-                background: linear-gradient(135deg, rgba(0, 128, 0, 0.03), rgba(229, 142, 36, 0.03));
-                border-radius: 12px;
-                border: 1px solid rgba(0, 128, 0, 0.08);
-                transition: all 0.3s ease;
-            }
-
-            #pro-terms-section .pts-def-item:hover {
-                transform: translateX(5px);
-                border-color: rgba(0, 128, 0, 0.2);
-                background: linear-gradient(135deg, rgba(0, 128, 0, 0.06), rgba(229, 142, 36, 0.06));
-            }
-
-            #pro-terms-section .pts-def-item .pts-def-term {
+                align-items: center;
+                gap: 10px;
+                font-size: 1.05rem;
                 font-weight: 700;
                 color: #008000;
-                font-size: 0.92rem;
-                min-width: 140px;
-                flex-shrink: 0;
+                margin: 0 0 12px 0;
             }
 
-            #pro-terms-section .pts-def-item .pts-def-text {
+            #pro-terms-section .pts-data-card h4::before {
+                content: '\f0c1';
+                font-family: 'Font Awesome 6 Free', 'FontAwesome';
+                font-weight: 900;
+                width: 30px;
+                height: 30px;
+                border-radius: 8px;
+                background: linear-gradient(135deg, #008000, #E58E24);
+                color: #ffffff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8rem;
+            }
+
+            #pro-terms-section .pts-data-card ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #pro-terms-section .pts-data-card ul li {
+                padding: 5px 0 5px 18px;
+                font-size: 0.88rem;
                 color: #4B5563;
-                font-size: 0.92rem;
-                line-height: 1.6;
+                position: relative;
+            }
+
+            #pro-terms-section .pts-data-card ul li::before {
+                content: '\f105';
+                font-family: 'Font Awesome 6 Free', 'FontAwesome';
+                font-weight: 900;
+                position: absolute;
+                left: 0;
+                top: 5px;
+                color: #E58E24;
             }
 
             /* Custom List */
@@ -488,81 +514,6 @@
                 border-radius: 2px;
             }
 
-            /* Phase Cards */
-            #pro-terms-section .pts-phase-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-                margin: 18px 0;
-            }
-
-            @media (max-width: 575px) {
-                #pro-terms-section .pts-phase-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            #pro-terms-section .pts-phase-card {
-                padding: 22px 20px;
-                border-radius: 16px;
-                background: linear-gradient(135deg, rgba(0, 128, 0, 0.06), rgba(229, 142, 36, 0.04));
-                border: 1px solid rgba(0, 128, 0, 0.15);
-                transition: all 0.4s ease;
-            }
-
-            #pro-terms-section .pts-phase-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 15px 30px rgba(0, 128, 0, 0.1);
-            }
-
-            #pro-terms-section .pts-phase-card h4 {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                font-size: 1.05rem;
-                font-weight: 700;
-                color: #008000;
-                margin: 0 0 12px 0;
-            }
-
-            #pro-terms-section .pts-phase-card h4::before {
-                content: '\f0c1';
-                font-family: 'Font Awesome 6 Free', 'FontAwesome';
-                font-weight: 900;
-                width: 30px;
-                height: 30px;
-                border-radius: 8px;
-                background: linear-gradient(135deg, #008000, #E58E24);
-                color: #ffffff;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.8rem;
-            }
-
-            #pro-terms-section .pts-phase-card ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            #pro-terms-section .pts-phase-card ul li {
-                padding: 5px 0 5px 18px;
-                font-size: 0.88rem;
-                color: #4B5563;
-                position: relative;
-            }
-
-            #pro-terms-section .pts-phase-card ul li::before {
-                content: '\f105';
-                font-family: 'Font Awesome 6 Free', 'FontAwesome';
-                font-weight: 900;
-                position: absolute;
-                left: 0;
-                top: 5px;
-                color: #E58E24;
-            }
-
             /* Highlight Note Box */
             #pro-terms-section .pts-note-box {
                 display: flex;
@@ -580,8 +531,6 @@
                 font-size: 1.4rem;
                 margin-top: 2px;
                 flex-shrink: 0;
-                font-family: "Font Awesome 5 Free";
-                font-weight: 900;
             }
 
             #pro-terms-section .pts-note-box .pts-note-text {
@@ -669,8 +618,6 @@
                 justify-content: center;
                 flex-shrink: 0;
                 font-size: 0.85rem;
-                font-family: "Font Awesome 5 Free";
-                font-weight: 900;
             }
 
             #pro-terms-section .pts-contact-list li a {
@@ -736,11 +683,6 @@
                 #pro-terms-section .pts-info-bar {
                     padding: 14px 18px;
                 }
-
-                #pro-terms-section .pts-def-item {
-                    flex-direction: column;
-                    gap: 4px;
-                }
             }
         </style>
 
@@ -758,7 +700,7 @@
                 </div>
                 <div class="pts-info-item">
                     <i class="fas fa-shield-alt"></i>
-                    <span><strong>ZATCA</strong> Phase 1 & Phase 2</span>
+                    <span><strong>ZATCA</strong> Compliant</span>
                 </div>
             </div>
 
@@ -771,29 +713,20 @@
                         <i class="fas fa-list-ul"></i> Table of Contents
                     </h5>
                     <ul class="pts-toc-list">
-                        <li><a href="#sec-1"><span class="pts-toc-num">1</span> Definitions</a></li>
-                        <li><a href="#sec-2"><span class="pts-toc-num">2</span> Acceptance of Terms</a></li>
-                        <li><a href="#sec-3"><span class="pts-toc-num">3</span> Software Services</a></li>
-                        <li><a href="#sec-4"><span class="pts-toc-num">4</span> ZATCA Compliance</a></li>
-                        <li><a href="#sec-5"><span class="pts-toc-num">5</span> Customer Responsibilities</a></li>
-                        <li><a href="#sec-6"><span class="pts-toc-num">6</span> Subscription & Payment</a></li>
-                        <li><a href="#sec-7"><span class="pts-toc-num">7</span> Trial Accounts</a></li>
-                        <li><a href="#sec-8"><span class="pts-toc-num">8</span> Data Ownership</a></li>
-                        <li><a href="#sec-9"><span class="pts-toc-num">9</span> Data Security</a></li>
-                        <li><a href="#sec-10"><span class="pts-toc-num">10</span> Backup & Recovery</a></li>
-                        <li><a href="#sec-11"><span class="pts-toc-num">11</span> Service Availability</a></li>
-                        <li><a href="#sec-12"><span class="pts-toc-num">12</span> Software Updates</a></li>
-                        <li><a href="#sec-13"><span class="pts-toc-num">13</span> Third-Party Services</a></li>
-                        <li><a href="#sec-14"><span class="pts-toc-num">14</span> Prohibited Use</a></li>
-                        <li><a href="#sec-15"><span class="pts-toc-num">15</span> Intellectual Property</a></li>
-                        <li><a href="#sec-16"><span class="pts-toc-num">16</span> Limitation of Liability</a></li>
-                        <li><a href="#sec-17"><span class="pts-toc-num">17</span> ZATCA Disclaimer</a></li>
-                        <li><a href="#sec-18"><span class="pts-toc-num">18</span> Suspension & Termination</a></li>
-                        <li><a href="#sec-19"><span class="pts-toc-num">19</span> Privacy</a></li>
-                        <li><a href="#sec-20"><span class="pts-toc-num">20</span> Force Majeure</a></li>
-                        <li><a href="#sec-21"><span class="pts-toc-num">21</span> Governing Law</a></li>
-                        <li><a href="#sec-22"><span class="pts-toc-num">22</span> Changes to Terms</a></li>
-                        <li><a href="#sec-23"><span class="pts-toc-num">23</span> Contact Information</a></li>
+                        <li><a href="#sec-1"><span class="pts-toc-num">1</span> Information We Collect</a></li>
+                        <li><a href="#sec-2"><span class="pts-toc-num">2</span> How We Use Your Information</a></li>
+                        <li><a href="#sec-3"><span class="pts-toc-num">3</span> ZATCA E-Invoicing Data</a></li>
+                        <li><a href="#sec-4"><span class="pts-toc-num">4</span> Data Sharing</a></li>
+                        <li><a href="#sec-5"><span class="pts-toc-num">5</span> Data Security</a></li>
+                        <li><a href="#sec-6"><span class="pts-toc-num">6</span> Data Retention</a></li>
+                        <li><a href="#sec-7"><span class="pts-toc-num">7</span> Customer Responsibilities</a></li>
+                        <li><a href="#sec-8"><span class="pts-toc-num">8</span> Cookies & Technologies</a></li>
+                        <li><a href="#sec-9"><span class="pts-toc-num">9</span> International Data Processing</a></li>
+                        <li><a href="#sec-10"><span class="pts-toc-num">10</span> Your Rights</a></li>
+                        <li><a href="#sec-11"><span class="pts-toc-num">11</span> Children's Privacy</a></li>
+                        <li><a href="#sec-12"><span class="pts-toc-num">12</span> Third-Party Services</a></li>
+                        <li><a href="#sec-13"><span class="pts-toc-num">13</span> Changes to Policy</a></li>
+                        <li><a href="#sec-14"><span class="pts-toc-num">14</span> Contact Us</a></li>
                     </ul>
                 </aside>
 
@@ -802,40 +735,79 @@
 
                     <!-- Intro -->
                     <div class="pts-intro">
-                        <p>Welcome to <strong>Blesslife ltd</strong>. These Terms & Conditions ("Terms") govern the use of
-                            our cloud-based ERP, POS, Inventory Management, Accounting, VAT, and ZATCA E-Invoicing Software
-                            ("Software" or "Service"). By creating an account, subscribing, or using our services, you agree
-                            to comply with these Terms.</p>
+                        <p>Welcome to <strong>BlessLife Ltd</strong>. We are committed to protecting the privacy and
+                            security of our customers' personal and business information. This Privacy Policy explains how
+                            we collect, use, store, disclose, and protect information when you use the BlessLife ERP
+                            cloud-based ERP, POS, Inventory, Accounting, VAT, and ZATCA E-Invoicing Software ("Software" or
+                            "Service"). By using our Software, you agree to the practices described in this Privacy Policy.
+                        </p>
                     </div>
 
                     <!-- Section 1 -->
                     <div class="pts-section"
                          id="sec-1">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">01</span> Definitions
+                            <span class="pts-section-num">01</span> Information We Collect
                         </h2>
-                        <div class="pts-def-list">
-                            <div class="pts-def-item">
-                                <span class="pts-def-term">Company</span>
-                                <span class="pts-def-text">Blesslife Ltd.</span>
+                        <p>We collect information necessary to provide and improve our services.</p>
+
+                        <div class="pts-data-grid">
+                            <div class="pts-data-card">
+                                <h4>A. Business Information</h4>
+                                <ul>
+                                    <li>Company Name</li>
+                                    <li>Commercial Registration (CR)</li>
+                                    <li>VAT Registration Number</li>
+                                    <li>Business Address</li>
+                                    <li>Branch Information</li>
+                                    <li>Business Activities</li>
+                                    <li>ZATCA Configuration Details</li>
+                                </ul>
                             </div>
-                            <div class="pts-def-item">
-                                <span class="pts-def-term">Customer</span>
-                                <span class="pts-def-text">means any individual or business using our software.</span>
+                            <div class="pts-data-card">
+                                <h4>B. Account Information</h4>
+                                <ul>
+                                    <li>Full Name</li>
+                                    <li>Email Address</li>
+                                    <li>Mobile Number</li>
+                                    <li>User Role</li>
+                                    <li>Login Credentials (encrypted)</li>
+                                </ul>
                             </div>
-                            <div class="pts-def-item">
-                                <span class="pts-def-term">Software</span>
-                                <span class="pts-def-text">refers to the cloud ERP, POS, Inventory, Accounting, Payroll,
-                                    CRM, and E-Invoicing platform.</span>
+                            <div class="pts-data-card">
+                                <h4>C. Financial Information</h4>
+                                <ul>
+                                    <li>Sales Records</li>
+                                    <li>Purchase Records</li>
+                                    <li>Accounting Entries</li>
+                                    <li>VAT Transactions</li>
+                                    <li>Invoices</li>
+                                    <li>Credit & Debit Notes</li>
+                                    <li>Inventory Transactions</li>
+                                    <li>Payment Records</li>
+                                </ul>
                             </div>
-                            <div class="pts-def-item">
-                                <span class="pts-def-term">ZATCA</span>
-                                <span class="pts-def-text">means the Zakat, Tax and Customs Authority of the Kingdom of
-                                    Saudi Arabia.</span>
+                            <div class="pts-data-card">
+                                <h4>D. Customer & Supplier Info</h4>
+                                <ul>
+                                    <li>Name</li>
+                                    <li>Contact Details</li>
+                                    <li>Tax Information</li>
+                                    <li>Billing Information</li>
+                                    <li>Transaction History</li>
+                                </ul>
                             </div>
-                            <div class="pts-def-item">
-                                <span class="pts-def-term">Subscription</span>
-                                <span class="pts-def-text">means the selected paid or free software plan.</span>
+                            <div class="pts-data-card">
+                                <h4>E. Technical Information</h4>
+                                <ul>
+                                    <li>IP Address</li>
+                                    <li>Device Information</li>
+                                    <li>Browser Type</li>
+                                    <li>Operating System</li>
+                                    <li>Login Activity</li>
+                                    <li>Session Logs</li>
+                                    <li>Error Logs</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -844,14 +816,19 @@
                     <div class="pts-section"
                          id="sec-2">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">02</span> Acceptance of Terms
+                            <span class="pts-section-num">02</span> How We Use Your Information
                         </h2>
-                        <p>By accessing or using our Software, you agree to:</p>
-                        <ul class="pts-bullet-list">
-                            <li>Comply with all applicable Saudi Arabian laws.</li>
-                            <li>Follow ZATCA regulations.</li>
-                            <li>Keep your login credentials secure.</li>
-                            <li>Provide accurate business information.</li>
+                        <p>We use your information to:</p>
+                        <ul class="pts-feature-list">
+                            <li>Provide ERP, POS, Inventory, and Accounting services</li>
+                            <li>Generate VAT-compliant invoices</li>
+                            <li>Support ZATCA Phase 1 and Phase 2 e-invoicing</li>
+                            <li>Process transactions and financial records</li>
+                            <li>Manage user accounts and subscriptions</li>
+                            <li>Improve software performance and security</li>
+                            <li>Provide technical support</li>
+                            <li>Detect fraud and unauthorized access</li>
+                            <li>Comply with applicable laws and regulations</li>
                         </ul>
                     </div>
 
@@ -859,87 +836,66 @@
                     <div class="pts-section"
                          id="sec-3">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">03</span> Software Services
+                            <span class="pts-section-num">03</span> ZATCA E-Invoicing Data
                         </h2>
-                        <p>Our cloud platform may include:</p>
+                        <p>When ZATCA Phase 2 integration is enabled, the Software may process and transmit invoice-related
+                            data required for compliance, including:</p>
                         <ul class="pts-feature-list">
-                            <li>ERP</li>
-                            <li>POS Billing</li>
-                            <li>Inventory Management</li>
-                            <li>Accounting</li>
-                            <li>VAT Management</li>
-                            <li>Purchase & Sales</li>
-                            <li>Customer & Supplier Management</li>
-                            <li>Financial Reports</li>
-                            <li>Multi-Branch</li>
-                            <li>Multi-User</li>
-                            <li>ZATCA Phase 1 Compliance</li>
-                            <li>ZATCA Phase 2 Integration</li>
+                            <li>Electronic Invoice (XML)</li>
+                            <li>Invoice UUID</li>
+                            <li>Invoice Hash</li>
+                            <li>QR Code</li>
+                            <li>Digital Signature</li>
+                            <li>Clearance or Reporting Requests</li>
                         </ul>
-                        <p><em>Service availability depends on your subscription plan.</em></p>
+                        <div class="pts-note-box">
+                            <i class="fas fa-info-circle"></i>
+                            <p class="pts-note-text">This information is processed solely to support compliance with
+                                applicable ZATCA requirements.</p>
+                        </div>
                     </div>
 
                     <!-- Section 4 -->
                     <div class="pts-section"
                          id="sec-4">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">04</span> ZATCA Compliance
+                            <span class="pts-section-num">04</span> Data Sharing
                         </h2>
-                        <p>Our software is designed to support ZATCA E-Invoicing requirements.</p>
-
-                        <div class="pts-phase-grid">
-                            <div class="pts-phase-card">
-                                <h4>Phase 1 (Generation Phase)</h4>
-                                <ul>
-                                    <li>Electronic invoice generation</li>
-                                    <li>QR Code generation</li>
-                                    <li>VAT compliant invoices</li>
-                                    <li>Secure invoice storage</li>
-                                    <li>Credit & Debit Notes</li>
-                                </ul>
-                            </div>
-                            <div class="pts-phase-card">
-                                <h4>Phase 2 (Integration Phase)</h4>
-                                <ul>
-                                    <li>Integration with ZATCA Fatoora Platform</li>
-                                    <li>XML invoice generation</li>
-                                    <li>Invoice clearance/reporting</li>
-                                    <li>Cryptographic stamping</li>
-                                    <li>Digital signatures</li>
-                                    <li>UUID generation</li>
-                                    <li>Invoice hash generation</li>
-                                    <li>API communication with ZATCA</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="pts-note-box">
-                            <i class="fas fa-info-circle"></i>
-                            <p class="pts-note-text">Phase 2 applies only after proper onboarding, certificate setup, and
-                                successful integration with ZATCA. Businesses are notified by ZATCA in implementation waves.
-                            </p>
-                        </div>
+                        <p>We do not sell, rent, or trade your personal or business information. We may share information
+                            only when necessary with:</p>
+                        <ul class="pts-bullet-list">
+                            <li>Government or regulatory authorities where legally required.</li>
+                            <li>Cloud hosting providers that support our services.</li>
+                            <li>Payment gateway providers.</li>
+                            <li>Email and SMS service providers.</li>
+                            <li>Technology partners involved in delivering the Software.</li>
+                            <li>ZATCA, when required for e-invoicing compliance.</li>
+                        </ul>
+                        <p><em>All third-party providers are expected to maintain appropriate security and confidentiality
+                                standards.</em></p>
                     </div>
 
                     <!-- Section 5 -->
                     <div class="pts-section"
                          id="sec-5">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">05</span> Customer Responsibilities
+                            <span class="pts-section-num">05</span> Data Security
                         </h2>
-                        <p>The Customer is responsible for:</p>
-                        <ul class="pts-bullet-list">
-                            <li>Maintaining a valid VAT Registration (if applicable).</li>
-                            <li>Providing correct company information.</li>
-                            <li>Keeping accounting records accurate.</li>
-                            <li>Maintaining internet connectivity.</li>
-                            <li>Protecting user accounts and passwords.</li>
-                            <li>Using the software lawfully.</li>
+                        <p>We implement commercially reasonable technical and organizational measures to protect your
+                            information, including:</p>
+                        <ul class="pts-feature-list">
+                            <li>SSL/TLS encryption</li>
+                            <li>Secure cloud infrastructure</li>
+                            <li>Role-based access control</li>
+                            <li>Password encryption</li>
+                            <li>Firewall protection</li>
+                            <li>Routine security monitoring</li>
+                            <li>Regular system updates</li>
                         </ul>
                         <div class="pts-note-box">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <p class="pts-note-text">Incorrect business information may result in invoice rejection by
-                                ZATCA.</p>
+                            <i class="fas fa-shield-alt"></i>
+                            <p class="pts-note-text">While we strive to protect your information, no internet-based service
+                                can guarantee absolute security.</p>
                         </div>
                     </div>
 
@@ -947,288 +903,152 @@
                     <div class="pts-section"
                          id="sec-6">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">06</span> Subscription & Payment
+                            <span class="pts-section-num">06</span> Data Retention
                         </h2>
+                        <p>We retain your information only as long as necessary to:</p>
                         <ul class="pts-bullet-list">
-                            <li>Subscription fees are payable in advance.</li>
-                            <li>All payments are non-refundable unless required by law.</li>
-                            <li>Failure to pay may result in suspension or termination of services.</li>
-                            <li>Prices may change with prior notice.</li>
+                            <li>Provide our services.</li>
+                            <li>Meet legal, tax, and accounting obligations.</li>
+                            <li>Resolve disputes.</li>
+                            <li>Enforce our agreements.</li>
                         </ul>
+                        <p><em>Retention periods may vary depending on applicable laws and business requirements.</em></p>
                     </div>
 
                     <!-- Section 7 -->
                     <div class="pts-section"
                          id="sec-7">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">07</span> Trial Accounts
+                            <span class="pts-section-num">07</span> Customer Responsibilities
                         </h2>
-                        <p>Trial accounts may include:</p>
-                        <ul class="pts-feature-list">
-                            <li>Limited features</li>
-                            <li>Limited storage</li>
-                            <li>Limited users</li>
-                            <li>Limited duration</li>
+                        <p>Customers are responsible for:</p>
+                        <ul class="pts-bullet-list">
+                            <li>Maintaining accurate business information.</li>
+                            <li>Keeping login credentials confidential.</li>
+                            <li>Managing user permissions within their organization.</li>
+                            <li>Logging out of shared devices.</li>
+                            <li>Using the Software in compliance with applicable laws.</li>
                         </ul>
-                        <p><em>The Company may suspend or terminate trial accounts at any time.</em></p>
                     </div>
 
                     <!-- Section 8 -->
                     <div class="pts-section"
                          id="sec-8">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">08</span> Data Ownership
+                            <span class="pts-section-num">08</span> Cookies and Similar Technologies
                         </h2>
-                        <p>All business data entered into the Software remains the property of the Customer. The Company
-                            does not claim ownership of:</p>
+                        <p>Our website and Software may use cookies and similar technologies to:</p>
                         <ul class="pts-feature-list">
-                            <li>Customers</li>
-                            <li>Suppliers</li>
-                            <li>Inventory</li>
-                            <li>Accounting records</li>
-                            <li>Invoices</li>
-                            <li>Purchase records</li>
-                            <li>Financial reports</li>
+                            <li>Maintain user sessions</li>
+                            <li>Remember preferences</li>
+                            <li>Improve website functionality</li>
+                            <li>Analyze usage and performance</li>
+                            <li>Enhance security</li>
                         </ul>
+                        <p><em>You may adjust your browser settings to manage cookies; however, disabling certain cookies
+                                may affect system functionality.</em></p>
                     </div>
 
                     <!-- Section 9 -->
                     <div class="pts-section"
                          id="sec-9">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">09</span> Data Security
+                            <span class="pts-section-num">09</span> International Data Processing
                         </h2>
-                        <p>We implement commercially reasonable security measures including:</p>
-                        <ul class="pts-feature-list">
-                            <li>SSL encryption</li>
-                            <li>Secure cloud infrastructure</li>
-                            <li>Access control</li>
-                            <li>Database backup</li>
-                            <li>Password protection</li>
-                        </ul>
-                        <p><em>While we strive to protect customer data, no online system can guarantee absolute
-                                security.</em></p>
+                        <p>Depending on the hosting environment, your data may be processed or stored in secure data centers
+                            located within or outside the Kingdom of Saudi Arabia. Appropriate safeguards are implemented to
+                            protect personal and business information.</p>
                     </div>
 
                     <!-- Section 10 -->
                     <div class="pts-section"
                          id="sec-10">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">10</span> Backup & Recovery
+                            <span class="pts-section-num">10</span> Your Rights
                         </h2>
-                        <p>We perform regular backups to support business continuity. Customers are also encouraged to
-                            maintain their own copies of important financial records.</p>
+                        <p>Subject to applicable law, you may have the right to:</p>
+                        <ul class="pts-bullet-list">
+                            <li>Access your personal information.</li>
+                            <li>Correct inaccurate information.</li>
+                            <li>Request deletion of certain personal data.</li>
+                            <li>Update your account information.</li>
+                            <li>Request a copy of your stored information.</li>
+                            <li>Object to certain processing activities where permitted.</li>
+                        </ul>
+                        <div class="pts-note-box">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p class="pts-note-text">Some requests may be limited where data must be retained for legal,
+                                accounting, tax, or regulatory purposes.</p>
+                        </div>
                     </div>
 
                     <!-- Section 11 -->
                     <div class="pts-section"
                          id="sec-11">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">11</span> Service Availability
+                            <span class="pts-section-num">11</span> Children's Privacy
                         </h2>
-                        <p>We aim for high system availability; however, temporary interruptions may occur due to:</p>
-                        <ul class="pts-bullet-list">
-                            <li>Maintenance</li>
-                            <li>Internet failures</li>
-                            <li>Cloud infrastructure issues</li>
-                            <li>Third-party services</li>
-                            <li>Government systems including ZATCA</li>
-                        </ul>
+                        <p>Our Software is intended for business use only and is not directed to individuals under the age
+                            of 18. We do not knowingly collect personal information from children.</p>
                     </div>
 
                     <!-- Section 12 -->
                     <div class="pts-section"
                          id="sec-12">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">12</span> Software Updates
+                            <span class="pts-section-num">12</span> Third-Party Services
                         </h2>
-                        <p>We may release:</p>
+                        <p>Our Software may integrate with third-party services such as:</p>
                         <ul class="pts-feature-list">
-                            <li>Bug fixes</li>
-                            <li>Security patches</li>
-                            <li>New features</li>
-                            <li>ZATCA compliance updates</li>
-                            <li>Performance improvements</li>
+                            <li>Payment gateways</li>
+                            <li>Email providers</li>
+                            <li>SMS providers</li>
+                            <li>Barcode scanners</li>
+                            <li>Receipt printers</li>
+                            <li>Cloud hosting platforms</li>
+                            <li>ZATCA APIs</li>
                         </ul>
-                        <p><em>Updates may be applied automatically.</em></p>
+                        <p><em>We are not responsible for the privacy practices of third-party services outside our
+                                control.</em></p>
                     </div>
 
                     <!-- Section 13 -->
                     <div class="pts-section"
                          id="sec-13">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">13</span> Third-Party Services
+                            <span class="pts-section-num">13</span> Changes to This Privacy Policy
                         </h2>
-                        <p>Our platform may integrate with:</p>
-                        <ul class="pts-feature-list">
-                            <li>Payment gateways</li>
-                            <li>SMS providers</li>
-                            <li>Email providers</li>
-                            <li>Barcode scanners</li>
-                            <li>Receipt printers</li>
-                            <li>Accounting tools</li>
-                            <li>ZATCA APIs</li>
-                        </ul>
-                        <p><em>We are not responsible for interruptions caused by third-party services.</em></p>
+                        <p>We may update this Privacy Policy from time to time to reflect changes in our services, legal
+                            requirements, or business practices. Updated versions will be published on our website with a
+                            revised "Last Updated" date.</p>
                     </div>
 
                     <!-- Section 14 -->
                     <div class="pts-section"
                          id="sec-14">
                         <h2 class="pts-section-title">
-                            <span class="pts-section-num">14</span> Prohibited Use
+                            <span class="pts-section-num">14</span> Contact Us
                         </h2>
-                        <p>Users shall not:</p>
-                        <ul class="pts-bullet-list">
-                            <li>Hack or attempt unauthorized access.</li>
-                            <li>Reverse engineer the Software.</li>
-                            <li>Share licenses illegally.</li>
-                            <li>Upload malicious code.</li>
-                            <li>Use the Software for unlawful purposes.</li>
-                            <li>Interfere with other users or system operations.</li>
-                        </ul>
-                        <div class="pts-note-box">
-                            <i class="fas fa-ban"></i>
-                            <p class="pts-note-text">Violation may result in immediate account suspension.</p>
-                        </div>
-                    </div>
-
-                    <!-- Section 15 -->
-                    <div class="pts-section"
-                         id="sec-15">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">15</span> Intellectual Property
-                        </h2>
-                        <p>All Software, source code, logos, branding, documentation, and design remain the exclusive
-                            property of the Company. No license is granted except for the limited right to use the Software
-                            during an active subscription.</p>
-                    </div>
-
-                    <!-- Section 16 -->
-                    <div class="pts-section"
-                         id="sec-16">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">16</span> Limitation of Liability
-                        </h2>
-                        <p>To the maximum extent permitted by law, the Company shall not be liable for:</p>
-                        <ul class="pts-bullet-list">
-                            <li>Loss of profits</li>
-                            <li>Business interruption</li>
-                            <li>Loss of business opportunities</li>
-                            <li>Data loss</li>
-                            <li>Tax penalties</li>
-                            <li>ZATCA penalties arising from incorrect customer data or misuse</li>
-                            <li>Indirect, incidental, or consequential damages</li>
-                        </ul>
-                    </div>
-
-                    <!-- Section 17 -->
-                    <div class="pts-section"
-                         id="sec-17">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">17</span> ZATCA Disclaimer
-                        </h2>
-                        <p>Although our Software is developed to support ZATCA Phase 1 and Phase 2 requirements, compliance
-                            also depends on:</p>
-                        <ul class="pts-bullet-list">
-                            <li>Accurate customer information</li>
-                            <li>Proper system configuration</li>
-                            <li>Valid digital certificates</li>
-                            <li>Successful onboarding with ZATCA</li>
-                            <li>Stable internet connectivity</li>
-                            <li>Correct operational use by the Customer</li>
-                        </ul>
-                        <div class="pts-note-box">
-                            <i class="fas fa-shield-alt"></i>
-                            <p class="pts-note-text">The Customer remains responsible for meeting all applicable legal and
-                                tax obligations. ZATCA compliance requirements may change over time, and updates may be
-                                required.</p>
-                        </div>
-                    </div>
-
-                    <!-- Section 18 -->
-                    <div class="pts-section"
-                         id="sec-18">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">18</span> Suspension & Termination
-                        </h2>
-                        <p>We may suspend or terminate accounts if:</p>
-                        <ul class="pts-bullet-list">
-                            <li>Subscription fees remain unpaid.</li>
-                            <li>Fraudulent activity is detected.</li>
-                            <li>These Terms are violated.</li>
-                            <li>Required by law or regulatory authorities.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Section 19 -->
-                    <div class="pts-section"
-                         id="sec-19">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">19</span> Privacy
-                        </h2>
-                        <p>Customer information is handled in accordance with our Privacy Policy. We do not sell customer
-                            data to third parties.</p>
-                    </div>
-
-                    <!-- Section 20 -->
-                    <div class="pts-section"
-                         id="sec-20">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">20</span> Force Majeure
-                        </h2>
-                        <p>The Company shall not be liable for delays or failures caused by events beyond its reasonable
-                            control, including natural disasters, internet outages, cyberattacks, governmental actions, or
-                            failures of third-party infrastructure.</p>
-                    </div>
-
-                    <!-- Section 21 -->
-                    <div class="pts-section"
-                         id="sec-21">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">21</span> Governing Law
-                        </h2>
-                        <p>These Terms shall be governed by the laws and regulations of the <strong>Kingdom of Saudi
-                                Arabia</strong>. Any disputes shall be subject to the competent courts of Saudi Arabia.</p>
-                    </div>
-
-                    <!-- Section 22 -->
-                    <div class="pts-section"
-                         id="sec-22">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">22</span> Changes to Terms
-                        </h2>
-                        <p>We reserve the right to modify these Terms at any time. Updated versions will be published on our
-                            website, and continued use of the Software constitutes acceptance of the revised Terms.</p>
-                    </div>
-
-                    <!-- Section 23 -->
-                    <div class="pts-section"
-                         id="sec-23">
-                        <h2 class="pts-section-title">
-                            <span class="pts-section-num">23</span> Contact Information
-                        </h2>
+                        <p>If you have any questions about this Privacy Policy or how your information is handled, please
+                            contact us:</p>
 
                         <div class="pts-contact-card">
-                            <h3>Blesslife ltd</h3>
-                            <p class="text-white">Get in touch with us for any questions or support</p>
+                            <h3>BlessLife Ltd</h3>
+                            <p class="text-white">Product: BlessLife ERP – Cloud ERP, POS, Inventory & Accounting Software
+                            </p>
                             <ul class="pts-contact-list">
                                 <li>
-                                    <i class="fas fa-globe"></i>
-                                    <a href="https://erp.blesslifeltd.com/"
-                                       target="_blank">https://erp.blesslifeltd.com/</a>
+                                    <i class="fas fa-phone"></i>
+                                    <a href="tel:+112242650">+1 122 426 50</a>
                                 </li>
                                 <li>
                                     <i class="fas fa-envelope"></i>
                                     <a href="mailto:support@blesslifeltd.com">support@blesslifeltd.com</a>
                                 </li>
                                 <li>
-                                    <i class="fas fa-phone"></i>
-                                    <a href="tel:+112242650">+112242650</a>
-                                </li>
-                                <li>
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Kingdom of Saudi Arabia</span>
+                                    <i class="fas fa-globe"></i>
+                                    <a href="https://erp.blesslifeltd.com/"
+                                       target="_blank">https://erp.blesslifeltd.com/</a>
                                 </li>
                             </ul>
                         </div>
@@ -1236,10 +1056,9 @@
 
                     <!-- Acknowledgement Box -->
                     <div class="pts-ack-box">
-                        <i class="fas fa-handshake"></i>
-                        <p><strong>Acknowledgement:</strong> By subscribing to or using this ERP, POS, Inventory, and
-                            Accounting Cloud Software, you confirm that you have read, understood, and agree to be bound by
-                            these Terms & Conditions.</p>
+                        <i class="fas fa-shield-check"></i>
+                        <p><strong>Acknowledgement:</strong> By creating an account, subscribing to, or using BlessLife ERP,
+                            you acknowledge that you have read, understood, and agreed to this Privacy Policy.</p>
                     </div>
 
                 </div>

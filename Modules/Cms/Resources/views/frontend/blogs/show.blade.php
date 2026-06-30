@@ -76,7 +76,7 @@
             #pro-article-section .pas-container {
                 position: relative;
                 z-index: 2;
-                max-width: 1320px;
+                max-width: 1640px;
                 margin: 0 auto;
                 padding: 0 20px;
             }
@@ -533,7 +533,7 @@
 
     @if ($suggestedBlogs->isNotEmpty())
         <section style="padding: 2rem 0 4rem;">
-            <div style="max-width: 1600px; margin: 0 auto; padding: 0 20px;">
+            <div style="max-width: 1640px; margin: 0 auto; padding: 0 20px;">
                 <h2 class="suggested-heading"
                     style="font-size: 30px; font-weight: 700; color: #1F2937; margin-bottom: 0.5rem; text-align: center;">
                     Related Articles

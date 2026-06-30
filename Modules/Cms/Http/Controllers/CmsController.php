@@ -183,6 +183,16 @@ class CmsController extends Controller
             ->with(compact('blog', 'suggestedBlogs'));
     }
 
+    public function privacyPolicy()
+    {
+        return view('cms::frontend.privacy-policy.index');
+    }
+
+    public function termsAndConditions()
+    {
+        return view('cms::frontend.terms-and-conditions.index');
+    }
+
     public function faq()
     {
         $faqs = CmsSiteDetail::getValue('faqs');
