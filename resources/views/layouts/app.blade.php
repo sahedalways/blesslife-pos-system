@@ -84,15 +84,13 @@
                 @yield('vue')
             </div>
             <div class="tw-flex-1 tw-overflow-y-auto tw-h-screen" id="scrollable-container">
-                <div class="lenis-content">
-                    @yield('content')
-                    @if (!$pos_layout)
-                    
-                        @include('layouts.partials.footer')
-                    @else
-                        @include('layouts.partials.footer_pos')
-                    @endif
-                </div>
+                @yield('content')
+                @if (!$pos_layout)
+                
+                    @include('layouts.partials.footer')
+                @else
+                    @include('layouts.partials.footer_pos')
+                @endif
             </div>
             <div class='scrolltop no-print'>
                 <div class='scroll icon'><i class="fas fa-angle-up"></i></div>
