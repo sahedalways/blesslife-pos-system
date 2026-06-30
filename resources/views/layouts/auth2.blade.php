@@ -42,73 +42,8 @@
     <div class="container-fluid tw-min-h-screen">
         <div class="row eq-height-row tw-min-h-screen">
             <div class="col-md-12 col-sm-12 col-xs-12 right-col tw-px-5 tw-flex tw-flex-col tw-justify-center"
-                 style="min-height: 100vh;">
-                <div class="row">
-                    {{-- <div
-                        class="lg:tw-w-16 md:tw-h-16 tw-w-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-mx-auto tw-overflow-hidden tw-bg-white tw-rounded-full tw-p-0.5 tw-mb-4">
-                        <img src="{{ asset('img/logo-small.png')}}" alt="lock" class="tw-rounded-full tw-object-fill" />
-                    </div> --}}
-
-                    <div class="tw-absolute tw-top-2 md:tw-top-5 tw-left-4 md:tw-left-8 tw-flex tw-items-center tw-gap-4"
-                         style="text-align: left">
-                        <a href="{{ url('/') }}">
-                            <img class="hero-nav__logo"
-                                 src="{{ $__logo_url }}"
-                                 change-src-onscroll="{{ $__logo_url }}"
-                                 alt="logo"
-                                 loading="lazy"
-                                 style="height: 50px; width: auto;">
-                        </a>
-                        @if (config('constants.SHOW_REPAIR_STATUS_LOGIN_SCREEN') && Route::has('repair-status'))
-                            <a class="tw-text-white tw-font-medium tw-text-sm md:tw-text-base hover:tw-text-white"
-                               href="{{ action([\Modules\Repair\Http\Controllers\CustomerRepairStatusController::class, 'index']) }}">
-                                @lang('repair::lang.repair_status')
-                            </a>
-                        @endif
-
-                        @if (Route::has('member_scanner'))
-                            <a class="tw-text-white tw-font-medium tw-text-sm md:tw-text-base hover:tw-text-white"
-                               href="{{ action([\Modules\Gym\Http\Controllers\MemberController::class, 'member_scanner']) }}">
-                                @lang('gym::lang.gym_member_profile')
-                            </a>
-                        @endif
-                    </div>
-
-                    <div class="tw-absolute tw-top-5 md:tw-top-8 tw-right-5 md:tw-right-10 tw-flex tw-items-center tw-gap-4"
-                         style="text-align: left">
-                        @if (!($request->segment(1) == 'business' && $request->segment(2) == 'register'))
-                            <!-- Register Url -->
-                            @if (config('constants.allow_registration'))
-                                {{-- <span
-                                class="tw-text-white tw-font-medium tw-text-sm md:tw-text-base">{{ __('business.not_yet_registered') }}
-                            </span> --}}
-
-                                <div
-                                     class="tw-border-2 tw-border-white tw-rounded-full tw-h-10 md:tw-h-12 tw-w-24 tw-flex tw-items-center tw-justify-center">
-                                    <a href="{{ route('business.getRegister') }}@if (!empty(request()->lang)) {{ '?lang=' . request()->lang }} @endif"
-                                       class="tw-text-white tw-font-medium tw-text-sm md:tw-text-base hover:tw-text-white">
-                                        {{ __('business.register') }}</a>
-                                </div>
-
-                                <!-- pricing url -->
-                                @if (Route::has('pricing') && config('app.env') != 'demo' && $request->segment(1) != 'pricing')
-                                    &nbsp; <a
-                                       class="tw-text-white tw-font-medium tw-text-sm md:tw-text-base hover:tw-text-white"
-                                       href="{{ action([\Modules\Superadmin\Http\Controllers\PricingController::class, 'index']) }}">@lang('superadmin::lang.pricing')</a>
-                                @endif
-                            @endif
-                        @endif
-                        @if ($request->segment(1) != 'login')
-                            <a class="tw-text-white tw-font-medium tw-text-sm md:tw-text-base hover:tw-text-white"
-                               href="{{ action([\App\Http\Controllers\Auth\LoginController::class, 'login']) }}@if (!empty(request()->lang)) {{ '?lang=' . request()->lang }} @endif">{{ __('business.sign_in') }}</a>
-                        @endif
-                        @include('layouts.partials.language_btn')
-                    </div>
-                    <div class="col-md-10 col-xs-8"
-                         style="text-align: right;">
-
-                    </div>
-                </div>
+                 style="min-height: 100vh; padding-top: 80px;">
+                @include('layouts.partials.auth_navbar')
                 @yield('content')
             </div>
         </div>

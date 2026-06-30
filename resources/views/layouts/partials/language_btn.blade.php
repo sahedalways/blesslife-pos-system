@@ -10,3 +10,11 @@
         @endforeach
     </ul>
 </details>
+
+<script>
+    document.addEventListener('click', function(e) {
+        document.querySelectorAll('.auth-navbar details').forEach(function(d) {
+            if (!d.contains(e.target)) d.removeAttribute('open');
+        });
+    });
+</script>
