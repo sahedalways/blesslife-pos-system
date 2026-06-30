@@ -15,6 +15,9 @@
         
         <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
 
+        <!-- global css -->
+        <link rel="stylesheet" href="{{ asset('css/global.css?v=' . $asset_v) }}">
+
         <!-- Styles -->
         <style>
             body {

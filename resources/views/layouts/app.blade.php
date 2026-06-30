@@ -181,6 +181,7 @@
 
     #scrollable-container{
         position:relative;
+        overflow-x: hidden;
     }
     
 
