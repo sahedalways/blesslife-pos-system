@@ -38,6 +38,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
 
 <body>
@@ -56,6 +57,13 @@
     <script src="{{ asset('js/vendor.js?v=' . $asset_v) }}"></script>
     <script src="{{ asset('js/functions.js?v=' . $asset_v) }}"></script>
     @yield('javascript')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+            function lenisRaf(time) { window.lenis.raf(time); requestAnimationFrame(lenisRaf); }
+            requestAnimationFrame(lenisRaf);
+        });
+    </script>
 </body>
 
 </html>
