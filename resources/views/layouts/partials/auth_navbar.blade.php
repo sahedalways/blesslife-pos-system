@@ -55,6 +55,18 @@
         justify-content: center !important;
         line-height: 1;
     }
+    .auth-navbar .btn-signin-outline {
+        background: transparent !important;
+        border: 2px solid #16a34a !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+    .auth-navbar .btn-signin-outline:hover {
+        background: rgba(22, 163, 74, 0.15) !important;
+        border-color: #15803d !important;
+        color: #fff !important;
+        transform: translateY(-2px);
+    }
     .auth-navbar details summary {
         color: rgba(0, 80, 0, 0.85) !important;
         cursor: pointer;
@@ -79,7 +91,7 @@
             @endif
             @if ($request->segment(1) != 'login')
                 <li>
-                    <a href="{{ route('login') }}@if (!empty(request()->lang)) {{ '?lang=' . request()->lang }} @endif" class="bls-global-btn"><span>{{ __('business.sign_in') }}</span></a>
+                    <a href="{{ route('login') }}@if (!empty(request()->lang)) {{ '?lang=' . request()->lang }} @endif" class="bls-global-btn btn-signin-outline"><span>{{ __('business.sign_in') }}</span></a>
                 </li>
             @endif
             <li>
