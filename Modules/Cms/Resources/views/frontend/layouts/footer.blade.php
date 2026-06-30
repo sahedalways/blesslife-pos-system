@@ -22,12 +22,12 @@
                     <h5 class="footer-title">Pages</h5>
                     <div class="footer-title-bar"></div>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="{{ url('/faq') }}"><i class="fas fa-angle-right me-2"></i>FAQ</a></li>
-                        <li><a href="{{ url('/terms-and-conditions') }}"><i class="fas fa-angle-right me-2"></i>Terms
+                        <li><a href="{{ url('/faq') }}" class="{{ request()->is('faq') ? 'active' : '' }}"><i class="fas fa-angle-right me-2"></i>FAQ</a></li>
+                        <li><a href="{{ url('/terms-and-conditions') }}" class="{{ request()->is('terms-and-conditions') ? 'active' : '' }}"><i class="fas fa-angle-right me-2"></i>Terms
                                 &amp; Conditions</a></li>
-                        <li><a href="{{ url('/privacy-policy') }}"><i class="fas fa-angle-right me-2"></i>Privacy
+                        <li><a href="{{ url('/privacy-policy') }}" class="{{ request()->is('privacy-policy') ? 'active' : '' }}"><i class="fas fa-angle-right me-2"></i>Privacy
                                 Policy</a></li>
-                        <li><a href="{{ url('/return-and-refund-policy') }}"><i
+                        <li><a href="{{ url('/return-and-refund-policy') }}" class="{{ request()->is('return-and-refund-policy') ? 'active' : '' }}"><i
                                    class="fas fa-angle-right me-2"></i>Return and Refund Policy</a></li>
                     </ul>
                 </div>
@@ -242,6 +242,15 @@
     }
 
     .footer-links a:hover i {
+        color: #E58E24;
+    }
+
+    .footer-links a.active {
+        color: #E58E24;
+        font-weight: 600;
+    }
+
+    .footer-links a.active i {
         color: #E58E24;
     }
 
