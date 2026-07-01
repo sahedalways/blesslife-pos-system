@@ -1,5 +1,5 @@
 table.dataTable th.focus,
 table.dataTable td.focus {
-  outline: 3px solid #337ab7;
+  outline: 3px solid #2e7d5e;
   outline-offset: -1px;
 }
