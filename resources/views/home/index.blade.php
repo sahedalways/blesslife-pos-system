@@ -482,89 +482,272 @@
         <div class="tw-px-5 tw-py-6">
             <div class="tw-grid tw-grid-cols-1 tw-gap-4 sm:tw-gap-5 lg:tw-grid-cols-2">
                 @if (auth()->user()->can('sell.view') || auth()->user()->can('direct_sell.view'))
-                    @if (!empty($all_locations))
-                        <div
-                             class="tw-transition-all lg:tw-col-span-2 xl:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
-                            <div class="tw-p-4 sm:tw-p-5">
-                                <div class="tw-flex tw-items-center tw-gap-2.5">
-                                    <div
-                                         class="tw-border-2 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-w-10 tw-h-10">
-                                        <svg aria-hidden="true"
-                                             class="tw-size-5 tw-text-sky-500 tw-shrink-0"
-                                             xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 24 24"
-                                             stroke-width="2"
-                                             stroke="currentColor"
-                                             fill="none"
-                                             stroke-linecap="round"
-                                             stroke-linejoin="round">
-                                            <path stroke="none"
-                                                  d="M0 0h24v24H0z"
-                                                  fill="none"></path>
-                                            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                            <path d="M17 17h-11v-14h-2"></path>
-                                            <path d="M6 5l14 1l-1 7h-13"></path>
-                                        </svg>
-                                    </div>
+                    <style>
+                        /* Card Container Styling to match Image */
+                        .chart-pro-card {
+                            background: #ffffff;
+                            border-radius: 16px;
+                            border: 1px solid rgba(0, 0, 0, 0.04);
+                            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+                            padding: 24px;
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            transition: all 0.3s ease;
+                            position: relative;
+                            overflow: hidden;
+                        }
 
-                                    <h3 class="tw-font-bold tw-text-base lg:tw-text-xl">
-                                        {{ __('home.sells_last_30_days') }}
+                        .chart-pro-card:hover {
+                            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+                            transform: translateY(-2px);
+                        }
+
+                        /* Header Styling */
+                        .chart-pro-header {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 20px;
+                            padding-bottom: 15px;
+                            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                        }
+
+                        .chart-pro-title {
+                            font-size: 1rem;
+                            font-weight: 700;
+                            color: #1f2937;
+                            margin: 0;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                        }
+
+                        .chart-pro-icon {
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 10px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: rgba(59, 130, 246, 0.1);
+                            color: #3b82f6;
+                        }
+
+                        .chart-pro-icon.green {
+                            background: rgba(16, 185, 129, 0.1);
+                            color: #10b981;
+                        }
+
+                        /* Chart Canvas Container */
+                        .chart-canvas-container {
+                            position: relative;
+                            flex: 1;
+                            width: 100%;
+                            min-height: 300px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        /* Force Canvas to fit */
+                        .chart-canvas-container canvas {
+                            max-width: 100% !important;
+                            height: auto !important;
+                            max-height: 300px !important;
+                        }
+
+                        /* Grid Layout for 3 Charts (Like Image) */
+                        .charts-grid-wrapper {
+                            display: grid;
+                            grid-template-columns: repeat(3, 1fr);
+                            gap: 20px;
+                            margin-top: 20px;
+                        }
+
+                        @media (max-width: 1024px) {
+                            .charts-grid-wrapper {
+                                grid-template-columns: repeat(2, 1fr);
+                            }
+                        }
+
+                        @media (max-width: 768px) {
+                            .charts-grid-wrapper {
+                                grid-template-columns: 1fr;
+                            }
+                        }
+                    </style>
+
+                    @if (auth()->user()->can('sell.view') || auth()->user()->can('direct_sell.view'))
+                        <div class="charts-grid-wrapper">
+
+                            <!-- Chart 1: Sells Last 30 Days (Line Chart Style) -->
+                            @if (!empty($all_locations))
+                                <div class="chart-pro-card">
+                                    <div class="chart-pro-header">
+                                        <h3 class="chart-pro-title">
+                                            <div class="chart-pro-icon">
+                                                <svg aria-hidden="true"
+                                                     class="tw-size-5"
+                                                     xmlns="http://www.w3.org/2000/svg"
+                                                     viewBox="0 0 24 24"
+                                                     stroke-width="2"
+                                                     stroke="currentColor"
+                                                     fill="none"
+                                                     stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <path stroke="none"
+                                                          d="M0 0h24v24H0z"
+                                                          fill="none"></path>
+                                                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                    <path d="M17 17h-11v-14h-2"></path>
+                                                    <path d="M6 5l14 1l-1 7h-13"></path>
+                                                </svg>
+                                            </div>
+                                            {{ __('home.sells_last_30_days') }}
+                                        </h3>
+                                    </div>
+                                    <div class="chart-canvas-container">
+                                        {!! $sells_chart_1->container() !!}
+                                    </div>
+                                </div>
+                            @endif
+
+                            <!-- Chart 2: Sells Current FY (Bar Chart Style) -->
+                            @if (!empty($all_locations))
+                                <div class="chart-pro-card">
+                                    <div class="chart-pro-header">
+                                        <h3 class="chart-pro-title">
+                                            <div class="chart-pro-icon">
+                                                <svg aria-hidden="true"
+                                                     class="tw-size-5"
+                                                     xmlns="http://www.w3.org/2000/svg"
+                                                     viewBox="0 0 24 24"
+                                                     stroke-width="2"
+                                                     stroke="currentColor"
+                                                     fill="none"
+                                                     stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <path stroke="none"
+                                                          d="M0 0h24v24H0z"
+                                                          fill="none"></path>
+                                                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                    <path d="M17 17h-11v-14h-2"></path>
+                                                    <path d="M6 5l14 1l-1 7h-13"></path>
+                                                </svg>
+                                            </div>
+                                            {{ __('home.sells_current_fy') }}
+                                        </h3>
+                                    </div>
+                                    <div class="chart-canvas-container">
+                                        {!! $sells_chart_2->container() !!}
+                                    </div>
+                                </div>
+                            @endif
+
+                            <!-- Placeholder for 3rd Chart (To match Image Layout) -->
+                            <!-- You can replace this with a 3rd chart variable if you have one -->
+                            <div class="chart-pro-card"
+                                 style="opacity: 0.6;">
+                                <div class="chart-pro-header">
+                                    <h3 class="chart-pro-title">
+                                        <div class="chart-pro-icon green">
+                                            <svg aria-hidden="true"
+                                                 class="tw-size-5"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 viewBox="0 0 24 24"
+                                                 stroke-width="2"
+                                                 stroke="currentColor"
+                                                 fill="none"
+                                                 stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none"
+                                                      d="M0 0h24v24H0z"
+                                                      fill="none"></path>
+                                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                                                <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                                                <path d="M12 12l0 .01"></path>
+                                            </svg>
+                                        </div>
+                                        Analytics Overview
                                     </h3>
                                 </div>
-                                <div class="tw-mt-5">
-                                    <div
-                                         class="tw-grid tw-w-full tw-h-100 tw-border tw-border-gray-200 tw-border-dashed tw-rounded-xl tw-bg-gray-50 ">
-                                        <p class="tw-text-sm tw-italic tw-font-normal tw-text-gray-400">
-                                            {!! $sells_chart_1->container() !!}
-                                        </p>
-                                    </div>
+                                <div class="chart-canvas-container"
+                                     style="background: #f9fafb; border-radius: 12px; border: 2px dashed #e5e7eb;">
+                                    <p class="text-gray-400 text-sm">Chart Area</p>
                                 </div>
                             </div>
+
                         </div>
                     @endif
 
+                    <!-- Script to Force Chart Colors to Match Image -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            if (typeof Chart !== 'undefined') {
+                                // 1. Style Line Chart (Blue)
+                                const chart1Canvas = document.querySelector('#{{ $sells_chart_1->id }}');
+                                if (chart1Canvas) {
+                                    const chart1 = Chart.getChart(chart1Canvas);
+                                    if (chart1) {
+                                        // Force Blue Line
+                                        chart1.data.datasets.forEach((dataset) => {
+                                            dataset.borderColor = '#3b82f6'; // Blue
+                                            dataset.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                                            dataset.borderWidth = 3;
+                                            dataset.pointRadius = 4;
+                                            dataset.pointHoverRadius = 6;
+                                            dataset.fill = true;
+                                        });
+                                        chart1.options.scales = {
+                                            y: {
+                                                grid: {
+                                                    color: '#f3f4f6',
+                                                    drawBorder: false
+                                                }
+                                            },
+                                            x: {
+                                                grid: {
+                                                    display: false
+                                                }
+                                            }
+                                        };
+                                        chart1.update();
+                                    }
+                                }
 
-                    @if (!empty($all_locations))
-                        <div
-                             class="tw-transition-all lg:tw-col-span-2 xl:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
-                            <div class="tw-p-4 sm:tw-p-5">
-                                <div class="tw-flex tw-items-center tw-gap-2.5">
-                                    <div
-                                         class="tw-border-2 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-w-10 tw-h-10">
-                                        <svg aria-hidden="true"
-                                             class="tw-size-5 tw-text-sky-500 tw-shrink-0"
-                                             xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 24 24"
-                                             stroke-width="2"
-                                             stroke="currentColor"
-                                             fill="none"
-                                             stroke-linecap="round"
-                                             stroke-linejoin="round">
-                                            <path stroke="none"
-                                                  d="M0 0h24v24H0z"
-                                                  fill="none"></path>
-                                            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                            <path d="M17 17h-11v-14h-2"></path>
-                                            <path d="M6 5l14 1l-1 7h-13"></path>
-                                        </svg>
-                                    </div>
-                                    <h3 class="tw-font-bold tw-text-base lg:tw-text-xl">
-                                        {{ __('home.sells_current_fy') }}
-                                    </h3>
-                                </div>
-                                <div class="tw-mt-5">
-                                    <div
-                                         class="tw-grid tw-w-full tw-h-100 tw-border tw-border-gray-200 tw-border-dashed tw-rounded-xl tw-bg-gray-50 ">
-                                        <p class="tw-text-sm tw-italic tw-font-normal tw-text-gray-400">
-                                            {!! $sells_chart_2->container() !!}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
+                                // 2. Style Bar Chart (Blue Bars)
+                                const chart2Canvas = document.querySelector('#{{ $sells_chart_2->id }}');
+                                if (chart2Canvas) {
+                                    const chart2 = Chart.getChart(chart2Canvas);
+                                    if (chart2) {
+                                        // Force Blue Bars
+                                        chart2.data.datasets.forEach((dataset) => {
+                                            dataset.backgroundColor = '#3b82f6'; // Blue
+                                            dataset.borderRadius = 4;
+                                            dataset.barPercentage = 0.6;
+                                        });
+                                        chart2.options.scales = {
+                                            y: {
+                                                grid: {
+                                                    color: '#f3f4f6',
+                                                    drawBorder: false
+                                                }
+                                            },
+                                            x: {
+                                                grid: {
+                                                    display: false
+                                                }
+                                            }
+                                        };
+                                        chart2.update();
+                                    }
+                                }
+                            }
+                        });
+                    </script>
                 @endif
 
                 @if (auth()->user()->can('sell.view') || auth()->user()->can('direct_sell.view'))
