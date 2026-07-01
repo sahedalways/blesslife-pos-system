@@ -17,10 +17,10 @@
     <!-- global css -->
     <style>
         html { overflow-x: clip; }
-        body { scrollbar-width: thin; scrollbar-color: #008000 #e8f5e9; }
-        body::-webkit-scrollbar { width: 8px; }
-        body::-webkit-scrollbar-track { background: #e8f5e9; }
-        body::-webkit-scrollbar-thumb {
+        html { scrollbar-width: thin; scrollbar-color: #008000 #e8f5e9; }
+        html::-webkit-scrollbar { width: 8px; }
+        html::-webkit-scrollbar-track { background: #e8f5e9; }
+        html::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #00c853, #008000, #006600);
             border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.3);

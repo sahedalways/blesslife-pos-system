@@ -23,16 +23,16 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('modules/cms/css/cms.css?v=' . $asset_v) }}">
         <style>
             html { overflow-x: clip; }
-            body { scrollbar-width: thin; scrollbar-color: #008000 #e8f5e9; }
-            body::-webkit-scrollbar { width: 8px; }
-            body::-webkit-scrollbar-track { background: #e8f5e9; }
-            body::-webkit-scrollbar-thumb {
+            html { scrollbar-width: thin; scrollbar-color: #008000 #e8f5e9; }
+            html::-webkit-scrollbar { width: 8px; }
+            html::-webkit-scrollbar-track { background: #e8f5e9; }
+            html::-webkit-scrollbar-thumb {
                 background: linear-gradient(180deg, #00c853, #008000, #006600);
                 border-radius: 10px;
                 border: 1px solid rgba(255,255,255,0.3);
                 box-shadow: inset 0 1px 3px rgba(255,255,255,0.4), 0 2px 6px rgba(0,128,0,0.3);
             }
-            body::-webkit-scrollbar-thumb:hover {
+            html::-webkit-scrollbar-thumb:hover {
                 background: linear-gradient(180deg, #00e676, #009a00, #007700);
             }
         </style>
