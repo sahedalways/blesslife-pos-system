@@ -647,10 +647,8 @@
                                 </div>
                             @endif
 
-                            <!-- Placeholder for 3rd Chart (To match Image Layout) -->
-                            <!-- You can replace this with a 3rd chart variable if you have one -->
-                            <div class="chart-pro-card"
-                                 style="opacity: 0.6;">
+                            <!-- Chart 3 -->
+                            <div class="chart-pro-card">
                                 <div class="chart-pro-header">
                                     <h3 class="chart-pro-title">
                                         <div class="chart-pro-icon green">
@@ -674,9 +672,8 @@
                                         Analytics Overview
                                     </h3>
                                 </div>
-                                <div class="chart-canvas-container"
-                                     style="background: #f9fafb; border-radius: 12px; border: 2px dashed #e5e7eb;">
-                                    <p class="text-gray-400 text-sm">Chart Area</p>
+                                <div class="chart-canvas-container">
+                                    <p style="color: #9ca3af; font-size: 0.875rem;">Chart Area</p>
                                 </div>
                             </div>
 
