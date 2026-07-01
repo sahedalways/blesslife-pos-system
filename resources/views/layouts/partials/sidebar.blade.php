@@ -9,8 +9,7 @@
 	</a> --}}
 
     <a href="{{ route('home') }}"
-        class="tw-flex tw-items-center tw-justify-center tw-w-full tw-border-r tw-h-15 tw-shrink-0 top-brand"
-        style="background: #008000 !important; border-bottom: 2px solid #ffffff !important;">
+        class="tw-flex tw-items-center tw-justify-center tw-w-full tw-border-r tw-h-15 tw-shrink-0 top-brand">
         <p class="tw-text-lg tw-font-medium tw-text-white side-bar-heading tw-text-center">
             {{ Session::get('business.name') }} <span
                   class="tw-inline-block tw-w-3 tw-h-3 tw-bg-green-400 tw-rounded-full"
@@ -72,9 +71,14 @@
             stroke: #000000 !important;
         }
 
-        .side-bar a.top-brand {
+        aside.side-bar > a.top-brand,
+        aside.side-bar > a.top-brand:hover,
+        aside.side-bar > a.top-brand:focus,
+        aside.side-bar > a.top-brand:active,
+        aside.side-bar > a.top-brand:visited {
             background: #008000 !important;
             border-bottom: 2px solid #ffffff !important;
+            color: #ffffff !important;
         }
 
         #side-bar a:focus,
