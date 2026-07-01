@@ -1,9 +1,9 @@
 <style>
     .dashboard-card {
-        box-shadow: 0 1px 3px rgba(0, 128, 0, 0.15) !important;
+        box-shadow: 0 2px 8px rgba(0, 128, 0, 0.25) !important;
     }
     .dashboard-card:hover {
-        box-shadow: 0 4px 14px rgba(0, 128, 0, 0.2) !important;
+        box-shadow: 0 6px 20px rgba(0, 128, 0, 0.35) !important;
     }
 </style>
 
