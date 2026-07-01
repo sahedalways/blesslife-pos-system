@@ -8,57 +8,108 @@
 		<span class="logo-lg">{{ Session::get('business.name') }}</span>
 	</a> --}}
 
+
     <div
-         style="background: #008000; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 90px; padding: 20px; border-bottom: 2px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden;">
+         style="
+    background-color: #114133;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 85px;
+    padding: 15px 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+">
 
         <a href="{{ route('home') }}"
-           style="display: flex; align-items: center; justify-content: center; text-decoration: none; width: 100%; transition: transform 0.3s ease;"
-           onmouseover="this.style.transform='scale(1.02)'"
-           onmouseout="this.style.transform='scale(1)'">
+           style="
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           text-decoration: none;
+           width: 100%;
+           transition: all 0.3s ease;
+       "
+           onmouseover="this.style.opacity='0.9'"
+           onmouseout="this.style.opacity='1'">
 
             <p
-               style="color: #ffffff; font-size: 1.2rem; font-weight: 700; letter-spacing: 0.8px; margin: 0; display: flex; align-items: center; gap: 10px; text-transform: capitalize; font-family: 'Poppins', sans-serif;">
+               style="
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: capitalize;
+            font-family: 'Poppins', sans-serif;
+            white-space: nowrap;
+        ">
 
-                {{-- Business Name --}}
-                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">
+                {{-- Business Name - Full Display --}}
+                <span
+                      style="
+                white-space: nowrap;
+                overflow: visible;
+                text-overflow: clip;
+            ">
                     {{ Session::get('business.name') }}
                 </span>
 
                 {{-- Professional Online Indicator --}}
-                <span style="position: relative; display: flex; width: 10px; height: 10px;"
+                <span style="
+                position: relative;
+                display: inline-flex;
+                width: 10px;
+                height: 10px;
+                flex-shrink: 0;
+            "
                       title="System Online">
-                    <!-- Ping Effect (The outer glowing ring) -->
-                    <span class="indicator-ping"></span>
+
+                    <!-- Ping Effect (Outer Glowing Ring) -->
+                    <span
+                          style="
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    background-color: #22c55e;
+                    opacity: 0.7;
+                    animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+                "></span>
+
                     <!-- Inner Solid Dot -->
                     <span
-                          style="position: relative; display: inline-flex; width: 10px; height: 10px; border-radius: 50%; background-color: #22c55e; border: 1.5px solid #114133;"></span>
+                          style="
+                    position: relative;
+                    display: inline-flex;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: #22c55e;
+                    border: 2px solid #114133;
+                    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+                "></span>
                 </span>
 
             </p>
         </a>
-    </div>
 
-    <style>
-        .indicator-ping {
-            position: absolute;
-            display: inline-flex;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: #4ade80;
-            opacity: 0.75;
-            animation: brandPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
+        <style>
+            @keyframes ping {
 
-        @keyframes brandPulse {
-
-            75%,
-            100% {
-                transform: scale(2.5);
-                opacity: 0;
+                75%,
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
             }
-        }
-    </style>
+        </style>
+    </div>
     <style>
         #side-bar a,
         #side-bar a span,
