@@ -435,6 +435,14 @@
                             <strong>non-returnable</strong>.</p>
                     </div>
 
+                    <!-- Section 2 -->
+                    <div class="pps-section"
+                         id="sec-2">
+                        <h2 class="pps-section-title"><span class="pps-section-num">02</span> Subscription Fees</h2>
+                        <p>Subscription fees are billed in advance on a monthly or annual basis depending on your chosen plan. All fees are non-transferable and non-refundable unless explicitly stated otherwise in this policy.</p>
+                        <p>We reserve the right to modify subscription pricing with at least 30 days' notice. Price changes will not affect your current billing cycle.</p>
+                    </div>
+
                     <!-- Section 3 -->
                     <div class="pps-section"
                          id="sec-3">
@@ -464,6 +472,30 @@
                         </ul>
                     </div>
 
+                    <!-- Section 5 -->
+                    <div class="pps-section"
+                         id="sec-5">
+                        <h2 class="pps-section-title"><span class="pps-section-num">05</span> Free Trial</h2>
+                        <p>We may offer a free trial period for new users. During the trial period, you will have full access to the platform at no cost. If you cancel before the trial ends, you will not be charged.</p>
+                        <p>At the end of the trial period, your subscription will automatically convert to a paid plan unless you cancel before the conversion date. No refunds are issued for charges incurred after trial conversion.</p>
+                    </div>
+
+                    <!-- Section 6 -->
+                    <div class="pps-section"
+                         id="sec-6">
+                        <h2 class="pps-section-title"><span class="pps-section-num">06</span> Cancellation</h2>
+                        <p>You may cancel your subscription at any time through your account dashboard or by contacting our support team. Upon cancellation, your access to the platform will continue until the end of the current billing period.</p>
+                        <p>No prorated refunds will be issued for the remaining days of the billing period after cancellation. You will retain access to your data for export purposes for 30 days following cancellation.</p>
+                    </div>
+
+                    <!-- Section 7 -->
+                    <div class="pps-section"
+                         id="sec-7">
+                        <h2 class="pps-section-title"><span class="pps-section-num">07</span> Automatic Renewal</h2>
+                        <p>All subscriptions renew automatically at the end of each billing period unless cancelled at least 24 hours before the renewal date. You authorize us to charge the then-applicable subscription fee to your selected payment method.</p>
+                        <p>If a payment fails, we will attempt to process the payment again within 5 business days. Continued failure to pay may result in service suspension and data loss.</p>
+                    </div>
+
                     <!-- Section 8 -->
                     <div class="pps-section"
                          id="sec-8">
@@ -473,6 +505,42 @@
                             <p class="mb-0">Temporary interruptions due to maintenance or government systems (ZATCA
                                 platform availability) do not automatically qualify for refunds.</p>
                         </div>
+                    </div>
+
+                    <!-- Section 9 -->
+                    <div class="pps-section"
+                         id="sec-9">
+                        <h2 class="pps-section-title"><span class="pps-section-num">09</span> Refund Procedure</h2>
+                        <p>To request a refund, please contact our support team at <strong>support@blesslifeltd.com</strong> with your account details and a clear explanation of the issue.</p>
+                        <p>All refund requests must be submitted within 30 days of the billing date. We will review your request and respond within 5-7 business days. Approved refunds will be processed to the original payment method.</p>
+                    </div>
+
+                    <!-- Section 10 -->
+                    <div class="pps-section"
+                         id="sec-10">
+                        <h2 class="pps-section-title"><span class="pps-section-num">10</span> Processing Time</h2>
+                        <p>Once a refund is approved, it may take 5-10 business days for the amount to appear in your account, depending on your payment provider and banking institution.</p>
+                        <ul class="pps-bullet-list">
+                            <li>Credit/debit card refunds: 5-7 business days</li>
+                            <li>Bank transfer refunds: 7-10 business days</li>
+                            <li>Digital wallet refunds: 3-5 business days</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 11 -->
+                    <div class="pps-section"
+                         id="sec-11">
+                        <h2 class="pps-section-title"><span class="pps-section-num">11</span> Suspension &amp; Termination</h2>
+                        <p>We reserve the right to suspend or terminate your account for violation of our Terms of Service, non-payment, or fraudulent activity. In such cases, no refund will be issued for the remaining subscription period.</p>
+                        <p>If your account is suspended in error, please contact support immediately to resolve the issue.</p>
+                    </div>
+
+                    <!-- Section 12 -->
+                    <div class="pps-section"
+                         id="sec-12">
+                        <h2 class="pps-section-title"><span class="pps-section-num">12</span> Custom Development Work</h2>
+                        <p>Fees for custom development, integrations, or professional services are non-refundable once work has commenced. If you have paid for custom work that has not yet been started, you may request a full refund within 7 days of payment.</p>
+                        <p>All custom work deliverables are subject to the scope defined in your project agreement. Additional features or changes requested after work begins may incur extra charges.</p>
                     </div>
 
                     <!-- Section 13 -->
@@ -489,6 +557,15 @@
                         <h4>30-Day Money-Back Guarantee</h4>
                         <p class="mb-0">For first-time subscribers: If you are not satisfied within your first 30 days
                             (and no custom work has been done), you may request a review for a refund.</p>
+                    </div>
+
+                    <!-- Section 14 -->
+                    <div class="pps-section"
+                         id="sec-14"
+                         style="margin-top: 40px;">
+                        <h2 class="pps-section-title"><span class="pps-section-num">14</span> Policy Changes</h2>
+                        <p>We may update this Return and Refund Policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of our services after changes constitutes acceptance of the revised policy.</p>
+                        <p>Material changes will be communicated via email at least 14 days before taking effect.</p>
                     </div>
 
                     <!-- Section 15 -->
