@@ -37,7 +37,7 @@
 
             <p
                style="
-             color: #DFB86B;
+             color: #e0e0e0;
              font-size: 1rem;
              font-weight: 600;
              letter-spacing: 0.5px;
@@ -114,16 +114,16 @@
         #side-bar a,
         #side-bar a span,
         #side-bar .chiled a span {
-            color: #DFB86B !important;
+            color: #e0e0e0 !important;
         }
 
         #side-bar a i {
-            color: #DFB86B !important;
+            color: #e0e0e0 !important;
         }
 
         #side-bar a svg {
-            color: #DFB86B !important;
-            stroke: #DFB86B !important;
+            color: #e0e0e0 !important;
+            stroke: #e0e0e0 !important;
         }
 
         #side-bar a:hover,
@@ -169,8 +169,8 @@
         #side-bar a:focus i,
         #side-bar a:focus svg {
             background: transparent !important;
-            color: #DFB86B !important;
-            stroke: #DFB86B !important;
+            color: #e0e0e0 !important;
+            stroke: #e0e0e0 !important;
         }
 
         #side-bar a.menu-active:focus,
