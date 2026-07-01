@@ -1,6 +1,6 @@
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="side-bar tw-relative tw-hidden tw-h-full tw-w-64 xl:tw-w-64 lg:tw-flex lg:tw-flex-col tw-shrink-0"
-       style="box-shadow: inset -2px 0 6px rgba(0,128,0,0.06), 2px 0 12px rgba(0,128,0,0.06);">
+       style="background: #114133; box-shadow: inset -2px 0 6px rgba(0,128,0,0.06), 2px 0 12px rgba(0,128,0,0.06);">
 
     <!-- sidebar: style can be found in sidebar.less -->
 
@@ -8,36 +8,55 @@
 		<span class="logo-lg">{{ Session::get('business.name') }}</span>
 	</a> --}}
 
-    <a href="{{ route('home') }}"
-        class="tw-flex tw-items-center tw-justify-center tw-w-full tw-h-15 tw-shrink-0 sidebar-brand-link">
-        <p class="tw-text-lg tw-font-medium tw-text-center tw-mb-0 sidebar-brand-text">
-            {{ Session::get('business.name') }} <span class="tw-inline-block tw-w-3 tw-h-3 tw-bg-green-400 tw-rounded-full" title="Online"></span>
-        </p>
-    </a>
+    <div
+         style="background: #008000; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 90px; padding: 20px; border-bottom: 2px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden;">
+
+        <a href="{{ route('home') }}"
+           style="display: flex; align-items: center; justify-content: center; text-decoration: none; width: 100%; transition: transform 0.3s ease;"
+           onmouseover="this.style.transform='scale(1.02)'"
+           onmouseout="this.style.transform='scale(1)'">
+
+            <p
+               style="color: #ffffff; font-size: 1.2rem; font-weight: 700; letter-spacing: 0.8px; margin: 0; display: flex; align-items: center; gap: 10px; text-transform: capitalize; font-family: 'Poppins', sans-serif;">
+
+                {{-- Business Name --}}
+                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">
+                    {{ Session::get('business.name') }}
+                </span>
+
+                {{-- Professional Online Indicator --}}
+                <span style="position: relative; display: flex; width: 10px; height: 10px;"
+                      title="System Online">
+                    <!-- Ping Effect (The outer glowing ring) -->
+                    <span class="indicator-ping"></span>
+                    <!-- Inner Solid Dot -->
+                    <span
+                          style="position: relative; display: inline-flex; width: 10px; height: 10px; border-radius: 50%; background-color: #22c55e; border: 1.5px solid #114133;"></span>
+                </span>
+
+            </p>
+        </a>
+    </div>
 
     <style>
-        aside.side-bar {
-            background: #124033 !important;
+        .indicator-ping {
+            position: absolute;
+            display: inline-flex;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #4ade80;
+            opacity: 0.75;
+            animation: brandPulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
-        aside.side-bar a.sidebar-brand-link {
-            background: #008000 !important;
-            border-bottom: 2px solid #ffffff;
-            color: #ffffff !important;
-            text-decoration: none;
-            margin-top: 24px;
-            margin-bottom: 24px;
-            padding-top: 16px;
-            padding-bottom: 16px;
-        }
-        aside.side-bar a.sidebar-brand-link:hover,
-        aside.side-bar a.sidebar-brand-link:focus,
-        aside.side-bar a.sidebar-brand-link:active {
-            background-color: #008000 !important;
-            color: #ffffff !important;
-            border-bottom: 2px solid #ffffff;
-        }
-        aside.side-bar a.sidebar-brand-link p.sidebar-brand-text {
-            color: #ffffff;
+
+        @keyframes brandPulse {
+
+            75%,
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
         }
     </style>
     <style>
