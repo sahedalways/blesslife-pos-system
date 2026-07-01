@@ -12,7 +12,7 @@
 
 @section('content')
 
-    <div class="tw-pb-6 xl:tw-pb-0" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);">
+    <div class="tw-pb-6 xl:tw-pb-0" style="background: linear-gradient(135deg, #e8ecf1 0%, #d5dde8 100%);">
         <div class="tw-px-5 tw-pt-3">
             {{-- <div class="sm:tw-flex sm:tw-items-center sm:tw-justify-between sm:tw-gap-12">
                 <h1 class="tw-text-2xl tw-font-medium tw-tracking-tight tw-text-white">
@@ -222,8 +222,8 @@
             @if ($is_admin)
                 <div class="tw-relative">
                     <div class="tw-absolute tw-inset-0 tw-grid" aria-hidden="true">
-                        <div style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);"></div>
-                        <div class="xl:tw-bg-none xl:tw-bg-gray-100" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);">
+                        <div style="background: linear-gradient(135deg, #e8ecf1 0%, #d5dde8 100%);"></div>
+                        <div class="xl:tw-bg-none xl:tw-bg-gray-100" style="background: linear-gradient(135deg, #e8ecf1 0%, #d5dde8 100%);">
                         </div>
                     </div>
                     <div class="tw-px-5 tw-isolate">
