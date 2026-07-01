@@ -17,10 +17,10 @@
 
     <style>
         aside.side-bar {
-            background-color: #124033 !important;
+            background: #124033 !important;
         }
         aside.side-bar a.sidebar-brand-link {
-            background-color: #008000;
+            background: #008000 !important;
             border-bottom: 2px solid #ffffff;
             color: #ffffff !important;
             text-decoration: none;
