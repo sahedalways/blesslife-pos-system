@@ -258,12 +258,26 @@
             gap: 6px !important;
         }
 
-        #premium-main-header .premium-dropdown-menu {
-            width: 200px;
-            right: -10px;
-        }
+    #premium-main-header .premium-dropdown-menu {
+        width: 200px;
+        right: -10px;
+    }
+
+    #premium-main-header details.premium-dropdown .premium-dropdown-menu a,
+    #premium-main-header details.premium-dropdown .premium-dropdown-menu li {
+        pointer-events: auto;
     }
 </style>
+
+<script>
+    document.addEventListener('click', function(e) {
+        document.querySelectorAll('#premium-main-header details.premium-dropdown').forEach(function(details) {
+            if (!details.contains(e.target)) {
+                details.removeAttribute('open');
+            }
+        });
+    });
+</script>
 
 <div id="premium-main-header"
      class="no-print">
