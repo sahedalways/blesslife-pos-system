@@ -506,7 +506,8 @@
         outline: none !important;
         width: 200px !important;
     }
-    .table-bordered > thead > tr > th {
+    .table-bordered thead tr th,
+    table.dataTable thead tr th {
         background: #114133 !important;
         color: #ffffff !important;
         font-weight: 600 !important;
@@ -514,6 +515,9 @@
         text-transform: uppercase !important;
         letter-spacing: 0.5px !important;
         font-size: 0.85rem !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important;
         border-bottom: 3px solid #DFB86B !important;
     }
     .dataTables_filter input[type="search"]:focus {
