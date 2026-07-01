@@ -17,13 +17,17 @@
     </a>
 
     <style>
-        .side-bar .sidebar-menu li a,
-        .side-bar .sidebar-menu li a span,
-        .side-bar .sidebar-menu .treeview-menu li a {
+        #side-bar a,
+        #side-bar a span,
+        #side-bar .chiled a span {
             color: #ffffff !important;
         }
-        .side-bar .sidebar-menu li a i {
+        #side-bar a i {
             color: #ffffff !important;
+        }
+        #side-bar a svg {
+            color: #ffffff !important;
+            stroke: #ffffff !important;
         }
     </style>
 
