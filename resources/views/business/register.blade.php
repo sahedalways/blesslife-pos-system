@@ -3,10 +3,10 @@
 
 @section('content')
 
-    <div class="col-md-8 col-xs-12 col-md-offset-2 tw-mt-6">
+    <div class="col-xs-12 tw-mt-6">
         <div
-             class="tw-p-5 md:tw-p-6 tw-mb-4 tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-2xl tw-ring-1 tw-ring-gray-200">
-            <div class="tw-flex tw-flex-col tw-gap-4 tw-dw-rounded-box tw-dw-p-6 tw-dw-max-w-md">
+             class="tw-p-4 sm:tw-p-5 md:tw-p-6 tw-mb-4 tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-2xl tw-ring-1 tw-ring-gray-200">
+            <div class="tw-flex tw-flex-col tw-gap-4 tw-dw-rounded-box tw-dw-p-4 sm:tw-dw-p-6" style="max-width:640px;margin:0 auto;">
                 <div class="tw-flex tw-flex-col rounded-2xl tw-dw-p-6 tw-dw-max-w-md text-center">
                     {{-- <svg xmlns="http://www.w3.org/2000/svg" class="tw-ml-4 tw-mt-4 icon icon-tabler icon-tabler-circle-key-filled" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
