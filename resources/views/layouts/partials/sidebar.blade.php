@@ -24,8 +24,10 @@
             border-bottom: 2px solid #ffffff;
             color: #ffffff !important;
             text-decoration: none;
-            margin-top: 12px;
-            margin-bottom: 12px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            padding-top: 16px;
+            padding-bottom: 16px;
         }
         aside.side-bar a.sidebar-brand-link:hover,
         aside.side-bar a.sidebar-brand-link:focus,
