@@ -33,8 +33,7 @@
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 8px;
-        color: #d4af37 !important;
-        /* Gold Color */
+        color: #e0e0e0 !important;
         font-size: 0.9rem;
         font-weight: 500;
         text-decoration: none;
@@ -45,46 +44,45 @@
     }
 
     #premium-main-header .premium-btn svg {
-        stroke: #d4af37 !important;
+        stroke: #e0e0e0 !important;
         width: 20px;
         height: 20px;
         transition: transform 0.3s ease;
     }
 
     #premium-main-header .premium-btn:hover {
-        background: rgba(212, 175, 55, 0.15);
-        border-color: rgba(212, 175, 55, 0.4);
-        color: #f9d868 !important;
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #ffffff !important;
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     #premium-main-header .premium-btn:hover svg {
         transform: scale(1.1);
-        stroke: #f9d868 !important;
+        stroke: #ffffff !important;
     }
 
     /* Special Primary Button (POS) */
     #premium-main-header .premium-btn-primary {
-        background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
-        color: #114133 !important;
-        border: none;
-        font-weight: 700;
-        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        font-weight: 600;
     }
 
     #premium-main-header .premium-btn-primary svg {
-        stroke: #114133 !important;
+        stroke: #ffffff !important;
     }
 
     #premium-main-header .premium-btn-primary:hover {
-        background: linear-gradient(135deg, #f9d868 0%, #d4af37 100%);
-        color: #0d3328 !important;
-        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+        background: rgba(255, 255, 255, 0.25);
+        color: #ffffff !important;
+        border-color: rgba(255, 255, 255, 0.4);
     }
 
     #premium-main-header .premium-btn-primary:hover svg {
-        stroke: #0d3328 !important;
+        stroke: #ffffff !important;
     }
 
     /* ===== SIDEBAR TOGGLES ===== */
@@ -107,7 +105,7 @@
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 8px;
-        color: #d4af37 !important;
+        color: #e0e0e0 !important;
         font-size: 0.9rem;
         font-weight: 500;
         cursor: pointer;
@@ -119,12 +117,12 @@
     }
 
     #premium-main-header summary.premium-dropdown-trigger:hover {
-        background: rgba(212, 175, 55, 0.15);
-        border-color: rgba(212, 175, 55, 0.4);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.25);
     }
 
     #premium-main-header summary.premium-dropdown-trigger svg {
-        stroke: #d4af37 !important;
+        stroke: #e0e0e0 !important;
         width: 20px;
         height: 20px;
     }
@@ -296,7 +294,7 @@
 
         {{-- Showing active package for SaaS Superadmin --}}
         @if (Module::has('Superadmin'))
-            <div style="color: #d4af37; font-size: 0.85rem; font-weight: 600;">
+            <div style="color: #e0e0e0; font-size: 0.85rem; font-weight: 600;">
                 @includeIf('superadmin::layouts.partials.active_subscription')
             </div>
         @endif
