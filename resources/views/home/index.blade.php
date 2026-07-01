@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="tw-pb-6 xl:tw-pb-0" style="background: linear-gradient(135deg, #0d3328 0%, #1a5c4a 100%);">
+    <div class="tw-pb-6 xl:tw-pb-0" style="background: linear-gradient(135deg, #faf7f2 0%, #e8d5a3 100%);">
         <div class="tw-px-5 tw-pt-3">
             {{-- <div class="sm:tw-flex sm:tw-items-center sm:tw-justify-between sm:tw-gap-12">
                 <h1 class="tw-text-2xl tw-font-medium tw-tracking-tight tw-text-white">
@@ -13,7 +13,7 @@
                     <div class="sm:tw-flex sm:tw-items-center sm:tw-justify-between sm:tw-gap-12">
                         <div class="tw-mt-2 sm:tw-w-1/2 md:tw-w-1/2">
                             <h1
-                                class="tw-text-2xl md:tw-text-4xl tw-tracking-tight tw-text-primary-800 tw-font-semibold text-white tw-mb-10 md:tw-mb-0">
+                                class="tw-text-2xl md:tw-text-4xl tw-tracking-tight tw-text-primary-800 tw-font-semibold tw-mb-10 md:tw-mb-0">
                                 {{ __('home.welcome_message', ['name' => Session::get('user.first_name')]) }}
                             </h1>
                         </div>
@@ -213,8 +213,8 @@
             @if ($is_admin)
                 <div class="tw-relative">
                     <div class="tw-absolute tw-inset-0 tw-grid" aria-hidden="true">
-                        <div style="background: linear-gradient(135deg, #0d3328 0%, #1a5c4a 100%);"></div>
-                        <div class="xl:tw-bg-none xl:tw-bg-gray-100" style="background: linear-gradient(135deg, #0d3328 0%, #1a5c4a 100%);">
+                        <div style="background: linear-gradient(135deg, #faf7f2 0%, #e8d5a3 100%);"></div>
+                        <div class="xl:tw-bg-none xl:tw-bg-gray-100" style="background: linear-gradient(135deg, #faf7f2 0%, #e8d5a3 100%);">
                         </div>
                     </div>
                     <div class="tw-px-5 tw-isolate">
