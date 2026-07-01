@@ -29,6 +29,35 @@
             color: #ffffff !important;
             stroke: #ffffff !important;
         }
+
+        #side-bar a:hover,
+        #side-bar a:hover span,
+        #side-bar a:hover i,
+        #side-bar a:hover svg {
+            color: #000000 !important;
+            stroke: #000000 !important;
+        }
+        #side-bar a:hover {
+            background: #DFB86B !important;
+        }
+        #side-bar .chiled a:hover {
+            background: transparent !important;
+        }
+        #side-bar .chiled a:hover span {
+            color: #DFB86B !important;
+        }
+
+        #side-bar a.menu-active,
+        #side-bar a.menu-active span,
+        #side-bar a.menu-active i,
+        #side-bar a.menu-active svg {
+            background: #DFB86B !important;
+            color: #000000 !important;
+            stroke: #000000 !important;
+        }
+        #side-bar div.menu-active {
+            background: transparent !important;
+        }
     </style>
 
     <!-- Sidebar Menu -->
