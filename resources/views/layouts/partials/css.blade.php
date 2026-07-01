@@ -516,6 +516,12 @@
         font-size: 0.75rem !important;
         border-bottom: 3px solid #DFB86B !important;
     }
+    table.table-bordered tbody tr:first-child td,
+    table.table-bordered tbody tr:first-child th,
+    table.dataTable tbody tr:first-child td,
+    table.dataTable tbody tr:first-child th {
+        border-top: none !important;
+    }
     .dataTables_filter input[type="search"]:focus {
         border-color: #15803d !important;
         box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15) !important;
