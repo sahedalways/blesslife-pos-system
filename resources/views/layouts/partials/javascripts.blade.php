@@ -205,8 +205,7 @@
         });
 
         $('.side-bar-collapse').click(function() {
-            $('body').toggleClass('sidebar-collapse');
-            localStorage.setItem("upos_sidebar_collapse", $('body').hasClass('sidebar-collapse'));
+            $('.side-bar').toggle('slow');
         });
 
         $('.dt-buttons.btn-group').find('a.btn').removeClass('btn-default');
