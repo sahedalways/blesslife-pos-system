@@ -13,7 +13,7 @@
                     <div class="sm:tw-flex sm:tw-items-center sm:tw-justify-between sm:tw-gap-12">
                         <div class="tw-mt-2 sm:tw-w-1/2 md:tw-w-1/2">
                             <h1
-                                class="tw-text-2xl md:tw-text-4xl tw-tracking-tight tw-font-semibold tw-mb-10 md:tw-mb-0" style="color: #DFB86B;">
+                                class="tw-text-2xl md:tw-text-4xl tw-tracking-tight tw-font-semibold tw-mb-10 md:tw-mb-0" style="color: #333333;">
                                 {{ __('home.welcome_message', ['name' => Session::get('user.first_name')]) }}
                             </h1>
                         </div>
