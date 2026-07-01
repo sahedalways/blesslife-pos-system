@@ -513,7 +513,7 @@
         padding: 12px 16px !important;
         text-transform: uppercase !important;
         letter-spacing: 0.5px !important;
-        font-size: 0.85rem !important;
+        font-size: 0.75rem !important;
         border-bottom: 3px solid #DFB86B !important;
     }
     .dataTables_filter input[type="search"]:focus {
