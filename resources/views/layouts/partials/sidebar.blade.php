@@ -8,11 +8,13 @@
 		<span class="logo-lg">{{ Session::get('business.name') }}</span>
 	</a> --}}
 
-    <a href="{{route('home')}}"
-        class="tw-flex tw-items-center tw-justify-center tw-w-full tw-border-r tw-h-15 tw-shrink-0"
+    <a href="{{ route('home') }}"
+        class="tw-flex tw-items-center tw-justify-center tw-w-full tw-border-r tw-h-15 tw-shrink-0 top-brand"
         style="background: #008000; border-bottom: 2px solid #ffffff;">
         <p class="tw-text-lg tw-font-medium tw-text-white side-bar-heading tw-text-center">
-            {{ Session::get('business.name') }} <span class="tw-inline-block tw-w-3 tw-h-3 tw-bg-green-400 tw-rounded-full" title="Online"></span>
+            {{ Session::get('business.name') }} <span
+                  class="tw-inline-block tw-w-3 tw-h-3 tw-bg-green-400 tw-rounded-full"
+                  title="Online"></span>
         </p>
     </a>
 
@@ -22,9 +24,11 @@
         #side-bar .chiled a span {
             color: #ffffff !important;
         }
+
         #side-bar a i {
             color: #ffffff !important;
         }
+
         #side-bar a svg {
             color: #ffffff !important;
             stroke: #ffffff !important;
@@ -37,12 +41,15 @@
             color: #000000 !important;
             stroke: #000000 !important;
         }
+
         #side-bar a:hover {
             background: #DFB86B !important;
         }
+
         #side-bar .chiled a:hover {
             background: transparent !important;
         }
+
         #side-bar .chiled a:hover span {
             color: #DFB86B !important;
         }
@@ -55,13 +62,19 @@
             color: #000000 !important;
             stroke: #000000 !important;
         }
-        #side-bar div.menu-active > a.drop_down,
-        #side-bar div.menu-active > a.drop_down span,
-        #side-bar div.menu-active > a.drop_down i,
-        #side-bar div.menu-active > a.drop_down svg {
+
+        #side-bar div.menu-active>a.drop_down,
+        #side-bar div.menu-active>a.drop_down span,
+        #side-bar div.menu-active>a.drop_down i,
+        #side-bar div.menu-active>a.drop_down svg {
             background: #DFB86B !important;
             color: #000000 !important;
             stroke: #000000 !important;
+        }
+
+        .side-bar a.top-brand {
+            background: #008000 !important;
+            border-bottom: 2px solid #ffffff !important;
         }
 
         #side-bar a:focus,
@@ -72,14 +85,15 @@
             color: #ffffff !important;
             stroke: #ffffff !important;
         }
+
         #side-bar a.menu-active:focus,
         #side-bar a.menu-active:focus span,
         #side-bar a.menu-active:focus i,
         #side-bar a.menu-active:focus svg,
-        #side-bar div.menu-active > a.drop_down:focus,
-        #side-bar div.menu-active > a.drop_down:focus span,
-        #side-bar div.menu-active > a.drop_down:focus i,
-        #side-bar div.menu-active > a.drop_down:focus svg {
+        #side-bar div.menu-active>a.drop_down:focus,
+        #side-bar div.menu-active>a.drop_down:focus span,
+        #side-bar div.menu-active>a.drop_down:focus i,
+        #side-bar div.menu-active>a.drop_down:focus svg {
             background: #DFB86B !important;
             color: #000000 !important;
             stroke: #000000 !important;
