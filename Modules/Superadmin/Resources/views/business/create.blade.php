@@ -126,7 +126,7 @@
                         minlength: 5
                     },
                     confirm_password: {
-                        equalTo: "#password"
+                        equalTo: "#register_password"
                     },
                     paid_via: {
                         required: function(element){
