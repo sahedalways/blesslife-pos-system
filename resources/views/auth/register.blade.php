@@ -6,7 +6,7 @@
 
     <h1 class="page-header text-center">{{ config('app.name', 'ultimatePOS') }}</h1>
     
-    <div class="col-xs-12">
+    <div class="col-md-8 col-md-offset-2">
         
         <div class="box box-solid">
             <div class="box-header with-border">

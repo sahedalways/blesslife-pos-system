@@ -511,6 +511,21 @@
     </script>
 @endif
 
+<style>
+    @media (max-width: 767px) {
+        #business_register_form .form-group,
+        #business_register_form .col-md-4,
+        #business_register_form .col-md-6 {
+            width: 100% !important;
+        }
+        #business_register_form .input-group {
+            width: 100% !important;
+        }
+        #business_register_form .input-group .form-control {
+            width: 100% !important;
+        }
+    }
+</style>
 <script>
     $(document).ready(function() {
         $('#business_register_form label').each(function() {
