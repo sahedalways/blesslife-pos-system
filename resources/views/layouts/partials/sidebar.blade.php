@@ -55,8 +55,34 @@
             color: #000000 !important;
             stroke: #000000 !important;
         }
-        #side-bar div.menu-active {
+        #side-bar div.menu-active > a.drop_down,
+        #side-bar div.menu-active > a.drop_down span,
+        #side-bar div.menu-active > a.drop_down i,
+        #side-bar div.menu-active > a.drop_down svg {
+            background: #DFB86B !important;
+            color: #000000 !important;
+            stroke: #000000 !important;
+        }
+
+        #side-bar a:focus,
+        #side-bar a:focus span,
+        #side-bar a:focus i,
+        #side-bar a:focus svg {
             background: transparent !important;
+            color: #ffffff !important;
+            stroke: #ffffff !important;
+        }
+        #side-bar a.menu-active:focus,
+        #side-bar a.menu-active:focus span,
+        #side-bar a.menu-active:focus i,
+        #side-bar a.menu-active:focus svg,
+        #side-bar div.menu-active > a.drop_down:focus,
+        #side-bar div.menu-active > a.drop_down:focus span,
+        #side-bar div.menu-active > a.drop_down:focus i,
+        #side-bar div.menu-active > a.drop_down:focus svg {
+            background: #DFB86B !important;
+            color: #000000 !important;
+            stroke: #000000 !important;
         }
     </style>
 
