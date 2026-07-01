@@ -186,6 +186,50 @@
             stroke: #000000 !important;
         }
 
+        body.sidebar-collapse aside.side-bar {
+            width: 64px !important;
+            min-width: 64px !important;
+            transition: width 0.3s ease;
+            overflow: hidden;
+        }
+
+        body.sidebar-collapse aside.side-bar > div:first-of-type {
+            height: 64px !important;
+            padding: 8px !important;
+        }
+
+        body.sidebar-collapse aside.side-bar > div:first-of-type p {
+            justify-content: center !important;
+        }
+
+        body.sidebar-collapse aside.side-bar > div:first-of-type p > span:first-child,
+        body.sidebar-collapse aside.side-bar > div:first-of-type p > span[title="System Online"] {
+            display: none !important;
+        }
+
+        body.sidebar-collapse #side-bar a > span {
+            display: none !important;
+        }
+
+        body.sidebar-collapse #side-bar .chiled {
+            display: none !important;
+        }
+
+        body.sidebar-collapse #side-bar a {
+            justify-content: center !important;
+            padding-left: 8px !important;
+            padding-right: 8px !important;
+            gap: 0 !important;
+        }
+
+        body.sidebar-collapse #side-bar a > svg.svg {
+            display: none !important;
+        }
+
+        body.sidebar-collapse #side-bar > div {
+            padding-left: 4px !important;
+            padding-right: 4px !important;
+        }
     </style>
 
     <!-- Sidebar Menu -->
