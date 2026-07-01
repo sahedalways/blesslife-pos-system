@@ -1,3 +1,12 @@
+<style>
+    .dashboard-card {
+        box-shadow: 0 1px 3px rgba(0, 128, 0, 0.15) !important;
+    }
+    .dashboard-card:hover {
+        box-shadow: 0 4px 14px rgba(0, 128, 0, 0.2) !important;
+    }
+</style>
+
 @extends('layouts.app')
 @section('title', __('home.home'))
 
@@ -71,7 +80,7 @@
                             <div class="tw-grid tw-grid-cols-1 tw-gap-4 tw-mt-6 sm:tw-grid-cols-2 xl:tw-grid-cols-4 sm:tw-gap-5">
                             
                                 <div
-                                    class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm hover:tw-shadow-md tw-rounded-xl  tw-ring-1 tw-ring-gray-200">
+                                    class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl  tw-ring-1 tw-ring-gray-200">
                                     <div class="tw-p-4 sm:tw-p-5">
                                         <div class="tw-flex tw-items-center tw-gap-4">
                                             <div
@@ -101,7 +110,7 @@
                                 </div>
 
                                 <div
-                                    class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm hover:tw-shadow-md tw-rounded-xl hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
+                                    class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
                                     <div class="tw-p-4 sm:tw-p-5">
                                         <div class="tw-flex tw-items-center tw-gap-4">
                                             <div
@@ -135,7 +144,7 @@
                                 </div>
 
                                 <div
-                                    class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm hover:tw-shadow-md tw-rounded-xl hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
+                                    class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
                                     <div class="tw-p-4 sm:tw-p-5">
                                         <div class="tw-flex tw-items-center tw-gap-4">
                                             <div
@@ -168,7 +177,7 @@
                                 </div>
 
                                 <div
-                                    class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm hover:tw-shadow-md tw-rounded-xl hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
+                                    class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
                                     <div class="tw-p-4 sm:tw-p-5">
                                         <div class="tw-flex tw-items-center tw-gap-4">
                                             <div
@@ -221,7 +230,7 @@
                         <div
                             class="tw-grid tw-grid-cols-1 tw-gap-4 tw-mt-4 sm:tw-mt-6 sm:tw-grid-cols-2 xl:tw-grid-cols-4 sm:tw-gap-5">
                             <div
-                                class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
+                                class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
                                 <div class="tw-p-4 sm:tw-p-5">
                                     <div class="tw-flex tw-items-center tw-gap-4">
                                         <div
@@ -251,7 +260,7 @@
                                 </div>
                             </div>
                             <div
-                                class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
+                                class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
                                 <div class="tw-p-4 sm:tw-p-5">
                                     <div class="tw-flex tw-items-center tw-gap-4">
                                         <div
@@ -282,7 +291,7 @@
                             </div>
 
                             <div
-                                class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
+                                class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
                                 <div class="tw-p-4 sm:tw-p-5">
                                     <div class="tw-flex tw-items-center tw-gap-4">
                                         <div
@@ -321,7 +330,7 @@
                             </div>
 
                             <div
-                                class="tw-transition-all tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
+                                class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-1 tw-ring-gray-200">
                                 <div class="tw-p-4 sm:tw-p-5">
                                     <div class="tw-flex tw-items-center tw-gap-4">
                                         <div
@@ -372,7 +381,7 @@
                 @if (auth()->user()->can('sell.view') || auth()->user()->can('direct_sell.view'))
                     @if (!empty($all_locations))
                         <div
-                            class="tw-transition-all lg:tw-col-span-2 xl:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                            class="tw-transition-all lg:tw-col-span-2 xl:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                             <div class="tw-p-4 sm:tw-p-5">
                                 <div class="tw-flex tw-items-center tw-gap-2.5">
                                     <div
@@ -412,7 +421,7 @@
                     @endif --}}
                     @if (!empty($all_locations))
                         <div
-                            class="tw-transition-all lg:tw-col-span-2 xl:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                            class="tw-transition-all lg:tw-col-span-2 xl:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                             <div class="tw-p-4 sm:tw-p-5">
                                 <div class="tw-flex tw-items-center tw-gap-2.5">
                                     <div
@@ -451,7 +460,7 @@
                 @endif --}}
                 @if (auth()->user()->can('sell.view') || auth()->user()->can('direct_sell.view'))
                     <div
-                        class="tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -508,7 +517,7 @@
                 @endif
                 @can('purchase.view')
                     <div
-                        class="tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -565,7 +574,7 @@
                 @endcan
                 @can('stock_report.view')
                     <div
-                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -617,7 +626,7 @@
                     </div>
                     @if (session('business.enable_product_expiry') == 1)
                         <div
-                            class="tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                            class="tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                             <div class="tw-p-4 sm:tw-p-5">
                                 <div class="tw-flex tw-items-center tw-gap-2.5">
                                     <div
@@ -670,7 +679,7 @@
                 @endcan
                 @if (auth()->user()->can('so.view_all') || auth()->user()->can('so.view_own'))
                     <div
-                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -732,7 +741,7 @@
                     !empty($common_settings['enable_purchase_requisition']) &&
                         (auth()->user()->can('purchase_requisition.view_all') || auth()->user()->can('purchase_requisition.view_own')))
                     <div
-                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -799,7 +808,7 @@
                         (auth()->user()->can('purchase_order.view_all') || auth()->user()->can('purchase_order.view_own')))
 
                     <div
-                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -861,7 +870,7 @@
                         auth()->user()->can('access_shipping') ||
                         auth()->user()->can('access_own_shipping'))
                     <div
-                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -945,7 +954,7 @@
                 @endif
                 @if (auth()->user()->can('account.access') && config('constants.show_payments_recovered_today') == true)
                     <div
-                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
