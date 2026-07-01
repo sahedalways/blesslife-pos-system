@@ -226,6 +226,17 @@
             }
         });
     }
+
+    $(document).ready(function() {
+        $('.tw-from-indigo-600.tw-to-blue-500').each(function() {
+            $(this).addClass('gold-sweep-btn');
+            $(this).contents().filter(function() {
+                return this.nodeType === 3 && $(this).text().trim() !== '';
+            }).each(function() {
+                $(this).replaceWith('<span>' + $(this).text() + '</span>');
+            });
+        });
+    });
 </script>
 
 

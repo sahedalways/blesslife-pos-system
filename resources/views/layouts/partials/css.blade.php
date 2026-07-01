@@ -444,6 +444,84 @@
         transform: rotate(315deg);
     }
 </style>
+<style>
+    .daterangepicker .ranges li.active {
+        background-color: #1a5c4a !important;
+        color: #fff !important;
+    }
+</style>
+<style>
+    .tw-dw-btn.tw-dw-btn-xs.tw-dw-btn-outline.tw-dw-btn-primary {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.7rem !important;
+        line-height: 1.4 !important;
+        min-height: 0 !important;
+        height: auto !important;
+        background-color: transparent !important;
+        color: #ffffff !important;
+        border-color: #10b981 !important;
+        border-width: 1.5px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+    .tw-dw-btn.tw-dw-btn-xs.tw-dw-btn-outline.tw-dw-btn-primary:hover {
+        background-color: transparent !important;
+        border-color: #059669 !important;
+        color: #ffffff !important;
+    }
+
+    .gold-sweep-btn {
+        background-image: linear-gradient(to right, #15803d 50%, #DFB86B 50%) !important;
+        background-size: 200% 100% !important;
+        background-position: 0 0 !important;
+        transition: background-position 0.4s ease !important;
+    }
+    .gold-sweep-btn:hover {
+        background-position: 100% 0 !important;
+        color: #ffffff !important;
+    }
+    .gold-sweep-btn span {
+        display: inline-block;
+        transition: transform 0.4s ease;
+    }
+    .gold-sweep-btn:hover span {
+        animation: blsTextFlip 0.5s ease forwards;
+    }
+    @keyframes blsTextFlip {
+        0% { transform: rotateX(0deg); }
+        50% { transform: rotateX(90deg); }
+        100% { transform: rotateX(0deg); }
+    }
+
+    .dataTables_filter input[type="search"] {
+        border: 2px solid #e5e7eb !important;
+        border-radius: 10px !important;
+        padding: 0.6rem 1rem 0.6rem 2.5rem !important;
+        font-size: 0.9rem !important;
+        background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E") 0.8rem center no-repeat !important;
+        transition: all 0.3s ease !important;
+        outline: none !important;
+        width: 200px !important;
+    }
+    .table-bordered > thead > tr > th {
+        background: #114133 !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        padding: 12px 16px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        font-size: 0.85rem !important;
+        border-bottom: 3px solid #DFB86B !important;
+    }
+    .dataTables_filter input[type="search"]:focus {
+        border-color: #15803d !important;
+        box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15) !important;
+        width: 260px !important;
+    }
+</style>
 @if (!empty($__system_settings['additional_css']))
     {!! $__system_settings['additional_css'] !!}
 @endif

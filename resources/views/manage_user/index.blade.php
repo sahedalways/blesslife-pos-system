@@ -1,6 +1,32 @@
 @extends('layouts.app')
 @section('title', __( 'user.users' ))
 
+<style>
+    a.add-user-btn {
+        background-image: linear-gradient(to right, #15803d 50%, #DFB86B 50%) !important;
+        background-size: 200% 100% !important;
+        background-position: 0 0 !important;
+        transition: background-position 0.4s ease !important;
+    }
+    a.add-user-btn:hover {
+        background-position: 100% 0 !important;
+        color: #ffffff !important;
+    }
+    a.add-user-btn span {
+        display: inline-block;
+        transition: transform 0.4s ease;
+    }
+    a.add-user-btn:hover span {
+        animation: blsTextFlip 0.5s ease forwards;
+    }
+    @keyframes blsTextFlip {
+        0% { transform: rotateX(0deg); }
+        50% { transform: rotateX(90deg); }
+        100% { transform: rotateX(0deg); }
+    }
+
+</style>
+
 @section('content')
 
 <!-- Content Header (Page header) -->
@@ -20,8 +46,8 @@
         @can('user.create')
             @slot('tool')
                 <div class="box-tools">
-                    <a class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full" href="{{action([\App\Http\Controllers\ManageUserController::class, 'create'])}}">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>                        @lang( 'messages.add' )
+                    <a class="tw-dw-btn tw-font-bold tw-text-white tw-border-none tw-rounded-full add-user-btn" href="{{action([\App\Http\Controllers\ManageUserController::class, 'create'])}}">
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>                        <span>@lang( 'messages.add' )</span>
                     </a>
                  </div>
             @endslot
