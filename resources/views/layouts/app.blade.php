@@ -39,7 +39,7 @@
 </head>
 <body
     class="tw-font-sans tw-antialiased tw-text-gray-900 tw-bg-gray-100 @if ($pos_layout) hold-transition lockscreen @else hold-transition skin-@if (!empty(session('business.theme_color'))){{ session('business.theme_color') }}@else{{ 'blue-light' }} @endif sidebar-mini @endif" >
-    <div class="tw-flex thetop">
+    <div class="tw-flex thetop tw-h-screen tw-overflow-y-auto">
         <script type="text/javascript">
             if (localStorage.getItem("upos_sidebar_collapse") == 'true') {
                 var body = document.getElementsByTagName("body")[0];
@@ -73,7 +73,7 @@
             <input type="hidden" id="status_span" data-status="{{ session('status.success') }}"
                 data-msg="{{ session('status.msg') }}">
         @endif
-        <main class="tw-flex tw-flex-col tw-flex-1 tw-h-full tw-min-w-0 tw-bg-gray-100">
+        <main class="tw-flex tw-flex-col tw-flex-1 tw-min-w-0 tw-bg-gray-100">
             @if($request->segment(1) != 'customer-display' && !$pos_layout)
                 @include('layouts.partials.header')
             @elseif($request->segment(1) != 'customer-display')
@@ -83,7 +83,7 @@
             <div id="app">
                 @yield('vue')
             </div>
-            <div class="tw-flex-1 tw-overflow-y-auto tw-h-screen" id="scrollable-container">
+            <div class="tw-flex-1" id="scrollable-container">
                 @yield('content')
                 @if (!$pos_layout)
                 

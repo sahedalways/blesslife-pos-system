@@ -186,15 +186,63 @@ class HomeController extends Controller
                     ->options($this->__chartOptions(__(
                         'home.total_sells',
                         ['currency' => $currency->code]
-                            )));
+                    )));
         if (! empty($fy_sells_by_location_data)) {
             foreach ($fy_sells_by_location_data as $location_sell) {
-                $sells_chart_2->dataset($location_sell['loc_label'], 'line', $location_sell['values']);
+                $sells_chart_2->dataset($location_sell['loc_label'], 'column', $location_sell['values']);
             }
         }
         if (count($all_locations) > 1) {
-            $sells_chart_2->dataset(__('report.all_locations'), 'line', $values);
+            $sells_chart_2->dataset(__('report.all_locations'), 'column', $values);
         }
+
+        // Chart 3: Donut - Sales by Location (Current FY)
+        $location_totals = $sells_this_fy->groupBy('location_id')->map(function ($items) {
+            return (float) $items->sum('total_sells');
+        });
+
+        $pie_labels = [];
+        $pie_values = [];
+        foreach ($all_locations as $loc_id => $loc_name) {
+            $pie_labels[] = $loc_name;
+            $pie_values[] = $location_totals->get($loc_id, 0);
+        }
+
+        $sells_chart_3 = new CommonChart;
+        $sells_chart_3->labels($pie_labels);
+        $sells_chart_3->dataset(__('home.total_sells'), 'pie', $pie_values);
+        $sells_chart_3->doughnut(75);
+        $sells_chart_3->height(300);
+        $sells_chart_3->options([
+            'title' => ['text' => ''],
+            'colors' => ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'],
+            'legend' => ['enabled' => true],
+            'tooltip' => [
+                'pointFormat' => '{series.name}: <b>{point.percentage:.1f}%</b>',
+            ],
+            'plotOptions' => [
+                'pie' => [
+                    'allowPointSelect' => true,
+                    'cursor' => 'pointer',
+                    'dataLabels' => [
+                        'enabled' => true,
+                        'format' => '<b>{point.name}</b>: {point.percentage:.1f}%',
+                    ],
+                    'showInLegend' => true,
+                ],
+            ],
+            'exporting' => [
+                'buttons' => [
+                    'contextButton' => [
+                        'enabled' => true,
+                        'align' => 'right',
+                        'verticalAlign' => 'top',
+                        'x' => -40,
+                        'y' => 10,
+                    ],
+                ],
+            ],
+        ]);
 
         //Get Dashboard widgets from module
         $module_widgets = $this->moduleUtil->getModuleData('dashboard_widget');
@@ -210,7 +258,7 @@ class HomeController extends Controller
         $common_settings = ! empty(session('business.common_settings')) ? session('business.common_settings') : [];
 
 
-        return view('home.index', compact('sells_chart_1', 'sells_chart_2', 'widgets', 'all_locations', 'common_settings', 'is_admin'));
+        return view('home.index', compact('sells_chart_1', 'sells_chart_2', 'sells_chart_3', 'widgets', 'all_locations', 'common_settings', 'is_admin'));
     }
 
     /**

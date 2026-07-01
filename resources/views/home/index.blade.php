@@ -479,8 +479,8 @@
         @endif
     </div>
     @if (auth()->user()->can('dashboard.data'))
-        <div class="tw-px-5 tw-py-6">
-            <div class="tw-grid tw-grid-cols-1 tw-gap-4 sm:tw-gap-5 lg:tw-grid-cols-2">
+        <div class="tw-py-6">
+            <div class="tw-grid tw-grid-cols-1 tw-gap-4 sm:tw-gap-5">
                 @if (auth()->user()->can('sell.view') || auth()->user()->can('direct_sell.view'))
                     <style>
                         /* Card Container Styling to match Image */
@@ -548,6 +548,11 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
+                        }
+
+                        .chart-canvas-container > div {
+                            width: 100%;
+                            height: 100%;
                         }
 
                         /* Force Canvas to fit */
@@ -647,7 +652,7 @@
                                 </div>
                             @endif
 
-                            <!-- Chart 3 -->
+                            <!-- Chart 3: Donut - Sales by Location -->
                             <div class="chart-pro-card">
                                 <div class="chart-pro-header">
                                     <h3 class="chart-pro-title">
@@ -669,87 +674,51 @@
                                                 <path d="M12 12l0 .01"></path>
                                             </svg>
                                         </div>
-                                        Analytics Overview
+                                        Sales by Location
                                     </h3>
                                 </div>
                                 <div class="chart-canvas-container">
-                                    <p style="color: #9ca3af; font-size: 0.875rem;">Chart Area</p>
+                                    {!! $sells_chart_3->container() !!}
                                 </div>
                             </div>
 
                         </div>
                     @endif
 
-                    <!-- Script to Force Chart Colors to Match Image -->
                     <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            if (typeof Chart !== 'undefined') {
-                                // 1. Style Line Chart (Blue)
-                                const chart1Canvas = document.querySelector('#{{ $sells_chart_1->id }}');
-                                if (chart1Canvas) {
-                                    const chart1 = Chart.getChart(chart1Canvas);
-                                    if (chart1) {
-                                        // Force Blue Line
-                                        chart1.data.datasets.forEach((dataset) => {
-                                            dataset.borderColor = '#3b82f6'; // Blue
-                                            dataset.backgroundColor = 'rgba(59, 130, 246, 0.1)';
-                                            dataset.borderWidth = 3;
-                                            dataset.pointRadius = 4;
-                                            dataset.pointHoverRadius = 6;
-                                            dataset.fill = true;
-                                        });
-                                        chart1.options.scales = {
-                                            y: {
-                                                grid: {
-                                                    color: '#f3f4f6',
-                                                    drawBorder: false
-                                                }
-                                            },
-                                            x: {
-                                                grid: {
-                                                    display: false
-                                                }
-                                            }
-                                        };
-                                        chart1.update();
-                                    }
-                                }
-
-                                // 2. Style Bar Chart (Blue Bars)
-                                const chart2Canvas = document.querySelector('#{{ $sells_chart_2->id }}');
-                                if (chart2Canvas) {
-                                    const chart2 = Chart.getChart(chart2Canvas);
-                                    if (chart2) {
-                                        // Force Blue Bars
-                                        chart2.data.datasets.forEach((dataset) => {
-                                            dataset.backgroundColor = '#3b82f6'; // Blue
-                                            dataset.borderRadius = 4;
-                                            dataset.barPercentage = 0.6;
-                                        });
-                                        chart2.options.scales = {
-                                            y: {
-                                                grid: {
-                                                    color: '#f3f4f6',
-                                                    drawBorder: false
-                                                }
-                                            },
-                                            x: {
-                                                grid: {
-                                                    display: false
-                                                }
-                                            }
-                                        };
-                                        chart2.update();
-                                    }
-                                }
+                        window.addEventListener('load', function() {
+                            var hc1 = window['{{ $sells_chart_1->id }}'];
+                            if (hc1 && hc1.series) {
+                                hc1.series.forEach(function(s) {
+                                    s.update({
+                                        color: '#3b82f6',
+                                        lineWidth: 3,
+                                        marker: { radius: 4, hoverRadius: 6 },
+                                        fillOpacity: 0.1
+                                    });
+                                });
                             }
+
+                            var hc2 = window['{{ $sells_chart_2->id }}'];
+                            if (hc2 && hc2.series) {
+                                hc2.series.forEach(function(s) {
+                                    s.update({ color: '#3b82f6' });
+                                });
+                            }
+
                         });
                     </script>
                 @endif
 
+            </div>
+        </div>
+
+        {{-- Sales/Purchase Payment Dues below charts --}}
+        <div class="tw-px-5 tw-pb-6">
+            <div class="tw-grid tw-grid-cols-1 tw-gap-4 sm:tw-gap-5">
                 @if (auth()->user()->can('sell.view') || auth()->user()->can('direct_sell.view'))
                     <div
-                         class="tw-transition-all lg:tw-col-span-1 tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
+                         class="tw-transition-all tw-duration-200 tw-bg-white dashboard-card tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
                         <div class="tw-p-4 sm:tw-p-5">
                             <div class="tw-flex tw-items-center tw-gap-2.5">
                                 <div
@@ -1432,6 +1401,7 @@
     @if (!empty($all_locations))
         {!! $sells_chart_1->script() !!}
         {!! $sells_chart_2->script() !!}
+        {!! $sells_chart_3->script() !!}
     @endif
     <script type="text/javascript">
         $(document).ready(function() {
