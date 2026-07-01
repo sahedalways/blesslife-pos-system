@@ -125,7 +125,7 @@ $(document).ready(function () {
                 minlength: 5,
             },
             confirm_password: {
-                equalTo: '#password',
+                equalTo: '#register_password',
             },
             username: {
                 required: true,
