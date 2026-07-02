@@ -598,6 +598,25 @@
         color: #fff !important;
     }
 
+    .import-expense-btn {
+        border: 2px solid #15803d !important;
+        color: #15803d !important;
+        background: transparent !important;
+        background-image: none !important;
+        border-radius: 9999px !important;
+        font-weight: 700 !important;
+        padding: 0.5rem 1.25rem !important;
+        font-size: 0.8125rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.375rem !important;
+        transition: all 0.2s ease !important;
+    }
+    .import-expense-btn:hover {
+        background: #15803d !important;
+        color: #fff !important;
+    }
+
     .gold-sweep-btn .get_product_description,
     .get_product_description {
         background: #DFB86B !important;
@@ -667,6 +686,21 @@
         0% { transform: rotateX(0deg); }
         50% { transform: rotateX(90deg); }
         100% { transform: rotateX(0deg); }
+    }
+
+    #save-and-print {
+        background: none !important;
+        background-image: linear-gradient(to right, #DFB86B 50%, transparent 50%) !important;
+        background-size: 200% 100% !important;
+        background-position: 100% 0 !important;
+        transition: background-position 0.4s ease !important;
+        border: 2px solid #15803d !important;
+        color: #15803d !important;
+    }
+    #save-and-print:hover {
+        background-position: 0 0 !important;
+        color: #ffffff !important;
+        border-color: #DFB86B !important;
     }
 
     .dataTables_filter input[type="search"] {

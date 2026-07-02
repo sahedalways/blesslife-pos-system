@@ -126,7 +126,7 @@
                     {!! Form::hidden('default_price_group', null, ['id' => 'default_price_group']) !!}
 
                     @if (in_array('types_of_service', $enabled_modules) && !empty($types_of_service))
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon">
@@ -154,7 +154,7 @@
                     @endif
 
                     @if (in_array('subscription', $enabled_modules))
-                        <div class="col-md-4 pull-right col-sm-6">
+                        <div class="col-sm-4">
                             <div class="checkbox">
                                 <label>
                                     {!! Form::checkbox('is_recurring', 1, false, ['class' => 'input-icheck', 'id' => 'is_recurring']) !!} @lang('lang_v1.subscribe')?
@@ -167,7 +167,7 @@
                         </div>
                     @endif
                     <div class="clearfix"></div>
-                    <div class="@if (!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             {!! Form::label('contact_id', __('contact.customer') . ':*') !!}
                             <div class="input-group">
@@ -227,7 +227,7 @@
                         </small>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <div class="multi-input">
                                 @php
@@ -259,7 +259,7 @@
                         @php
                             $is_commission_agent_required = !empty($pos_settings['is_commission_agent_required']);
                         @endphp
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('commission_agent', __('lang_v1.commission_agent') . ':') !!}
                                 {!! Form::select('commission_agent', $commission_agent, null, [
@@ -270,7 +270,7 @@
                             </div>
                         </div>
                     @endif
-                    <div class="@if (!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             {!! Form::label('transaction_date', __('sale.sale_date') . ':*') !!}
                             <div class="input-group">
@@ -292,7 +292,7 @@
                                    id="disable_qty_alert">
                         @endif
                     @else
-                        <div class="@if (!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('status', __('sale.status') . ':*') !!}
                                 {!! Form::select('status', $statuses, null, [
@@ -304,7 +304,7 @@
                         </div>
                     @endif
                     @if ($sale_type != 'sales_order')
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('invoice_scheme_id', __('invoice.invoice_scheme') . ':') !!}
                                 {!! Form::select('invoice_scheme_id', $invoice_schemes, $default_invoice_schemes->id, [
@@ -315,7 +315,7 @@
                         </div>
                     @endif
                     @can('edit_invoice_number')
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label(
                                     'invoice_no',
@@ -329,6 +329,20 @@
                             </div>
                         </div>
                     @endcan
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            {!! Form::label('upload_document', __('purchase.attach_document') . ':') !!}
+                            {!! Form::file('sell_document', [
+                                'id' => 'upload_document',
+                                'accept' => implode(',', array_keys(config('constants.document_upload_mimes_types'))),
+                            ]) !!}
+                            <p class="help-block">
+                                @lang('purchase.max_file_size', ['size' => config('constants.document_size_limit') / 1000000])
+                                @includeIf('components.document_help_text')
+                            </p>
+                        </div>
+                    </div>
 
                     @php
                         $custom_field_1_label = !empty($custom_labels['sell']['custom_field_1'])
@@ -379,10 +393,21 @@
                             }
                         @endphp
                     @endif
-                    <div class="col-md-4">
+                    <div class="clearfix"
+                         style="margin-top: 13rem;"></div>
+                    <div class="col-sm-6">
                         <div class="form-group">
                             {!! Form::label('project_name', 'Project Name:') !!}
                             {!! Form::text('project_name', null, ['class' => 'form-control', 'placeholder' => 'Project Name']) !!}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {!! Form::label('project_code', 'Project Code:') !!}
+                            {!! Form::text('project_code', null, [
+                                'class' => 'form-control',
+                                'placeholder' => 'Project Code',
+                            ]) !!}
                         </div>
                     </div>
                     @if (!empty($custom_field_2_label))
@@ -393,7 +418,7 @@
                             }
                         @endphp
 
-                        <div class="col-md-4">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('custom_field_2', $label_2) !!}
                                 {!! Form::text('custom_field_2', null, [
@@ -412,7 +437,7 @@
                             }
                         @endphp
 
-                        <div class="col-md-4">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('custom_field_3', $label_3) !!}
                                 {!! Form::text('custom_field_3', null, [
@@ -431,7 +456,7 @@
                             }
                         @endphp
 
-                        <div class="col-md-4">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('custom_field_4', $label_4) !!}
                                 {!! Form::text('custom_field_4', null, [
@@ -442,28 +467,6 @@
                             </div>
                         </div>
                     @endif
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            {!! Form::label('project_code', 'Project Code:') !!}
-                            {!! Form::text('project_code', null, [
-                                'class' => 'form-control',
-                                'placeholder' => 'Project Code',
-                            ]) !!}
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            {!! Form::label('upload_document', __('purchase.attach_document') . ':') !!}
-                            {!! Form::file('sell_document', [
-                                'id' => 'upload_document',
-                                'accept' => implode(',', array_keys(config('constants.document_upload_mimes_types'))),
-                            ]) !!}
-                            <p class="help-block">
-                                @lang('purchase.max_file_size', ['size' => config('constants.document_size_limit') / 1000000])
-                                @includeIf('components.document_help_text')
-                            </p>
-                        </div>
-                    </div>
                     <div class="clearfix"></div>
 
                     @if ((!empty($pos_settings['enable_sales_order']) && $sale_type != 'sales_order') || $is_order_request_enabled)
@@ -993,9 +996,10 @@
                     <div class="clearfix"></div>
                     <div class="col-md-12 text-center">
                         <button type="button"
-                                class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-sm tw-text-white"
-                                id="toggle_additional_expense"> <i class="fas fa-plus"></i> @lang('lang_v1.add_additional_expenses') <i
-                               class="fas fa-chevron-down"></i></button>
+                                class="tw-dw-btn tw-dw-btn-sm"
+                                id="toggle_additional_expense"
+                                style="background: #DFB86B; color: #1f2937; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <i class="fas fa-plus"></i> @lang('lang_v1.add_additional_expenses') <i class="fas fa-chevron-down"></i></button>
                     </div>
                     <div class="col-md-8 col-md-offset-4"
                          id="additional_expenses_div"
@@ -1284,7 +1288,7 @@
                         class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-lg tw-text-white">@lang('messages.save')</button>
                 <button type="button"
                         id="save-and-print"
-                        class="tw-dw-btn tw-dw-btn-success tw-dw-btn-lg tw-text-white">@lang('lang_v1.save_and_print')</button>
+                        class="tw-dw-btn tw-dw-btn-lg gold-sweep-btn"><span>@lang('lang_v1.save_and_print')</span></button>
             </div>
         </div>
 
