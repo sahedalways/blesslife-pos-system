@@ -369,6 +369,87 @@
         min-height: 48px;
     }
 
+    /* ===== Global Form Control Styles ===== */
+    .form-control {
+        border: 1.5px solid #d1d5db;
+        border-radius: 0.5rem;
+        padding: 0.625rem 0.875rem;
+        font-size: 0.875rem;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    .form-control:focus {
+        border-color: #1a5c4a;
+        box-shadow: 0 0 0 3px rgba(26, 92, 74, 0.15);
+        outline: none;
+    }
+    .form-control:hover:not(:focus) {
+        border-color: #9ca3af;
+    }
+    .input-group .form-control:focus {
+        border-color: #1a5c4a;
+        box-shadow: 0 0 0 3px rgba(26, 92, 74, 0.15);
+    }
+    .select2-container--default .select2-selection--single,
+    .select2-container--default .select2-selection--multiple {
+        border: 1.5px solid #d1d5db !important;
+        border-radius: 0.5rem !important;
+        padding: 0.375rem 0.5rem;
+        min-height: 40px;
+        transition: all 0.2s ease-in-out;
+    }
+    .select2-container--default .select2-selection--single:focus,
+    .select2-container--default .select2-selection--multiple:focus,
+    .select2-container--default.select2-container--focus .select2-selection--single,
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+        border-color: #1a5c4a !important;
+        box-shadow: 0 0 0 3px rgba(26, 92, 74, 0.15) !important;
+    }
+    .input-group-addon {
+        border: 1.5px solid #d1d5db;
+        border-radius: 0.5rem;
+        background: #f9fafb;
+        color: #374151;
+        font-size: 0.875rem;
+        padding: 0.5rem 0.875rem;
+    }
+    .input-group .input-group-addon:last-child {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .input-group .form-control:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .checkbox label {
+        font-size: 0.875rem;
+        color: #374151;
+    }
+    .checkbox input[type="checkbox"] {
+        accent-color: #1a5c4a;
+    }
+    label {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.375rem;
+    }
+    .box {
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+        border: none;
+    }
+    .box-header {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 1rem 1.25rem;
+        background: #fafafa;
+        border-radius: 0.75rem 0.75rem 0 0;
+    }
+    .box-body {
+        padding: 1.5rem 1.25rem;
+    }
+
 </style>
 
 
@@ -446,6 +527,18 @@
 </style>
 <style>
     .daterangepicker .ranges li.active {
+        background-color: #1a5c4a !important;
+        color: #fff !important;
+    }
+
+    .daterangepicker select.monthselect,
+    .daterangepicker select.yearselect {
+        background-color: #1a5c4a !important;
+        color: #fff !important;
+    }
+
+    .daterangepicker select.monthselect option,
+    .daterangepicker select.yearselect option {
         background-color: #1a5c4a !important;
         color: #fff !important;
     }
