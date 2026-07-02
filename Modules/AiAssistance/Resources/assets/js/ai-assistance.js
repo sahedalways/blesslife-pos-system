@@ -23,7 +23,7 @@ $(document).ready(function () {
     // Simple function for consistent AI button HTML
     function createAiButtonHtml(className, id, wrapperClass) {
         // Base button classes
-        var btnClass = 'tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-xs';
+        var btnClass = 'tw-dw-btn tw-dw-btn-xs';
         if (className) btnClass += ' ' + className;
 
         // Create button HTML
@@ -32,7 +32,7 @@ $(document).ready(function () {
             btnClass +
             '"' +
             (id ? ' id="' + id + '"' : '') +
-            ' style="background: linear-gradient(45deg, #4a90e2, #7b68ee); margin: 5px;">' +
+            ' style="background: #DFB86B; color: #1f2937; border: none; border-radius: 9999px; font-weight: 600; display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.5rem 1.25rem; font-size: 0.8125rem; margin: 5px;">' +
             '<i class="fa fa-magic"></i> ' +
             LANG.use_ai +
             '</button>';

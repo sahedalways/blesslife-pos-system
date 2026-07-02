@@ -19,10 +19,10 @@
         @component('components.widget', ['class' => 'box-primary', 'title' => __('lang_v1.all_variations')])
             @slot('tool')
                 <div class="box-tools">
-                    <a class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full btn-modal"
+                    <a class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full btn-modal tw-inline-flex tw-items-center tw-justify-center tw-gap-1 tw-px-4"
                     data-href="{{action([\App\Http\Controllers\VariationTemplateController::class, 'create'])}}" 
                     data-container=".variation_modal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />

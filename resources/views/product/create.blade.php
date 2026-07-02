@@ -529,7 +529,7 @@
                                     @if (!empty($duplicate_product) && $duplicate_product->enable_stock == 0) disabled @endif
                                     type="submit"
                                     value="submit_n_add_opening_stock"
-                                    class="tw-dw-btn tw-dw-btn-lg tw-text-white bg-purple submit_product_form">@lang('lang_v1.save_n_add_opening_stock')</button>
+                                    class="tw-dw-btn tw-dw-btn-lg submit_product_form tw-border tw-border-green-700 tw-text-green-700 hover:tw-bg-green-700 hover:tw-text-white">@lang('lang_v1.save_n_add_opening_stock')</button>
                         @endcan
 
                         <button type="submit"
@@ -538,7 +538,7 @@
 
                         <button type="submit"
                                 value="submit"
-                                class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-lg tw-text-white submit_product_form">@lang('messages.save')</button>
+                                class="tw-dw-btn tw-dw-btn-lg submit_product_form tw-border tw-border-green-700 tw-text-green-700 hover:tw-bg-green-700 hover:tw-text-white">@lang('messages.save')</button>
                     </div>
 
                 </div>

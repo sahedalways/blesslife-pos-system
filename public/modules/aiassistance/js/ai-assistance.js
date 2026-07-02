@@ -22,14 +22,14 @@ $(document).ready(function() {
     // Simple function for consistent AI button HTML
     function createAiButtonHtml(className, id, wrapperClass) {
         // Base button classes
-        var btnClass = 'tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-xs';
+        var btnClass = 'tw-dw-btn tw-dw-btn-primary tw-dw-btn-xs';
         if (className) btnClass += ' ' + className;
         
         // Create button HTML
         var buttonHtml = '<button type="button" class="' + btnClass + '"' +
             (id ? ' id="' + id + '"' : '') + 
-            ' style="background: linear-gradient(45deg, #4a90e2, #7b68ee); margin: 5px;">' +
-            '<i class="fa fa-magic"></i> ' + LANG.use_ai + 
+            ' style="background: #DFB86B; color: #1f2937; border: none; display: inline-flex; align-items: center; gap: 4px; border-radius: 9999px; padding: 4px 12px; font-size: 12px; line-height: 1.5;">' +
+            '<i class="fa fa-magic tw-text-yellow-700"></i> ' + LANG.use_ai + 
             '</button>';
         
         // Wrap if wrapper class provided

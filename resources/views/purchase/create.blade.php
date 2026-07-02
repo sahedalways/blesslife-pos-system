@@ -323,9 +323,10 @@
                 </div>
                 <div class="col-sm-2 text-center">
                     <button type="button"
-                            class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm"
+                            class="tw-dw-btn tw-dw-btn-sm"
                             data-toggle="modal"
-                            data-target="#import_purchase_products_modal">@lang('product.import_products')</button>
+                            data-target="#import_purchase_products_modal"
+                            style="background: #DFB86B; color: #1f2937; border: none; display: inline-flex; align-items: center; justify-content: center;">@lang('product.import_products')</button>
                 </div>
                 <div class="col-sm-8">
                     <div class="form-group">
@@ -681,8 +682,9 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <button type="button"
-                            class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm"
-                            id="toggle_additional_expense"> <i class="fas fa-plus"></i> @lang('lang_v1.add_additional_expenses') <i
+                            class="tw-dw-btn tw-dw-btn-sm"
+                            id="toggle_additional_expense"
+                            style="background: #DFB86B; color: #1f2937; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;"> <i class="fas fa-plus"></i> @lang('lang_v1.add_additional_expenses') <i
                            class="fas fa-chevron-down"></i></button>
                 </div>
                 <div class="col-md-8 col-md-offset-4"

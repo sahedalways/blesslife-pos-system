@@ -348,19 +348,22 @@
     }
 
     .form-group.has-error .auth-input,
-    .auth-input.input-error {
+    .auth-input.input-error,
+    .form-group.has-error .form-control {
         border-color: #dc2626 !important;
         background: #fef2f2 !important;
     }
 
     .auth-input.input-error:focus,
-    .form-group.has-error .auth-input:focus {
+    .form-group.has-error .auth-input:focus,
+    .form-group.has-error .form-control:focus {
         border-color: #dc2626 !important;
         box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1) !important;
     }
 
     .auth-input.input-error:hover:not(:focus),
-    .form-group.has-error .auth-input:hover:not(:focus) {
+    .form-group.has-error .auth-input:hover:not(:focus),
+    .form-group.has-error .form-control:hover:not(:focus) {
         border-color: #dc2626 !important;
     }
 
@@ -385,6 +388,12 @@
     }
     .form-control:hover:not(:focus) {
         border-color: #9ca3af;
+    }
+    select.form-control {
+        padding: 0.375rem 1.75rem 0.375rem 0.625rem;
+        min-height: 2.25rem;
+        height: auto;
+        line-height: 1.5;
     }
     .input-group .form-control:focus {
         border-color: #1a5c4a;
@@ -566,11 +575,82 @@
         color: #ffffff !important;
     }
 
+    .tw-dw-btn-neutral {
+        border-radius: 9999px !important;
+    }
+
+    .download-excel-btn {
+        border: 2px solid #15803d !important;
+        color: #15803d !important;
+        background: transparent !important;
+        background-image: none !important;
+        border-radius: 9999px !important;
+        font-weight: 700 !important;
+        padding: 0.5rem 1.25rem !important;
+        font-size: 0.8125rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.375rem !important;
+        transition: all 0.2s ease !important;
+    }
+    .download-excel-btn:hover {
+        background: #15803d !important;
+        color: #fff !important;
+    }
+
+    .gold-sweep-btn .get_product_description,
+    .get_product_description {
+        background: #DFB86B !important;
+        background-image: none !important;
+        color: #1f2937 !important;
+        border: none !important;
+        border-radius: 9999px !important;
+        font-weight: 600 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.375rem !important;
+        font-size: 0.8125rem !important;
+        transition: all 0.2s ease !important;
+    }
+    .get_product_description:hover {
+        background: #d4a84b !important;
+        color: #1f2937 !important;
+    }
+
+    button.more_btn {
+        background: #DFB86B !important;
+        background-image: none !important;
+        color: #1f2937 !important;
+        border: none !important;
+        width: 160px !important;
+        border-radius: 9999px !important;
+        font-weight: 600 !important;
+        font-size: 0.8125rem !important;
+        padding: 0.5rem 1rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.375rem !important;
+        transition: all 0.2s ease !important;
+    }
+    button.more_btn:hover {
+        background: #d4a84b !important;
+        background-image: none !important;
+        color: #1f2937 !important;
+    }
+
     .gold-sweep-btn {
         background-image: linear-gradient(to right, #15803d 50%, #DFB86B 50%) !important;
         background-size: 200% 100% !important;
         background-position: 0 0 !important;
         transition: background-position 0.4s ease !important;
+        color: #ffffff !important;
+        border-radius: 9999px !important;
+        font-weight: 700 !important;
+        padding: 0.625rem 1.5rem !important;
+        border: none !important;
+        min-height: 2.75rem;
     }
     .gold-sweep-btn:hover {
         background-position: 100% 0 !important;
@@ -619,6 +699,11 @@
         border-color: #15803d !important;
         box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15) !important;
         width: 260px !important;
+    }
+
+    .dataTables_length select.form-control {
+        display: inline-block !important;
+        width: auto !important;
     }
 </style>
 @if (!empty($__system_settings['additional_css']))

@@ -40,8 +40,9 @@
                 @endforeach
                 <div class="col-sm-2">
                     <button type="button"
-                            class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm"
-                            id="add_variation_values">+</button>
+                            class="tw-dw-btn tw-dw-btn-sm tw-rounded-full tw-px-3"
+                            id="add_variation_values"
+                            style="background: #DFB86B; color: #1f2937; border: none;">+</button>
                 </div>
             </div>
             <div id="variation_values">

@@ -231,7 +231,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <button type="submit"
-                        class="tw-dw-btn tw-dw-btn-primary tw-dw-btn-lg tw-text-white"
+                        class="tw-dw-btn tw-dw-btn-lg tw-text-white tw-border-none tw-rounded-full tw-from-indigo-600 tw-to-blue-500"
                         id="submit_user_button">@lang('messages.save')</button>
             </div>
         </div>

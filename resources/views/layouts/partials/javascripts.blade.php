@@ -227,14 +227,22 @@
         });
     }
 
-    $(document).ready(function() {
-        $('.tw-from-indigo-600.tw-to-blue-500').each(function() {
-            $(this).addClass('gold-sweep-btn');
+    function applyGoldSweep(selector) {
+        $(selector).each(function() {
+            $(this).addClass('gold-sweep-btn tw-rounded-full tw-border-none');
             $(this).contents().filter(function() {
                 return this.nodeType === 3 && $(this).text().trim() !== '';
             }).each(function() {
                 $(this).replaceWith('<span>' + $(this).text() + '</span>');
             });
+        });
+    }
+
+    $(document).ready(function() {
+        applyGoldSweep('.tw-from-indigo-600.tw-to-blue-500');
+        applyGoldSweep('.tw-dw-btn-primary:not(.tw-dw-btn-outline):not(.tw-dw-btn-xs):not(.tw-dw-btn-sm)');
+        $(document).on('shown.bs.modal', function() {
+            applyGoldSweep('.tw-dw-btn-primary:not(.tw-dw-btn-outline):not(.tw-dw-btn-xs):not(.tw-dw-btn-sm)');
         });
     });
 </script>
