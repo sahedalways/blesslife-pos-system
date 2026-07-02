@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="form-group pull-right">
                         <div class="input-group">
-                        <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm" id="dashboard_date_filter">
+                        <button type="button" class="tw-dw-btn tw-dw-btn-sm" id="dashboard_date_filter" style="background: #DFB86B; color: #000; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
                             <span>
                             <i class="fa fa-calendar"></i> {{ __('messages.filter_by_date') }}
                             </span>

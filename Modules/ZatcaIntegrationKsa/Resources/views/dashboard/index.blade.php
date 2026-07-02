@@ -3,7 +3,7 @@
 @section('content')
     @include('zatcaintegrationksa::layouts.nav')
 
-    <section class="content no-print">
+    <section class="content no-print zatca-dashboard">
         <div class="row">
             <!-- Total Invoices -->
             <div class="col-md-3 col-sm-6 col-xs-12">

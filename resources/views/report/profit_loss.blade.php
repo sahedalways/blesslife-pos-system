@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <button type="button"
-                                class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm"
+                                class="date-filter-btn"
                                 id="profit_loss_date_filter">
                             <span>
                                 <i class="fa fa-calendar"></i> {{ __('messages.filter_by_date') }}

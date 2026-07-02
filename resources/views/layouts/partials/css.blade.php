@@ -598,6 +598,88 @@
         color: #fff !important;
     }
 
+    .pos-tab-menu .list-group-item {
+        background: transparent !important;
+        color: #15803d !important;
+        border: 2px solid #15803d !important;
+        margin-bottom: 8px !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+        transition: all 0.2s ease !important;
+    }
+    .pos-tab-menu .list-group-item.active {
+        background: linear-gradient(135deg, #15803d, #DFB86B) !important;
+        color: #fff !important;
+        border-color: transparent !important;
+        transform: scale(1.03) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    }
+    .pos-tab-menu .list-group-item:hover {
+        opacity: 0.9 !important;
+        transform: scale(1.02) !important;
+    }
+
+    .zatca-dashboard .tw-mb-4 {
+        border-radius: 16px !important;
+        transition: all 0.3s ease !important;
+        overflow: hidden !important;
+    }
+    .zatca-dashboard .tw-mb-4:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.12) !important;
+    }
+    .zatca-dashboard .col-md-3:nth-child(1) .tw-mb-4 {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe) !important;
+    }
+    .zatca-dashboard .col-md-3:nth-child(2) .tw-mb-4 {
+        background: linear-gradient(135deg, #fefce8, #fef9c3) !important;
+    }
+    .zatca-dashboard .col-md-3:nth-child(3) .tw-mb-4 {
+        background: linear-gradient(135deg, #fff7ed, #ffedd5) !important;
+    }
+    .zatca-dashboard .col-md-3:nth-child(4) .tw-mb-4 {
+        background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
+    }
+    .zatca-dashboard .col-md-3:nth-child(5) .tw-mb-4 {
+        background: linear-gradient(135deg, #fef2f2, #fecaca) !important;
+    }
+
+    .accounting-reports-page .box-warning {
+        background: linear-gradient(135deg, #f0fdf4, #fefce8) !important;
+        border: 1px solid #15803d !important;
+        border-radius: 12px !important;
+    }
+
+    .report-view-btn {
+        background-image: linear-gradient(to right, #15803d 50%, #DFB86B 50%) !important;
+        background-size: 200% 100% !important;
+        background-position: 0 0 !important;
+        transition: background-position 0.4s ease !important;
+        color: #ffffff !important;
+        border: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        font-weight: 700 !important;
+        padding: 0.25rem 1.25rem !important;
+        font-size: 0.8125rem !important;
+        border-radius: 9999px !important;
+        min-height: 2.25rem;
+        margin-top: 16px;
+    }
+    .report-view-btn:hover {
+        background-position: 100% 0 !important;
+        color: #ffffff !important;
+    }
+    .report-view-btn span {
+        display: inline-block;
+        transition: transform 0.4s ease;
+    }
+    .report-view-btn:hover span {
+        animation: blsTextFlip 0.5s ease forwards;
+    }
+
     .import-expense-btn {
         border: 2px solid #15803d !important;
         color: #15803d !important;
@@ -657,6 +739,60 @@
         background: #d4a84b !important;
         background-image: none !important;
         color: #1f2937 !important;
+    }
+
+    .date-filter-btn,
+    button[id$="_date_filter"],
+    a[id$="_date_filter"] {
+        background: #DFB86B !important;
+        color: #000 !important;
+        border: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        border-radius: 9999px !important;
+        font-weight: 700 !important;
+        padding: 0.5rem 1.25rem !important;
+        font-size: 0.8125rem !important;
+        transition: all 0.2s ease !important;
+    }
+    .date-filter-btn:hover,
+    button[id$="_date_filter"]:hover,
+    a[id$="_date_filter"]:hover {
+        opacity: 0.9 !important;
+        transform: scale(1.02) !important;
+    }
+
+    .zatca-btn {
+        background-image: linear-gradient(to right, #15803d 50%, #DFB86B 50%) !important;
+        background-size: 200% 100% !important;
+        background-position: 0 0 !important;
+        transition: background-position 0.4s ease !important;
+        color: #fff !important;
+        border: none !important;
+        border-radius: 9999px !important;
+        padding: 0.5rem 1.5rem !important;
+        font-weight: 600 !important;
+        font-size: 0.875rem !important;
+        min-height: 2.5rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+    }
+    .zatca-btn:hover {
+        background-position: 100% 0 !important;
+        color: #fff !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(21, 128, 61, 0.3) !important;
+    }
+    .zatca-btn span {
+        display: inline-block;
+        transition: transform 0.4s ease;
+    }
+    .zatca-btn:hover span {
+        animation: blsTextFlip 0.5s ease forwards;
     }
 
     .gold-sweep-btn {

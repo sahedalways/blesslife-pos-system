@@ -3,7 +3,7 @@
 @section('content')
     @include('zatcaintegrationksa::layouts.nav')
 
-    <section class="content">
+    <section class="content zatca-onboarding">
         <div class="row">
             @php
                 $settings = json_decode($business->zatca_settings, true);
@@ -53,9 +53,7 @@
 
                         <p class="m-5">@lang('zatcaintegrationksa::lang.sync_warning')</p>
                         <div class="form-group">
-                            {!! Form::submit(__('zatcaintegrationksa::lang.apply_setting'), [
-                                'class' => 'tw-dw-btn tw-dw-btn-success tw-text-white tw-dw-btn-lg',
-                            ]) !!}
+                            <button type="submit" class="tw-dw-btn zatca-btn" style="margin-top: 16px;"><span>{{ __('zatcaintegrationksa::lang.apply_setting') }}</span></button>
                         </div>
                     </form>
                 @endcomponent
@@ -124,7 +122,7 @@
                             @endif
                         @endforeach
                         <div class="form-group mt-2">
-                            {!! Form::submit(__('messages.save'), ['class' => 'tw-dw-btn tw-dw-btn-success tw-text-white tw-dw-btn-lg']) !!}
+                            <button type="submit" class="tw-dw-btn zatca-btn"><span>{{ __('messages.save') }}</span></button>
                         </div>
                     </form>
                 @endcomponent
@@ -149,7 +147,7 @@
                     </div>
                     <div class="col-md-12 text-center">
                         <a href="{{ action([\Modules\ZatcaIntegrationKsa\Http\Controllers\ZatcaInvoiceController::class, 'DeleteTestingInvoice']) }}"
-                            class="tw-dw-btn tw-dw-btn-secondary btw-dw-btn-lg delete_zatca_invoice">@lang('zatcaintegrationksa::lang.unsync_invoice')</a>
+                            class="tw-dw-btn zatca-btn" style="margin-top: 16px;"><span>@lang('zatcaintegrationksa::lang.unsync_invoice')</span></a>
                     </div>
                 @endcomponent
             </div>
@@ -466,7 +464,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        {!! Form::submit(__('messages.submit'), ['class' => 'tw-dw-btn tw-dw-btn-success tw-text-white tw-dw-btn-lg']) !!}
+                                        <button type="submit" class="tw-dw-btn tw-dw-btn-lg gold-sweep-btn"><span>{{ __('messages.submit') }}</span></button>
                                     </div>
                                 </div>
                                 {!! Form::close() !!}

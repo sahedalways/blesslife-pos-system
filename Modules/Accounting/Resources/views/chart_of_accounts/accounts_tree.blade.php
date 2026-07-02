@@ -12,16 +12,16 @@
 @else
 <div class="row">
     <div class="col-md-4 mb-12 col-md-offset-4">
-        <div class="input-group">
-            <input type="input" class="form-control" id="accounts_tree_search">
-            <span class="input-group-addon">
+        <div class="input-group" style="border: 2px solid #15803d; border-radius: 9999px; overflow: hidden; box-shadow: 0 2px 6px rgba(21, 128, 61, 0.15);">
+            <input type="input" class="form-control" id="accounts_tree_search" style="border: none; box-shadow: none; border-radius: 9999px 0 0 9999px; padding-left: 16px;">
+            <span class="input-group-addon" style="background: #15803d; color: #fff; border: none; border-radius: 0 9999px 9999px 0; padding: 0 16px;">
                 <i class="fas fa-search"></i>
             </span>
         </div>
     </div>
     <div class="col-md-4">
-        <button class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm" id="expand_all">@lang('accounting::lang.expand_all')</button>
-        <button class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm" id="collapse_all">@lang('accounting::lang.collapse_all')</button>
+        <button class="tw-dw-btn tw-dw-btn-sm" id="expand_all" style="background: #DFB86B; color: #000; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">@lang('accounting::lang.expand_all')</button>
+        <button class="tw-dw-btn tw-dw-btn-sm" id="collapse_all" style="background: #DFB86B; color: #000; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">@lang('accounting::lang.collapse_all')</button>
     </div>
     <div class="col-md-12" id="accounts_tree_container">
         <ul>
